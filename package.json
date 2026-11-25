@@ -2,6 +2,7 @@
   "name": "nexus-ai-root",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "NEXUS AI - Autonomous Business Operations Platform",
   "scripts": {
     "install:all": "cd backend && npm install && cd ../frontend && npm install",
