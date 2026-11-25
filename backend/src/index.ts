@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import os from 'os';
 import { config } from './config/env.js';
 import { db } from './database/db.js';
 import { seedDatabase } from './database/seed.js';
@@ -42,7 +43,15 @@ app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
 // Static uploads directory
-const uploadsDir = path.resolve(process.cwd(), 'uploads');
+const isServerlessEnv = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
+const uploadsDir = isServerlessEnv ? path.join(os.tmpdir(), 'nexus_uploads') : path.resolve(process.cwd(), 'uploads');
+try {
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+} catch (err) {
+  console.warn('[UPLOADS] Warning creating uploads directory:', err);
+}
 app.use('/uploads', express.static(uploadsDir));
 
 // Health Check

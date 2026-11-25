@@ -1309,8 +1309,8 @@ var require_node = __commonJS({
           }
           break;
         case "FILE":
-          var fs9 = __require("fs");
-          stream2 = new fs9.SyncWriteStream(fd2, { autoClose: false });
+          var fs10 = __require("fs");
+          stream2 = new fs10.SyncWriteStream(fd2, { autoClose: false });
           stream2._type = "fs";
           break;
         case "PIPE":
@@ -19082,7 +19082,7 @@ var require_view = __commonJS({
     "use strict";
     var debug = require_src()("express:view");
     var path9 = __require("path");
-    var fs9 = __require("fs");
+    var fs10 = __require("fs");
     var dirname = path9.dirname;
     var basename = path9.basename;
     var extname = path9.extname;
@@ -19148,7 +19148,7 @@ var require_view = __commonJS({
     function tryStat(path10) {
       debug('stat "%s"', path10);
       try {
-        return fs9.statSync(path10);
+        return fs10.statSync(path10);
       } catch (e) {
         return void 0;
       }
@@ -19503,7 +19503,7 @@ var require_types = __commonJS({
 var require_mime = __commonJS({
   "node_modules/mime/mime.js"(exports, module2) {
     var path9 = __require("path");
-    var fs9 = __require("fs");
+    var fs10 = __require("fs");
     function Mime() {
       this.types = /* @__PURE__ */ Object.create(null);
       this.extensions = /* @__PURE__ */ Object.create(null);
@@ -19524,7 +19524,7 @@ var require_mime = __commonJS({
     };
     Mime.prototype.load = function(file) {
       this._loading = file;
-      var map2 = {}, content = fs9.readFileSync(file, "ascii"), lines = content.split(/[\r\n]+/);
+      var map2 = {}, content = fs10.readFileSync(file, "ascii"), lines = content.split(/[\r\n]+/);
       lines.forEach(function(line) {
         var fields = line.replace(/\s*#.*|^\s*|\s*$/g, "").split(/\s+/);
         map2[fields.shift()] = fields;
@@ -19762,7 +19762,7 @@ var require_send = __commonJS({
     var escapeHtml = require_escape_html();
     var etag = require_etag();
     var fresh = require_fresh();
-    var fs9 = __require("fs");
+    var fs10 = __require("fs");
     var mime = require_mime();
     var ms = require_ms2();
     var onFinished = require_on_finished();
@@ -20095,7 +20095,7 @@ var require_send = __commonJS({
       var i = 0;
       var self2 = this;
       debug('stat "%s"', path10);
-      fs9.stat(path10, function onstat(err, stat) {
+      fs10.stat(path10, function onstat(err, stat) {
         if (err && err.code === "ENOENT" && !extname(path10) && path10[path10.length - 1] !== sep) {
           return next(err);
         }
@@ -20110,7 +20110,7 @@ var require_send = __commonJS({
         }
         var p = path10 + "." + self2._extensions[i++];
         debug('stat "%s"', p);
-        fs9.stat(p, function(err2, stat) {
+        fs10.stat(p, function(err2, stat) {
           if (err2) return next(err2);
           if (stat.isDirectory()) return next();
           self2.emit("file", p, stat);
@@ -20128,7 +20128,7 @@ var require_send = __commonJS({
         }
         var p = join(path10, self2._index[i]);
         debug('stat "%s"', p);
-        fs9.stat(p, function(err2, stat) {
+        fs10.stat(p, function(err2, stat) {
           if (err2) return next(err2);
           if (stat.isDirectory()) return next();
           self2.emit("file", p, stat);
@@ -20140,7 +20140,7 @@ var require_send = __commonJS({
     SendStream.prototype.stream = function stream(path10, options) {
       var self2 = this;
       var res = this.res;
-      var stream2 = fs9.createReadStream(path10, options);
+      var stream2 = fs10.createReadStream(path10, options);
       this.emit("stream", stream2);
       stream2.pipe(res);
       function cleanup() {
@@ -23628,9 +23628,9 @@ var require_package = __commonJS({
 // node_modules/dotenv/lib/main.js
 var require_main = __commonJS({
   "node_modules/dotenv/lib/main.js"(exports, module2) {
-    var fs9 = __require("fs");
+    var fs10 = __require("fs");
     var path9 = __require("path");
-    var os4 = __require("os");
+    var os6 = __require("os");
     var crypto9 = __require("crypto");
     var packageJson = require_package();
     var version4 = packageJson.version;
@@ -23737,7 +23737,7 @@ var require_main = __commonJS({
       if (options && options.path && options.path.length > 0) {
         if (Array.isArray(options.path)) {
           for (const filepath of options.path) {
-            if (fs9.existsSync(filepath)) {
+            if (fs10.existsSync(filepath)) {
               possibleVaultPath = filepath.endsWith(".vault") ? filepath : `${filepath}.vault`;
             }
           }
@@ -23747,13 +23747,13 @@ var require_main = __commonJS({
       } else {
         possibleVaultPath = path9.resolve(process.cwd(), ".env.vault");
       }
-      if (fs9.existsSync(possibleVaultPath)) {
+      if (fs10.existsSync(possibleVaultPath)) {
         return possibleVaultPath;
       }
       return null;
     }
     function _resolveHome(envPath) {
-      return envPath[0] === "~" ? path9.join(os4.homedir(), envPath.slice(1)) : envPath;
+      return envPath[0] === "~" ? path9.join(os6.homedir(), envPath.slice(1)) : envPath;
     }
     function _configVault(options) {
       const debug = Boolean(options && options.debug);
@@ -23796,7 +23796,7 @@ var require_main = __commonJS({
       const parsedAll = {};
       for (const path10 of optionPaths) {
         try {
-          const parsed = DotenvModule.parse(fs9.readFileSync(path10, { encoding }));
+          const parsed = DotenvModule.parse(fs10.readFileSync(path10, { encoding }));
           DotenvModule.populate(parsedAll, parsed, options);
         } catch (e) {
           if (debug) {
@@ -25524,15 +25524,15 @@ var require_pg_connection_string = __commonJS({
       if (config2.sslnegotiation === "direct" && config2.ssl === void 0) {
         config2.ssl = true;
       }
-      const fs9 = config2.sslcert || config2.sslkey || config2.sslrootcert ? __require("fs") : null;
+      const fs10 = config2.sslcert || config2.sslkey || config2.sslrootcert ? __require("fs") : null;
       if (config2.sslcert) {
-        config2.ssl.cert = fs9.readFileSync(config2.sslcert).toString();
+        config2.ssl.cert = fs10.readFileSync(config2.sslcert).toString();
       }
       if (config2.sslkey) {
-        config2.ssl.key = fs9.readFileSync(config2.sslkey).toString();
+        config2.ssl.key = fs10.readFileSync(config2.sslkey).toString();
       }
       if (config2.sslrootcert) {
-        config2.ssl.ca = fs9.readFileSync(config2.sslrootcert).toString();
+        config2.ssl.ca = fs10.readFileSync(config2.sslrootcert).toString();
       }
       if (options.useLibpqCompat && config2.uselibpqcompat) {
         throw new Error("Both useLibpqCompat and uselibpqcompat are set. Please use only one of them.");
@@ -27532,15 +27532,15 @@ var require_lib4 = __commonJS({
   "node_modules/pgpass/lib/index.js"(exports, module2) {
     "use strict";
     var path9 = __require("path");
-    var fs9 = __require("fs");
+    var fs10 = __require("fs");
     var helper = require_helper();
     module2.exports = function(connInfo, cb) {
       var file = helper.getFileName();
-      fs9.stat(file, function(err, stat) {
+      fs10.stat(file, function(err, stat) {
         if (err || !helper.usePgPass(stat, file)) {
           return cb(void 0);
         }
-        var st = fs9.createReadStream(file);
+        var st = fs10.createReadStream(file);
         helper.getPassword(connInfo, st, cb);
       });
     };
@@ -37504,7 +37504,7 @@ var require_make_middleware = __commonJS({
 var require_mkdirp = __commonJS({
   "node_modules/mkdirp/index.js"(exports, module2) {
     var path9 = __require("path");
-    var fs9 = __require("fs");
+    var fs10 = __require("fs");
     var _0777 = parseInt("0777", 8);
     module2.exports = mkdirP.mkdirp = mkdirP.mkdirP = mkdirP;
     function mkdirP(p, opts, f, made) {
@@ -37515,7 +37515,7 @@ var require_mkdirp = __commonJS({
         opts = { mode: opts };
       }
       var mode = opts.mode;
-      var xfs = opts.fs || fs9;
+      var xfs = opts.fs || fs10;
       if (mode === void 0) {
         mode = _0777;
       }
@@ -37554,7 +37554,7 @@ var require_mkdirp = __commonJS({
         opts = { mode: opts };
       }
       var mode = opts.mode;
-      var xfs = opts.fs || fs9;
+      var xfs = opts.fs || fs10;
       if (mode === void 0) {
         mode = _0777;
       }
@@ -37591,8 +37591,8 @@ var require_mkdirp = __commonJS({
 // node_modules/multer/storage/disk.js
 var require_disk = __commonJS({
   "node_modules/multer/storage/disk.js"(exports, module2) {
-    var fs9 = __require("fs");
-    var os4 = __require("os");
+    var fs10 = __require("fs");
+    var os6 = __require("os");
     var path9 = __require("path");
     var crypto9 = __require("crypto");
     var mkdirp = require_mkdirp();
@@ -37602,7 +37602,7 @@ var require_disk = __commonJS({
       });
     }
     function getDestination(req, file, cb) {
-      cb(null, os4.tmpdir());
+      cb(null, os6.tmpdir());
     }
     function DiskStorage(opts) {
       this.getFilename = opts.filename || getFilename;
@@ -37622,7 +37622,7 @@ var require_disk = __commonJS({
         that.getFilename(req, file, function(err2, filename) {
           if (err2) return cb(err2);
           var finalPath = path9.join(destination, filename);
-          var outStream = fs9.createWriteStream(finalPath);
+          var outStream = fs10.createWriteStream(finalPath);
           file.stream.pipe(outStream);
           outStream.on("error", cb);
           outStream.on("finish", function() {
@@ -37641,7 +37641,7 @@ var require_disk = __commonJS({
       delete file.destination;
       delete file.filename;
       delete file.path;
-      fs9.unlink(path10, cb);
+      fs10.unlink(path10, cb);
     };
     module2.exports = function(opts) {
       return new DiskStorage(opts);
@@ -54407,6 +54407,7 @@ var require_main4 = __commonJS({
 var import_express22 = __toESM(require_express2());
 var import_cors = __toESM(require_lib3());
 import path8 from "path";
+import os5 from "os";
 
 // src/config/env.ts
 var import_dotenv = __toESM(require_main());
@@ -54438,7 +54439,7 @@ var config = {
 };
 
 // src/database/db.ts
-import fs from "fs";
+import fs2 from "fs";
 import path2 from "path";
 import os from "os";
 
@@ -54540,8 +54541,8 @@ var DatabaseService = class _DatabaseService {
   storeFilePath;
   isPostgres = false;
   constructor() {
-    const isServerless2 = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
-    if (isServerless2) {
+    const isServerless3 = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
+    if (isServerless3) {
       this.dataDir = path2.join(os.tmpdir(), "nexus_data");
     } else {
       this.dataDir = path2.resolve(process.cwd(), "data");
@@ -54575,8 +54576,8 @@ var DatabaseService = class _DatabaseService {
   }
   initLocalStore() {
     try {
-      if (!fs.existsSync(this.dataDir)) {
-        fs.mkdirSync(this.dataDir, { recursive: true });
+      if (!fs2.existsSync(this.dataDir)) {
+        fs2.mkdirSync(this.dataDir, { recursive: true });
       }
     } catch (e) {
       console.warn("[DATABASE] Could not create dataDir:", this.dataDir, e);
@@ -54590,8 +54591,8 @@ var DatabaseService = class _DatabaseService {
     let loaded = false;
     for (const p of candidatePaths) {
       try {
-        if (fs.existsSync(p)) {
-          const raw = fs.readFileSync(p, "utf-8");
+        if (fs2.existsSync(p)) {
+          const raw = fs2.readFileSync(p, "utf-8");
           const parsed = JSON.parse(raw);
           if (parsed && typeof parsed === "object") {
             this.store = { ...initialStore, ...parsed };
@@ -54623,10 +54624,10 @@ var DatabaseService = class _DatabaseService {
   }
   persist() {
     try {
-      if (!fs.existsSync(this.dataDir)) {
-        fs.mkdirSync(this.dataDir, { recursive: true });
+      if (!fs2.existsSync(this.dataDir)) {
+        fs2.mkdirSync(this.dataDir, { recursive: true });
       }
-      fs.writeFileSync(this.storeFilePath, JSON.stringify(this.store, null, 2), "utf-8");
+      fs2.writeFileSync(this.storeFilePath, JSON.stringify(this.store, null, 2), "utf-8");
     } catch (err) {
       console.warn("[DATABASE] Persistent write to disk skipped/failed:", err);
     }
@@ -61826,7 +61827,7 @@ var resolve = (from, to) => {
 
 // node_modules/nodemailer/dist/esm/shared/index.js
 import util2 from "node:util";
-import fs2 from "node:fs";
+import fs3 from "node:fs";
 
 // node_modules/nodemailer/dist/esm/fetch/index.js
 import http from "node:http";
@@ -62843,7 +62844,7 @@ function resolveContentValue(data, key, options, callback) {
         });
         return;
       }
-      return resolveStream(fs2.createReadStream(content.path), callback);
+      return resolveStream(fs3.createReadStream(content.path), callback);
     }
   }
   if (typeof data[key].content === "string" && !["utf8", "usascii", "ascii"].includes(encoding)) {
@@ -65103,7 +65104,7 @@ function detectExtension(mimeType) {
 
 // node_modules/nodemailer/dist/esm/mime-node/index.js
 import crypto2 from "node:crypto";
-import fs3 from "node:fs";
+import fs4 from "node:fs";
 import { PassThrough as PassThrough2, finished as finished2, pipeline } from "node:stream";
 
 // node_modules/nodemailer/dist/esm/base64/index.js
@@ -67730,7 +67731,7 @@ var MimeNode = class _MimeNode {
         });
         return contentStream;
       }
-      return fs3.createReadStream(content.path);
+      return fs4.createReadStream(content.path);
     }
     if (content && typeof content.href === "string") {
       if (this._accessDisabled("disableUrlAccess")) {
@@ -69022,7 +69023,7 @@ function relaxedHeaderLine(line) {
 
 // node_modules/nodemailer/dist/esm/dkim/index.js
 import { PassThrough as PassThrough3 } from "node:stream";
-import fs4 from "node:fs";
+import fs5 from "node:fs";
 import path4 from "node:path";
 import crypto5 from "node:crypto";
 var DKIM_ALGO = "sha256";
@@ -69073,10 +69074,10 @@ var DKIMSigner = class {
     const cache = this.cache;
     this.cache = false;
     cache.destroy();
-    fs4.unlink(this.cachePath, () => false);
+    fs5.unlink(this.cachePath, () => false);
   }
   createReadCache() {
-    this.cache = fs4.createReadStream(this.cachePath);
+    this.cache = fs5.createReadStream(this.cachePath);
     this.cache.once("error", (err) => this.fail(err));
     this.cache.once("close", () => {
       this.cleanup();
@@ -69139,7 +69140,7 @@ var DKIMSigner = class {
   }
   createWriteCache() {
     this.output.usingCache = true;
-    this.cache = fs4.createWriteStream(this.cachePath, { mode: 384 });
+    this.cache = fs5.createWriteStream(this.cachePath, { mode: 384 });
     this.cache.once("error", (err) => {
       this.relaxedBody.unpipe(this.cache);
       this.relaxedBody.on("readable", () => {
@@ -78037,7 +78038,7 @@ var emailNotificationTool = {
 };
 
 // src/tools/implementations/documentAnalysis.ts
-import fs5 from "fs";
+import fs6 from "fs";
 var DocumentAnalysisInputSchema = external_exports.object({
   documentId: external_exports.string().optional().describe("ID of uploaded document in the database"),
   filePath: external_exports.string().optional().describe("Direct file path to the uploaded document"),
@@ -78096,11 +78097,11 @@ var documentAnalysisTool = {
     let docRecord = input.documentId ? db.getDocumentById(input.documentId) : void 0;
     const targetPath = input.filePath || docRecord?.file_path;
     const originalName = input.fileName || docRecord?.original_name || "Uploaded_Invoice.pdf";
-    if (config.geminiApiKey && targetPath && fs5.existsSync(targetPath)) {
+    if (config.geminiApiKey && targetPath && fs6.existsSync(targetPath)) {
       try {
         const genAI = new GoogleGenerativeAI(config.geminiApiKey);
         const model = genAI.getGenerativeModel({ model: config.geminiModel || "gemini-3.5-flash" });
-        const fileBuffer = fs5.readFileSync(targetPath);
+        const fileBuffer = fs6.readFileSync(targetPath);
         const base64Data = fileBuffer.toString("base64");
         const mimeType = docRecord?.mime_type || (targetPath.endsWith(".pdf") ? "application/pdf" : "image/jpeg");
         const prompt = `Analyze this business document (invoice, receipt, or PO).
@@ -79017,11 +79018,17 @@ approvalRoutes.post("/:id/decide", authenticateJWT, requireRole(["ADMIN", "MANAG
 var import_express17 = __toESM(require_express2());
 var import_multer = __toESM(require_multer());
 import path5 from "path";
-import fs6 from "fs";
+import fs7 from "fs";
+import os4 from "os";
 var documentRoutes = (0, import_express17.Router)();
-var uploadsDir = path5.resolve(process.cwd(), "uploads");
-if (!fs6.existsSync(uploadsDir)) {
-  fs6.mkdirSync(uploadsDir, { recursive: true });
+var isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
+var uploadsDir = isServerless ? path5.join(os4.tmpdir(), "nexus_uploads") : path5.resolve(process.cwd(), "uploads");
+try {
+  if (!fs7.existsSync(uploadsDir)) {
+    fs7.mkdirSync(uploadsDir, { recursive: true });
+  }
+} catch (err) {
+  console.warn("[UPLOADS] Warning creating uploads directory:", err);
 }
 var storage = import_multer.default.diskStorage({
   destination: (_req, _file, cb) => {
@@ -79316,7 +79323,7 @@ var GeminiClient = class _GeminiClient {
 var geminiClient = GeminiClient.getInstance();
 
 // src/routes/integrationRoutes.ts
-import fs7 from "fs";
+import fs8 from "fs";
 import path6 from "path";
 var integrationRoutes = (0, import_express19.Router)();
 integrationRoutes.get("/", authenticateJWT, (req, res) => {
@@ -79364,8 +79371,8 @@ integrationRoutes.post("/gemini/connect", authenticateJWT, requireRole(["ADMIN"]
     const testResult = await targetModel.generateContent('Verify connection: respond with "NEXUS_AI_CONNECTED"');
     const reply = testResult.response.text();
     const envPath = path6.resolve(process.cwd(), ".env");
-    if (fs7.existsSync(envPath)) {
-      let content = fs7.readFileSync(envPath, "utf-8");
+    if (fs8.existsSync(envPath)) {
+      let content = fs8.readFileSync(envPath, "utf-8");
       if (content.includes("GEMINI_API_KEY=")) {
         content = content.replace(/^GEMINI_API_KEY=.*$/m, `GEMINI_API_KEY=${apiKey}`);
       } else {
@@ -79378,7 +79385,7 @@ GEMINI_API_KEY=${apiKey}`;
         content += `
 GEMINI_MODEL=${model}`;
       }
-      fs7.writeFileSync(envPath, content, "utf-8");
+      fs8.writeFileSync(envPath, content, "utf-8");
     }
     config.geminiApiKey = apiKey;
     config.geminiModel = model;
@@ -87713,7 +87720,7 @@ function shouldShowDeprecationWarning() {
 if (shouldShowDeprecationWarning()) console.warn("\u26A0\uFE0F  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715");
 
 // src/database/supabaseClient.ts
-import fs8 from "fs";
+import fs9 from "fs";
 import path7 from "path";
 var SupabaseService = class _SupabaseService {
   static instance;
@@ -87820,8 +87827,8 @@ var SupabaseService = class _SupabaseService {
   async saveConfiguration(payload) {
     const envPath = path7.resolve(process.cwd(), ".env");
     let envContent = "";
-    if (fs8.existsSync(envPath)) {
-      envContent = fs8.readFileSync(envPath, "utf-8");
+    if (fs9.existsSync(envPath)) {
+      envContent = fs9.readFileSync(envPath, "utf-8");
     }
     const updates = {
       SUPABASE_URL: payload.supabaseUrl?.trim(),
@@ -87848,7 +87855,7 @@ var SupabaseService = class _SupabaseService {
         newLines.push(`${key}=${value}`);
       }
     }
-    fs8.writeFileSync(envPath, newLines.join("\n"), "utf-8");
+    fs9.writeFileSync(envPath, newLines.join("\n"), "utf-8");
     this.initClient();
     return {
       success: true,
@@ -87935,11 +87942,11 @@ var SupabaseService = class _SupabaseService {
   getMigrationSql() {
     const migrationPath = path7.resolve(process.cwd(), "../database/migrations/001_initial_schema.sql");
     const altPath = path7.resolve(process.cwd(), "database/migrations/001_initial_schema.sql");
-    if (fs8.existsSync(migrationPath)) {
-      return fs8.readFileSync(migrationPath, "utf-8");
+    if (fs9.existsSync(migrationPath)) {
+      return fs9.readFileSync(migrationPath, "utf-8");
     }
-    if (fs8.existsSync(altPath)) {
-      return fs8.readFileSync(altPath, "utf-8");
+    if (fs9.existsSync(altPath)) {
+      return fs9.readFileSync(altPath, "utf-8");
     }
     return "-- Migration file not found on disk.";
   }
@@ -88015,7 +88022,15 @@ app.use((0, import_cors.default)({
 }));
 app.use(import_express22.default.json({ limit: "15mb" }));
 app.use(import_express22.default.urlencoded({ extended: true, limit: "15mb" }));
-var uploadsDir2 = path8.resolve(process.cwd(), "uploads");
+var isServerlessEnv = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
+var uploadsDir2 = isServerlessEnv ? path8.join(os5.tmpdir(), "nexus_uploads") : path8.resolve(process.cwd(), "uploads");
+try {
+  if (!fs.existsSync(uploadsDir2)) {
+    fs.mkdirSync(uploadsDir2, { recursive: true });
+  }
+} catch (err) {
+  console.warn("[UPLOADS] Warning creating uploads directory:", err);
+}
 app.use("/uploads", import_express22.default.static(uploadsDir2));
 app.get(["/api/health", "/health"], (_req, res) => {
   res.json({
@@ -88073,8 +88088,8 @@ async function startServer() {
   });
   return server;
 }
-var isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
-if (process.env.NODE_ENV !== "test" && !isServerless && __require.main === module) {
+var isServerless2 = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
+if (process.env.NODE_ENV !== "test" && !isServerless2 && __require.main === module) {
   startServer().catch((err) => {
     console.error("[FATAL] Failed to start NEXUS AI server:", err);
     process.exit(1);

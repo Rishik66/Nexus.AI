@@ -2,15 +2,21 @@ import { Router, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 import { db } from '../database/db.js';
 import { authenticateJWT, AuthRequest } from '../middleware/auth.js';
 import { documentAnalysisTool } from '../tools/implementations/documentAnalysis.js';
 
 export const documentRoutes = Router();
 
-const uploadsDir = path.resolve(process.cwd(), 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
+const uploadsDir = isServerless ? path.join(os.tmpdir(), 'nexus_uploads') : path.resolve(process.cwd(), 'uploads');
+try {
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+} catch (err) {
+  console.warn('[UPLOADS] Warning creating uploads directory:', err);
 }
 
 const storage = multer.diskStorage({
