@@ -42,6 +42,35 @@ app.use(cors({
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
+// Ensure database is seeded before any route is evaluated
+let storeInitialized = false;
+let initPromise: Promise<void> | null = null;
+
+const ensureStoreSeeded = async () => {
+  if (storeInitialized) return;
+  if (!initPromise) {
+    initPromise = (async () => {
+      try {
+        const users = db.getUsers();
+        if (users.length === 0) {
+          console.log('[BOOT] Auto-seeding enterprise dataset...');
+          await seedDatabase();
+        }
+      } catch (err) {
+        console.warn('[BOOT] Error during auto-seed:', err);
+      } finally {
+        storeInitialized = true;
+      }
+    })();
+  }
+  return initPromise;
+};
+
+app.use(async (_req, _res, next) => {
+  await ensureStoreSeeded();
+  next();
+});
+
 // Static uploads directory
 const isServerlessEnv = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
 const uploadsDir = isServerlessEnv ? path.join(os.tmpdir(), 'nexus_uploads') : path.resolve(process.cwd(), 'uploads');
@@ -64,6 +93,7 @@ app.get(['/api/health', '/health'], (_req, res) => {
     demoMode: config.demoMode,
     geminiLive: !!config.geminiApiKey,
     databaseEngine: db.isUsingPostgres() ? 'PostgreSQL' : 'Embedded Relational Engine',
+    userCount: db.getUsers().length,
   });
 });
 

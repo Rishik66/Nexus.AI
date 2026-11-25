@@ -88022,6 +88022,31 @@ app.use((0, import_cors.default)({
 }));
 app.use(import_express22.default.json({ limit: "15mb" }));
 app.use(import_express22.default.urlencoded({ extended: true, limit: "15mb" }));
+var storeInitialized = false;
+var initPromise = null;
+var ensureStoreSeeded = async () => {
+  if (storeInitialized) return;
+  if (!initPromise) {
+    initPromise = (async () => {
+      try {
+        const users = db.getUsers();
+        if (users.length === 0) {
+          console.log("[BOOT] Auto-seeding enterprise dataset...");
+          await seedDatabase();
+        }
+      } catch (err) {
+        console.warn("[BOOT] Error during auto-seed:", err);
+      } finally {
+        storeInitialized = true;
+      }
+    })();
+  }
+  return initPromise;
+};
+app.use(async (_req, _res, next) => {
+  await ensureStoreSeeded();
+  next();
+});
 var isServerlessEnv = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
 var uploadsDir2 = isServerlessEnv ? path8.join(os5.tmpdir(), "nexus_uploads") : path8.resolve(process.cwd(), "uploads");
 try {
@@ -88040,7 +88065,8 @@ app.get(["/api/health", "/health"], (_req, res) => {
     timestamp: (/* @__PURE__ */ new Date()).toISOString(),
     demoMode: config.demoMode,
     geminiLive: !!config.geminiApiKey,
-    databaseEngine: db.isUsingPostgres() ? "PostgreSQL" : "Embedded Relational Engine"
+    databaseEngine: db.isUsingPostgres() ? "PostgreSQL" : "Embedded Relational Engine",
+    userCount: db.getUsers().length
   });
 });
 var apiRoutes = [
@@ -88098,21 +88124,6 @@ if (process.env.NODE_ENV !== "test" && !isServerless2 && __require.main === modu
 var index_default = app;
 
 // src/serverless.ts
-var initialized = false;
-index_default.use(async (_req, _res, next) => {
-  if (!initialized) {
-    try {
-      const users = db.getUsers();
-      if (users.length === 0) {
-        await seedDatabase();
-      }
-    } catch (err) {
-      console.warn("[SERVERLESS INIT] Warning during store initialization:", err);
-    }
-    initialized = true;
-  }
-  next();
-});
 var serverless_default = index_default;
 export {
   serverless_default as default
