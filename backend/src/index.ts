@@ -106,7 +106,7 @@ export async function startServer() {
   return server;
 }
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   startServer().catch(err => {
     console.error('[FATAL] Failed to start NEXUS AI server:', err);
     process.exit(1);
