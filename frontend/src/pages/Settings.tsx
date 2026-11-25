@@ -44,6 +44,13 @@ export const Settings: React.FC = () => {
   const [migrationSql, setMigrationSql] = useState('');
   const [copiedSql, setCopiedSql] = useState(false);
 
+  // Gemini Live AI state
+  const [geminiKey, setGeminiKey] = useState('');
+  const [geminiModel, setGeminiModel] = useState('gemini-1.5-flash');
+  const [showGeminiKey, setShowGeminiKey] = useState(false);
+  const [connectingGemini, setConnectingGemini] = useState(false);
+  const [geminiMessage, setGeminiMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
   const fetchIntegrations = async () => {
     try {
       setLoading(true);
@@ -102,6 +109,36 @@ export const Settings: React.FC = () => {
       setConnectMessage({ type: 'error', text: errMsg });
     } finally {
       setConnecting(false);
+    }
+  };
+
+  const handleConnectGemini = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!geminiKey) {
+      setGeminiMessage({ type: 'error', text: 'Please enter a valid Google Gemini API Key.' });
+      return;
+    }
+    try {
+      setConnectingGemini(true);
+      setGeminiMessage(null);
+      const res = await ApiService.connectGemini({
+        apiKey: geminiKey,
+        model: geminiModel,
+      });
+      if (res.success) {
+        setGeminiMessage({
+          type: 'success',
+          text: `Connected to Gemini! Test response: "${res.testReply}". Live AI planning & function calling are active.`,
+        });
+        await fetchIntegrations();
+      } else {
+        setGeminiMessage({ type: 'error', text: res.message || 'Failed to verify Gemini API Key.' });
+      }
+    } catch (err: any) {
+      const errMsg = err.response?.data?.message || err.message || 'Verification failed.';
+      setGeminiMessage({ type: 'error', text: errMsg });
+    } finally {
+      setConnectingGemini(false);
     }
   };
 
@@ -168,6 +205,115 @@ export const Settings: React.FC = () => {
           <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-cyan-400' : ''}`} />
           Refresh Status
         </button>
+      </div>
+
+      {/* Google Gemini Live AI Configuration Card */}
+      <div className="p-6 rounded-2xl bg-[#0d1527] border border-purple-500/30 shadow-2xl space-y-5">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-4 border-b border-[#1f2d4d]">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center shadow-lg shadow-purple-500/10">
+              <Cpu className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-base font-bold text-white">Google Gemini Live AI Reasoning Engine</h2>
+                <span
+                  className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
+                    integrations.find((i) => i.provider === 'GEMINI')?.status === 'CONNECTED'
+                      ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                      : 'bg-purple-500/20 text-purple-300 border-purple-500/30'
+                  }`}
+                >
+                  {integrations.find((i) => i.provider === 'GEMINI')?.status === 'CONNECTED'
+                    ? '● CONNECTED (LIVE GEMINI LLM REASONING)'
+                    : '○ AUTONOMOUS DEMO FALLBACK ENGINE'}
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Powers real-time natural language planning (ORION), function calling, tool execution, and multimodal vision OCR (SAGE).
+              </p>
+            </div>
+          </div>
+
+          <a
+            href="https://aistudio.google.com/apikey"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#131e38] hover:bg-[#1f2d4d] text-purple-300 hover:text-white border border-purple-500/30 text-xs font-semibold transition-all self-start md:self-auto"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            Get Free Gemini API Key (Google AI Studio)
+          </a>
+        </div>
+
+        {geminiMessage && (
+          <div
+            className={`p-3 rounded-xl text-xs flex items-center gap-2 ${
+              geminiMessage.type === 'success'
+                ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30'
+                : 'bg-rose-500/10 text-rose-300 border border-rose-500/30'
+            }`}
+          >
+            {geminiMessage.type === 'success' ? <CheckCircle2 className="w-4 h-4 flex-shrink-0" /> : <AlertCircle className="w-4 h-4 flex-shrink-0" />}
+            <span>{geminiMessage.text}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleConnectGemini} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* API Key */}
+            <div className="md:col-span-2 space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-300 flex items-center justify-between">
+                <span>Google Gemini API Key:</span>
+                <span className="text-[10px] text-slate-500 font-mono">Starts with AIzaSy...</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showGeminiKey ? 'text' : 'password'}
+                  required
+                  placeholder="AIzaSy..."
+                  value={geminiKey}
+                  onChange={(e) => setGeminiKey(e.target.value)}
+                  className="w-full bg-[#131e38] border border-[#22345e] rounded-xl px-3.5 py-2.5 pr-10 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors font-mono"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowGeminiKey(!showGeminiKey)}
+                  className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-200"
+                >
+                  {showGeminiKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Model Select */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-300">
+                LLM Architecture:
+              </label>
+              <select
+                value={geminiModel}
+                onChange={(e) => setGeminiModel(e.target.value)}
+                className="w-full bg-[#131e38] border border-[#22345e] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-purple-500"
+              >
+                <option value="gemini-1.5-flash">Gemini 1.5 Flash (Recommended / Fast)</option>
+                <option value="gemini-1.5-pro">Gemini 1.5 Pro (Deep Multimodal Reasoning)</option>
+                <option value="gemini-2.0-flash">Gemini 2.0 Flash (Next-Gen Preview)</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-end gap-3 pt-1">
+            <button
+              type="submit"
+              disabled={connectingGemini}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-purple-500/20 disabled:opacity-50 transition-all"
+            >
+              <Sparkles className={`w-4 h-4 ${connectingGemini ? 'animate-spin' : ''}`} />
+              {connectingGemini ? 'Verifying with Gemini...' : 'Activate Live Gemini AI'}
+            </button>
+          </div>
+        </form>
       </div>
 
       {/* Supabase Cloud Database Integration Section */}

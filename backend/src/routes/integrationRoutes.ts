@@ -2,6 +2,11 @@ import { Router, Response } from 'express';
 import { db } from '../database/db.js';
 import { config } from '../config/env.js';
 import { authenticateJWT, AuthRequest, requireRole } from '../middleware/auth.js';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { geminiClient } from '../orchestrator/geminiClient.js';
+import fs from 'fs';
+import path from 'path';
+import { z } from 'zod';
 
 export const integrationRoutes = Router();
 
@@ -40,6 +45,54 @@ integrationRoutes.get('/', authenticateJWT, (req: AuthRequest, res: Response) =>
   ];
 
   res.json({ integrations });
+});
+
+integrationRoutes.post('/gemini/connect', authenticateJWT, requireRole(['ADMIN']), async (req: AuthRequest, res: Response) => {
+  try {
+    const { apiKey, model } = z.object({
+      apiKey: z.string().min(10, 'Gemini API key must be at least 10 characters'),
+      model: z.string().optional().default('gemini-1.5-flash'),
+    }).parse(req.body);
+
+    // 1. Verify key by generating a brief test response
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const targetModel = genAI.getGenerativeModel({ model });
+    const testResult = await targetModel.generateContent('Verify connection: respond with "NEXUS_AI_CONNECTED"');
+    const reply = testResult.response.text();
+
+    // 2. Persist to backend .env
+    const envPath = path.resolve(process.cwd(), '.env');
+    if (fs.existsSync(envPath)) {
+      let content = fs.readFileSync(envPath, 'utf-8');
+      if (content.includes('GEMINI_API_KEY=')) {
+        content = content.replace(/^GEMINI_API_KEY=.*$/m, `GEMINI_API_KEY=${apiKey}`);
+      } else {
+        content += `\nGEMINI_API_KEY=${apiKey}`;
+      }
+      if (content.includes('GEMINI_MODEL=')) {
+        content = content.replace(/^GEMINI_MODEL=.*$/m, `GEMINI_MODEL=${model}`);
+      } else {
+        content += `\nGEMINI_MODEL=${model}`;
+      }
+      fs.writeFileSync(envPath, content, 'utf-8');
+    }
+
+    // 3. Re-initialize in-memory singleton
+    config.geminiApiKey = apiKey;
+    config.geminiModel = model;
+    geminiClient.reinit(apiKey, model);
+
+    res.json({
+      success: true,
+      message: 'Google Gemini AI connected successfully! Native LLM reasoning, multimodal vision, and function calling are now active.',
+      testReply: reply.trim(),
+    });
+  } catch (err: any) {
+    res.status(400).json({
+      success: false,
+      message: `Gemini verification failed: ${err.message || 'Invalid API Key'}`,
+    });
+  }
 });
 
 integrationRoutes.post('/test', authenticateJWT, requireRole(['ADMIN']), async (req: AuthRequest, res: Response) => {

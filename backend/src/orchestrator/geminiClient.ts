@@ -36,6 +36,19 @@ export class GeminiClient {
     return GeminiClient.instance;
   }
 
+  public reinit(apiKey?: string, model?: string): void {
+    if (apiKey) config.geminiApiKey = apiKey;
+    if (model) config.geminiModel = model;
+    if (config.geminiApiKey) {
+      try {
+        this.genAI = new GoogleGenerativeAI(config.geminiApiKey);
+        console.log('[GEMINI] Live Google Gemini client re-initialized with model:', config.geminiModel);
+      } catch (err) {
+        console.warn('[GEMINI] Failed to re-initialize Gemini SDK:', err);
+      }
+    }
+  }
+
   public isLiveAvailable(): boolean {
     return !!this.genAI && !!config.geminiApiKey;
   }

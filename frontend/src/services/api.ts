@@ -239,6 +239,10 @@ export const ApiService = {
     const res = await api.get('/integrations');
     return res.data.integrations;
   },
+  connectGemini: async (payload: { apiKey: string; model?: string }) => {
+    const res = await api.post('/integrations/gemini/connect', payload);
+    return res.data;
+  },
   getAuditLogs: async (params?: Record<string, any>) => {
     const res = await api.get('/audit-logs', { params });
     return res.data.logs;
