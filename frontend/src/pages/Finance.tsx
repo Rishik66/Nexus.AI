@@ -145,13 +145,13 @@ export const Finance: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="px-4 py-2 rounded-xl bg-[#131e38] border border-amber-500/30 text-amber-300 text-xs font-mono font-bold">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+          <div className="px-4 py-2 rounded-xl bg-[#131e38] border border-amber-500/30 text-amber-300 text-xs font-mono font-bold text-center sm:text-left">
             Overdue Exposure: {formatCurrency(overdueAmount, curr)}
           </div>
           <button
             onClick={() => setIsSaleModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all"
+            className="w-full sm:w-auto justify-center flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all"
           >
             <Plus className="w-4 h-4" />
             <span>Record New Sale / Invoice</span>
@@ -329,16 +329,16 @@ export const Finance: React.FC = () => {
 
       {/* Record New Sale & Create Invoice Modal */}
       {isSaleModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-          <div className="bg-[#0d1527] border border-[#22345e] rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+          <div className="bg-[#0d1527] border border-[#22345e] rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-6 shadow-2xl space-y-4 sm:space-y-5 max-h-[92vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-[#22345e]">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0">
                   <TrendingUp className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white">Record New Sale & Customer Invoice</h3>
-                  <p className="text-[11px] text-slate-400">Adds transaction directly into your financial ledger</p>
+                  <h3 className="text-sm sm:text-base font-bold text-white">Record New Sale & Customer Invoice</h3>
+                  <p className="text-[10px] sm:text-[11px] text-slate-400">Adds transaction directly into your financial ledger</p>
                 </div>
               </div>
               <button
@@ -401,7 +401,7 @@ export const Finance: React.FC = () => {
               </div>
 
               {/* Price & Quantity Grid */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
                     Unit Price ({getCurrencySymbol(curr)})
@@ -433,7 +433,7 @@ export const Finance: React.FC = () => {
               </div>
 
               {/* Status and Due Date */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
                     Payment Status
@@ -469,18 +469,18 @@ export const Finance: React.FC = () => {
                 </span>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setIsSaleModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2 rounded-xl text-xs text-slate-400 hover:text-white order-2 sm:order-1 text-center"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submittingSale}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 disabled:opacity-50 transition-all"
+                  className="w-full sm:w-auto justify-center flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 disabled:opacity-50 transition-all order-1 sm:order-2"
                 >
                   <Check className="w-4 h-4" />
                   <span>{submittingSale ? 'Recording Sale...' : 'Record Sale & Generate Invoice'}</span>

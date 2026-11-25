@@ -415,7 +415,7 @@ export const Settings: React.FC = () => {
 
         {/* Setup Walkthrough Mini Banner */}
         <div className="p-3.5 rounded-xl bg-[#131e38]/70 border border-[#22345e] flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 text-slate-300">
+          <div className="flex flex-wrap items-center gap-2 text-slate-300">
             <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 font-mono text-[10px] flex items-center justify-center font-bold">
               1
             </span>
@@ -436,7 +436,7 @@ export const Settings: React.FC = () => {
             <button
               onClick={handleSyncSeedToSupabase}
               disabled={syncingSeed}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-300 border border-emerald-500/40 text-xs font-bold transition-all disabled:opacity-50"
+              className="w-full md:w-auto justify-center flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-300 border border-emerald-500/40 text-xs font-bold transition-all disabled:opacity-50"
             >
               <UploadCloud className={`w-3.5 h-3.5 ${syncingSeed ? 'animate-bounce' : ''}`} />
               {syncingSeed ? 'Syncing Tables...' : 'Push Enterprise Seed to Supabase'}
@@ -736,7 +736,7 @@ export const Settings: React.FC = () => {
             <button
               type="submit"
               disabled={savingBiz}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 transition-all disabled:opacity-50"
+              className="w-full sm:w-auto justify-center flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 transition-all disabled:opacity-50"
             >
               <Save className={`w-4 h-4 ${savingBiz ? 'animate-spin' : ''}`} />
               <span>{savingBiz ? 'Saving Company Profile...' : 'Save Company Profile'}</span>
@@ -772,15 +772,15 @@ export const Settings: React.FC = () => {
               </pre>
             </div>
 
-            <div className="flex items-center justify-between pt-2">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
               <span className="text-[11px] text-slate-400">
                 Creates: users, businesses, products, suppliers, customers, invoices, expenses, agent_runs, audit_logs.
               </span>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   type="button"
                   onClick={handleCopySql}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white text-xs font-bold shadow-lg shadow-cyan-500/20 transition-all"
+                  className="w-full sm:w-auto justify-center flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white text-xs font-bold shadow-lg shadow-cyan-500/20 transition-all"
                 >
                   {copiedSql ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
                   {copiedSql ? 'Copied to Clipboard!' : 'Copy Entire SQL Script'}

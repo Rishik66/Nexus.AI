@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Sparkles,
@@ -23,12 +23,15 @@ import {
   LogOut,
   Building2,
   BarChart3,
+  Menu,
+  X,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.js';
 
 export const Landing: React.FC = () => {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const agents = [
     {
@@ -191,19 +194,20 @@ export const Landing: React.FC = () => {
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             {isAuthenticated ? (
               <>
                 <button
                   onClick={() => navigate('/command-center')}
-                  className="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 flex items-center gap-2 transition-all"
+                  className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 sm:gap-2 transition-all"
                 >
-                  <span>Enter Workspace</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span className="hidden xs:inline">Enter Workspace</span>
+                  <span className="xs:hidden">Workspace</span>
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
                 <button
                   onClick={logout}
-                  className="p-2.5 rounded-xl bg-[#131e38] hover:bg-[#182442] border border-[#22345e] text-slate-400 hover:text-rose-400 transition-colors"
+                  className="p-2 sm:p-2.5 rounded-xl bg-[#131e38] hover:bg-[#182442] border border-[#22345e] text-slate-400 hover:text-rose-400 transition-colors"
                   title="Sign Out"
                 >
                   <LogOut className="w-4 h-4" />
@@ -213,21 +217,101 @@ export const Landing: React.FC = () => {
               <>
                 <button
                   onClick={() => navigate('/login')}
-                  className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
+                  className="hidden sm:block px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
                 >
                   Sign In
                 </button>
                 <button
                   onClick={() => navigate('/login?tab=signup')}
-                  className="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 transition-all"
+                  className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 transition-all"
                 >
                   <span>Get Started</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </>
             )}
+
+            {/* Mobile / Tablet Hamburger Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-xl bg-[#131e38] border border-[#22345e] text-slate-300 hover:text-white transition-colors"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5 text-cyan-400" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile / Tablet Slide-Down Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-[#0d1527] border-b border-[#22345e] px-4 py-5 space-y-4 animate-in slide-in-from-top-2 duration-200 shadow-2xl">
+            <nav className="flex flex-col space-y-2 text-sm font-semibold text-slate-300">
+              <a
+                href="#features"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-3 py-2 rounded-lg hover:bg-[#131e38] hover:text-cyan-400 transition-colors"
+              >
+                Features & Modules
+              </a>
+              <a
+                href="#agents"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-3 py-2 rounded-lg hover:bg-[#131e38] hover:text-cyan-400 transition-colors"
+              >
+                5 Specialized AI Agents
+              </a>
+              <a
+                href="#who-uses"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-3 py-2 rounded-lg hover:bg-[#131e38] hover:text-cyan-400 transition-colors"
+              >
+                Who It's Built For
+              </a>
+              <a
+                href="#how-it-works"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-3 py-2 rounded-lg hover:bg-[#131e38] hover:text-cyan-400 transition-colors"
+              >
+                Autonomous Architecture
+              </a>
+            </nav>
+
+            <div className="pt-3 border-t border-[#1f2d4d] flex flex-col gap-2">
+              {!isAuthenticated ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate('/login');
+                    }}
+                    className="w-full py-2.5 rounded-xl bg-[#131e38] border border-[#22345e] text-slate-200 text-xs font-bold text-center hover:bg-[#182442]"
+                  >
+                    Sign In to Existing Workspace
+                  </button>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate('/login?tab=signup');
+                    }}
+                    className="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold text-center shadow-lg shadow-cyan-500/20"
+                  >
+                    Create Free Enterprise Account
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    navigate('/command-center');
+                  }}
+                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold text-center"
+                >
+                  Go to Command Center
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* ============================================================== */}

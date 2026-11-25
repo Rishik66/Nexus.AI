@@ -76,20 +76,20 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner: Holistic Business Health Score */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-[#0d1527] via-[#131e38] to-[#0d1527] border border-[#22345e] shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-5">
+      <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-[#0d1527] via-[#131e38] to-[#0d1527] border border-[#22345e] shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 w-full lg:w-auto">
           {/* Health Score Gauge Display */}
-          <div className="relative w-24 h-24 rounded-2xl bg-[#090f1d] border-2 border-cyan-500/40 flex flex-col items-center justify-center shadow-lg shadow-cyan-500/20 flex-shrink-0">
-            <span className="text-3xl font-black text-white tracking-tight">
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#090f1d] border-2 border-cyan-500/40 flex flex-col items-center justify-center shadow-lg shadow-cyan-500/20 flex-shrink-0">
+            <span className="text-2xl sm:text-3xl font-black text-white tracking-tight">
               {metrics?.healthScore ?? 0}
             </span>
-            <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase">
+            <span className="text-[9px] sm:text-[10px] font-mono text-cyan-400 font-bold uppercase">
               / 100 HEALTH
             </span>
           </div>
 
           <div>
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="flex flex-wrap items-center gap-2 mb-1.5">
               <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                 STATUS: {metrics?.healthStatus || 'HEALTHY'}
               </span>
@@ -109,7 +109,7 @@ export const Dashboard: React.FC = () => {
 
         <button
           onClick={() => navigate('/command-center')}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/20 transition-all flex-shrink-0"
+          className="w-full sm:w-auto justify-center flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/20 transition-all flex-shrink-0"
         >
           <Sparkles className="w-4 h-4" />
           Run AI Health Optimization

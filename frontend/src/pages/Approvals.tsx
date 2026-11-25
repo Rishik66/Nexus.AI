@@ -139,7 +139,7 @@ export const Approvals: React.FC = () => {
                       className="text-xs bg-[#131e38] border border-[#22345e] rounded-lg px-3 py-2 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 flex-1"
                     />
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
                       <button
                         onClick={() => handleDecision(a.id, 'REJECTED')}
                         className="px-4 py-2 rounded-xl bg-rose-950/40 hover:bg-rose-900/60 border border-rose-500/40 text-rose-300 text-xs font-bold transition-all"

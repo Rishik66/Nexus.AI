@@ -99,10 +99,10 @@ export const Inventory: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
             onClick={handleTriggerAtlasRestock}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all"
+            className="w-full sm:w-auto justify-center flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all"
           >
             <Sparkles className="w-4 h-4" />
             AI Asset Procurement Plan
@@ -123,7 +123,7 @@ export const Inventory: React.FC = () => {
           />
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Category Filter */}
           <select
             value={selectedCategory}
@@ -233,8 +233,8 @@ export const Inventory: React.FC = () => {
 
       {/* Manual Stock Adjustment Modal */}
       {adjustModalOpen && selectedProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
-          <div className="bg-[#0d1527] border border-[#22345e] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm">
+          <div className="bg-[#0d1527] border border-[#22345e] rounded-2xl max-w-md w-full p-4 sm:p-6 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
             <h3 className="text-base font-bold text-white">Manual Asset & Capacity Allocation</h3>
             <p className="text-xs text-slate-400">
               Adjusting quantity for <span className="text-cyan-400 font-bold">{selectedProduct.name}</span> ({selectedProduct.sku}).

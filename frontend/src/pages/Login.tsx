@@ -237,7 +237,7 @@ export const Login: React.FC = () => {
         </div>
 
         {/* Auth Form Card */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#0d1527] border border-[#22345e] shadow-2xl shadow-black/80 space-y-5 backdrop-blur-md">
+        <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0d1527] border border-[#22345e] shadow-2xl shadow-black/80 space-y-4 sm:space-y-5 backdrop-blur-md">
           {/* Tabs for Login vs Signup (Hidden when in Forgot Password mode) */}
           {mode !== 'FORGOT_PASSWORD' && (
             <div className="grid grid-cols-2 p-1 rounded-xl bg-[#131e38] border border-[#22345e] text-xs font-semibold">
@@ -296,7 +296,7 @@ export const Login: React.FC = () => {
           {mode === 'LOGIN' && (
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               {/* Quick Fill Demo Banner */}
-              <div className="p-2.5 rounded-xl bg-cyan-950/30 border border-cyan-800/40 flex items-center justify-between text-xs">
+              <div className="p-2.5 rounded-xl bg-cyan-950/30 border border-cyan-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                 <div className="text-[11px] text-slate-300">
                   <span className="text-cyan-400 font-semibold">Demo:</span> admin@nexus.ai / nexus123
                 </div>
@@ -307,7 +307,7 @@ export const Login: React.FC = () => {
                     setPassword('nexus123');
                     setError(null);
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-[11px] font-semibold transition-colors"
+                  className="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-[11px] font-semibold transition-colors self-start sm:self-auto"
                 >
                   Quick Fill
                 </button>
