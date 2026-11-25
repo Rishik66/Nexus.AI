@@ -62187,7 +62187,7 @@ function nmfetch(url, options) {
   let finished3 = false;
   let cookies;
   let body;
-  const handler2 = parsed.protocol === "https:" ? import_node_https.default : import_node_http.default;
+  const handler = parsed.protocol === "https:" ? import_node_https.default : import_node_http.default;
   const headers = {
     "accept-encoding": "gzip,deflate",
     "user-agent": "nodemailer/" + version
@@ -62271,7 +62271,7 @@ function nmfetch(url, options) {
     reqOptions.servername = parsed.hostname;
   }
   try {
-    req = handler2.request(reqOptions);
+    req = handler.request(reqOptions);
   } catch (E) {
     finished3 = true;
     setImmediate(() => {
@@ -70559,7 +70559,7 @@ var SMTPConnection = class extends import_node_events2.EventEmitter {
       }
     }
     if (this.customAuth.has(this._authMethod)) {
-      const handler2 = this.customAuth.get(this._authMethod);
+      const handler = this.customAuth.get(this._authMethod);
       let lastResponse;
       let returned = false;
       const resolve3 = () => {
@@ -70612,7 +70612,7 @@ var SMTPConnection = class extends import_node_events2.EventEmitter {
         setImmediate(() => this._sendCommand(cmd, maskAuthCommand(cmd)));
         return promise;
       };
-      const handlerResponse = handler2({
+      const handlerResponse = handler({
         auth: this._auth,
         method: this._authMethod,
         extensions: [].concat(this._supportedExtensions),
@@ -88018,7 +88018,7 @@ app.use(import_express22.default.json({ limit: "15mb" }));
 app.use(import_express22.default.urlencoded({ extended: true, limit: "15mb" }));
 var uploadsDir2 = import_path6.default.resolve(process.cwd(), "uploads");
 app.use("/uploads", import_express22.default.static(uploadsDir2));
-app.get("/api/health", (_req, res) => {
+app.get(["/api/health", "/health"], (_req, res) => {
   res.json({
     status: "HEALTHY",
     service: "NEXUS AI - Autonomous Business Operations Platform",
@@ -88029,27 +88029,33 @@ app.get("/api/health", (_req, res) => {
     databaseEngine: db.isUsingPostgres() ? "PostgreSQL" : "Embedded Relational Engine"
   });
 });
-app.use("/api/auth", authRoutes);
-app.use("/api/businesses", businessRoutes);
-app.use("/api/dashboard", dashboardRoutes);
-app.use("/api/products", productRoutes);
-app.use("/api/inventory", inventoryRoutes);
-app.use("/api/customers", customerRoutes);
-app.use("/api/suppliers", supplierRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/invoices", invoiceRoutes);
-app.use("/api/expenses", expenseRoutes);
-app.use("/api/tasks", taskRoutes);
-app.use("/api/agents", agentRoutes);
-app.use("/api/agent-runs", agentRunRoutes);
-app.use("/api/tools", toolRoutes);
-app.use("/api/workflows", workflowRoutes);
-app.use("/api/approvals", approvalRoutes);
-app.use("/api/documents", documentRoutes);
-app.use("/api/audit-logs", auditRoutes);
-app.use("/api/integrations", integrationRoutes);
-app.use("/api/notifications", notificationRoutes);
-app.use("/api/supabase", supabaseRoutes);
+var apiRoutes = [
+  { path: "/auth", router: authRoutes },
+  { path: "/businesses", router: businessRoutes },
+  { path: "/dashboard", router: dashboardRoutes },
+  { path: "/products", router: productRoutes },
+  { path: "/inventory", router: inventoryRoutes },
+  { path: "/customers", router: customerRoutes },
+  { path: "/suppliers", router: supplierRoutes },
+  { path: "/orders", router: orderRoutes },
+  { path: "/invoices", router: invoiceRoutes },
+  { path: "/expenses", router: expenseRoutes },
+  { path: "/tasks", router: taskRoutes },
+  { path: "/agents", router: agentRoutes },
+  { path: "/agent-runs", router: agentRunRoutes },
+  { path: "/tools", router: toolRoutes },
+  { path: "/workflows", router: workflowRoutes },
+  { path: "/approvals", router: approvalRoutes },
+  { path: "/documents", router: documentRoutes },
+  { path: "/audit-logs", router: auditRoutes },
+  { path: "/integrations", router: integrationRoutes },
+  { path: "/notifications", router: notificationRoutes },
+  { path: "/supabase", router: supabaseRoutes }
+];
+for (const r of apiRoutes) {
+  app.use(`/api${r.path}`, r.router);
+  app.use(r.path, r.router);
+}
 app.use(errorHandler);
 async function startServer() {
   const users = db.getUsers();
@@ -88079,7 +88085,7 @@ var index_default = app;
 
 // src/serverless.ts
 var initialized = false;
-async function ensureInitialized() {
+index_default.use(async (_req, _res, next) => {
   if (!initialized) {
     try {
       const users = db.getUsers();
@@ -88087,39 +88093,13 @@ async function ensureInitialized() {
         await seedDatabase();
       }
     } catch (err) {
-      console.warn("[SERVERLESS BOOT] Warning during store initialization:", err);
+      console.warn("[SERVERLESS INIT] Warning during store initialization:", err);
     }
     initialized = true;
   }
-}
-async function handler(req, res) {
-  if (res.setHeader) {
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
-    );
-  }
-  if (req.method === "OPTIONS") {
-    res.status(200).end();
-    return;
-  }
-  await ensureInitialized();
-  return new Promise((resolve3, reject) => {
-    if (res.on) {
-      res.on("finish", resolve3);
-      res.on("close", resolve3);
-      res.on("error", reject);
-    }
-    index_default(req, res, (err) => {
-      if (err) return reject(err);
-      resolve3();
-    });
-  });
-}
-var serverless_default = handler;
+  next();
+});
+var serverless_default = index_default;
 /*! Bundled license information:
 
 depd/index.js:
@@ -88451,4 +88431,4 @@ object-assign/index.js:
    * limitations under the License.
    *)
 */
-module.exports = handler; module.exports.default = handler;
+module.exports = serverless_default; module.exports.default = serverless_default;

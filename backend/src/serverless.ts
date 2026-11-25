@@ -4,7 +4,8 @@ import { seedDatabase } from './database/seed.js';
 
 let initialized = false;
 
-async function ensureInitialized() {
+// Middleware ensuring enterprise store is seeded on first serverless invocation
+app.use(async (_req: any, _res: any, next: any) => {
   if (!initialized) {
     try {
       const users = db.getUsers();
@@ -12,43 +13,11 @@ async function ensureInitialized() {
         await seedDatabase();
       }
     } catch (err) {
-      console.warn('[SERVERLESS BOOT] Warning during store initialization:', err);
+      console.warn('[SERVERLESS INIT] Warning during store initialization:', err);
     }
     initialized = true;
   }
-}
+  next();
+});
 
-// Vercel Serverless Function Handler
-async function handler(req: any, res: any) {
-  // CORS Preflight handling
-  if (res.setHeader) {
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization'
-    );
-  }
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
-  await ensureInitialized();
-
-  return new Promise<void>((resolve, reject) => {
-    if (res.on) {
-      res.on('finish', resolve);
-      res.on('close', resolve);
-      res.on('error', reject);
-    }
-    (app as any)(req, res, (err: any) => {
-      if (err) return reject(err);
-      resolve();
-    });
-  });
-}
-
-export default handler;
+export default app;

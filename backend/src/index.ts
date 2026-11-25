@@ -46,7 +46,7 @@ const uploadsDir = path.resolve(process.cwd(), 'uploads');
 app.use('/uploads', express.static(uploadsDir));
 
 // Health Check
-app.get('/api/health', (_req, res) => {
+app.get(['/api/health', '/health'], (_req, res) => {
   res.json({
     status: 'HEALTHY',
     service: 'NEXUS AI - Autonomous Business Operations Platform',
@@ -58,28 +58,35 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/businesses', businessRoutes);
-app.use('/api/dashboard', dashboardRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/inventory', inventoryRoutes);
-app.use('/api/customers', customerRoutes);
-app.use('/api/suppliers', supplierRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/invoices', invoiceRoutes);
-app.use('/api/expenses', expenseRoutes);
-app.use('/api/tasks', taskRoutes);
-app.use('/api/agents', agentRoutes);
-app.use('/api/agent-runs', agentRunRoutes);
-app.use('/api/tools', toolRoutes);
-app.use('/api/workflows', workflowRoutes);
-app.use('/api/approvals', approvalRoutes);
-app.use('/api/documents', documentRoutes);
-app.use('/api/audit-logs', auditRoutes);
-app.use('/api/integrations', integrationRoutes);
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/supabase', supabaseRoutes);
+// API Routes - registered on both /api/* and root paths for serverless flexibility
+const apiRoutes = [
+  { path: '/auth', router: authRoutes },
+  { path: '/businesses', router: businessRoutes },
+  { path: '/dashboard', router: dashboardRoutes },
+  { path: '/products', router: productRoutes },
+  { path: '/inventory', router: inventoryRoutes },
+  { path: '/customers', router: customerRoutes },
+  { path: '/suppliers', router: supplierRoutes },
+  { path: '/orders', router: orderRoutes },
+  { path: '/invoices', router: invoiceRoutes },
+  { path: '/expenses', router: expenseRoutes },
+  { path: '/tasks', router: taskRoutes },
+  { path: '/agents', router: agentRoutes },
+  { path: '/agent-runs', router: agentRunRoutes },
+  { path: '/tools', router: toolRoutes },
+  { path: '/workflows', router: workflowRoutes },
+  { path: '/approvals', router: approvalRoutes },
+  { path: '/documents', router: documentRoutes },
+  { path: '/audit-logs', router: auditRoutes },
+  { path: '/integrations', router: integrationRoutes },
+  { path: '/notifications', router: notificationRoutes },
+  { path: '/supabase', router: supabaseRoutes },
+];
+
+for (const r of apiRoutes) {
+  app.use(`/api${r.path}`, r.router);
+  app.use(r.path, r.router);
+}
 
 // Error Handling
 app.use(errorHandler);

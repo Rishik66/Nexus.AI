@@ -295,6 +295,24 @@ export const Login: React.FC = () => {
           {/* ============================================================== */}
           {mode === 'LOGIN' && (
             <form onSubmit={handleLoginSubmit} className="space-y-4">
+              {/* Quick Fill Demo Banner */}
+              <div className="p-2.5 rounded-xl bg-cyan-950/30 border border-cyan-800/40 flex items-center justify-between text-xs">
+                <div className="text-[11px] text-slate-300">
+                  <span className="text-cyan-400 font-semibold">Demo:</span> admin@nexus.ai / nexus123
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEmail('admin@nexus.ai');
+                    setPassword('nexus123');
+                    setError(null);
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-[11px] font-semibold transition-colors"
+                >
+                  Quick Fill
+                </button>
+              </div>
+
               <div className="space-y-1.5">
                 <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
                   Work Email Address
