@@ -88107,7 +88107,17 @@ async function handler(req, res) {
     return;
   }
   await ensureInitialized();
-  return index_default(req, res);
+  return new Promise((resolve3, reject) => {
+    if (res.on) {
+      res.on("finish", resolve3);
+      res.on("close", resolve3);
+      res.on("error", reject);
+    }
+    index_default(req, res, (err) => {
+      if (err) return reject(err);
+      resolve3();
+    });
+  });
 }
 var serverless_default = handler;
 /*! Bundled license information:

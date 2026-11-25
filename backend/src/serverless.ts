@@ -37,7 +37,18 @@ async function handler(req: any, res: any) {
   }
 
   await ensureInitialized();
-  return (app as any)(req, res);
+
+  return new Promise<void>((resolve, reject) => {
+    if (res.on) {
+      res.on('finish', resolve);
+      res.on('close', resolve);
+      res.on('error', reject);
+    }
+    (app as any)(req, res, (err: any) => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
 }
 
 export default handler;
