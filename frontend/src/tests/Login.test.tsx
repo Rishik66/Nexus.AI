@@ -6,7 +6,7 @@ import { AuthProvider } from '../context/AuthContext.js';
 import { Login } from '../pages/Login.js';
 
 describe('Login Page Component Tests', () => {
-  it('renders login screen with inputs and quick login buttons', () => {
+  it('renders enterprise login screen with sign in and create account tabs', () => {
     render(
       <BrowserRouter>
         <AuthProvider>
@@ -16,10 +16,10 @@ describe('Login Page Component Tests', () => {
     );
 
     expect(screen.getByText('NEXUS')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/admin@nexus.ai/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Sign In to NEXUS AI/i })).toBeInTheDocument();
-    expect(screen.getByText('Admin')).toBeInTheDocument();
-    expect(screen.getByText('Manager')).toBeInTheDocument();
-    expect(screen.getByText('Employee')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/user@company.com/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Sign In to Workspace/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /^Sign In$/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Create Account/i })).toBeInTheDocument();
+    expect(screen.getByText(/Forgot password\?/i)).toBeInTheDocument();
   });
 });

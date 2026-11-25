@@ -122,12 +122,13 @@ export class DatabaseService {
   }
 
   public persist() {
-    if (!this.isPostgres) {
-      try {
-        fs.writeFileSync(this.storeFilePath, JSON.stringify(this.store, null, 2), 'utf-8');
-      } catch (err) {
-        console.error('[DATABASE] Error persisting store to disk:', err);
+    try {
+      if (!fs.existsSync(this.dataDir)) {
+        fs.mkdirSync(this.dataDir, { recursive: true });
       }
+      fs.writeFileSync(this.storeFilePath, JSON.stringify(this.store, null, 2), 'utf-8');
+    } catch (err) {
+      console.error('[DATABASE] Error persisting store to disk:', err);
     }
   }
 
@@ -163,6 +164,44 @@ export class DatabaseService {
     this.store.users.push(newUser);
     this.persist();
     return newUser;
+  }
+
+  public updateUser(id: string, updates: Partial<User>): User | undefined {
+    const userIndex = this.store.users.findIndex(u => u.id === id);
+    if (userIndex === -1) return undefined;
+    this.store.users[userIndex] = {
+      ...this.store.users[userIndex],
+      ...updates,
+      updated_at: new Date().toISOString(),
+    };
+    this.persist();
+    return this.store.users[userIndex];
+  }
+
+  private otpMap: Map<string, { otp: string; expiresAt: number }> = new Map();
+
+  public saveOtp(email: string, otp: string, ttlMinutes: number = 15): void {
+    const key = email.toLowerCase().trim();
+    this.otpMap.set(key, {
+      otp: otp.trim(),
+      expiresAt: Date.now() + ttlMinutes * 60 * 1000,
+    });
+  }
+
+  public verifyOtp(email: string, otp: string): boolean {
+    const key = email.toLowerCase().trim();
+    const entry = this.otpMap.get(key);
+    if (!entry) return false;
+    if (Date.now() > entry.expiresAt) {
+      this.otpMap.delete(key);
+      return false;
+    }
+    return entry.otp === otp.trim();
+  }
+
+  public clearOtp(email: string): void {
+    const key = email.toLowerCase().trim();
+    this.otpMap.delete(key);
   }
 
   // --- Businesses ---

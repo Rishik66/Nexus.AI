@@ -54581,12 +54581,13 @@ var DatabaseService = class _DatabaseService {
     }
   }
   persist() {
-    if (!this.isPostgres) {
-      try {
-        import_fs.default.writeFileSync(this.storeFilePath, JSON.stringify(this.store, null, 2), "utf-8");
-      } catch (err) {
-        console.error("[DATABASE] Error persisting store to disk:", err);
+    try {
+      if (!import_fs.default.existsSync(this.dataDir)) {
+        import_fs.default.mkdirSync(this.dataDir, { recursive: true });
       }
+      import_fs.default.writeFileSync(this.storeFilePath, JSON.stringify(this.store, null, 2), "utf-8");
+    } catch (err) {
+      console.error("[DATABASE] Error persisting store to disk:", err);
     }
   }
   isUsingPostgres() {
@@ -54616,6 +54617,39 @@ var DatabaseService = class _DatabaseService {
     this.store.users.push(newUser);
     this.persist();
     return newUser;
+  }
+  updateUser(id, updates) {
+    const userIndex = this.store.users.findIndex((u) => u.id === id);
+    if (userIndex === -1) return void 0;
+    this.store.users[userIndex] = {
+      ...this.store.users[userIndex],
+      ...updates,
+      updated_at: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    this.persist();
+    return this.store.users[userIndex];
+  }
+  otpMap = /* @__PURE__ */ new Map();
+  saveOtp(email, otp, ttlMinutes = 15) {
+    const key = email.toLowerCase().trim();
+    this.otpMap.set(key, {
+      otp: otp.trim(),
+      expiresAt: Date.now() + ttlMinutes * 60 * 1e3
+    });
+  }
+  verifyOtp(email, otp) {
+    const key = email.toLowerCase().trim();
+    const entry = this.otpMap.get(key);
+    if (!entry) return false;
+    if (Date.now() > entry.expiresAt) {
+      this.otpMap.delete(key);
+      return false;
+    }
+    return entry.otp === otp.trim();
+  }
+  clearOtp(email) {
+    const key = email.toLowerCase().trim();
+    this.otpMap.delete(key);
   }
   // --- Businesses ---
   getBusinesses() {
@@ -61350,6 +61384,14 @@ var LoginSchema = external_exports.object({
   email: external_exports.string().email(),
   password: external_exports.string()
 });
+var ForgotPasswordSchema = external_exports.object({
+  email: external_exports.string().email()
+});
+var ResetPasswordSchema = external_exports.object({
+  email: external_exports.string().email(),
+  otp: external_exports.string().length(6),
+  new_password: external_exports.string().min(6)
+});
 authRoutes.post("/register", async (req, res) => {
   const { email, password, full_name, role } = RegisterSchema.parse(req.body);
   const existing = db.getUserByEmail(email);
@@ -61395,6 +61437,94 @@ authRoutes.post("/login", async (req, res) => {
       role: user.role
     }
   });
+});
+authRoutes.post("/forgot-password", async (req, res) => {
+  try {
+    const { email } = ForgotPasswordSchema.parse(req.body);
+    const user = db.getUserByEmail(email);
+    if (!user) {
+      return res.status(404).json({ error: "No user account found with this email address." });
+    }
+    const otp = Math.floor(1e5 + Math.random() * 9e5).toString();
+    db.saveOtp(email, otp, 15);
+    let emailDispatched = false;
+    if (config.resendApiKey && config.resendApiKey.startsWith("re_")) {
+      try {
+        const resp = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${config.resendApiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            from: "NEXUS AI <auth@nexus.ai>",
+            to: [email],
+            subject: "Your NEXUS AI Password Reset Code",
+            html: `
+              <div style="font-family: Arial, sans-serif; padding: 24px; background: #0b1120; color: #f8fafc; border-radius: 12px;">
+                <h2 style="color: #38bdf8;">NEXUS AI Password Reset</h2>
+                <p>Hello ${user.full_name},</p>
+                <p>You requested a one-time verification code to reset your account password.</p>
+                <div style="margin: 24px 0; padding: 16px; background: #1e293b; border-radius: 8px; text-align: center;">
+                  <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #38bdf8; font-family: monospace;">${otp}</span>
+                </div>
+                <p style="color: #94a3b8; font-size: 13px;">This code expires in 15 minutes. If you did not request this, you can safely ignore this email.</p>
+              </div>
+            `
+          })
+        });
+        emailDispatched = resp.ok;
+      } catch (err) {
+        console.warn("[AUTH] Live email dispatch failed:", err);
+      }
+    }
+    db.createNotification({
+      business_id: db.getDemoBusiness()?.id || "",
+      title: "Password Reset OTP Dispatched",
+      message: `OTP verification code dispatched to ${email}`,
+      type: "SECURITY",
+      is_read: false
+    });
+    res.json({
+      success: true,
+      message: emailDispatched ? "A 6-digit verification code has been dispatched to your email." : "A 6-digit verification code has been generated.",
+      // In development or when email gateway is pending, provide devOtp for instant testing
+      devOtp: !emailDispatched ? otp : void 0
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message || "Failed to process password reset request." });
+  }
+});
+authRoutes.post("/reset-password", async (req, res) => {
+  try {
+    const { email, otp, new_password } = ResetPasswordSchema.parse(req.body);
+    const isValid2 = db.verifyOtp(email, otp);
+    if (!isValid2) {
+      return res.status(400).json({ error: "Invalid or expired verification code. Please request a new one." });
+    }
+    const user = db.getUserByEmail(email);
+    if (!user) {
+      return res.status(404).json({ error: "User account not found." });
+    }
+    const salt = await bcryptjs_default.genSalt(10);
+    const passwordHash = await bcryptjs_default.hash(new_password, salt);
+    db.updateUser(user.id, { password_hash: passwordHash });
+    db.clearOtp(email);
+    db.logAudit({
+      business_id: db.getDemoBusiness()?.id || "",
+      user_id: user.id,
+      action: "PASSWORD_RESET",
+      entity_type: "USER",
+      entity_id: user.id,
+      details: { email }
+    });
+    res.json({
+      success: true,
+      message: "Password has been successfully updated. You can now log in with your new password."
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message || "Failed to reset password." });
+  }
 });
 authRoutes.get("/me", authenticateJWT, (req, res) => {
   if (!req.user) {

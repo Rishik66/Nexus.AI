@@ -10,6 +10,7 @@ interface AuthContextType {
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (email: string, pass: string) => Promise<void>;
+  register: (email: string, pass: string, fullName: string, role?: 'ADMIN' | 'MANAGER' | 'EMPLOYEE') => Promise<void>;
   logout: () => void;
   switchRole: (newRole: 'ADMIN' | 'MANAGER' | 'EMPLOYEE') => Promise<void>;
   refreshApprovals: () => Promise<void>;
@@ -104,6 +105,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await refreshApprovals();
   };
 
+  const register = async (email: string, pass: string, fullName: string, newRole: 'ADMIN' | 'MANAGER' | 'EMPLOYEE' = 'ADMIN') => {
+    const res = await ApiService.register({
+      email,
+      password: pass,
+      full_name: fullName,
+      role: newRole,
+    });
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem('nexus_token', res.token);
+    }
+    setToken(res.token);
+    setUser(res.user);
+    setRole(res.user.role);
+
+    try {
+      const biz = await ApiService.getCurrentBusiness();
+      if (biz) setBusiness(biz);
+    } catch {
+      // ignore
+    }
+
+    await refreshApprovals();
+  };
+
   const logout = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       window.localStorage.removeItem('nexus_token');
@@ -139,6 +164,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isLoading,
         isAuthenticated: Boolean(user && token),
         login,
+        register,
         logout,
         switchRole,
         refreshApprovals,
