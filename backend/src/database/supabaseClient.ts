@@ -231,13 +231,20 @@ export class SupabaseService {
         stats.suppliers = store.suppliers.length;
       }
 
-      // 4. Sync Products / Assets
+      // 4. Sync Products / Assets (deduplicate by sku)
       if (store.products?.length) {
+        const uniqueProductsMap = new Map();
+        for (const p of store.products) {
+          if (!uniqueProductsMap.has(p.sku)) {
+            uniqueProductsMap.set(p.sku, p);
+          }
+        }
+        const uniqueProducts = Array.from(uniqueProductsMap.values());
         const { error: pError } = await this.client
           .from('products')
-          .upsert(store.products, { onConflict: 'id' });
+          .upsert(uniqueProducts, { onConflict: 'business_id, sku' });
         if (pError) throw new Error(`Failed to sync assets/products: ${pError.message}`);
-        stats.products = store.products.length;
+        stats.products = uniqueProducts.length;
       }
 
       // 5. Sync Customers
@@ -251,11 +258,26 @@ export class SupabaseService {
 
       // 6. Sync Invoices
       if (store.invoices?.length) {
+        const cleanInvoices = store.invoices.map((inv: any) => ({
+          id: inv.id,
+          business_id: inv.business_id,
+          customer_id: inv.customer_id,
+          invoice_number: inv.invoice_number,
+          status: inv.status,
+          issue_date: inv.issue_date,
+          due_date: inv.due_date,
+          subtotal: inv.subtotal,
+          tax_amount: inv.tax_amount,
+          total_amount: inv.total_amount,
+          notes: inv.notes,
+          created_at: inv.created_at,
+          updated_at: inv.updated_at,
+        }));
         const { error: iError } = await this.client
           .from('invoices')
-          .upsert(store.invoices, { onConflict: 'id' });
+          .upsert(cleanInvoices, { onConflict: 'id' });
         if (iError) throw new Error(`Failed to sync invoices: ${iError.message}`);
-        stats.invoices = store.invoices.length;
+        stats.invoices = cleanInvoices.length;
       }
 
       // 7. Sync Expenses
