@@ -33,8 +33,10 @@ export interface Business {
   is_demo: boolean;
 }
 
+export type AgentName = 'ORION' | 'ATLAS' | 'NOVA' | 'SAGE' | 'SENTINEL' | 'HERMES' | 'APEX';
+
 export interface AgentDescriptor {
-  name: 'ORION' | 'ATLAS' | 'NOVA' | 'SAGE' | 'SENTINEL';
+  name: AgentName;
   role: string;
   tagline: string;
   avatarColor: string;
@@ -45,7 +47,7 @@ export interface AgentDescriptor {
 export interface PlanStep {
   id: string;
   stepIndex: number;
-  agentName: 'ORION' | 'ATLAS' | 'NOVA' | 'SAGE' | 'SENTINEL';
+  agentName: AgentName;
   description: string;
   toolName?: string;
   suggestedInput?: any;

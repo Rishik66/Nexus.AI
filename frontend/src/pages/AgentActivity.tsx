@@ -24,11 +24,11 @@ export const AgentActivity: React.FC = () => {
           <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
             Multi-Agent Intelligence Network
           </span>
-          <span className="text-xs text-slate-400 font-mono">5 Specialized Cooperating Agents</span>
+          <span className="text-xs text-slate-400 font-mono">{agents.length || 7} Specialized Cooperating Agents</span>
         </div>
         <h1 className="text-2xl font-extrabold text-white">Agent Activity & Roster</h1>
         <p className="text-xs text-slate-400 mt-1">
-          Architectural overview of all 5 specialized agents, their role boundaries, tool authorizations, and execution audit history.
+          Architectural overview of all specialized AI models, their role boundaries, tool authorizations, and execution audit history.
         </p>
       </div>
 

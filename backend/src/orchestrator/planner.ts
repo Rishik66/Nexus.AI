@@ -33,10 +33,12 @@ Break down this user business goal into a structured sequential multi-agent exec
 Goal: "${goal}"
 
 Available Specialist Agents:
-- ATLAS (Operations, Inventory, Suppliers, Purchase Orders, Tasks)
-- NOVA (Finance, Revenue, Expenses, Invoices, Cash Flow)
+- ATLAS (Operations, Infrastructure, Inventory, Suppliers, Purchase Orders, Tasks)
+- NOVA (Finance, Revenue, Expenses, Invoices, Cash Flow, Forex)
 - SAGE (Research, Multimodal Document Extraction, Insights)
 - SENTINEL (Quality, Risk Review, Human Approval Gate)
+- HERMES (Customer Communications, Accounts Receivable Outreach, Partner Messaging)
+- APEX (Executive Strategy, Market Benchmarking, Growth Forecasting)
 
 Available Tools:
 - DATABASE_SEARCH (low risk)
@@ -50,7 +52,7 @@ Available Tools:
 Output ONLY valid JSON matching this schema:
 {
   "summary": "1 sentence executive summary of the plan",
-  "targetAgents": ["ORION", "ATLAS", "NOVA", "SAGE", "SENTINEL"],
+  "targetAgents": ["ORION", "ATLAS", "NOVA", "SAGE", "SENTINEL", "HERMES", "APEX"],
   "estimatedTurns": number,
   "steps": [
     {

@@ -2,7 +2,7 @@ export type UserRole = 'ADMIN' | 'MANAGER' | 'EMPLOYEE';
 
 export interface User {
   id: string;
-  business_id: string;
+  business_id?: string;
   email: string;
   password_hash: string;
   full_name: string;
@@ -14,7 +14,7 @@ export interface User {
 export interface Business {
   id: string;
   name: string;
-  type: 'RETAIL' | 'SUPERMARKET' | 'ECOMMERCE' | 'SME' | 'SERVICE' | 'DISTRIBUTOR' | 'STARTUP' | 'GENERAL';
+  type: 'RETAIL' | 'SUPERMARKET' | 'ECOMMERCE' | 'SME' | 'SERVICE' | 'DISTRIBUTOR' | 'STARTUP' | 'GENERAL' | 'TECHNOLOGY';
   currency: string;
   address?: string;
   phone?: string;
@@ -74,7 +74,7 @@ export interface Customer {
   phone?: string;
   company?: string;
   status: 'ACTIVE' | 'INACTIVE';
-  total_spend: number;
+  total_spend?: number;
   created_at: string;
   updated_at: string;
 }
@@ -163,7 +163,7 @@ export interface Task {
 }
 
 export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH';
-export type AgentName = 'ORION' | 'ATLAS' | 'NOVA' | 'SAGE' | 'SENTINEL';
+export type AgentName = 'ORION' | 'ATLAS' | 'NOVA' | 'SAGE' | 'SENTINEL' | 'HERMES' | 'APEX';
 
 export interface AgentStep {
   id: string;
@@ -253,8 +253,9 @@ export interface Workflow {
   business_id: string;
   name: string;
   description?: string;
-  trigger_type: 'MANUAL' | 'SCHEDULED' | 'EVENT';
+  trigger_type: 'MANUAL' | 'SCHEDULED' | 'EVENT' | 'EVENT_DRIVEN' | 'WEBHOOK';
   trigger_config?: any;
+  cron_expression?: string;
   steps: any[];
   is_active: boolean;
   created_at: string;
@@ -280,7 +281,7 @@ export interface Notification {
   user_id?: string;
   title: string;
   message: string;
-  type: 'INFO' | 'WARNING' | 'SUCCESS' | 'ERROR' | 'APPROVAL_REQUIRED';
+  type: 'INFO' | 'WARNING' | 'SUCCESS' | 'ERROR' | 'APPROVAL_REQUIRED' | 'SECURITY';
   is_read: boolean;
   link?: string;
   created_at: string;

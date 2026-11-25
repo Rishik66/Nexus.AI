@@ -199,6 +199,38 @@ export class GeminiClient {
       };
     }
 
+    if (agentName === 'HERMES') {
+      if (taskLower.includes('email') || taskLower.includes('message') || taskLower.includes('remind') || taskLower.includes('outreach')) {
+        return {
+          thought: 'Drafting targeted customer communication for accounts receivable recovery and engagement.',
+          toolCall: {
+            name: 'EMAIL_NOTIFICATION',
+            args: { to: 'customer@enterprise-partner.com', subject: 'Account Status & Invoice Notice', body: 'Friendly reminder regarding outstanding account balances.' },
+          },
+          source: 'AUTONOMOUS_DEMO_ENGINE',
+        };
+      }
+      return {
+        thought: 'Querying customer directory to review engagement history and payment statuses.',
+        toolCall: {
+          name: 'DATABASE_SEARCH',
+          args: { entity: 'CUSTOMERS', query: {} },
+        },
+        source: 'AUTONOMOUS_DEMO_ENGINE',
+      };
+    }
+
+    if (agentName === 'APEX') {
+      return {
+        thought: 'Synthesizing executive market trends and modeling quarterly growth trajectories.',
+        toolCall: {
+          name: 'BUSINESS_ANALYTICS',
+          args: { metrics: ['REVENUE_EXPENSES', 'RUNWAY_ANALYSIS', 'INVENTORY_METRICS'] },
+        },
+        source: 'AUTONOMOUS_DEMO_ENGINE',
+      };
+    }
+
     // Default response
     return {
       thought: `Agent ${agentName} evaluating operational context.`,
