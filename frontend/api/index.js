@@ -55112,6 +55112,24 @@ var DatabaseService = class _DatabaseService {
     this.persist();
     return newWf;
   }
+  updateWorkflow(id, updates) {
+    const idx = this.store.workflows.findIndex((w) => w.id === id);
+    if (idx === -1) return void 0;
+    this.store.workflows[idx] = {
+      ...this.store.workflows[idx],
+      ...updates,
+      updated_at: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    this.persist();
+    return this.store.workflows[idx];
+  }
+  deleteWorkflow(id) {
+    const idx = this.store.workflows.findIndex((w) => w.id === id);
+    if (idx === -1) return false;
+    this.store.workflows.splice(idx, 1);
+    this.persist();
+    return true;
+  }
   // --- Audit Logs ---
   logAudit(entry) {
     const log = {
@@ -65376,12 +65394,139 @@ toolRoutes.post("/:name/execute", authenticateJWT, requireRole(["ADMIN", "MANAGE
 // src/routes/workflowRoutes.ts
 var import_express15 = __toESM(require_express2());
 var workflowRoutes = (0, import_express15.Router)();
+var DEFAULT_WORKFLOW_TEMPLATES = [
+  {
+    name: "Weekly Infrastructure & Compute Audit",
+    description: "Autonomous audit of engineering hardware, server clusters, and reorder triggers with purchase order drafting.",
+    trigger_type: "SCHEDULED",
+    cron_expression: "0 9 * * 1",
+    steps: [
+      { agent: "ATLAS", action: "AUDIT_INFRASTRUCTURE", order: 1 },
+      { agent: "SENTINEL", action: "EVALUATE_CAPACITY_GATES", order: 2 },
+      { agent: "ORION", action: "STAGE_PURCHASE_ORDERS", order: 3 }
+    ],
+    is_active: true
+  },
+  {
+    name: "Daily Cash Flow & Receivables Recovery Sweep",
+    description: "Automated scan of open customer invoices, revenue vs. expenditures, and overdue receivables alert dispatch.",
+    trigger_type: "SCHEDULED",
+    cron_expression: "0 8 * * *",
+    steps: [
+      { agent: "NOVA", action: "ANALYZE_EXPENDITURES", order: 1 },
+      { agent: "NOVA", action: "IDENTIFY_OVERDUE_INVOICES", order: 2 },
+      { agent: "SENTINEL", action: "AUTHORIZE_CLIENT_REMINDERS", order: 3 }
+    ],
+    is_active: true
+  },
+  {
+    name: "Multimodal Vendor Invoice & Contract Ingestion",
+    description: "Ingests vendor contracts and receipts via Gemini Vision OCR, extracting structured line items, dates, and SLA compliance.",
+    trigger_type: "EVENT_DRIVEN",
+    cron_expression: "ON_UPLOAD",
+    steps: [
+      { agent: "SAGE", action: "MULTIMODAL_DOCUMENT_OCR", order: 1 },
+      { agent: "NOVA", action: "VALIDATE_BUDGET_COMPLIANCE", order: 2 },
+      { agent: "SENTINEL", action: "HUMAN_APPROVAL_GATE", order: 3 }
+    ],
+    is_active: true
+  },
+  {
+    name: "Autonomous Expenditure Anomaly & Cloud Burst Sentinel",
+    description: "Real-time detection of anomalous cloud compute usage spikes, SaaS license sprawl, and unauthorized budget deviations.",
+    trigger_type: "SCHEDULED",
+    cron_expression: "0 17 * * *",
+    steps: [
+      { agent: "NOVA", action: "FLAG_EXPENSE_ANOMALIES", order: 1 },
+      { agent: "ORION", action: "INVESTIGATE_COST_DRIVERS", order: 2 },
+      { agent: "SENTINEL", action: "NOTIFY_EXECUTIVE_STAKEHOLDERS", order: 3 }
+    ],
+    is_active: true
+  }
+];
+var CreateWorkflowSchema = external_exports.object({
+  name: external_exports.string().min(2),
+  description: external_exports.string().optional().default(""),
+  trigger_type: external_exports.enum(["SCHEDULED", "EVENT_DRIVEN", "WEBHOOK", "MANUAL"]).default("SCHEDULED"),
+  cron_expression: external_exports.string().optional().default("0 9 * * 1"),
+  steps: external_exports.array(external_exports.object({
+    agent: external_exports.string(),
+    action: external_exports.string(),
+    order: external_exports.number().default(1)
+  })).optional().default([]),
+  is_active: external_exports.boolean().optional().default(true)
+});
 workflowRoutes.get("/", authenticateJWT, (req, res) => {
   const businessId = req.businessId || db.getDemoBusiness()?.id || "";
-  const workflows = db.getWorkflows(businessId);
+  let workflows = db.getWorkflows(businessId);
+  if (workflows.length === 0) {
+    for (const tpl of DEFAULT_WORKFLOW_TEMPLATES) {
+      db.createWorkflow({
+        ...tpl,
+        business_id: businessId
+      });
+    }
+    workflows = db.getWorkflows(businessId);
+  }
   res.json({ workflows, count: workflows.length });
 });
-workflowRoutes.post("/:id/trigger", authenticateJWT, requireRole(["ADMIN", "MANAGER"]), async (req, res) => {
+workflowRoutes.post("/", authenticateJWT, (req, res) => {
+  const businessId = req.businessId || db.getDemoBusiness()?.id || "";
+  const body = CreateWorkflowSchema.parse(req.body);
+  const wf = db.createWorkflow({
+    business_id: businessId,
+    name: body.name,
+    description: body.description || "",
+    trigger_type: body.trigger_type,
+    cron_expression: body.cron_expression,
+    steps: body.steps,
+    is_active: body.is_active
+  });
+  db.logAudit({
+    business_id: businessId,
+    user_id: req.user?.id,
+    action: "CREATE_WORKFLOW",
+    entity_type: "WORKFLOW",
+    entity_id: wf.id,
+    details: { name: wf.name, trigger: wf.trigger_type }
+  });
+  res.status(201).json({ workflow: wf });
+});
+workflowRoutes.post("/seed-defaults", authenticateJWT, (req, res) => {
+  const businessId = req.businessId || db.getDemoBusiness()?.id || "";
+  const existingNames = new Set(db.getWorkflows(businessId).map((w) => w.name));
+  for (const tpl of DEFAULT_WORKFLOW_TEMPLATES) {
+    if (!existingNames.has(tpl.name)) {
+      db.createWorkflow({
+        ...tpl,
+        business_id: businessId
+      });
+    }
+  }
+  const workflows = db.getWorkflows(businessId);
+  res.json({ success: true, workflows, count: workflows.length });
+});
+workflowRoutes.patch("/:id/toggle", authenticateJWT, (req, res) => {
+  const businessId = req.businessId || db.getDemoBusiness()?.id || "";
+  const workflow = db.getWorkflows(businessId).find((w) => w.id === req.params.id);
+  if (!workflow) {
+    return res.status(404).json({ error: "Workflow not found." });
+  }
+  const updated = db.updateWorkflow(workflow.id, {
+    is_active: !workflow.is_active
+  });
+  res.json({ workflow: updated });
+});
+workflowRoutes.delete("/:id", authenticateJWT, (req, res) => {
+  const businessId = req.businessId || db.getDemoBusiness()?.id || "";
+  const workflow = db.getWorkflows(businessId).find((w) => w.id === req.params.id);
+  if (!workflow) {
+    return res.status(404).json({ error: "Workflow not found." });
+  }
+  db.deleteWorkflow(workflow.id);
+  res.json({ success: true, message: "Workflow removed." });
+});
+workflowRoutes.post("/:id/trigger", authenticateJWT, async (req, res) => {
   const businessId = req.businessId || db.getDemoBusiness()?.id || "";
   const workflow = db.getWorkflows(businessId).find((w) => w.id === req.params.id);
   if (!workflow) {

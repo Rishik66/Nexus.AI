@@ -746,6 +746,26 @@ export class DatabaseService {
     return newWf;
   }
 
+  public updateWorkflow(id: string, updates: Partial<Workflow>): Workflow | undefined {
+    const idx = this.store.workflows.findIndex(w => w.id === id);
+    if (idx === -1) return undefined;
+    this.store.workflows[idx] = {
+      ...this.store.workflows[idx],
+      ...updates,
+      updated_at: new Date().toISOString(),
+    };
+    this.persist();
+    return this.store.workflows[idx];
+  }
+
+  public deleteWorkflow(id: string): boolean {
+    const idx = this.store.workflows.findIndex(w => w.id === id);
+    if (idx === -1) return false;
+    this.store.workflows.splice(idx, 1);
+    this.persist();
+    return true;
+  }
+
   // --- Audit Logs ---
   public logAudit(entry: Omit<AuditLog, 'id' | 'created_at'>): AuditLog {
     const log: AuditLog = {
