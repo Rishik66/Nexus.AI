@@ -19,6 +19,10 @@ import {
   Code,
   FileText,
   UploadCloud,
+  Building2,
+  Save,
+  Phone,
+  MapPin,
 } from 'lucide-react';
 import { ApiService } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.js';
@@ -50,6 +54,53 @@ export const Settings: React.FC = () => {
   const [showGeminiKey, setShowGeminiKey] = useState(false);
   const [connectingGemini, setConnectingGemini] = useState(false);
   const [geminiMessage, setGeminiMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Company Profile state
+  const [bizName, setBizName] = useState('');
+  const [bizType, setBizType] = useState('TECHNOLOGY');
+  const [bizCurrency, setBizCurrency] = useState('USD');
+  const [bizAddress, setBizAddress] = useState('');
+  const [bizPhone, setBizPhone] = useState('');
+  const [savingBiz, setSavingBiz] = useState(false);
+  const [bizMessage, setBizMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  useEffect(() => {
+    if (business) {
+      setBizName(business.name || '');
+      setBizType(business.type || 'TECHNOLOGY');
+      setBizCurrency(business.currency || 'USD');
+      setBizAddress(business.address || '');
+      setBizPhone(business.phone || '');
+    }
+  }, [business]);
+
+  const handleSaveCompanyProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!bizName.trim()) {
+      setBizMessage({ type: 'error', text: 'Company name cannot be blank.' });
+      return;
+    }
+    try {
+      setSavingBiz(true);
+      setBizMessage(null);
+      const updated = await ApiService.updateBusiness({
+        name: bizName.trim(),
+        type: bizType,
+        currency: bizCurrency,
+        address: bizAddress.trim(),
+        phone: bizPhone.trim(),
+      });
+      setBizMessage({
+        type: 'success',
+        text: `Company profile saved successfully! Multi-agent controls calibrated for "${updated.name}".`,
+      });
+      setTimeout(() => setBizMessage(null), 4000);
+    } catch (err: any) {
+      setBizMessage({ type: 'error', text: err.message || 'Failed to update company profile.' });
+    } finally {
+      setSavingBiz(false);
+    }
+  };
 
   const fetchIntegrations = async () => {
     try {
@@ -546,27 +597,152 @@ export const Settings: React.FC = () => {
         </div>
       </div>
 
-      {/* Business Details Card */}
-      <div className="p-5 rounded-2xl bg-[#0d1527] border border-[#22345e] space-y-3">
-        <h3 className="text-sm font-bold text-white">Active Enterprise Tenant</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div className="p-3 rounded-lg bg-[#131e38] border border-[#22345e]">
-            <span className="text-slate-400 block text-[10px]">Business Name</span>
-            <span className="font-bold text-white">{business?.name}</span>
-          </div>
-          <div className="p-3 rounded-lg bg-[#131e38] border border-[#22345e]">
-            <span className="text-slate-400 block text-[10px]">Primary Currency</span>
-            <span className="font-bold text-cyan-400 font-mono">{business?.currency || 'USD'}</span>
-          </div>
-          <div className="p-3 rounded-lg bg-[#131e38] border border-[#22345e]">
-            <span className="text-slate-400 block text-[10px]">Industry Vertical</span>
-            <span className="font-bold text-white">{business?.type}</span>
-          </div>
-          <div className="p-3 rounded-lg bg-[#131e38] border border-[#22345e]">
-            <span className="text-slate-400 block text-[10px]">Headquarters Address</span>
-            <span className="text-slate-300">{business?.address || 'Silicon Valley, CA'}</span>
+      {/* Company Profile & Business Information (Where the user enters their company inputs) */}
+      <div className="p-6 rounded-2xl bg-[#0d1527] border border-cyan-500/30 shadow-2xl space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#1f2d4d]">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shadow-lg shadow-cyan-500/10">
+              <Building2 className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-base font-bold text-white">Company Profile & Enterprise Inputs</h2>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
+                  ACTIVE TENANT
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Provide your company's operational parameters. All 5 AI agents use these inputs to calculate thresholds, currency conversions, and reports.
+              </p>
+            </div>
           </div>
         </div>
+
+        {bizMessage && (
+          <div
+            className={`p-3.5 rounded-xl text-xs flex items-center gap-2 ${
+              bizMessage.type === 'success'
+                ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30'
+                : 'bg-rose-500/10 text-rose-300 border border-rose-500/30'
+            }`}
+          >
+            {bizMessage.type === 'success' ? (
+              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+            ) : (
+              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            )}
+            <span>{bizMessage.text}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleSaveCompanyProfile} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Company Name */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                Company / Organization Name
+              </label>
+              <div className="relative">
+                <Building2 className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                <input
+                  type="text"
+                  required
+                  value={bizName}
+                  onChange={(e) => setBizName(e.target.value)}
+                  placeholder="e.g. Apex Global Technologies"
+                  className="w-full bg-[#131e38] border border-[#22345e] rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Industry Vertical */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                Industry Vertical
+              </label>
+              <select
+                value={bizType}
+                onChange={(e) => setBizType(e.target.value)}
+                className="w-full bg-[#131e38] border border-[#22345e] rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-500"
+              >
+                <option value="TECHNOLOGY">Technology & B2B SaaS</option>
+                <option value="CLOUD_INFRASTRUCTURE">Cloud & IT Infrastructure</option>
+                <option value="LOGISTICS">Logistics, Supply Chain & Hardware</option>
+                <option value="MANUFACTURING">Manufacturing & Engineering</option>
+                <option value="FINANCIAL_SERVICES">Financial Services & Fintech</option>
+                <option value="HEALTHCARE">Healthcare & Biotech</option>
+                <option value="RETAIL">E-Commerce & Retail</option>
+                <option value="CONSULTING">Professional Services & Consulting</option>
+              </select>
+            </div>
+
+            {/* Operating Currency */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                Operating Financial Currency
+              </label>
+              <select
+                value={bizCurrency}
+                onChange={(e) => setBizCurrency(e.target.value)}
+                className="w-full bg-[#131e38] border border-[#22345e] rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-500 font-mono"
+              >
+                <option value="USD">USD ($) — United States Dollar</option>
+                <option value="EUR">EUR (€) — Euro</option>
+                <option value="GBP">GBP (£) — British Pound</option>
+                <option value="INR">INR (₹) — Indian Rupee</option>
+                <option value="CAD">CAD ($) — Canadian Dollar</option>
+                <option value="AUD">AUD ($) — Australian Dollar</option>
+                <option value="JPY">JPY (¥) — Japanese Yen</option>
+                <option value="SGD">SGD ($) — Singapore Dollar</option>
+              </select>
+            </div>
+
+            {/* Business Contact Phone */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                Corporate Phone / Contact
+              </label>
+              <div className="relative">
+                <Phone className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                <input
+                  type="text"
+                  value={bizPhone}
+                  onChange={(e) => setBizPhone(e.target.value)}
+                  placeholder="+1 (555) 019-2834"
+                  className="w-full bg-[#131e38] border border-[#22345e] rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Headquarters Address */}
+          <div className="space-y-1.5">
+            <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+              Corporate Headquarters Address
+            </label>
+            <div className="relative">
+              <MapPin className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+              <input
+                type="text"
+                value={bizAddress}
+                onChange={(e) => setBizAddress(e.target.value)}
+                placeholder="100 Innovation Way, Suite 400, San Francisco, CA 94107"
+                className="w-full bg-[#131e38] border border-[#22345e] rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-end gap-3 pt-2">
+            <button
+              type="submit"
+              disabled={savingBiz}
+              className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 transition-all disabled:opacity-50"
+            >
+              <Save className={`w-4 h-4 ${savingBiz ? 'animate-spin' : ''}`} />
+              <span>{savingBiz ? 'Saving Company Profile...' : 'Save Company Profile'}</span>
+            </button>
+          </div>
+        </form>
       </div>
 
       {/* Schema SQL Migration Modal */}

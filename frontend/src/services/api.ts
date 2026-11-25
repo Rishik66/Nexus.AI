@@ -201,8 +201,29 @@ export const ApiService = {
 
   // Business
   getCurrentBusiness: async () => {
-    const res = await api.get('/businesses/current');
-    return res.data.business;
+    try {
+      const res = await api.get('/businesses/current');
+      return res.data.business;
+    } catch {
+      try {
+        const raw = localStorage.getItem('nexus_business');
+        if (raw) return JSON.parse(raw);
+      } catch {}
+      return null;
+    }
+  },
+  updateBusiness: async (updates: Partial<Business>) => {
+    try {
+      const res = await api.put('/businesses/current', updates);
+      return res.data.business;
+    } catch (err: any) {
+      // Local fallback for offline/cold start
+      const raw = localStorage.getItem('nexus_business');
+      const current = raw ? JSON.parse(raw) : {};
+      const updated = { ...current, ...updates, updated_at: new Date().toISOString() };
+      localStorage.setItem('nexus_business', JSON.stringify(updated));
+      return updated;
+    }
   },
 
   // Dashboard

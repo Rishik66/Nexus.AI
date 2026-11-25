@@ -24,3 +24,18 @@ businessRoutes.get('/current', authenticateJWT, (req: AuthRequest, res: Response
   }
   res.json({ business: biz });
 });
+
+businessRoutes.put('/current', authenticateJWT, (req: AuthRequest, res: Response) => {
+  const bizId = req.businessId || 'default-biz';
+  const { name, type, currency, address, phone } = req.body;
+
+  const updated = db.updateBusiness(bizId, {
+    ...(name ? { name: String(name).trim() } : {}),
+    ...(type ? { type: String(type).trim() } : {}),
+    ...(currency ? { currency: String(currency).trim().toUpperCase() } : {}),
+    ...(address !== undefined ? { address: String(address).trim() } : {}),
+    ...(phone !== undefined ? { phone: String(phone).trim() } : {}),
+  });
+
+  res.json({ success: true, business: updated });
+});

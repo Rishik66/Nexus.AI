@@ -54707,6 +54707,32 @@ var DatabaseService = class _DatabaseService {
     this.persist();
     return newBiz;
   }
+  updateBusiness(id, updates) {
+    const idx = this.store.businesses.findIndex((b) => b.id === id);
+    if (idx === -1) {
+      const newBiz = {
+        id,
+        name: updates.name || "Enterprise Organization",
+        type: updates.type || "TECHNOLOGY",
+        currency: updates.currency || "USD",
+        address: updates.address,
+        phone: updates.phone,
+        is_demo: false,
+        created_at: (/* @__PURE__ */ new Date()).toISOString(),
+        updated_at: (/* @__PURE__ */ new Date()).toISOString()
+      };
+      this.store.businesses.push(newBiz);
+      this.persist();
+      return newBiz;
+    }
+    this.store.businesses[idx] = {
+      ...this.store.businesses[idx],
+      ...updates,
+      updated_at: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    this.persist();
+    return this.store.businesses[idx];
+  }
   // --- Products ---
   getProducts(businessId) {
     return this.store.products.filter((p) => p.business_id === businessId);
@@ -61674,6 +61700,18 @@ businessRoutes.get("/current", authenticateJWT, (req, res) => {
     };
   }
   res.json({ business: biz });
+});
+businessRoutes.put("/current", authenticateJWT, (req, res) => {
+  const bizId = req.businessId || "default-biz";
+  const { name, type, currency, address, phone } = req.body;
+  const updated = db.updateBusiness(bizId, {
+    ...name ? { name: String(name).trim() } : {},
+    ...type ? { type: String(type).trim() } : {},
+    ...currency ? { currency: String(currency).trim().toUpperCase() } : {},
+    ...address !== void 0 ? { address: String(address).trim() } : {},
+    ...phone !== void 0 ? { phone: String(phone).trim() } : {}
+  });
+  res.json({ success: true, business: updated });
 });
 
 // src/routes/dashboardRoutes.ts

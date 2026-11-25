@@ -271,6 +271,34 @@ export class DatabaseService {
     return newBiz;
   }
 
+  public updateBusiness(id: string, updates: Partial<Business>): Business | undefined {
+    const idx = this.store.businesses.findIndex(b => b.id === id);
+    if (idx === -1) {
+      // If business does not exist yet in memory store, create it
+      const newBiz: Business = {
+        id,
+        name: updates.name || 'Enterprise Organization',
+        type: updates.type || 'TECHNOLOGY',
+        currency: updates.currency || 'USD',
+        address: updates.address,
+        phone: updates.phone,
+        is_demo: false,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      this.store.businesses.push(newBiz);
+      this.persist();
+      return newBiz;
+    }
+    this.store.businesses[idx] = {
+      ...this.store.businesses[idx],
+      ...updates,
+      updated_at: new Date().toISOString(),
+    };
+    this.persist();
+    return this.store.businesses[idx];
+  }
+
   // --- Products ---
   public getProducts(businessId: string): Product[] {
     return this.store.products.filter(p => p.business_id === businessId);
