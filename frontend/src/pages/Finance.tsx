@@ -125,36 +125,44 @@ export const Finance: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#1f2d4d]">
-                {invoices.map((inv) => (
-                  <tr key={inv.id} className="hover:bg-[#131e38]/50 transition-colors">
-                    <td className="py-3 px-4 font-mono font-bold text-cyan-400">
-                      {inv.invoice_number}
-                    </td>
-                    <td className="py-3 px-4 font-semibold text-slate-200">
-                      {inv.customer_name || 'Customer'}
-                    </td>
-                    <td className="py-3 px-4 text-slate-400 font-mono">{inv.issue_date}</td>
-                    <td className="py-3 px-4 text-slate-400 font-mono">{inv.due_date}</td>
-                    <td className="py-3 px-4 font-mono font-bold text-white">
-                      ${Number(inv.total_amount).toFixed(2)}
-                    </td>
-                    <td className="py-3 px-4">
-                      {inv.status === 'PAID' ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                          <CheckCircle2 className="w-3 h-3" /> PAID
-                        </span>
-                      ) : inv.status === 'OVERDUE' ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 animate-pulse">
-                          <AlertTriangle className="w-3 h-3" /> OVERDUE
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                          <Clock className="w-3 h-3" /> ISSUED
-                        </span>
-                      )}
+                {invoices.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="py-8 text-center text-slate-500">
+                      No invoices recorded yet.
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  invoices.map((inv) => (
+                    <tr key={inv.id} className="hover:bg-[#131e38]/50 transition-colors">
+                      <td className="py-3 px-4 font-mono font-bold text-cyan-400">
+                        {inv.invoice_number}
+                      </td>
+                      <td className="py-3 px-4 font-semibold text-slate-200">
+                        {inv.customer_name || 'Customer'}
+                      </td>
+                      <td className="py-3 px-4 text-slate-400 font-mono">{inv.issue_date}</td>
+                      <td className="py-3 px-4 text-slate-400 font-mono">{inv.due_date}</td>
+                      <td className="py-3 px-4 font-mono font-bold text-white">
+                        ${Number(inv.total_amount).toFixed(2)}
+                      </td>
+                      <td className="py-3 px-4">
+                        {inv.status === 'PAID' ? (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                            <CheckCircle2 className="w-3 h-3" /> PAID
+                          </span>
+                        ) : inv.status === 'OVERDUE' ? (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 animate-pulse">
+                            <AlertTriangle className="w-3 h-3" /> OVERDUE
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                            <Clock className="w-3 h-3" /> ISSUED
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -176,28 +184,36 @@ export const Finance: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#1f2d4d]">
-                {expenses.map((e) => (
-                  <tr key={e.id} className="hover:bg-[#131e38]/50 transition-colors">
-                    <td className="py-3 px-4">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
-                        {e.category}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 font-medium text-slate-200">
-                      {e.description}
-                      {e.description.includes('Anomalous') && (
-                        <span className="ml-2 text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40">
-                          SPIKE
-                        </span>
-                      )}
-                    </td>
-                    <td className="py-3 px-4 text-slate-400 font-mono">{e.date}</td>
-                    <td className="py-3 px-4 text-slate-400">{e.payment_method}</td>
-                    <td className="py-3 px-4 text-right font-mono font-bold text-rose-400">
-                      -${Number(e.amount).toFixed(2)}
+                {expenses.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="py-8 text-center text-slate-500">
+                      No operating expenses recorded yet.
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  expenses.map((e) => (
+                    <tr key={e.id} className="hover:bg-[#131e38]/50 transition-colors">
+                      <td className="py-3 px-4">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+                          {e.category}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 font-medium text-slate-200">
+                        {e.description}
+                        {e.description.includes('Anomalous') && (
+                          <span className="ml-2 text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                            SPIKE
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-3 px-4 text-slate-400 font-mono">{e.date}</td>
+                      <td className="py-3 px-4 text-slate-400">{e.payment_method}</td>
+                      <td className="py-3 px-4 text-right font-mono font-bold text-rose-400">
+                        -${Number(e.amount).toFixed(2)}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

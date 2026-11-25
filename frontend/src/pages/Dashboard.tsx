@@ -80,7 +80,7 @@ export const Dashboard: React.FC = () => {
           {/* Health Score Gauge Display */}
           <div className="relative w-24 h-24 rounded-2xl bg-[#090f1d] border-2 border-cyan-500/40 flex flex-col items-center justify-center shadow-lg shadow-cyan-500/20 flex-shrink-0">
             <span className="text-3xl font-black text-white tracking-tight">
-              {metrics?.healthScore || 85}
+              {metrics?.healthScore ?? 0}
             </span>
             <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase">
               / 100 HEALTH
@@ -93,7 +93,7 @@ export const Dashboard: React.FC = () => {
                 STATUS: {metrics?.healthStatus || 'HEALTHY'}
               </span>
               <span className="text-xs text-slate-400 font-mono">
-                {business?.name || 'Apex Retail & Distribution Co.'}
+                {business?.name || 'Apex Global Technologies & Enterprise Solutions'}
               </span>
             </div>
             <h2 className="text-lg sm:text-xl font-extrabold text-white">
@@ -101,7 +101,7 @@ export const Dashboard: React.FC = () => {
             </h2>
             <p className="text-xs text-slate-300 mt-1 max-w-xl">
               {metrics?.executiveSummary ||
-                'Enterprise operational velocity is optimal. Cloud resource margins are positive. 4 infrastructure assets require allocation review.'}
+                'Enterprise operational velocity is optimal. Cloud resource margins are positive.'}
             </p>
           </div>
         </div>
@@ -124,7 +124,7 @@ export const Dashboard: React.FC = () => {
             <DollarSign className="w-4 h-4 text-emerald-400" />
           </div>
           <div className="text-2xl font-black text-white">
-            ${(m.totalRevenue || 22356).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            ${(m.totalRevenue ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-emerald-400 font-medium">
             <TrendingUp className="w-3.5 h-3.5" />
@@ -139,7 +139,7 @@ export const Dashboard: React.FC = () => {
             <TrendingDown className="w-4 h-4 text-rose-400" />
           </div>
           <div className="text-2xl font-black text-white">
-            ${(m.totalExpenses || 23270).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            ${(m.totalExpenses ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-amber-400 font-medium">
             <AlertTriangle className="w-3.5 h-3.5" />
@@ -154,7 +154,7 @@ export const Dashboard: React.FC = () => {
             <Package className="w-4 h-4 text-amber-400" />
           </div>
           <div className="text-2xl font-black text-amber-400">
-            {m.lowStockCount || 4} <span className="text-xs font-normal text-slate-400">Assets</span>
+            {m.lowStockCount ?? 0} <span className="text-xs font-normal text-slate-400">Assets</span>
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-cyan-400 font-medium">
             <button
@@ -173,10 +173,10 @@ export const Dashboard: React.FC = () => {
             <AlertTriangle className="w-4 h-4 text-rose-400" />
           </div>
           <div className="text-2xl font-black text-rose-400">
-            ${(m.overdueAmount || 6970).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            ${(m.overdueAmount ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-slate-400 font-medium">
-            <span>{m.overdueInvoicesCount || 2} invoices past due</span>
+            <span>{m.overdueInvoicesCount ?? 0} invoices past due</span>
           </div>
         </div>
       </div>

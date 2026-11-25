@@ -226,7 +226,7 @@ export const Settings: React.FC = () => {
                 >
                   {integrations.find((i) => i.provider === 'GEMINI')?.status === 'CONNECTED'
                     ? '● CONNECTED (LIVE GEMINI LLM REASONING)'
-                    : '○ AUTONOMOUS DEMO FALLBACK ENGINE'}
+                    : '○ OFFLINE (GEMINI API KEY REQUIRED)'}
                 </span>
               </div>
               <p className="text-xs text-slate-400 mt-0.5">

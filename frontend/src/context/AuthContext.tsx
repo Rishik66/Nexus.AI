@@ -7,7 +7,10 @@ interface AuthContextType {
   role: 'ADMIN' | 'MANAGER' | 'EMPLOYEE';
   pendingApprovalsCount: number;
   token: string | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
   login: (email: string, pass: string) => Promise<void>;
+  logout: () => void;
   switchRole: (newRole: 'ADMIN' | 'MANAGER' | 'EMPLOYEE') => Promise<void>;
   refreshApprovals: () => Promise<void>;
 }
@@ -15,59 +18,68 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>({
-    id: 'demo-admin-id',
-    email: 'admin@nexus.ai',
-    full_name: 'Alexandra Vance (Lead Architect)',
-    role: 'ADMIN',
-  });
-  const [business, setBusiness] = useState<Business | null>({
-    id: 'demo-biz-id',
-    name: 'Apex Retail & Distribution Co.',
-    type: 'DISTRIBUTOR',
-    currency: 'USD',
-    is_demo: true,
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [business, setBusiness] = useState<Business | null>(null);
   const [role, setRole] = useState<'ADMIN' | 'MANAGER' | 'EMPLOYEE'>('ADMIN');
   const [pendingApprovalsCount, setPendingApprovalsCount] = useState<number>(0);
-  const [token, setToken] = useState<string | null>(
-    typeof window !== 'undefined' && window.localStorage ? window.localStorage.getItem('nexus_token') : null
-  );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [token, setToken] = useState<string | null>(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return window.localStorage.getItem('nexus_token');
+    }
+    return null;
+  });
 
-  // Initialize session
+  // Check and restore session on mount if token exists
   useEffect(() => {
-    const init = async () => {
+    const checkSession = async () => {
+      const storedToken = typeof window !== 'undefined' && window.localStorage
+        ? window.localStorage.getItem('nexus_token')
+        : null;
+
+      if (!storedToken) {
+        setUser(null);
+        setToken(null);
+        setIsLoading(false);
+        return;
+      }
+
       try {
-        // Automatically login as admin if no token in demo mode
-        if (!token) {
-          const res = await ApiService.login('admin@nexus.ai', 'nexus123');
-          localStorage.setItem('nexus_token', res.token);
-          setToken(res.token);
-          setUser(res.user);
-          setRole(res.user.role);
+        const meRes = await ApiService.getMe();
+        if (meRes?.user) {
+          setUser(meRes.user);
+          setRole(meRes.user.role);
+          setToken(storedToken);
+
+          const biz = await ApiService.getCurrentBusiness();
+          if (biz) setBusiness(biz);
+
+          await refreshApprovals();
         } else {
-          const res = await ApiService.getMe();
-          if (res?.user) {
-            setUser(res.user);
-            setRole(res.user.role);
-          }
+          // Token invalid
+          localStorage.removeItem('nexus_token');
+          setUser(null);
+          setToken(null);
         }
-
-        const biz = await ApiService.getCurrentBusiness();
-        if (biz) setBusiness(biz);
-
-        await refreshApprovals();
       } catch (err) {
-        console.warn('Auth session initial fallback:', err);
+        console.warn('Session verification failed, logging out:', err);
+        if (typeof window !== 'undefined' && window.localStorage) {
+          window.localStorage.removeItem('nexus_token');
+        }
+        setUser(null);
+        setToken(null);
+      } finally {
+        setIsLoading(false);
       }
     };
-    init();
+
+    checkSession();
   }, []);
 
   const refreshApprovals = async () => {
     try {
       const data = await ApiService.getApprovals();
-      setPendingApprovalsCount(data.pendingCount);
+      setPendingApprovalsCount(data.pendingCount || 0);
     } catch (err) {
       // ignore
     }
@@ -75,11 +87,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, pass: string) => {
     const res = await ApiService.login(email, pass);
-    localStorage.setItem('nexus_token', res.token);
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem('nexus_token', res.token);
+    }
     setToken(res.token);
     setUser(res.user);
     setRole(res.user.role);
+
+    try {
+      const biz = await ApiService.getCurrentBusiness();
+      if (biz) setBusiness(biz);
+    } catch {
+      // ignore
+    }
+
     await refreshApprovals();
+  };
+
+  const logout = () => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.removeItem('nexus_token');
+    }
+    setToken(null);
+    setUser(null);
+    setBusiness(null);
+    setPendingApprovalsCount(0);
+    window.location.href = '/login';
   };
 
   const switchRole = async (newRole: 'ADMIN' | 'MANAGER' | 'EMPLOYEE') => {
@@ -103,7 +136,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         role,
         pendingApprovalsCount,
         token,
+        isLoading,
+        isAuthenticated: Boolean(user && token),
         login,
+        logout,
         switchRole,
         refreshApprovals,
       }}

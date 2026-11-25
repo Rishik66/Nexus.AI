@@ -2,8 +2,10 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.js';
 import { DashboardLayout } from './layouts/DashboardLayout.js';
+import { ProtectedRoute } from './components/ProtectedRoute.js';
 
 // Pages
+import { Login } from './pages/Login.js';
 import { CommandCenter } from './pages/CommandCenter.js';
 import { Dashboard } from './pages/Dashboard.js';
 import { Inventory } from './pages/Inventory.js';
@@ -22,22 +24,31 @@ export const App: React.FC = () => {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<DashboardLayout />}>
-            <Route index element={<Navigate to="/command-center" replace />} />
-            <Route path="command-center" element={<CommandCenter />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="inventory" element={<Inventory />} />
-            <Route path="finance" element={<Finance />} />
-            <Route path="customers" element={<Customers />} />
-            <Route path="suppliers" element={<Suppliers />} />
-            <Route path="workflows" element={<Workflows />} />
-            <Route path="approvals" element={<Approvals />} />
-            <Route path="documents" element={<DocumentIntelligence />} />
-            <Route path="agents" element={<AgentActivity />} />
-            <Route path="audit-logs" element={<AuditLogs />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="*" element={<Navigate to="/command-center" replace />} />
+          {/* Public Login Route */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Protected Routes (Everyone must log in first) */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<DashboardLayout />}>
+              <Route index element={<Navigate to="/command-center" replace />} />
+              <Route path="command-center" element={<CommandCenter />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="inventory" element={<Inventory />} />
+              <Route path="finance" element={<Finance />} />
+              <Route path="customers" element={<Customers />} />
+              <Route path="suppliers" element={<Suppliers />} />
+              <Route path="workflows" element={<Workflows />} />
+              <Route path="approvals" element={<Approvals />} />
+              <Route path="documents" element={<DocumentIntelligence />} />
+              <Route path="agents" element={<AgentActivity />} />
+              <Route path="audit-logs" element={<AuditLogs />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="*" element={<Navigate to="/command-center" replace />} />
+            </Route>
           </Route>
+
+          {/* Catch-all redirect to login if unauthenticated */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

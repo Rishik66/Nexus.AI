@@ -26,37 +26,51 @@ export const Suppliers: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {suppliers.map((s) => (
-          <div key={s.id} className="p-4 rounded-xl bg-[#0d1527] border border-[#22345e] space-y-3">
-            <div className="flex items-start justify-between">
-              <div>
-                <h3 className="font-bold text-sm text-white">{s.name}</h3>
-                <p className="text-[11px] text-slate-400">Contact: {s.contact_person || 'Sales Desk'}</p>
-              </div>
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 text-xs font-bold">
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                {s.rating || 4.5}
-              </div>
-            </div>
-
-            <div className="space-y-1 text-xs text-slate-400">
-              <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-slate-500" />
-                <span>{s.email}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-slate-500" />
-                <span>{s.phone}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Avg Fulfillment Lead Time: <strong className="text-slate-200">{s.lead_time_days} days</strong></span>
-              </div>
-            </div>
+      {loading ? (
+        <div className="flex items-center justify-center min-h-[200px]">
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-8 h-8 border-3 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" />
+            <p className="text-xs text-slate-400 font-mono">Loading vendor directory...</p>
           </div>
-        ))}
-      </div>
+        </div>
+      ) : suppliers.length === 0 ? (
+        <div className="p-8 text-center rounded-2xl bg-[#0d1527] border border-[#22345e] text-slate-400 text-xs">
+          <Truck className="w-8 h-8 mx-auto text-slate-600 mb-2" />
+          No supplier vendors found in registry.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {suppliers.map((s) => (
+            <div key={s.id} className="p-4 rounded-xl bg-[#0d1527] border border-[#22345e] space-y-3">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="font-bold text-sm text-white">{s.name}</h3>
+                  <p className="text-[11px] text-slate-400">Contact: {s.contact_person || 'Sales Desk'}</p>
+                </div>
+                <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 text-xs font-bold">
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  {s.rating || 4.5}
+                </div>
+              </div>
+
+              <div className="space-y-1 text-xs text-slate-400">
+                <div className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-slate-500" />
+                  <span>{s.email}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Phone className="w-3.5 h-3.5 text-slate-500" />
+                  <span>{s.phone}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Avg Fulfillment Lead Time: <strong className="text-slate-200">{s.lead_time_days} days</strong></span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Staged Purchase Orders Table */}
       <div className="p-5 rounded-2xl bg-[#0d1527] border border-[#22345e] space-y-3">

@@ -164,51 +164,65 @@ export const Inventory: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#1f2d4d]">
-              {filteredProducts.map((p) => {
-                const isLow = p.stock_quantity <= p.reorder_threshold;
-                return (
-                  <tr key={p.id} className="hover:bg-[#131e38]/50 transition-colors">
-                    <td className="py-3 px-4">
-                      <div className="font-bold text-slate-200">{p.name}</div>
-                      <div className="font-mono text-[10px] text-cyan-400">{p.sku}</div>
-                    </td>
-                    <td className="py-3 px-4 text-slate-300">{p.category}</td>
-                    <td className="py-3 px-4 font-mono text-slate-300">
-                      ${Number(p.cost_price).toFixed(2)} / ${Number(p.unit_price).toFixed(2)}
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-slate-200">{p.stock_quantity}</span>
-                        <span className="text-[10px] text-slate-500">
-                          (Min: {p.reorder_threshold})
-                        </span>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      {isLow ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                          <AlertTriangle className="w-3 h-3" /> LOW CAPACITY
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                          <CheckCircle2 className="w-3 h-3" /> Healthy
-                        </span>
-                      )}
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <button
-                        onClick={() => {
-                          setSelectedProduct(p);
-                          setAdjustModalOpen(true);
-                        }}
-                        className="px-2.5 py-1 rounded bg-[#182442] hover:bg-[#22345e] text-slate-300 hover:text-white border border-[#22345e] text-[11px] font-medium transition-all"
-                      >
-                        Reallocate Capacity
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {loading ? (
+                <tr>
+                  <td colSpan={6} className="py-8 text-center text-slate-500">
+                    Loading asset catalog...
+                  </td>
+                </tr>
+              ) : filteredProducts.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="py-8 text-center text-slate-500">
+                    No infrastructure assets found. Use AI Asset Procurement Plan to stage assets.
+                  </td>
+                </tr>
+              ) : (
+                filteredProducts.map((p) => {
+                  const isLow = p.stock_quantity <= p.reorder_threshold;
+                  return (
+                    <tr key={p.id} className="hover:bg-[#131e38]/50 transition-colors">
+                      <td className="py-3 px-4">
+                        <div className="font-bold text-slate-200">{p.name}</div>
+                        <div className="font-mono text-[10px] text-cyan-400">{p.sku}</div>
+                      </td>
+                      <td className="py-3 px-4 text-slate-300">{p.category}</td>
+                      <td className="py-3 px-4 font-mono text-slate-300">
+                        ${Number(p.cost_price).toFixed(2)} / ${Number(p.unit_price).toFixed(2)}
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-slate-200">{p.stock_quantity}</span>
+                          <span className="text-[10px] text-slate-500">
+                            (Min: {p.reorder_threshold})
+                          </span>
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        {isLow ? (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                            <AlertTriangle className="w-3 h-3" /> LOW CAPACITY
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                            <CheckCircle2 className="w-3 h-3" /> Healthy
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-3 px-4 text-right">
+                        <button
+                          onClick={() => {
+                            setSelectedProduct(p);
+                            setAdjustModalOpen(true);
+                          }}
+                          className="px-2.5 py-1 rounded bg-[#182442] hover:bg-[#22345e] text-slate-300 hover:text-white border border-[#22345e] text-[11px] font-medium transition-all"
+                        >
+                          Reallocate Capacity
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>
@@ -279,27 +293,33 @@ export const Inventory: React.FC = () => {
           Recent Infrastructure & Asset Allocation Logs
         </h3>
         <div className="space-y-2">
-          {movements.slice(0, 5).map((m) => (
-            <div
-              key={m.id}
-              className="p-3 rounded-lg bg-[#131e38] border border-[#22345e] flex items-center justify-between text-xs"
-            >
-              <div>
-                <span className="font-semibold text-slate-200">{m.reason || 'Infrastructure Reallocation'}</span>
-                <div className="text-[10px] text-slate-400 font-mono">
-                  Type: {m.type} • Ref: {m.reference_id || 'N/A'} • {new Date(m.created_at).toLocaleString()}
+          {movements.length === 0 ? (
+            <div className="p-4 text-center rounded-lg bg-[#131e38] text-slate-500 text-xs">
+              No asset allocation movements logged yet.
+            </div>
+          ) : (
+            movements.slice(0, 5).map((m) => (
+              <div
+                key={m.id}
+                className="p-3 rounded-lg bg-[#131e38] border border-[#22345e] flex items-center justify-between text-xs"
+              >
+                <div>
+                  <span className="font-semibold text-slate-200">{m.reason || 'Infrastructure Reallocation'}</span>
+                  <div className="text-[10px] text-slate-400 font-mono">
+                    Type: {m.type} • Ref: {m.reference_id || 'N/A'} • {new Date(m.created_at).toLocaleString()}
+                  </div>
+                </div>
+                <div className="font-mono font-bold">
+                  <span className={m.quantity >= 0 ? 'text-emerald-400' : 'text-rose-400'}>
+                    {m.quantity >= 0 ? `+${m.quantity}` : m.quantity} units
+                  </span>
+                  <span className="text-slate-500 text-[10px] ml-1">
+                    ({m.previous_quantity} → {m.new_quantity})
+                  </span>
                 </div>
               </div>
-              <div className="font-mono font-bold">
-                <span className={m.quantity >= 0 ? 'text-emerald-400' : 'text-rose-400'}>
-                  {m.quantity >= 0 ? `+${m.quantity}` : m.quantity} units
-                </span>
-                <span className="text-slate-500 text-[10px] ml-1">
-                  ({m.previous_quantity} → {m.new_quantity})
-                </span>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>

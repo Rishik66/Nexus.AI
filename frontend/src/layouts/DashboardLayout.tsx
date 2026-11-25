@@ -21,11 +21,12 @@ import {
   Menu,
   X,
   ExternalLink,
+  LogOut,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.js';
 
 export const DashboardLayout: React.FC = () => {
-  const { user, business, role, switchRole, pendingApprovalsCount } = useAuth();
+  const { user, business, role, switchRole, logout, pendingApprovalsCount } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
 
@@ -202,6 +203,13 @@ export const DashboardLayout: React.FC = () => {
                 <p className="text-[10px] text-cyan-400 font-mono font-semibold">{role}</p>
               </div>
             </div>
+            <button
+              onClick={logout}
+              title="Sign Out"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </aside>
@@ -261,6 +269,16 @@ export const DashboardLayout: React.FC = () => {
                 </span>
               )}
             </NavLink>
+
+            {/* Sign Out Button */}
+            <button
+              onClick={logout}
+              title="Sign Out"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#131e38] border border-[#22345e] text-slate-400 hover:text-rose-400 hover:border-rose-500/40 text-xs font-medium transition-colors"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Sign Out</span>
+            </button>
           </div>
         </header>
 
