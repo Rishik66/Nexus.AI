@@ -54400,7 +54400,7 @@ var require_main4 = __commonJS({
 // src/serverless.ts
 var serverless_exports = {};
 __export(serverless_exports, {
-  default: () => handler
+  default: () => serverless_default
 });
 module.exports = __toCommonJS(serverless_exports);
 
@@ -88093,9 +88093,23 @@ async function ensureInitialized() {
   }
 }
 async function handler(req, res) {
+  if (res.setHeader) {
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
+    );
+  }
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
   await ensureInitialized();
   return index_default(req, res);
 }
+var serverless_default = handler;
 /*! Bundled license information:
 
 depd/index.js:
@@ -88427,3 +88441,4 @@ object-assign/index.js:
    * limitations under the License.
    *)
 */
+module.exports = handler; module.exports.default = handler;

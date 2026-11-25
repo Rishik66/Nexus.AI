@@ -22,6 +22,30 @@ import { ApiService } from '../services/api.js';
 
 type AuthMode = 'LOGIN' | 'SIGNUP' | 'FORGOT_PASSWORD';
 
+const extractErrorMessage = (err: any, fallback: string = 'An unexpected error occurred.'): string => {
+  if (!err) return fallback;
+  if (typeof err === 'string') return err;
+
+  const data = err.response?.data;
+  if (data) {
+    if (typeof data === 'string') return data;
+    if (typeof data.error === 'string') return data.error;
+    if (typeof data.error?.message === 'string') return data.error.message;
+    if (typeof data.message === 'string') return data.message;
+    if (typeof data.code === 'string' && data.message) return String(data.message);
+    if (typeof data.error === 'object' && data.error !== null) {
+      return data.error.message || data.error.code || JSON.stringify(data.error);
+    }
+  }
+
+  if (err.message === 'Network Error') {
+    return 'Unable to reach backend server. Please verify your connection or ensure backend is running.';
+  }
+
+  if (typeof err.message === 'string') return err.message;
+  return fallback;
+};
+
 export const Login: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -85,13 +109,7 @@ export const Login: React.FC = () => {
       const target = from && from !== '/login' && from !== '/' ? from : '/command-center';
       navigate(target, { replace: true });
     } catch (err: any) {
-      const msg =
-        err.response?.data?.error ||
-        err.response?.data?.message ||
-        (err.message === 'Network Error'
-          ? 'Unable to reach backend server. Please verify your connection or ensure backend is running.'
-          : err.message) ||
-        'Invalid email or password.';
+      const msg = extractErrorMessage(err, 'Invalid email or password.');
       setError(msg);
       setLoading(false);
     }
@@ -118,7 +136,7 @@ export const Login: React.FC = () => {
       const target = from && from !== '/login' && from !== '/' ? from : '/command-center';
       navigate(target, { replace: true });
     } catch (err: any) {
-      const msg = err.response?.data?.error || err.response?.data?.message || err.message || 'Registration failed. Please try again.';
+      const msg = extractErrorMessage(err, 'Registration failed. Please try again.');
       setError(msg);
       setLoading(false);
     }
@@ -141,7 +159,7 @@ export const Login: React.FC = () => {
       setOtpCode(''); // user must input the code received in email
       setOtpStep('VERIFY');
     } catch (err: any) {
-      const msg = err.response?.data?.error || err.response?.data?.message || err.message || 'Failed to dispatch verification code.';
+      const msg = extractErrorMessage(err, 'Failed to dispatch verification code.');
       setError(msg);
     } finally {
       setLoading(false);
@@ -180,7 +198,7 @@ export const Login: React.FC = () => {
       setOtpStep('REQUEST');
       setPassword('');
     } catch (err: any) {
-      const msg = err.response?.data?.error || err.message || 'Failed to reset password. Please check your verification code.';
+      const msg = extractErrorMessage(err, 'Failed to reset password. Please check your verification code.');
       setError(msg);
     } finally {
       setLoading(false);
@@ -260,7 +278,7 @@ export const Login: React.FC = () => {
           {error && (
             <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2 animate-shake">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />
-              <span>{error}</span>
+              <span>{typeof error === 'string' ? error : (error as any)?.message || JSON.stringify(error)}</span>
             </div>
           )}
 
@@ -268,7 +286,7 @@ export const Login: React.FC = () => {
           {successMessage && (
             <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-              <span>{successMessage}</span>
+              <span>{typeof successMessage === 'string' ? successMessage : (successMessage as any)?.message || JSON.stringify(successMessage)}</span>
             </div>
           )}
 
