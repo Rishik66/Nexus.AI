@@ -99,7 +99,7 @@ export const ApiService = {
     const res = await api.post('/auth/login', { email, password });
     return res.data;
   },
-  register: async (payload: { email: string; password: string; full_name: string; role?: string }) => {
+  register: async (payload: { email: string; password: string; full_name: string; company_name?: string; role?: string }) => {
     const res = await api.post('/auth/register', payload);
     return res.data;
   },

@@ -15,6 +15,7 @@ import {
   KeyRound,
   ArrowLeft,
   RefreshCw,
+  Building2,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.js';
 import { ApiService } from '../services/api.js';
@@ -33,6 +34,7 @@ export const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
+  const [companyName, setCompanyName] = useState('');
   const [role, setRole] = useState<'ADMIN' | 'MANAGER' | 'EMPLOYEE'>('ADMIN');
   const [showPassword, setShowPassword] = useState(false);
 
@@ -107,7 +109,7 @@ export const Login: React.FC = () => {
       setLoading(true);
       setError(null);
       setSuccessMessage(null);
-      await register(email.trim(), password, fullName.trim(), role);
+      await register(email.trim(), password, fullName.trim(), role, companyName.trim());
       navigate(from, { replace: true });
     } catch (err: any) {
       const msg = err.response?.data?.error || err.response?.data?.message || err.message || 'Registration failed. Please try again.';
@@ -381,6 +383,23 @@ export const Login: React.FC = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="John Doe"
+                    className="w-full bg-[#131e38] border border-[#22345e] rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+                  Company / Organization Name
+                </label>
+                <div className="relative">
+                  <Building2 className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                  <input
+                    type="text"
+                    required
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    placeholder="e.g. Acme Cloud Innovations"
                     className="w-full bg-[#131e38] border border-[#22345e] rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                   />
                 </div>

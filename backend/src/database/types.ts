@@ -2,6 +2,7 @@ export type UserRole = 'ADMIN' | 'MANAGER' | 'EMPLOYEE';
 
 export interface User {
   id: string;
+  business_id: string;
   email: string;
   password_hash: string;
   full_name: string;

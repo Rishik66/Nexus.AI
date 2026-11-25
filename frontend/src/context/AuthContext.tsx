@@ -10,7 +10,7 @@ interface AuthContextType {
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (email: string, pass: string) => Promise<void>;
-  register: (email: string, pass: string, fullName: string, role?: 'ADMIN' | 'MANAGER' | 'EMPLOYEE') => Promise<void>;
+  register: (email: string, pass: string, fullName: string, role?: 'ADMIN' | 'MANAGER' | 'EMPLOYEE', companyName?: string) => Promise<void>;
   logout: () => void;
   switchRole: (newRole: 'ADMIN' | 'MANAGER' | 'EMPLOYEE') => Promise<void>;
   refreshApprovals: () => Promise<void>;
@@ -105,11 +105,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await refreshApprovals();
   };
 
-  const register = async (email: string, pass: string, fullName: string, newRole: 'ADMIN' | 'MANAGER' | 'EMPLOYEE' = 'ADMIN') => {
+  const register = async (
+    email: string,
+    pass: string,
+    fullName: string,
+    newRole: 'ADMIN' | 'MANAGER' | 'EMPLOYEE' = 'ADMIN',
+    companyName?: string
+  ) => {
     const res = await ApiService.register({
       email,
       password: pass,
       full_name: fullName,
+      company_name: companyName,
       role: newRole,
     });
     if (typeof window !== 'undefined' && window.localStorage) {

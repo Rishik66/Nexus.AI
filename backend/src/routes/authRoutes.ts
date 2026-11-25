@@ -11,6 +11,7 @@ const RegisterSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
   full_name: z.string().min(2),
+  company_name: z.string().min(2).optional(),
   role: z.enum(['ADMIN', 'MANAGER', 'EMPLOYEE']).optional().default('ADMIN'),
 });
 
@@ -30,21 +31,69 @@ const ResetPasswordSchema = z.object({
 });
 
 authRoutes.post('/register', async (req: Request, res: Response) => {
-  const { email, password, full_name, role } = RegisterSchema.parse(req.body);
+  const { email, password, full_name, company_name, role } = RegisterSchema.parse(req.body);
 
   const existing = db.getUserByEmail(email);
   if (existing) {
     return res.status(400).json({ error: 'User with this email already exists.' });
   }
 
+  // Multi-tenant organization isolation:
+  // Create a brand new tenant organization for this company
+  const orgName = company_name?.trim() || `${full_name.trim()}'s Organization`;
+  const newBusiness = db.createBusiness({
+    name: orgName,
+    type: 'GENERAL',
+    currency: 'USD',
+    is_demo: false,
+  });
+
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
 
   const newUser = db.createUser({
+    business_id: newBusiness.id,
     email,
     password_hash: passwordHash,
     full_name,
     role,
+  });
+
+  // Seed standard starter workflow templates for the new company
+  db.createWorkflow({
+    business_id: newBusiness.id,
+    name: 'Weekly Infrastructure & Compute Audit',
+    description: 'Continuous audit of engineering hardware, cloud compute clusters, and reorder triggers.',
+    trigger_type: 'SCHEDULED',
+    cron_expression: '0 9 * * 1',
+    steps: [
+      { agent: 'ATLAS', action: 'AUDIT_INFRASTRUCTURE', order: 1 },
+      { agent: 'SENTINEL', action: 'EVALUATE_CAPACITY_GATES', order: 2 },
+    ],
+    is_active: true,
+  });
+
+  db.createWorkflow({
+    business_id: newBusiness.id,
+    name: 'Daily Cash Flow & Receivables Sweep',
+    description: 'Automated scan of outstanding customer invoices and expenditure categorization.',
+    trigger_type: 'SCHEDULED',
+    cron_expression: '0 8 * * *',
+    steps: [
+      { agent: 'NOVA', action: 'ANALYZE_EXPENDITURES', order: 1 },
+      { agent: 'NOVA', action: 'IDENTIFY_OVERDUE_INVOICES', order: 2 },
+    ],
+    is_active: true,
+  });
+
+  // Log audit
+  db.logAudit({
+    business_id: newBusiness.id,
+    user_id: newUser.id,
+    action: 'REGISTER_TENANT_ORGANIZATION',
+    entity_type: 'BUSINESS',
+    entity_id: newBusiness.id,
+    details: { company_name: orgName, admin_email: email },
   });
 
   const token = generateToken(newUser);
@@ -52,10 +101,12 @@ authRoutes.post('/register', async (req: Request, res: Response) => {
     token,
     user: {
       id: newUser.id,
+      business_id: newUser.business_id,
       email: newUser.email,
       full_name: newUser.full_name,
       role: newUser.role,
     },
+    business: newBusiness,
   });
 });
 
@@ -77,6 +128,7 @@ authRoutes.post('/login', async (req: Request, res: Response) => {
     token,
     user: {
       id: user.id,
+      business_id: user.business_id,
       email: user.email,
       full_name: user.full_name,
       role: user.role,
@@ -196,6 +248,7 @@ authRoutes.get('/me', authenticateJWT, (req: AuthRequest, res: Response) => {
   res.json({
     user: {
       id: req.user.id,
+      business_id: req.user.business_id,
       email: req.user.email,
       full_name: req.user.full_name,
       role: req.user.role,

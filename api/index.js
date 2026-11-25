@@ -54569,6 +54569,19 @@ var DatabaseService = class _DatabaseService {
         const raw = import_fs.default.readFileSync(this.storeFilePath, "utf-8");
         this.store = { ...initialStore, ...JSON.parse(raw) };
         console.log("[DATABASE] Loaded local persistent store from", this.storeFilePath);
+        const defaultBiz = this.store.businesses.find((b) => b.is_demo) || this.store.businesses[0];
+        if (defaultBiz) {
+          let usersMigrated = false;
+          this.store.users.forEach((u) => {
+            if (!u.business_id) {
+              u.business_id = defaultBiz.id;
+              usersMigrated = true;
+            }
+          });
+          if (usersMigrated) {
+            this.persist();
+          }
+        }
       } catch (err) {
         console.error("[DATABASE] Failed to parse local store, initializing empty store", err);
         this.store = { ...initialStore };
@@ -61324,7 +61337,7 @@ var import_express = __toESM(require_express2());
 var import_jsonwebtoken = __toESM(require_jsonwebtoken());
 function generateToken(user) {
   return import_jsonwebtoken.default.sign(
-    { id: user.id, email: user.email, role: user.role },
+    { id: user.id, email: user.email, role: user.role, business_id: user.business_id },
     config.jwtSecret,
     { expiresIn: "7d" }
   );
@@ -61332,15 +61345,6 @@ function generateToken(user) {
 function authenticateJWT(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    if (config.demoMode) {
-      const demoUser = db.getUserByEmail("admin@nexus.ai");
-      if (demoUser) {
-        req.user = demoUser;
-        const biz = db.getDemoBusiness();
-        if (biz) req.businessId = biz.id;
-        return next();
-      }
-    }
     return res.status(401).json({ error: "Authentication required. Missing Bearer token." });
   }
   const token = authHeader.split(" ")[1];
@@ -61351,8 +61355,10 @@ function authenticateJWT(req, res, next) {
       return res.status(401).json({ error: "User not found or session expired." });
     }
     req.user = user;
-    const biz = db.getDemoBusiness();
-    if (biz) req.businessId = biz.id;
+    req.businessId = user.business_id || payload.business_id || db.getDemoBusiness()?.id;
+    if (!req.businessId) {
+      return res.status(403).json({ error: "User is not associated with any organization." });
+    }
     next();
   } catch (err) {
     return res.status(403).json({ error: "Invalid or expired token." });
@@ -61378,6 +61384,7 @@ var RegisterSchema = external_exports.object({
   email: external_exports.string().email(),
   password: external_exports.string().min(6),
   full_name: external_exports.string().min(2),
+  company_name: external_exports.string().min(2).optional(),
   role: external_exports.enum(["ADMIN", "MANAGER", "EMPLOYEE"]).optional().default("ADMIN")
 });
 var LoginSchema = external_exports.object({
@@ -61393,28 +61400,70 @@ var ResetPasswordSchema = external_exports.object({
   new_password: external_exports.string().min(6)
 });
 authRoutes.post("/register", async (req, res) => {
-  const { email, password, full_name, role } = RegisterSchema.parse(req.body);
+  const { email, password, full_name, company_name, role } = RegisterSchema.parse(req.body);
   const existing = db.getUserByEmail(email);
   if (existing) {
     return res.status(400).json({ error: "User with this email already exists." });
   }
+  const orgName = company_name?.trim() || `${full_name.trim()}'s Organization`;
+  const newBusiness = db.createBusiness({
+    name: orgName,
+    type: "GENERAL",
+    currency: "USD",
+    is_demo: false
+  });
   const salt = await bcryptjs_default.genSalt(10);
   const passwordHash = await bcryptjs_default.hash(password, salt);
   const newUser = db.createUser({
+    business_id: newBusiness.id,
     email,
     password_hash: passwordHash,
     full_name,
     role
+  });
+  db.createWorkflow({
+    business_id: newBusiness.id,
+    name: "Weekly Infrastructure & Compute Audit",
+    description: "Continuous audit of engineering hardware, cloud compute clusters, and reorder triggers.",
+    trigger_type: "SCHEDULED",
+    cron_expression: "0 9 * * 1",
+    steps: [
+      { agent: "ATLAS", action: "AUDIT_INFRASTRUCTURE", order: 1 },
+      { agent: "SENTINEL", action: "EVALUATE_CAPACITY_GATES", order: 2 }
+    ],
+    is_active: true
+  });
+  db.createWorkflow({
+    business_id: newBusiness.id,
+    name: "Daily Cash Flow & Receivables Sweep",
+    description: "Automated scan of outstanding customer invoices and expenditure categorization.",
+    trigger_type: "SCHEDULED",
+    cron_expression: "0 8 * * *",
+    steps: [
+      { agent: "NOVA", action: "ANALYZE_EXPENDITURES", order: 1 },
+      { agent: "NOVA", action: "IDENTIFY_OVERDUE_INVOICES", order: 2 }
+    ],
+    is_active: true
+  });
+  db.logAudit({
+    business_id: newBusiness.id,
+    user_id: newUser.id,
+    action: "REGISTER_TENANT_ORGANIZATION",
+    entity_type: "BUSINESS",
+    entity_id: newBusiness.id,
+    details: { company_name: orgName, admin_email: email }
   });
   const token = generateToken(newUser);
   res.status(201).json({
     token,
     user: {
       id: newUser.id,
+      business_id: newUser.business_id,
       email: newUser.email,
       full_name: newUser.full_name,
       role: newUser.role
-    }
+    },
+    business: newBusiness
   });
 });
 authRoutes.post("/login", async (req, res) => {
@@ -61432,6 +61481,7 @@ authRoutes.post("/login", async (req, res) => {
     token,
     user: {
       id: user.id,
+      business_id: user.business_id,
       email: user.email,
       full_name: user.full_name,
       role: user.role
@@ -61533,6 +61583,7 @@ authRoutes.get("/me", authenticateJWT, (req, res) => {
   res.json({
     user: {
       id: req.user.id,
+      business_id: req.user.business_id,
       email: req.user.email,
       full_name: req.user.full_name,
       role: req.user.role
@@ -61543,14 +61594,14 @@ authRoutes.get("/me", authenticateJWT, (req, res) => {
 // src/routes/businessRoutes.ts
 var import_express2 = __toESM(require_express2());
 var businessRoutes = (0, import_express2.Router)();
-businessRoutes.get("/", authenticateJWT, (_req, res) => {
-  const businesses = db.getBusinesses();
-  res.json({ businesses });
+businessRoutes.get("/", authenticateJWT, (req, res) => {
+  const currentBiz = req.businessId ? db.getBusinessById(req.businessId) : null;
+  res.json({ businesses: currentBiz ? [currentBiz] : [] });
 });
 businessRoutes.get("/current", authenticateJWT, (req, res) => {
-  const biz = req.businessId && db.getBusinessById(req.businessId) || db.getDemoBusiness();
+  const biz = req.businessId ? db.getBusinessById(req.businessId) : null;
   if (!biz) {
-    return res.status(404).json({ error: "Business not found." });
+    return res.status(404).json({ error: "Business organization not found." });
   }
   res.json({ business: biz });
 });
@@ -61718,7 +61769,10 @@ var businessAnalyticsTool = {
 // src/routes/dashboardRoutes.ts
 var dashboardRoutes = (0, import_express3.Router)();
 dashboardRoutes.get("/metrics", authenticateJWT, async (req, res) => {
-  const businessId = req.businessId || db.getDemoBusiness()?.id || "";
+  const businessId = req.businessId;
+  if (!businessId) {
+    return res.status(403).json({ error: "Tenant organization not found." });
+  }
   const analytics = await businessAnalyticsTool.execute(
     { metrics: ["ALL"] },
     { businessId, agentName: "SENTINEL" }
@@ -61739,19 +61793,35 @@ dashboardRoutes.get("/metrics", authenticateJWT, async (req, res) => {
   });
 });
 dashboardRoutes.get("/charts", authenticateJWT, (req, res) => {
-  const businessId = req.businessId || db.getDemoBusiness()?.id || "";
+  const businessId = req.businessId;
+  if (!businessId) {
+    return res.status(403).json({ error: "Tenant organization not found." });
+  }
   const expenses = db.getExpenses(businessId);
   const invoices = db.getInvoices(businessId);
   const products = db.getProducts(businessId);
-  const monthlyData = [
-    { month: "Jun", revenue: 14200, expenses: 9800, profit: 4400 },
-    { month: "Jul", revenue: 18500, expenses: 11200, profit: 7300 },
-    { month: "Aug", revenue: 21400, expenses: 13500, profit: 7900 },
-    { month: "Sep", revenue: 19800, expenses: 12100, profit: 7700 },
-    { month: "Oct", revenue: 22356, expenses: 14200, profit: 8156 },
-    { month: "Nov", revenue: 26800, expenses: 23270, profit: 3530 }
-    // Reflects current ledger
-  ];
+  const isDemo = db.getBusinessById(businessId)?.is_demo;
+  let monthlyData = [];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const currentMonthIdx = (/* @__PURE__ */ new Date()).getMonth();
+  const last6Months = [];
+  for (let i = 5; i >= 0; i--) {
+    const idx = (currentMonthIdx - i + 12) % 12;
+    last6Months.push(months[idx]);
+  }
+  const totalRev = invoices.filter((i) => i.status === "PAID").reduce((sum, i) => sum + Number(i.total_amount || 0), 0);
+  const totalExp = expenses.reduce((sum, e) => sum + Number(e.amount || 0), 0);
+  monthlyData = last6Months.map((m, idx) => {
+    const isCurrent = idx === 5;
+    const rev = isCurrent ? totalRev : Math.round(totalRev * (0.6 + idx * 0.08) * 100) / 100;
+    const exp = isCurrent ? totalExp : Math.round(totalExp * (0.65 + idx * 0.07) * 100) / 100;
+    return {
+      month: m,
+      revenue: rev,
+      expenses: exp,
+      profit: Math.round((rev - exp) * 100) / 100
+    };
+  });
   const categoryTotals = {};
   for (const exp of expenses) {
     categoryTotals[exp.category] = (categoryTotals[exp.category] || 0) + Number(exp.amount);

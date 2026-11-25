@@ -109,6 +109,21 @@ export class DatabaseService {
         const raw = fs.readFileSync(this.storeFilePath, 'utf-8');
         this.store = { ...initialStore, ...JSON.parse(raw) };
         console.log('[DATABASE] Loaded local persistent store from', this.storeFilePath);
+
+        // Ensure all legacy users have a valid business_id assigned
+        const defaultBiz = this.store.businesses.find(b => b.is_demo) || this.store.businesses[0];
+        if (defaultBiz) {
+          let usersMigrated = false;
+          this.store.users.forEach(u => {
+            if (!u.business_id) {
+              u.business_id = defaultBiz.id;
+              usersMigrated = true;
+            }
+          });
+          if (usersMigrated) {
+            this.persist();
+          }
+        }
       } catch (err) {
         console.error('[DATABASE] Failed to parse local store, initializing empty store', err);
         this.store = { ...initialStore };
