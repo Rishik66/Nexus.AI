@@ -27,6 +27,7 @@ import { documentRoutes } from './routes/documentRoutes.js';
 import { auditRoutes } from './routes/auditRoutes.js';
 import { integrationRoutes } from './routes/integrationRoutes.js';
 import { notificationRoutes } from './routes/notificationRoutes.js';
+import { supabaseRoutes } from './routes/supabaseRoutes.js';
 
 const app = express();
 
@@ -78,6 +79,7 @@ app.use('/api/documents', documentRoutes);
 app.use('/api/audit-logs', auditRoutes);
 app.use('/api/integrations', integrationRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/supabase', supabaseRoutes);
 
 // Error Handling
 app.use(errorHandler);

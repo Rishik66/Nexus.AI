@@ -247,6 +247,28 @@ export const ApiService = {
     const res = await api.get('/notifications');
     return res.data;
   },
+
+  // Supabase Integration Services
+  getSupabaseStatus: async () => {
+    const res = await api.get('/supabase/status');
+    return res.data;
+  },
+  testSupabase: async (payload: { supabaseUrl: string; supabaseAnonKey?: string; supabaseServiceRoleKey?: string; databaseUrl?: string }) => {
+    const res = await api.post('/supabase/test', payload);
+    return res.data;
+  },
+  connectSupabase: async (payload: { supabaseUrl: string; supabaseAnonKey?: string; supabaseServiceRoleKey?: string; databaseUrl?: string }) => {
+    const res = await api.post('/supabase/connect', payload);
+    return res.data;
+  },
+  syncSupabaseSeed: async () => {
+    const res = await api.post('/supabase/sync-seed');
+    return res.data;
+  },
+  getSupabaseMigrationSql: async () => {
+    const res = await api.get('/supabase/migration-sql');
+    return res.data.sql;
+  },
 };
 
 export default api;
