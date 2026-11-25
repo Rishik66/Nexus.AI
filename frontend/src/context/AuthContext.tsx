@@ -126,14 +126,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(res.user);
     setRole(res.user.role);
 
+    if (res.business) {
+      setBusiness(res.business);
+    } else {
+      try {
+        const biz = await ApiService.getCurrentBusiness();
+        if (biz) setBusiness(biz);
+      } catch {
+        // ignore
+      }
+    }
+
     try {
-      const biz = await ApiService.getCurrentBusiness();
-      if (biz) setBusiness(biz);
+      await refreshApprovals();
     } catch {
       // ignore
     }
-
-    await refreshApprovals();
   };
 
   const logout = () => {

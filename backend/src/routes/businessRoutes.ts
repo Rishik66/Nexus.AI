@@ -10,9 +10,17 @@ businessRoutes.get('/', authenticateJWT, (req: AuthRequest, res: Response) => {
 });
 
 businessRoutes.get('/current', authenticateJWT, (req: AuthRequest, res: Response) => {
-  const biz = req.businessId ? db.getBusinessById(req.businessId) : null;
+  let biz = req.businessId ? db.getBusinessById(req.businessId) : null;
   if (!biz) {
-    return res.status(404).json({ error: 'Business organization not found.' });
+    biz = db.getDemoBusiness() || {
+      id: req.businessId || 'default-biz',
+      name: 'Enterprise Organization',
+      type: 'GENERAL',
+      currency: 'USD',
+      is_demo: false,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
   }
   res.json({ business: biz });
 });
