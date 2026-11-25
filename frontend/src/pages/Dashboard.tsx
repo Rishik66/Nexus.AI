@@ -127,9 +127,17 @@ export const Dashboard: React.FC = () => {
           <div className="text-2xl font-black text-white">
             {formatCurrency(m.totalRevenue ?? 0, business?.currency)}
           </div>
-          <div className="flex items-center gap-1.5 mt-2 text-[11px] text-emerald-400 font-medium">
-            <TrendingUp className="w-3.5 h-3.5" />
-            <span>+18.4% from last period</span>
+          <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>+18.4% from last period</span>
+            </div>
+            <button
+              onClick={() => navigate('/sales')}
+              className="text-[11px] text-cyan-400 hover:text-cyan-300 hover:underline font-semibold flex items-center gap-1"
+            >
+              <span>+ Record Sale</span>
+            </button>
           </div>
         </div>
 

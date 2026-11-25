@@ -22,12 +22,15 @@ import {
   X,
   ExternalLink,
   LogOut,
+  Plus,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.js';
+import { RecordSaleModal } from '../components/RecordSaleModal.js';
 
 export const DashboardLayout: React.FC = () => {
   const { user, business, role, switchRole, logout, pendingApprovalsCount } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [saleModalOpen, setSaleModalOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -49,9 +52,11 @@ export const DashboardLayout: React.FC = () => {
       icon: Package,
     },
     {
-      to: '/finance',
-      label: 'Finance & Invoicing',
+      to: '/sales',
+      label: 'Sales & Revenue',
       icon: TrendingUp,
+      badge: 'Sales',
+      badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
     },
     {
       to: '/customers',
@@ -236,8 +241,19 @@ export const DashboardLayout: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Role Switcher for Hackathon Judges */}
+          {/* Top Navbar Actions */}
           <div className="flex items-center gap-3">
+            {/* Global Record Sale Button */}
+            <button
+              onClick={() => setSaleModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Record Sale</span>
+              <span className="sm:hidden">Sale</span>
+            </button>
+
+            {/* Quick Role Switcher for Hackathon Judges */}
             <div className="hidden md:flex items-center gap-1.5 p-1 rounded-lg bg-[#131e38] border border-[#22345e]">
               <span className="text-[11px] text-slate-400 px-2 font-medium flex items-center gap-1">
                 <UserCheck className="w-3.5 h-3.5 text-cyan-400" /> Role:
@@ -289,6 +305,17 @@ export const DashboardLayout: React.FC = () => {
           </div>
         </main>
       </div>
+
+      {/* Global Record Sale Modal */}
+      <RecordSaleModal
+        isOpen={saleModalOpen}
+        onClose={() => setSaleModalOpen(false)}
+        onSuccess={() => {
+          if (location.pathname === '/sales' || location.pathname === '/finance' || location.pathname === '/dashboard') {
+            window.location.reload();
+          }
+        }}
+      />
     </div>
   );
 };
