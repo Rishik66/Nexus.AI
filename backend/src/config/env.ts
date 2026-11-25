@@ -9,7 +9,7 @@ export const config = {
   jwtSecret: process.env.JWT_SECRET || 'nexus_ai_super_secure_jwt_secret_key_2026_hackathon_elite',
   frontendUrl: process.env.FRONTEND_URL || 'http://localhost:5173',
   geminiApiKey: process.env.GEMINI_API_KEY || '',
-  geminiModel: process.env.GEMINI_MODEL || 'gemini-1.5-pro',
+  geminiModel: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
   databaseUrl: process.env.DATABASE_URL || '',
   supabaseUrl: process.env.SUPABASE_URL || '',
   supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',

@@ -46,7 +46,7 @@ export const Settings: React.FC = () => {
 
   // Gemini Live AI state
   const [geminiKey, setGeminiKey] = useState('');
-  const [geminiModel, setGeminiModel] = useState('gemini-1.5-flash');
+  const [geminiModel, setGeminiModel] = useState('gemini-3.5-flash');
   const [showGeminiKey, setShowGeminiKey] = useState(false);
   const [connectingGemini, setConnectingGemini] = useState(false);
   const [geminiMessage, setGeminiMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -296,9 +296,9 @@ export const Settings: React.FC = () => {
                 onChange={(e) => setGeminiModel(e.target.value)}
                 className="w-full bg-[#131e38] border border-[#22345e] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-purple-500"
               >
-                <option value="gemini-1.5-flash">Gemini 1.5 Flash (Recommended / Fast)</option>
-                <option value="gemini-1.5-pro">Gemini 1.5 Pro (Deep Multimodal Reasoning)</option>
-                <option value="gemini-2.0-flash">Gemini 2.0 Flash (Next-Gen Preview)</option>
+                <option value="gemini-3.5-flash">Gemini 3.5 Flash (Active / High-Speed)</option>
+                <option value="gemini-3.8-flash">Gemini 3.8 Flash (Latest Preview)</option>
+                <option value="gemini-2.5-pro">Gemini 2.5 Pro (Deep Multimodal Reasoning)</option>
               </select>
             </div>
           </div>

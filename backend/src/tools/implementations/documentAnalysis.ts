@@ -73,7 +73,7 @@ export const documentAnalysisTool: ToolDefinition<
     if (config.geminiApiKey && targetPath && fs.existsSync(targetPath)) {
       try {
         const genAI = new GoogleGenerativeAI(config.geminiApiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+        const model = genAI.getGenerativeModel({ model: config.geminiModel || 'gemini-3.5-flash' });
 
         const fileBuffer = fs.readFileSync(targetPath);
         const base64Data = fileBuffer.toString('base64');
