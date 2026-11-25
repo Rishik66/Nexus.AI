@@ -100,14 +100,23 @@ If a step modifies data or drafts purchase orders, classify as MEDIUM risk. If i
   private generateDeterministicPlan(goal: string, _businessId: string): ExecutionPlan {
     const g = goal.toLowerCase();
 
-    // Template 1: Low stock, inventory & restocking PO
-    if (g.includes('low stock') || g.includes('restock') || g.includes('inventory') || g.includes('purchase order')) {
+    // Template 1: Enterprise Infrastructure Assets, Cloud Capacity & Procurement Requisitions
+    if (
+      g.includes('asset') ||
+      g.includes('infrastructure') ||
+      g.includes('capacity') ||
+      g.includes('procurement') ||
+      g.includes('low stock') ||
+      g.includes('restock') ||
+      g.includes('inventory') ||
+      g.includes('purchase order')
+    ) {
       const steps: PlanStep[] = [
         {
           id: uuidv4(),
           stepIndex: 1,
           agentName: 'ATLAS',
-          description: 'Audit product catalog for items depleted below reorder threshold.',
+          description: 'Audit operational infrastructure, compute nodes, and hardware assets depleted below capacity threshold.',
           toolName: 'DATABASE_SEARCH',
           suggestedInput: { entity: 'products', filter: { low_stock: true } },
           riskLevel: 'LOW',
@@ -118,7 +127,7 @@ If a step modifies data or drafts purchase orders, classify as MEDIUM risk. If i
           id: uuidv4(),
           stepIndex: 2,
           agentName: 'ATLAS',
-          description: 'Calculate optimal reorder quantities and supplier lead times.',
+          description: 'Calculate optimal capacity expansion quantities and vendor lead times.',
           toolName: 'BUSINESS_CALCULATOR',
           suggestedInput: {
             operation: 'REORDER_QUANTITY',
@@ -132,7 +141,7 @@ If a step modifies data or drafts purchase orders, classify as MEDIUM risk. If i
           id: uuidv4(),
           stepIndex: 3,
           agentName: 'SENTINEL',
-          description: 'Review replenishment plan, check supplier terms, and enforce human approval gate.',
+          description: 'Review infrastructure expansion plan, check vendor SLAs, and enforce human approval gate.',
           riskLevel: 'MEDIUM',
           dependencies: [2],
           status: 'PENDING',
@@ -141,12 +150,12 @@ If a step modifies data or drafts purchase orders, classify as MEDIUM risk. If i
           id: uuidv4(),
           stepIndex: 4,
           agentName: 'ATLAS',
-          description: 'Generate formal Purchase Order draft for approved low-stock items.',
+          description: 'Generate formal procurement requisition draft for approved infrastructure assets.',
           toolName: 'DATABASE_UPDATE',
           suggestedInput: {
             action: 'CREATE_PURCHASE_ORDER_DRAFT',
-            payload: { notes: 'Restock draft generated for critical low stock items' },
-            reason: 'Replenish depleted inventory',
+            payload: { notes: 'Procurement draft generated for critical infrastructure and operational assets' },
+            reason: 'Replenish depleted enterprise infrastructure capacity',
           },
           riskLevel: 'MEDIUM',
           dependencies: [3],
@@ -156,7 +165,7 @@ If a step modifies data or drafts purchase orders, classify as MEDIUM risk. If i
           id: uuidv4(),
           stepIndex: 5,
           agentName: 'ORION',
-          description: 'Synthesize operational report and present final restocking summary.',
+          description: 'Synthesize operational report and present final procurement & capacity summary.',
           riskLevel: 'LOW',
           dependencies: [4],
           status: 'PENDING',
@@ -165,7 +174,7 @@ If a step modifies data or drafts purchase orders, classify as MEDIUM risk. If i
 
       return {
         goal,
-        summary: 'Detect depleted inventory, calculate reorder quantities, submit for SENTINEL safety approval, and draft supplier purchase orders.',
+        summary: 'Audit depleted operational infrastructure & software licenses, calculate capacity replenishment, submit for SENTINEL safety approval, and draft vendor procurement requisitions.',
         targetAgents: ['ORION', 'ATLAS', 'SENTINEL'],
         steps,
         estimatedTurns: steps.length,
@@ -390,7 +399,7 @@ If a step modifies data or drafts purchase orders, classify as MEDIUM risk. If i
         id: uuidv4(),
         stepIndex: 1,
         agentName: 'ATLAS',
-        description: 'Audit physical inventory, low stock alerts, and supply chain constraints.',
+        description: 'Audit enterprise infrastructure assets, capacity allocation alerts, and vendor SLA constraints.',
         toolName: 'DATABASE_SEARCH',
         suggestedInput: { entity: 'products', filter: { low_stock: true } },
         riskLevel: 'LOW',

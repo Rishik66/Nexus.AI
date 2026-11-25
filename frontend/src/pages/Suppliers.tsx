@@ -80,7 +80,7 @@ export const Suppliers: React.FC = () => {
               {orders.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="py-4 text-center text-slate-500">
-                    No purchase orders yet. Trigger ATLAS in Command Center to generate low-stock POs!
+                    No purchase orders yet. Trigger ATLAS in Command Center to generate enterprise infrastructure POs!
                   </td>
                 </tr>
               ) : (

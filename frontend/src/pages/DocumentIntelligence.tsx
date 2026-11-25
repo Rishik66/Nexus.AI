@@ -59,7 +59,7 @@ export const DocumentIntelligence: React.FC = () => {
         </div>
         <h1 className="text-2xl font-extrabold text-white">Document Intelligence</h1>
         <p className="text-xs text-slate-400 mt-1">
-          Upload unstructured PDF invoices, freight receipts, or purchase orders. SAGE extracts structured line items, calculates tax, verifies suppliers, and drafts verified database records.
+          Upload unstructured B2B service contracts, cloud infrastructure invoices, or enterprise Statements of Work (SOWs). SAGE extracts structured line items, verifies SLAs, cross-references vendors, and drafts verified database records.
         </p>
       </div>
 

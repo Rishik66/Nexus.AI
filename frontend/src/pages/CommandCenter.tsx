@@ -42,23 +42,23 @@ export const CommandCenter: React.FC = () => {
   // Suggested demo prompts for hackathon judges
   const suggestedPrompts = [
     {
-      title: 'Low-Stock & PO Restock',
-      prompt: 'Find products that are running low on stock and prepare a restocking plan.',
+      title: 'Infrastructure & Asset Procurement',
+      prompt: 'Audit operational IT assets and cloud compute capacity, calculate needed units, and stage procurement orders.',
       agent: 'ATLAS',
     },
     {
-      title: 'Expense Anomaly Audit',
-      prompt: 'Analyze my expenses, detect unusual spending spikes, and identify cost drivers.',
+      title: 'Expense Anomaly & Cloud Audit',
+      prompt: 'Analyze operating expenses, detect unbudgeted cloud overage spikes, and isolate SaaS cost leakages.',
       agent: 'NOVA',
     },
     {
-      title: 'Overdue Receivables',
-      prompt: 'Check which customer invoices are overdue and create employee follow-up tasks.',
+      title: 'Client Invoices & Receivables',
+      prompt: 'Check which client invoices are overdue and create employee accounts receivable recovery tasks.',
       agent: 'NOVA',
     },
     {
-      title: 'Complete 360° Health Check',
-      prompt: 'Perform a complete business health check and prepare strategic growth recommendations.',
+      title: '360° Enterprise Health Audit',
+      prompt: 'Perform a complete 360-degree business health check and formulate operational growth recommendations.',
       agent: 'ORION',
     },
   ];
@@ -320,7 +320,7 @@ export const CommandCenter: React.FC = () => {
           <textarea
             value={goal}
             onChange={(e) => setGoal(e.target.value)}
-            placeholder="Type or speak a business goal... (e.g. 'Audit low stock items, calculate optimal reorder units, and stage purchase orders for human review')"
+            placeholder="Type or speak an enterprise goal... (e.g. 'Audit operational IT assets, calculate needed developer workstations, and stage procurement orders for human review')"
             rows={3}
             className="w-full bg-[#131e38] border border-[#22345e] rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
           />

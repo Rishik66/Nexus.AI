@@ -16,7 +16,7 @@ describe('AI Command Center Component Tests', () => {
     );
 
     expect(screen.getByText('AI Command Center')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Type or speak a business goal/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Type or speak an enterprise goal/i)).toBeInTheDocument();
     expect(screen.getByText(/Generate Execution Plan/i)).toBeInTheDocument();
   });
 
@@ -29,8 +29,8 @@ describe('AI Command Center Component Tests', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText('Low-Stock & PO Restock')).toBeInTheDocument();
-    expect(screen.getByText('Expense Anomaly Audit')).toBeInTheDocument();
-    expect(screen.getByText('Overdue Receivables')).toBeInTheDocument();
+    expect(screen.getByText('Infrastructure & Asset Procurement')).toBeInTheDocument();
+    expect(screen.getByText('Expense Anomaly & Cloud Audit')).toBeInTheDocument();
+    expect(screen.getByText('Client Invoices & Receivables')).toBeInTheDocument();
   });
 });

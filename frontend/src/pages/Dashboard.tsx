@@ -101,7 +101,7 @@ export const Dashboard: React.FC = () => {
             </h2>
             <p className="text-xs text-slate-300 mt-1 max-w-xl">
               {metrics?.executiveSummary ||
-                'Operational velocity is healthy. Net profit margin is positive. 4 SKUs require restocking attention.'}
+                'Enterprise operational velocity is optimal. Cloud resource margins are positive. 4 infrastructure assets require allocation review.'}
             </p>
           </div>
         </div>
@@ -143,25 +143,25 @@ export const Dashboard: React.FC = () => {
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-amber-400 font-medium">
             <AlertTriangle className="w-3.5 h-3.5" />
-            <span>Freight surge logged</span>
+            <span>Cloud compute burst logged</span>
           </div>
         </div>
 
-        {/* Low Stock Depletion Alerts */}
+        {/* Infrastructure & Asset Depletion Alerts */}
         <div className="p-4 rounded-xl bg-[#0d1527] border border-[#22345e] hover:border-slate-500 transition-colors">
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-medium">Low Stock Products</span>
+            <span className="text-xs font-medium">Infrastructure & Asset Alerts</span>
             <Package className="w-4 h-4 text-amber-400" />
           </div>
           <div className="text-2xl font-black text-amber-400">
-            {m.lowStockCount || 4} <span className="text-xs font-normal text-slate-400">SKUs</span>
+            {m.lowStockCount || 4} <span className="text-xs font-normal text-slate-400">Assets</span>
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-cyan-400 font-medium">
             <button
               onClick={() => navigate('/inventory')}
               className="hover:underline flex items-center gap-1"
             >
-              Restock with ATLAS <ArrowRight className="w-3 h-3" />
+              Auto-Provision with ATLAS <ArrowRight className="w-3 h-3" />
             </button>
           </div>
         </div>

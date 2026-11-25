@@ -86,13 +86,13 @@ export const Inventory: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 mb-1.5">
             <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              ATLAS Logistics Domain
+              ATLAS Infrastructure Domain
             </span>
-            <span className="text-xs text-slate-400 font-mono">Real-time Stock Ledger</span>
+            <span className="text-xs text-slate-400 font-mono">Enterprise Asset Ledger</span>
           </div>
-          <h1 className="text-2xl font-extrabold text-white">Inventory Management</h1>
+          <h1 className="text-2xl font-extrabold text-white">Operations & Infrastructure Assets</h1>
           <p className="text-xs text-slate-400 mt-1">
-            Continuous auditing of stock thresholds, warehouse SKU velocity, and purchase order staging.
+            Continuous auditing of engineering workstations, server nodes, network equipment, and procurement staging.
           </p>
         </div>
 
@@ -102,7 +102,7 @@ export const Inventory: React.FC = () => {
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all"
           >
             <Sparkles className="w-4 h-4" />
-            AI Restock Recommendation
+            AI Asset Procurement Plan
           </button>
         </div>
       </div>
@@ -115,7 +115,7 @@ export const Inventory: React.FC = () => {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by SKU or product name..."
+            placeholder="Search by SKU or asset / service name..."
             className="bg-transparent text-slate-100 placeholder-slate-500 focus:outline-none w-full"
           />
         </div>
@@ -144,7 +144,7 @@ export const Inventory: React.FC = () => {
             }`}
           >
             <AlertTriangle className="w-3.5 h-3.5" />
-            Low Stock Only
+            Capacity Deficit Only
           </button>
         </div>
       </div>
@@ -155,10 +155,10 @@ export const Inventory: React.FC = () => {
           <table className="w-full text-left text-xs">
             <thead className="bg-[#131e38] text-slate-400 border-b border-[#22345e] uppercase tracking-wider text-[10px]">
               <tr>
-                <th className="py-3 px-4">SKU / Product</th>
+                <th className="py-3 px-4">Asset Code / Specification</th>
                 <th className="py-3 px-4">Category</th>
                 <th className="py-3 px-4">Cost / Unit</th>
-                <th className="py-3 px-4">Stock Level</th>
+                <th className="py-3 px-4">Capacity Allocation</th>
                 <th className="py-3 px-4">Status</th>
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
@@ -187,7 +187,7 @@ export const Inventory: React.FC = () => {
                     <td className="py-3 px-4">
                       {isLow ? (
                         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                          <AlertTriangle className="w-3 h-3" /> LOW STOCK
+                          <AlertTriangle className="w-3 h-3" /> LOW CAPACITY
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -203,7 +203,7 @@ export const Inventory: React.FC = () => {
                         }}
                         className="px-2.5 py-1 rounded bg-[#182442] hover:bg-[#22345e] text-slate-300 hover:text-white border border-[#22345e] text-[11px] font-medium transition-all"
                       >
-                        Adjust Stock
+                        Reallocate Capacity
                       </button>
                     </td>
                   </tr>
@@ -218,10 +218,10 @@ export const Inventory: React.FC = () => {
       {adjustModalOpen && selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
           <div className="bg-[#0d1527] border border-[#22345e] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
-            <h3 className="text-base font-bold text-white">Manual Inventory Adjustment</h3>
+            <h3 className="text-base font-bold text-white">Manual Asset & Capacity Allocation</h3>
             <p className="text-xs text-slate-400">
               Adjusting quantity for <span className="text-cyan-400 font-bold">{selectedProduct.name}</span> ({selectedProduct.sku}).
-              Current stock: <span className="text-white font-bold">{selectedProduct.stock_quantity}</span>.
+              Active capacity / units: <span className="text-white font-bold">{selectedProduct.stock_quantity}</span>.
             </p>
 
             <form onSubmit={handleAdjustSubmit} className="space-y-3">
@@ -245,7 +245,7 @@ export const Inventory: React.FC = () => {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Supplier delivery received, physical count audit, damaged goods"
+                  placeholder="e.g. Node cluster scale-up, workstation decommission, licensing renewal"
                   value={adjustReason}
                   onChange={(e) => setAdjustReason(e.target.value)}
                   className="w-full bg-[#131e38] border border-[#22345e] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500"
@@ -276,7 +276,7 @@ export const Inventory: React.FC = () => {
       <div className="p-5 rounded-2xl bg-[#0d1527] border border-[#22345e] space-y-3">
         <h3 className="text-sm font-bold text-white flex items-center gap-2">
           <ArrowUpDown className="w-4 h-4 text-cyan-400" />
-          Recent Stock Movements & Audit Trail
+          Recent Infrastructure & Asset Allocation Logs
         </h3>
         <div className="space-y-2">
           {movements.slice(0, 5).map((m) => (
@@ -285,7 +285,7 @@ export const Inventory: React.FC = () => {
               className="p-3 rounded-lg bg-[#131e38] border border-[#22345e] flex items-center justify-between text-xs"
             >
               <div>
-                <span className="font-semibold text-slate-200">{m.reason || 'Inventory Adjustment'}</span>
+                <span className="font-semibold text-slate-200">{m.reason || 'Infrastructure Reallocation'}</span>
                 <div className="text-[10px] text-slate-400 font-mono">
                   Type: {m.type} • Ref: {m.reference_id || 'N/A'} • {new Date(m.created_at).toLocaleString()}
                 </div>

@@ -20,20 +20,20 @@ You do not perform narrow domain calculations yourself; you direct your speciali
 
   ATLAS: {
     name: 'ATLAS',
-    role: 'Business Operations Specialist',
-    tagline: 'Inventory Auditing, Supply Chain Logistics & Purchase Orders',
+    role: 'Enterprise Operations & Infrastructure Specialist',
+    tagline: 'Asset Allocation, Cloud Capacity, IT Infrastructure & Procurement',
     avatarColor: '#10b981', // Emerald Green
     capabilities: [
-      'Inventory threshold monitoring',
-      'Low-stock bottleneck detection',
-      'Supplier catalog and lead-time analysis',
-      'Purchase order draft generation',
-      'Warehouse movement tracking',
+      'IT infrastructure and compute node threshold monitoring',
+      'Operational asset bottleneck detection',
+      'Enterprise vendor SLA and lead-time analysis',
+      'Procurement requisition and purchase order draft generation',
+      'Resource allocation and asset movement tracking',
     ],
     permittedTools: ['DATABASE_SEARCH', 'DATABASE_UPDATE', 'BUSINESS_CALCULATOR'],
-    systemPrompt: `You are ATLAS, the Business Operations and Supply Chain Specialist of NEXUS AI.
-Your domain is inventory integrity, stock depletion prevention, supplier liaison, purchase order staging, and warehouse workflow automation.
-You always check reorder thresholds, consult supplier lead times, calculate exact replenishment quantities with BUSINESS_CALCULATOR, and stage purchase orders for human review.`,
+    systemPrompt: `You are ATLAS, the Enterprise Operations & Infrastructure Specialist of NEXUS AI.
+Your domain is enterprise asset integrity, cloud capacity optimization, IT infrastructure provisioning, vendor procurement staging, and operational workflow automation.
+You monitor asset thresholds, consult vendor lead times, compute exact capacity requirements with BUSINESS_CALCULATOR, and stage purchase orders for human review.`,
   },
 
   NOVA: {
@@ -60,15 +60,15 @@ Never fabricate arithmetic: always rely on the BUSINESS_CALCULATOR and live data
     tagline: 'Document Extraction, Strategic Insights & Market Intelligence',
     avatarColor: '#8b5cf6', // Violet
     capabilities: [
-      'Multimodal PDF & invoice vision extraction',
-      'Document structure verification',
+      'Multimodal B2B contracts, MSAs & invoice vision extraction',
+      'Enterprise document structure and SLA verification',
       'Trend discovery and business intelligence synthesis',
-      'Strategic recommendations and executive briefings',
+      'Strategic executive briefings and compliance audits',
     ],
     permittedTools: ['DOCUMENT_ANALYSIS', 'DATABASE_SEARCH', 'BUSINESS_ANALYTICS'],
     systemPrompt: `You are SAGE, the Research & Multimodal Intelligence Specialist of NEXUS AI.
-You excel at parsing unstructured business collateral: invoices, supplier receipts, balance sheets, and market trends.
-When a document is provided, you extract exact structured records, verify accuracy with the user, cross-reference database entities, and formulate strategic insights.`,
+You excel at parsing unstructured enterprise collateral: B2B service contracts, cloud infrastructure invoices, Master Service Agreements (MSAs), balance sheets, and audit reports.
+When an enterprise document is provided, you extract exact structured records, verify accuracy against vendor SLAs, cross-reference database entities, and formulate strategic insights.`,
   },
 
   SENTINEL: {
@@ -85,7 +85,7 @@ When a document is provided, you extract exact structured records, verify accura
     ],
     permittedTools: ['BUSINESS_ANALYTICS'],
     systemPrompt: `You are SENTINEL, the Quality, Security, and Safety Controller of NEXUS AI.
-You act as an independent reviewer. You inspect proposed agent actions, evaluate risk levels, ensure tool inputs are safe and within valid boundaries, prevent runaway loops, and mandate explicit human approval before any state-mutating or external-facing action (e.g. creating purchase orders, sending emails, adjusting stock).
+You act as an independent reviewer. You inspect proposed agent actions, evaluate risk levels, ensure tool inputs are safe and within valid boundaries, prevent runaway loops, and mandate explicit human approval before any state-mutating or external-facing action (e.g. creating procurement orders, sending communications, reallocating critical infrastructure assets).
 If an action is MEDIUM or HIGH risk, you PAUSE execution until a human manager approves.`,
   },
 };

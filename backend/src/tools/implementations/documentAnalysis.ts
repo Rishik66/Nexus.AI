@@ -133,32 +133,32 @@ Output ONLY raw valid JSON. Do not wrap in markdown or backticks.`;
     }
 
     // 2. High-Precision Heuristic / Synthetic Document Intelligence Extractor
-    // Produces realistic parsed invoice data matching the uploaded document name or realistic supplier
+    // Produces realistic parsed invoice data matching enterprise IT, cloud infrastructure, or consulting services
     const simulatedData = {
       documentNumber: `INV-${Math.floor(100000 + Math.random() * 900000)}`,
-      issuerName: originalName.toLowerCase().includes('packaging') ? 'EcoPackaging Solutions' : 'TechSupply Global',
-      recipientName: 'Apex Retail & Distribution Co.',
+      issuerName: originalName.toLowerCase().includes('cloud') ? 'CloudScale Infrastructure Networks' : 'SiliconCore Systems Inc.',
+      recipientName: 'Apex Global Technologies & Enterprise Solutions',
       issueDate: new Date().toISOString().split('T')[0],
-      dueDate: new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0],
+      dueDate: new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0],
       items: [
         {
-          description: 'High-Speed Wireless 2D Barcode Scanners (Batch 10)',
-          quantity: 10,
-          unitPrice: 95.00,
-          totalPrice: 950.00,
+          description: 'Dedicated AMD EPYC 64-Core Cloud Compute Node (Q3 Provisioning)',
+          quantity: 2,
+          unitPrice: 1250.00,
+          totalPrice: 2500.00,
         },
         {
-          description: 'Direct Thermal POS Paper Rolls (Box of 50)',
-          quantity: 20,
-          unitPrice: 22.00,
-          totalPrice: 440.00,
+          description: 'Enterprise NextGen Firewall Appliance 10Gbps (SLA Rack Unit)',
+          quantity: 1,
+          unitPrice: 1850.00,
+          totalPrice: 1850.00,
         },
       ],
-      subtotal: 1390.00,
-      taxAmount: 111.20,
-      totalAmount: 1501.20,
+      subtotal: 4350.00,
+      taxAmount: 348.00,
+      totalAmount: 4698.00,
       currency: 'USD',
-      notes: 'Payment terms: Net 15 days via ACH or Wire Transfer.',
+      notes: 'Corporate B2B payment terms: Net 30 days via Corporate ACH or Wire Transfer.',
     };
 
     if (docRecord) {

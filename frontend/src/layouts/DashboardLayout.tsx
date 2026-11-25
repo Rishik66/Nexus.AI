@@ -44,7 +44,7 @@ export const DashboardLayout: React.FC = () => {
     },
     {
       to: '/inventory',
-      label: 'Inventory & Stock',
+      label: 'Operations & Assets',
       icon: Package,
     },
     {
@@ -141,7 +141,7 @@ export const DashboardLayout: React.FC = () => {
               <Building2 className="w-4 h-4" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-xs font-semibold text-slate-200 truncate">{business?.name || 'Apex Retail Co.'}</p>
+              <p className="text-xs font-semibold text-slate-200 truncate">{business?.name || 'Apex Global Tech & Enterprise'}</p>
               <div className="flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span className="text-[10px] text-slate-400">Demo Enterprise Active</span>
