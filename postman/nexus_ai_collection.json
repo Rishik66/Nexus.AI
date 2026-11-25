@@ -1,0 +1,374 @@
+{
+  "info": {
+    "_postman_id": "nexus-ai-api-collection-2026",
+    "name": "NEXUS AI — Autonomous Business Operations Platform API",
+    "description": "Complete Postman API Collection for NEXUS AI Hackathon submission covering Authentication, Multi-Agent Orchestration, Tool Registry, Human Approvals, Workflows, Multimodal Document Intelligence, and Database Operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login Admin User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) { pm.collectionVariables.set('authToken', json.token); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@nexus.ai\",\n  \"password\": \"nexus123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Authenticated User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Command Center & Agent Orchestration",
+      "item": [
+        {
+          "name": "Generate Execution Plan (ORION)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"goal\": \"Find products that are running low on stock and prepare restocking orders.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/agent-runs/plan",
+              "host": ["{{baseUrl}}"],
+              "path": ["agent-runs", "plan"]
+            }
+          }
+        },
+        {
+          "name": "Execute Autonomous Multi-Agent Run",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"goal\": \"Audit low-stock inventory, calculate replenishment quantities, and prepare purchase orders for human review.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/agent-runs/execute",
+              "host": ["{{baseUrl}}"],
+              "path": ["agent-runs", "execute"]
+            }
+          }
+        },
+        {
+          "name": "List Recent Agent Runs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/agent-runs",
+              "host": ["{{baseUrl}}"],
+              "path": ["agent-runs"]
+            }
+          }
+        },
+        {
+          "name": "List The 5 Specialized Agents",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/agents",
+              "host": ["{{baseUrl}}"],
+              "path": ["agents"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tool Registry Execution",
+      "item": [
+        {
+          "name": "List All 7 Registered Tools",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tools",
+              "host": ["{{baseUrl}}"],
+              "path": ["tools"]
+            }
+          }
+        },
+        {
+          "name": "Execute BUSINESS_CALCULATOR (Deterministic Arithmetic)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"operation\": \"REORDER_QUANTITY\",\n  \"parameters\": {\n    \"current_stock\": 4,\n    \"reorder_threshold\": 15,\n    \"unit_cost\": 95.0,\n    \"buffer_multiplier\": 2.0\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tools/BUSINESS_CALCULATOR/execute",
+              "host": ["{{baseUrl}}"],
+              "path": ["tools", "BUSINESS_CALCULATOR", "execute"]
+            }
+          }
+        },
+        {
+          "name": "Execute BUSINESS_ANALYTICS (Health Score)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metrics\": [\"ALL\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tools/BUSINESS_ANALYTICS/execute",
+              "host": ["{{baseUrl}}"],
+              "path": ["tools", "BUSINESS_ANALYTICS", "execute"]
+            }
+          }
+        },
+        {
+          "name": "Execute CURRENCY_CONVERSION (Forex Feed)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 1500,\n  \"from\": \"USD\",\n  \"to\": \"EUR\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tools/CURRENCY_CONVERSION/execute",
+              "host": ["{{baseUrl}}"],
+              "path": ["tools", "CURRENCY_CONVERSION", "execute"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Human Approval Center",
+      "item": [
+        {
+          "name": "List Pending Approvals",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/approvals",
+              "host": ["{{baseUrl}}"],
+              "path": ["approvals"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Business Operations & Ledger",
+      "item": [
+        {
+          "name": "Dashboard Metrics & Health Score",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dashboard/metrics",
+              "host": ["{{baseUrl}}"],
+              "path": ["dashboard", "metrics"]
+            }
+          }
+        },
+        {
+          "name": "Dashboard Charts (Revenue vs Costs)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dashboard/charts",
+              "host": ["{{baseUrl}}"],
+              "path": ["dashboard", "charts"]
+            }
+          }
+        },
+        {
+          "name": "List Products (with Low Stock Filter)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products?low_stock=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["products"],
+              "query": [
+                { "key": "low_stock", "value": "true" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Overdue Customer Invoices",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/overdue",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices", "overdue"]
+            }
+          }
+        },
+        {
+          "name": "List Operating Expenses",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/expenses",
+              "host": ["{{baseUrl}}"],
+              "path": ["expenses"]
+            }
+          }
+        },
+        {
+          "name": "List Suppliers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/suppliers",
+              "host": ["{{baseUrl}}"],
+              "path": ["suppliers"]
+            }
+          }
+        },
+        {
+          "name": "List Workflows",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/workflows",
+              "host": ["{{baseUrl}}"],
+              "path": ["workflows"]
+            }
+          }
+        },
+        {
+          "name": "Get Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/audit-logs",
+              "host": ["{{baseUrl}}"],
+              "path": ["audit-logs"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

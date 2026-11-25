@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#070b14] text-slate-100 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom scrollbar for dark enterprise UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d1527;
+}
+::-webkit-scrollbar-thumb {
+  background: #22345e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Pulse glow animations */
+@keyframes agentPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.8);
+  }
+}
+
+.agent-active-glow {
+  animation: agentPulse 2s infinite ease-in-out;
+}
+
+@keyframes voiceWave {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1.0); }
+}
+
+.voice-bar {
+  animation: voiceWave 1s infinite ease-in-out;
+}
