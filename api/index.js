@@ -54397,13 +54397,14 @@ var require_main4 = __commonJS({
   }
 });
 
-// src/index.ts
-var index_exports = {};
-__export(index_exports, {
-  default: () => index_default,
-  startServer: () => startServer
+// src/serverless.ts
+var serverless_exports = {};
+__export(serverless_exports, {
+  default: () => handler
 });
-module.exports = __toCommonJS(index_exports);
+module.exports = __toCommonJS(serverless_exports);
+
+// src/index.ts
 var import_express22 = __toESM(require_express2());
 var import_cors = __toESM(require_lib3());
 var import_path6 = __toESM(require("path"));
@@ -74379,17 +74380,34 @@ async function startServer() {
   });
   return server;
 }
-if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
+var isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || true);
+if (process.env.NODE_ENV !== "test" && !isServerless && require.main === module) {
   startServer().catch((err) => {
     console.error("[FATAL] Failed to start NEXUS AI server:", err);
     process.exit(1);
   });
 }
 var index_default = app;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  startServer
-});
+
+// src/serverless.ts
+var initialized = false;
+async function ensureInitialized() {
+  if (!initialized) {
+    try {
+      const users = db.getUsers();
+      if (users.length === 0) {
+        await seedDatabase();
+      }
+    } catch (err) {
+      console.warn("[SERVERLESS BOOT] Warning during store initialization:", err);
+    }
+    initialized = true;
+  }
+}
+async function handler(req, res) {
+  await ensureInitialized();
+  return index_default(req, res);
+}
 /*! Bundled license information:
 
 depd/index.js:
@@ -74721,3 +74739,4 @@ object-assign/index.js:
    * limitations under the License.
    *)
 */
+if (module.exports && module.exports.default) { const _h = module.exports.default; module.exports = _h; module.exports.default = _h; }

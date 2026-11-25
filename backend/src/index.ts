@@ -106,7 +106,13 @@ export async function startServer() {
   return server;
 }
 
-if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+const isServerless = !!(
+  process.env.VERCEL ||
+  process.env.AWS_LAMBDA_FUNCTION_NAME ||
+  process.env.SERVERLESS_BUNDLE
+);
+
+if (process.env.NODE_ENV !== 'test' && !isServerless && require.main === module) {
   startServer().catch(err => {
     console.error('[FATAL] Failed to start NEXUS AI server:', err);
     process.exit(1);
