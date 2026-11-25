@@ -61702,15 +61702,19 @@ businessRoutes.get("/current", authenticateJWT, (req, res) => {
   res.json({ business: biz });
 });
 businessRoutes.put("/current", authenticateJWT, (req, res) => {
-  const bizId = req.businessId || "default-biz";
+  const bizId = req.businessId || req.user?.business_id || db.getDemoBusiness()?.id || "default-biz";
   const { name, type, currency, address, phone } = req.body;
-  const updated = db.updateBusiness(bizId, {
-    ...name ? { name: String(name).trim() } : {},
-    ...type ? { type: String(type).trim() } : {},
-    ...currency ? { currency: String(currency).trim().toUpperCase() } : {},
-    ...address !== void 0 ? { address: String(address).trim() } : {},
-    ...phone !== void 0 ? { phone: String(phone).trim() } : {}
-  });
+  const updates = {};
+  if (name !== void 0) updates.name = String(name).trim();
+  if (type !== void 0) updates.type = String(type).trim();
+  if (currency !== void 0) updates.currency = String(currency).trim().toUpperCase();
+  if (address !== void 0) updates.address = String(address).trim();
+  if (phone !== void 0) updates.phone = String(phone).trim();
+  const updated = db.updateBusiness(bizId, updates);
+  const demo = db.getDemoBusiness();
+  if (demo && demo.id !== bizId && demo.is_demo) {
+    db.updateBusiness(demo.id, updates);
+  }
   res.json({ success: true, business: updated });
 });
 
@@ -62231,11 +62235,13 @@ invoiceRoutes.get("/overdue", authenticateJWT, (req, res) => {
   res.json({ invoices: overdue, count: overdue.length, totalOverdueAmount: totalOverdue });
 });
 var CreateInvoiceSchema = external_exports.object({
-  customer_id: external_exports.string(),
+  customer_id: external_exports.string().optional(),
+  customer_name: external_exports.string().optional(),
   invoice_number: external_exports.string().optional(),
-  due_date: external_exports.string(),
+  due_date: external_exports.string().optional(),
   subtotal: external_exports.number().positive(),
-  tax_amount: external_exports.number().nonnegative(),
+  tax_amount: external_exports.number().nonnegative().optional().default(0),
+  status: external_exports.enum(["ISSUED", "PAID", "OVERDUE"]).optional().default("ISSUED"),
   notes: external_exports.string().optional(),
   items: external_exports.array(external_exports.object({
     description: external_exports.string(),
@@ -62245,21 +62251,38 @@ var CreateInvoiceSchema = external_exports.object({
     product_id: external_exports.string().optional()
   })).optional().default([])
 });
-invoiceRoutes.post("/", authenticateJWT, requireRole(["ADMIN", "MANAGER"]), (req, res) => {
+invoiceRoutes.post("/", authenticateJWT, (req, res) => {
   const businessId = req.businessId || db.getDemoBusiness()?.id || "";
   const body = CreateInvoiceSchema.parse(req.body);
+  let custId = body.customer_id;
+  if (!custId) {
+    const custName = body.customer_name?.trim() || "Valued Enterprise Client";
+    const existing = db.getCustomers(businessId).find((c) => c.name.toLowerCase() === custName.toLowerCase());
+    if (existing) {
+      custId = existing.id;
+    } else {
+      const newCust = db.createCustomer({
+        business_id: businessId,
+        name: custName,
+        email: `${custName.toLowerCase().replace(/[^a-z0-9]/g, "")}@client.com`,
+        status: "ACTIVE"
+      });
+      custId = newCust.id;
+    }
+  }
   const invNum = body.invoice_number || `INV-${Date.now().toString().slice(-6)}`;
-  const total = body.subtotal + body.tax_amount;
+  const total = body.subtotal + (body.tax_amount || 0);
+  const defaultDueDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1e3).toISOString().split("T")[0];
   const invoice = db.createInvoice(
     {
       business_id: businessId,
-      customer_id: body.customer_id,
+      customer_id: custId,
       invoice_number: invNum,
-      status: "ISSUED",
+      status: body.status || "ISSUED",
       issue_date: (/* @__PURE__ */ new Date()).toISOString().split("T")[0],
-      due_date: body.due_date,
+      due_date: body.due_date || defaultDueDate,
       subtotal: body.subtotal,
-      tax_amount: body.tax_amount,
+      tax_amount: body.tax_amount || 0,
       total_amount: total,
       notes: body.notes
     },

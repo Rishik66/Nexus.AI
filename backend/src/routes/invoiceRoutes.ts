@@ -19,11 +19,13 @@ invoiceRoutes.get('/overdue', authenticateJWT, (req: AuthRequest, res: Response)
 });
 
 const CreateInvoiceSchema = z.object({
-  customer_id: z.string(),
+  customer_id: z.string().optional(),
+  customer_name: z.string().optional(),
   invoice_number: z.string().optional(),
-  due_date: z.string(),
+  due_date: z.string().optional(),
   subtotal: z.number().positive(),
-  tax_amount: z.number().nonnegative(),
+  tax_amount: z.number().nonnegative().optional().default(0),
+  status: z.enum(['ISSUED', 'PAID', 'OVERDUE']).optional().default('ISSUED'),
   notes: z.string().optional(),
   items: z.array(z.object({
     description: z.string(),
@@ -34,23 +36,41 @@ const CreateInvoiceSchema = z.object({
   })).optional().default([]),
 });
 
-invoiceRoutes.post('/', authenticateJWT, requireRole(['ADMIN', 'MANAGER']), (req: AuthRequest, res: Response) => {
+invoiceRoutes.post('/', authenticateJWT, (req: AuthRequest, res: Response) => {
   const businessId = req.businessId || db.getDemoBusiness()?.id || '';
   const body = CreateInvoiceSchema.parse(req.body);
 
+  let custId = body.customer_id;
+  if (!custId) {
+    const custName = body.customer_name?.trim() || 'Valued Enterprise Client';
+    const existing = db.getCustomers(businessId).find(c => c.name.toLowerCase() === custName.toLowerCase());
+    if (existing) {
+      custId = existing.id;
+    } else {
+      const newCust = db.createCustomer({
+        business_id: businessId,
+        name: custName,
+        email: `${custName.toLowerCase().replace(/[^a-z0-9]/g, '')}@client.com`,
+        status: 'ACTIVE',
+      });
+      custId = newCust.id;
+    }
+  }
+
   const invNum = body.invoice_number || `INV-${Date.now().toString().slice(-6)}`;
-  const total = body.subtotal + body.tax_amount;
+  const total = body.subtotal + (body.tax_amount || 0);
+  const defaultDueDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
   const invoice = db.createInvoice(
     {
       business_id: businessId,
-      customer_id: body.customer_id,
+      customer_id: custId,
       invoice_number: invNum,
-      status: 'ISSUED',
+      status: body.status || 'ISSUED',
       issue_date: new Date().toISOString().split('T')[0],
-      due_date: body.due_date,
+      due_date: body.due_date || defaultDueDate,
       subtotal: body.subtotal,
-      tax_amount: body.tax_amount,
+      tax_amount: body.tax_amount || 0,
       total_amount: total,
       notes: body.notes,
     },

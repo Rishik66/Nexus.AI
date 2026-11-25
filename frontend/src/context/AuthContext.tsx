@@ -11,6 +11,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   login: (email: string, pass: string) => Promise<void>;
   register: (email: string, pass: string, fullName: string, role?: 'ADMIN' | 'MANAGER' | 'EMPLOYEE', companyName?: string) => Promise<void>;
+  updateBusiness: (updates: Partial<Business>) => Promise<Business>;
   logout: () => void;
   switchRole: (newRole: 'ADMIN' | 'MANAGER' | 'EMPLOYEE') => Promise<void>;
   refreshApprovals: () => Promise<void>;
@@ -223,6 +224,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const updateBusiness = async (updates: Partial<Business>): Promise<Business> => {
+    const updated = await ApiService.updateBusiness(updates);
+    if (updated) {
+      setBusiness(updated);
+      if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('nexus_business', JSON.stringify(updated));
+      }
+    }
+    return updated;
+  };
+
   const logout = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       window.localStorage.removeItem('nexus_token');
@@ -261,6 +273,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAuthenticated: Boolean(user && token),
         login,
         register,
+        updateBusiness,
         logout,
         switchRole,
         refreshApprovals,

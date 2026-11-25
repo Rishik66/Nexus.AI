@@ -11,9 +11,12 @@ import {
   Filter,
 } from 'lucide-react';
 import { ApiService } from '../services/api.js';
+import { useAuth } from '../context/AuthContext.js';
 import { useNavigate } from 'react-router-dom';
+import { formatCurrency } from '../utils/currency.js';
 
 export const Inventory: React.FC = () => {
+  const { business } = useAuth();
   const navigate = useNavigate();
   const [products, setProducts] = useState<any[]>([]);
   const [movements, setMovements] = useState<any[]>([]);
@@ -187,7 +190,7 @@ export const Inventory: React.FC = () => {
                       </td>
                       <td className="py-3 px-4 text-slate-300">{p.category}</td>
                       <td className="py-3 px-4 font-mono text-slate-300">
-                        ${Number(p.cost_price).toFixed(2)} / ${Number(p.unit_price).toFixed(2)}
+                        {formatCurrency(p.cost_price, business?.currency)} / {formatCurrency(p.unit_price, business?.currency)}
                       </td>
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2">

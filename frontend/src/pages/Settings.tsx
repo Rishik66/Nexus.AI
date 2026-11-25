@@ -28,7 +28,7 @@ import { ApiService } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.js';
 
 export const Settings: React.FC = () => {
-  const { business, user, role } = useAuth();
+  const { business, user, role, updateBusiness } = useAuth();
   const [integrations, setIntegrations] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -83,7 +83,7 @@ export const Settings: React.FC = () => {
     try {
       setSavingBiz(true);
       setBizMessage(null);
-      const updated = await ApiService.updateBusiness({
+      const updated = await updateBusiness({
         name: bizName.trim(),
         type: bizType,
         currency: bizCurrency,
@@ -92,9 +92,9 @@ export const Settings: React.FC = () => {
       });
       setBizMessage({
         type: 'success',
-        text: `Company profile saved successfully! Multi-agent controls calibrated for "${updated.name}".`,
+        text: `Company profile saved successfully! Currency set to ${updated.currency} and Headquarters updated to "${updated.address || 'Saved'}".`,
       });
-      setTimeout(() => setBizMessage(null), 4000);
+      setTimeout(() => setBizMessage(null), 5000);
     } catch (err: any) {
       setBizMessage({ type: 'error', text: err.message || 'Failed to update company profile.' });
     } finally {

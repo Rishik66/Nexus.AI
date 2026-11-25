@@ -26,16 +26,23 @@ businessRoutes.get('/current', authenticateJWT, (req: AuthRequest, res: Response
 });
 
 businessRoutes.put('/current', authenticateJWT, (req: AuthRequest, res: Response) => {
-  const bizId = req.businessId || 'default-biz';
+  const bizId = req.businessId || req.user?.business_id || db.getDemoBusiness()?.id || 'default-biz';
   const { name, type, currency, address, phone } = req.body;
 
-  const updated = db.updateBusiness(bizId, {
-    ...(name ? { name: String(name).trim() } : {}),
-    ...(type ? { type: String(type).trim() } : {}),
-    ...(currency ? { currency: String(currency).trim().toUpperCase() } : {}),
-    ...(address !== undefined ? { address: String(address).trim() } : {}),
-    ...(phone !== undefined ? { phone: String(phone).trim() } : {}),
-  });
+  const updates: any = {};
+  if (name !== undefined) updates.name = String(name).trim();
+  if (type !== undefined) updates.type = String(type).trim();
+  if (currency !== undefined) updates.currency = String(currency).trim().toUpperCase();
+  if (address !== undefined) updates.address = String(address).trim();
+  if (phone !== undefined) updates.phone = String(phone).trim();
+
+  const updated = db.updateBusiness(bizId, updates);
+
+  // Also sync demo business if currently active
+  const demo = db.getDemoBusiness();
+  if (demo && demo.id !== bizId && demo.is_demo) {
+    db.updateBusiness(demo.id, updates);
+  }
 
   res.json({ success: true, business: updated });
 });

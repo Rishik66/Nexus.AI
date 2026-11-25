@@ -31,6 +31,7 @@ import {
 import { ApiService } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.js';
 import { useNavigate } from 'react-router-dom';
+import { formatCurrency } from '../utils/currency.js';
 
 const COLORS = ['#0ea5e9', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6'];
 
@@ -124,7 +125,7 @@ export const Dashboard: React.FC = () => {
             <DollarSign className="w-4 h-4 text-emerald-400" />
           </div>
           <div className="text-2xl font-black text-white">
-            ${(m.totalRevenue ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            {formatCurrency(m.totalRevenue ?? 0, business?.currency)}
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-emerald-400 font-medium">
             <TrendingUp className="w-3.5 h-3.5" />
@@ -139,7 +140,7 @@ export const Dashboard: React.FC = () => {
             <TrendingDown className="w-4 h-4 text-rose-400" />
           </div>
           <div className="text-2xl font-black text-white">
-            ${(m.totalExpenses ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            {formatCurrency(m.totalExpenses ?? 0, business?.currency)}
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-amber-400 font-medium">
             <AlertTriangle className="w-3.5 h-3.5" />
@@ -173,7 +174,7 @@ export const Dashboard: React.FC = () => {
             <AlertTriangle className="w-4 h-4 text-rose-400" />
           </div>
           <div className="text-2xl font-black text-rose-400">
-            ${(m.overdueAmount ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            {formatCurrency(m.overdueAmount ?? 0, business?.currency)}
           </div>
           <div className="flex items-center gap-1.5 mt-2 text-[11px] text-slate-400 font-medium">
             <span>{m.overdueInvoicesCount ?? 0} invoices past due</span>
@@ -263,7 +264,7 @@ export const Dashboard: React.FC = () => {
                   <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
                   <span className="truncate">{item.name}</span>
                 </span>
-                <span className="font-mono text-slate-400">${item.value.toLocaleString()}</span>
+                <span className="font-mono text-slate-400">{formatCurrency(item.value, business?.currency)}</span>
               </div>
             ))}
           </div>

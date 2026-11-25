@@ -215,7 +215,11 @@ export const ApiService = {
   updateBusiness: async (updates: Partial<Business>) => {
     try {
       const res = await api.put('/businesses/current', updates);
-      return res.data.business;
+      if (res.data?.business) {
+        localStorage.setItem('nexus_business', JSON.stringify(res.data.business));
+        return res.data.business;
+      }
+      return res.data;
     } catch (err: any) {
       // Local fallback for offline/cold start
       const raw = localStorage.getItem('nexus_business');
@@ -294,6 +298,20 @@ export const ApiService = {
   getInvoices: async () => {
     const res = await api.get('/invoices');
     return res.data.invoices;
+  },
+  createInvoice: async (data: {
+    customer_id?: string;
+    customer_name?: string;
+    invoice_number?: string;
+    due_date?: string;
+    subtotal: number;
+    tax_amount?: number;
+    status?: 'ISSUED' | 'PAID' | 'OVERDUE';
+    notes?: string;
+    items?: Array<{ description: string; quantity: number; unit_price: number; total_price: number; product_id?: string }>;
+  }) => {
+    const res = await api.post('/invoices', data);
+    return res.data.invoice;
   },
   getOverdueInvoices: async () => {
     const res = await api.get('/invoices/overdue');
