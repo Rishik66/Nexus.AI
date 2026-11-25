@@ -21,8 +21,8 @@ var __commonJS = (cb, mod) => function __require() {
   }
 };
 var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
+  for (var name2 in all)
+    __defProp(target, name2, { get: all[name2], enumerable: true });
 };
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
@@ -308,30 +308,30 @@ var require_depd = __commonJS({
       Object.defineProperty(obj, prop, descriptor);
     }
     function DeprecationError(namespace, message, stack) {
-      var error = new Error();
+      var error2 = new Error();
       var stackString;
-      Object.defineProperty(error, "constructor", {
+      Object.defineProperty(error2, "constructor", {
         value: DeprecationError
       });
-      Object.defineProperty(error, "message", {
+      Object.defineProperty(error2, "message", {
         configurable: true,
         enumerable: false,
         value: message,
         writable: true
       });
-      Object.defineProperty(error, "name", {
+      Object.defineProperty(error2, "name", {
         enumerable: false,
         configurable: true,
         value: "DeprecationError",
         writable: true
       });
-      Object.defineProperty(error, "namespace", {
+      Object.defineProperty(error2, "namespace", {
         configurable: true,
         enumerable: false,
         value: namespace,
         writable: true
       });
-      Object.defineProperty(error, "stack", {
+      Object.defineProperty(error2, "stack", {
         configurable: true,
         enumerable: false,
         get: function() {
@@ -344,7 +344,7 @@ var require_depd = __commonJS({
           stackString = val;
         }
       });
-      return error;
+      return error2;
     }
   }
 });
@@ -355,10 +355,10 @@ var require_bytes = __commonJS({
     "use strict";
     module2.exports = bytes;
     module2.exports.format = format;
-    module2.exports.parse = parse;
+    module2.exports.parse = parse2;
     var formatThousandsRegExp = /\B(?=(\d{3})+(?!\d))/g;
     var formatDecimalsRegExp = /(?:\.0*|(\.[^0]+)0+)$/;
-    var map = {
+    var map2 = {
       b: 1,
       kb: 1 << 10,
       mb: 1 << 20,
@@ -369,7 +369,7 @@ var require_bytes = __commonJS({
     var parseRegExp = /^((-|\+)?(\d+(?:\.\d+)?)) *(kb|mb|gb|tb|pb)$/i;
     function bytes(value, options) {
       if (typeof value === "string") {
-        return parse(value);
+        return parse2(value);
       }
       if (typeof value === "number") {
         return format(value, options);
@@ -386,22 +386,22 @@ var require_bytes = __commonJS({
       var decimalPlaces = options && options.decimalPlaces !== void 0 ? options.decimalPlaces : 2;
       var fixedDecimals = Boolean(options && options.fixedDecimals);
       var unit = options && options.unit || "";
-      if (!unit || !map[unit.toLowerCase()]) {
-        if (mag >= map.pb) {
+      if (!unit || !map2[unit.toLowerCase()]) {
+        if (mag >= map2.pb) {
           unit = "PB";
-        } else if (mag >= map.tb) {
+        } else if (mag >= map2.tb) {
           unit = "TB";
-        } else if (mag >= map.gb) {
+        } else if (mag >= map2.gb) {
           unit = "GB";
-        } else if (mag >= map.mb) {
+        } else if (mag >= map2.mb) {
           unit = "MB";
-        } else if (mag >= map.kb) {
+        } else if (mag >= map2.kb) {
           unit = "KB";
         } else {
           unit = "B";
         }
       }
-      var val = value / map[unit.toLowerCase()];
+      var val = value / map2[unit.toLowerCase()];
       var str = val.toFixed(decimalPlaces);
       if (!fixedDecimals) {
         str = str.replace(formatDecimalsRegExp, "$1");
@@ -413,7 +413,7 @@ var require_bytes = __commonJS({
       }
       return str + unitSeparator + unit;
     }
-    function parse(val) {
+    function parse2(val) {
       if (typeof val === "number" && !isNaN(val)) {
         return val;
       }
@@ -433,7 +433,7 @@ var require_bytes = __commonJS({
       if (isNaN(floatValue)) {
         return null;
       }
-      return Math.floor(map[unit] * floatValue);
+      return Math.floor(map2[unit] * floatValue);
     }
   }
 });
@@ -449,7 +449,7 @@ var require_content_type = __commonJS({
     var QUOTE_REGEXP = /([\\"])/g;
     var TYPE_REGEXP = /^[!#$%&'*+.^_`|~0-9A-Za-z-]+\/[!#$%&'*+.^_`|~0-9A-Za-z-]+$/;
     exports2.format = format;
-    exports2.parse = parse;
+    exports2.parse = parse2;
     function format(obj) {
       if (!obj || typeof obj !== "object") {
         throw new TypeError("argument obj is required");
@@ -473,7 +473,7 @@ var require_content_type = __commonJS({
       }
       return string;
     }
-    function parse(string) {
+    function parse2(string) {
       if (!string) {
         throw new TypeError("argument string is required");
       }
@@ -662,13 +662,13 @@ var require_statuses = __commonJS({
       504: true
     };
     function createMessageToStatusCodeMap(codes2) {
-      var map = {};
+      var map2 = {};
       Object.keys(codes2).forEach(function forEachCode(code) {
         var message = codes2[code];
         var status2 = Number(code);
-        map[message.toLowerCase()] = status2;
+        map2[message.toLowerCase()] = status2;
       });
-      return map;
+      return map2;
     }
     function createStatusCodeList(codes2) {
       return Object.keys(codes2).map(function mapCode(code) {
@@ -740,13 +740,13 @@ var require_inherits_browser = __commonJS({
 var require_inherits = __commonJS({
   "node_modules/inherits/inherits.js"(exports2, module2) {
     try {
-      util2 = require("util");
-      if (typeof util2.inherits !== "function") throw "";
-      module2.exports = util2.inherits;
+      util4 = require("util");
+      if (typeof util4.inherits !== "function") throw "";
+      module2.exports = util4.inherits;
     } catch (e) {
       module2.exports = require_inherits_browser();
     }
-    var util2;
+    var util4;
   }
 });
 
@@ -829,8 +829,8 @@ var require_http_errors = __commonJS({
       inherits(HttpError, Error);
       return HttpError;
     }
-    function createClientErrorConstructor(HttpError, name, code) {
-      var className = toClassName(name);
+    function createClientErrorConstructor(HttpError, name2, code) {
+      var className = toClassName(name2);
       function ClientError(message) {
         var msg = message != null ? message : statuses.message[code];
         var err = new Error(msg);
@@ -868,8 +868,8 @@ var require_http_errors = __commonJS({
         return val instanceof Error && typeof val.expose === "boolean" && typeof val.statusCode === "number" && val.status === val.statusCode;
       };
     }
-    function createServerErrorConstructor(HttpError, name, code) {
-      var className = toClassName(name);
+    function createServerErrorConstructor(HttpError, name2, code) {
+      var className = toClassName(name2);
       function ServerError(message) {
         var msg = message != null ? message : statuses.message[code];
         var err = new Error(msg);
@@ -896,33 +896,33 @@ var require_http_errors = __commonJS({
       ServerError.prototype.expose = false;
       return ServerError;
     }
-    function nameFunc(func, name) {
+    function nameFunc(func, name2) {
       var desc = Object.getOwnPropertyDescriptor(func, "name");
       if (desc && desc.configurable) {
-        desc.value = name;
+        desc.value = name2;
         Object.defineProperty(func, "name", desc);
       }
     }
     function populateConstructorExports(exports3, codes, HttpError) {
       codes.forEach(function forEachCode(code) {
         var CodeError;
-        var name = toIdentifier(statuses.message[code]);
+        var name2 = toIdentifier(statuses.message[code]);
         switch (codeClass(code)) {
           case 400:
-            CodeError = createClientErrorConstructor(HttpError, name, code);
+            CodeError = createClientErrorConstructor(HttpError, name2, code);
             break;
           case 500:
-            CodeError = createServerErrorConstructor(HttpError, name, code);
+            CodeError = createServerErrorConstructor(HttpError, name2, code);
             break;
         }
         if (CodeError) {
           exports3[code] = CodeError;
-          exports3[name] = CodeError;
+          exports3[name2] = CodeError;
         }
       });
     }
-    function toClassName(name) {
-      return name.slice(-5) === "Error" ? name : name + "Error";
+    function toClassName(name2) {
+      return name2.slice(-5) === "Error" ? name2 : name2 + "Error";
     }
   }
 });
@@ -939,7 +939,7 @@ var require_ms = __commonJS({
       options = options || {};
       var type = typeof val;
       if (type === "string" && val.length > 0) {
-        return parse(val);
+        return parse2(val);
       } else if (type === "number" && isNaN(val) === false) {
         return options.long ? fmtLong(val) : fmtShort(val);
       }
@@ -947,7 +947,7 @@ var require_ms = __commonJS({
         "val is not a non-empty string or a valid number. val=" + JSON.stringify(val)
       );
     };
-    function parse(str) {
+    function parse2(str) {
       str = String(str);
       if (str.length > 100) {
         return;
@@ -1017,14 +1017,14 @@ var require_ms = __commonJS({
     function fmtLong(ms) {
       return plural(ms, d, "day") || plural(ms, h, "hour") || plural(ms, m, "minute") || plural(ms, s, "second") || ms + " ms";
     }
-    function plural(ms, n, name) {
+    function plural(ms, n, name2) {
       if (ms < n) {
         return;
       }
       if (ms < n * 1.5) {
-        return Math.floor(ms / n) + " " + name;
+        return Math.floor(ms / n) + " " + name2;
       }
-      return Math.ceil(ms / n) + " " + name + "s";
+      return Math.ceil(ms / n) + " " + name2 + "s";
     }
   }
 });
@@ -1113,15 +1113,15 @@ var require_debug = __commonJS({
     function disable() {
       exports2.enable("");
     }
-    function enabled(name) {
+    function enabled(name2) {
       var i, len;
       for (i = 0, len = exports2.skips.length; i < len; i++) {
-        if (exports2.skips[i].test(name)) {
+        if (exports2.skips[i].test(name2)) {
           return false;
         }
       }
       for (i = 0, len = exports2.names.length; i < len; i++) {
-        if (exports2.names[i].test(name)) {
+        if (exports2.names[i].test(name2)) {
           return true;
         }
       }
@@ -1224,7 +1224,7 @@ var require_browser = __commonJS({
 var require_node = __commonJS({
   "node_modules/debug/src/node.js"(exports2, module2) {
     var tty = require("tty");
-    var util2 = require("util");
+    var util4 = require("util");
     exports2 = module2.exports = require_debug();
     exports2.init = init;
     exports2.log = log;
@@ -1249,7 +1249,7 @@ var require_node = __commonJS({
     }, {});
     var fd = parseInt(process.env.DEBUG_FD, 10) || 2;
     if (1 !== fd && 2 !== fd) {
-      util2.deprecate(function() {
+      util4.deprecate(function() {
       }, "except for stderr(2) and stdout(1), any other usage of DEBUG_FD is deprecated. Override debug.log if you want to use a different log function (https://git.io/debug_fd)")();
     }
     var stream = 1 === fd ? process.stdout : 2 === fd ? process.stderr : createWritableStdioStream(fd);
@@ -1258,28 +1258,28 @@ var require_node = __commonJS({
     }
     exports2.formatters.o = function(v) {
       this.inspectOpts.colors = this.useColors;
-      return util2.inspect(v, this.inspectOpts).split("\n").map(function(str) {
+      return util4.inspect(v, this.inspectOpts).split("\n").map(function(str) {
         return str.trim();
       }).join(" ");
     };
     exports2.formatters.O = function(v) {
       this.inspectOpts.colors = this.useColors;
-      return util2.inspect(v, this.inspectOpts);
+      return util4.inspect(v, this.inspectOpts);
     };
     function formatArgs(args) {
-      var name = this.namespace;
+      var name2 = this.namespace;
       var useColors2 = this.useColors;
       if (useColors2) {
         var c = this.color;
-        var prefix = "  \x1B[3" + c + ";1m" + name + " \x1B[0m";
+        var prefix = "  \x1B[3" + c + ";1m" + name2 + " \x1B[0m";
         args[0] = prefix + args[0].split("\n").join("\n" + prefix);
         args.push("\x1B[3" + c + "m+" + exports2.humanize(this.diff) + "\x1B[0m");
       } else {
-        args[0] = (/* @__PURE__ */ new Date()).toUTCString() + " " + name + " " + args[0];
+        args[0] = (/* @__PURE__ */ new Date()).toUTCString() + " " + name2 + " " + args[0];
       }
     }
     function log() {
-      return stream.write(util2.format.apply(util2, arguments) + "\n");
+      return stream.write(util4.format.apply(util4, arguments) + "\n");
     }
     function save(namespaces) {
       if (null == namespaces) {
@@ -1303,14 +1303,14 @@ var require_node = __commonJS({
           }
           break;
         case "FILE":
-          var fs6 = require("fs");
-          stream2 = new fs6.SyncWriteStream(fd2, { autoClose: false });
+          var fs9 = require("fs");
+          stream2 = new fs9.SyncWriteStream(fd2, { autoClose: false });
           stream2._type = "fs";
           break;
         case "PIPE":
         case "TCP":
-          var net = require("net");
-          stream2 = new net.Socket({
+          var net8 = require("net");
+          stream2 = new net8.Socket({
             fd: fd2,
             readable: false,
             writable: true
@@ -1355,9 +1355,9 @@ var require_src = __commonJS({
 var require_destroy = __commonJS({
   "node_modules/destroy/index.js"(exports2, module2) {
     "use strict";
-    var EventEmitter2 = require("events").EventEmitter;
+    var EventEmitter8 = require("events").EventEmitter;
     var ReadStream = require("fs").ReadStream;
-    var Stream = require("stream");
+    var Stream2 = require("stream");
     var Zlib = require("zlib");
     module2.exports = destroy;
     function destroy(stream, suppress) {
@@ -1401,7 +1401,7 @@ var require_destroy = __commonJS({
           } else {
             stream._binding.clear();
           }
-        } else if (stream._destroy && stream._destroy !== Stream.Transform.prototype._destroy) {
+        } else if (stream._destroy && stream._destroy !== Stream2.Transform.prototype._destroy) {
           stream.destroy();
         } else if (stream._destroy && typeof stream.close === "function") {
           stream.destroyed = true;
@@ -1414,10 +1414,10 @@ var require_destroy = __commonJS({
       }
     }
     function hasDestroy(stream) {
-      return stream instanceof Stream && typeof stream.destroy === "function";
+      return stream instanceof Stream2 && typeof stream.destroy === "function";
     }
     function isEventEmitter(val) {
-      return val instanceof EventEmitter2;
+      return val instanceof EventEmitter8;
     }
     function isFsReadStream(stream) {
       return stream instanceof ReadStream;
@@ -4505,7 +4505,7 @@ var require_streams = __commonJS({
   "node_modules/iconv-lite/lib/streams.js"(exports2, module2) {
     "use strict";
     var Buffer2 = require("buffer").Buffer;
-    var Transform = require("stream").Transform;
+    var Transform9 = require("stream").Transform;
     module2.exports = function(iconv) {
       iconv.encodeStream = function encodeStream(encoding, options) {
         return new IconvLiteEncoderStream(iconv.getEncoder(encoding, options), options);
@@ -4522,9 +4522,9 @@ var require_streams = __commonJS({
       this.conv = conv;
       options = options || {};
       options.decodeStrings = false;
-      Transform.call(this, options);
+      Transform9.call(this, options);
     }
-    IconvLiteEncoderStream.prototype = Object.create(Transform.prototype, {
+    IconvLiteEncoderStream.prototype = Object.create(Transform9.prototype, {
       constructor: { value: IconvLiteEncoderStream }
     });
     IconvLiteEncoderStream.prototype._transform = function(chunk, encoding, done) {
@@ -4562,9 +4562,9 @@ var require_streams = __commonJS({
       this.conv = conv;
       options = options || {};
       options.encoding = this.encoding = "utf8";
-      Transform.call(this, options);
+      Transform9.call(this, options);
     }
-    IconvLiteDecoderStream.prototype = Object.create(Transform.prototype, {
+    IconvLiteDecoderStream.prototype = Object.create(Transform9.prototype, {
       constructor: { value: IconvLiteDecoderStream }
     });
     IconvLiteDecoderStream.prototype._transform = function(chunk, encoding, done) {
@@ -4773,14 +4773,14 @@ var require_lib = __commonJS({
     iconv.encodings = null;
     iconv.defaultCharUnicode = "\uFFFD";
     iconv.defaultCharSingleByte = "?";
-    iconv.encode = function encode(str, encoding, options) {
+    iconv.encode = function encode4(str, encoding, options) {
       str = "" + (str || "");
       var encoder = iconv.getEncoder(encoding, options);
       var res = encoder.write(str);
       var trail = encoder.end();
       return trail && trail.length > 0 ? Buffer2.concat([res, trail]) : res;
     };
-    iconv.decode = function decode(buf, encoding, options) {
+    iconv.decode = function decode2(buf, encoding, options) {
       if (typeof buf === "string") {
         if (!iconv.skipDecodeWarning) {
           console.error("Iconv-lite warning: decode()-ing strings is deprecated. Refer to https://github.com/ashtuchkin/iconv-lite/wiki/Use-Buffers-when-decoding");
@@ -4954,12 +4954,12 @@ var require_raw_body = __commonJS({
       var limit = bytes.parse(opts.limit);
       var length = opts.length != null && !isNaN(opts.length) ? parseInt(opts.length, 10) : null;
       if (done) {
-        return readStream(stream, encoding, length, limit, wrap(done));
+        return readStream(stream, encoding, length, limit, wrap2(done));
       }
-      return new Promise(function executor(resolve, reject) {
+      return new Promise(function executor(resolve3, reject) {
         readStream(stream, encoding, length, limit, function onRead(err, buf) {
           if (err) return reject(err);
-          resolve(buf);
+          resolve3(buf);
         });
       });
     }
@@ -5080,7 +5080,7 @@ var require_raw_body = __commonJS({
         return {};
       }
     }
-    function wrap(fn) {
+    function wrap2(fn) {
       var res;
       if (asyncHooks.AsyncResource) {
         res = new asyncHooks.AsyncResource(fn.name || "bound-anonymous-fn");
@@ -5165,14 +5165,14 @@ var require_on_finished = __commonJS({
         defer(listener, null, msg);
         return msg;
       }
-      attachListener(msg, wrap(listener));
+      attachListener(msg, wrap2(listener));
       return msg;
     }
     function isFinished(msg) {
       var socket = msg.socket;
-      var finished = writableEnded(msg);
-      if (typeof finished === "boolean") {
-        return Boolean(finished || socket && !socket.writable);
+      var finished3 = writableEnded(msg);
+      if (typeof finished3 === "boolean") {
+        return Boolean(finished3 || socket && !socket.writable);
       }
       if (typeof msg.complete === "boolean") {
         return Boolean(msg.upgrade || !socket || !socket.readable || msg.complete && !msg.readable);
@@ -5182,17 +5182,17 @@ var require_on_finished = __commonJS({
     function attachFinishedListener(msg, callback) {
       var eeMsg;
       var eeSocket;
-      var finished = false;
-      function onFinish(error) {
+      var finished3 = false;
+      function onFinish(error2) {
         eeMsg.cancel();
         eeSocket.cancel();
-        finished = true;
-        callback(error);
+        finished3 = true;
+        callback(error2);
       }
       eeMsg = eeSocket = first([[msg, "end", "finish"]], onFinish);
       function onSocket(socket) {
         msg.removeListener("socket", onSocket);
-        if (finished) return;
+        if (finished3) return;
         if (eeMsg !== eeSocket) return;
         eeSocket = first([[socket, "error", "close"]], onFinish);
       }
@@ -5241,7 +5241,7 @@ var require_on_finished = __commonJS({
         return {};
       }
     }
-    function wrap(fn) {
+    function wrap2(fn) {
       var res;
       if (asyncHooks.AsyncResource) {
         res = new asyncHooks.AsyncResource(fn.name || "bound-anonymous-fn");
@@ -5267,9 +5267,9 @@ var require_read = __commonJS({
     var iconv = require_lib();
     var onFinished = require_on_finished();
     var unpipe = require_unpipe();
-    var zlib = require("zlib");
+    var zlib2 = require("zlib");
     module2.exports = read;
-    function read(req, res, next, parse, debug, options) {
+    function read(req, res, next, parse2, debug, options) {
       var length;
       var opts = options;
       var stream;
@@ -5292,16 +5292,16 @@ var require_read = __commonJS({
       opts.length = length;
       opts.encoding = verify ? null : encoding;
       debug("read body");
-      getBody(stream, opts, function(error, body) {
-        if (error) {
+      getBody(stream, opts, function(error2, body) {
+        if (error2) {
           var _error;
-          if (error.type === "encoding.unsupported") {
+          if (error2.type === "encoding.unsupported") {
             _error = createError(415, 'unsupported charset "' + encoding.toUpperCase() + '"', {
               charset: encoding.toLowerCase(),
               type: "charset.unsupported"
             });
           } else {
-            _error = createError(400, error);
+            _error = createError(400, error2);
           }
           if (stream !== req) {
             unpipe(req);
@@ -5339,7 +5339,7 @@ var require_read = __commonJS({
         try {
           debug("parse body");
           str = typeof body !== "string" && encoding !== null ? iconv.decode(body, encoding) : body;
-          req.body = parse(str);
+          req.body = parse2(str);
         } catch (err) {
           next(createError(400, err, {
             body: str,
@@ -5363,12 +5363,12 @@ var require_read = __commonJS({
       }
       switch (encoding) {
         case "deflate":
-          stream = zlib.createInflate();
+          stream = zlib2.createInflate();
           debug("inflate body");
           req.pipe(stream);
           break;
         case "gzip":
-          stream = zlib.createGunzip();
+          stream = zlib2.createGunzip();
           debug("gunzip body");
           req.pipe(stream);
           break;
@@ -5407,7 +5407,7 @@ var require_media_typer = __commonJS({
     var typeNameRegExp = /^[A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126}$/;
     var typeRegExp = /^ *([A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126})\/([A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126}) *$/;
     exports2.format = format;
-    exports2.parse = parse;
+    exports2.parse = parse2;
     function format(obj) {
       if (!obj || typeof obj !== "object") {
         throw new TypeError("argument obj is required");
@@ -5442,7 +5442,7 @@ var require_media_typer = __commonJS({
       }
       return string;
     }
-    function parse(string) {
+    function parse2(string) {
       if (!string) {
         throw new TypeError("argument string is required");
       }
@@ -14106,17 +14106,17 @@ var require_mime_types = __commonJS({
       }
       return exts[0];
     }
-    function lookup(path7) {
-      if (!path7 || typeof path7 !== "string") {
+    function lookup(path9) {
+      if (!path9 || typeof path9 !== "string") {
         return false;
       }
-      var extension2 = extname("x." + path7).toLowerCase().substr(1);
+      var extension2 = extname("x." + path9).toLowerCase().substr(1);
       if (!extension2) {
         return false;
       }
       return exports2.types[extension2] || false;
     }
-    function populateMaps(extensions, types2) {
+    function populateMaps(extensions2, types2) {
       var preference = ["nginx", "apache", void 0, "iana"];
       Object.keys(db2).forEach(function forEachMimeType(type) {
         var mime = db2[type];
@@ -14124,7 +14124,7 @@ var require_mime_types = __commonJS({
         if (!exts || !exts.length) {
           return;
         }
-        extensions[type] = exts;
+        extensions2[type] = exts;
         for (var i = 0; i < exts.length; i++) {
           var extension2 = exts[i];
           if (types2[extension2]) {
@@ -14275,7 +14275,7 @@ var require_json = __commonJS({
         throw new TypeError("option verify must be function");
       }
       var shouldParse = typeof type !== "function" ? typeChecker(type) : type;
-      function parse(body) {
+      function parse2(body) {
         if (body.length === 0) {
           return {};
         }
@@ -14323,7 +14323,7 @@ var require_json = __commonJS({
           }));
           return;
         }
-        read(req, res, next, parse, debug, {
+        read(req, res, next, parse2, debug, {
           encoding: charset,
           inflate,
           limit,
@@ -14360,17 +14360,17 @@ var require_json = __commonJS({
         return void 0;
       }
     }
-    function normalizeJsonSyntaxError(error, obj) {
-      var keys = Object.getOwnPropertyNames(error);
+    function normalizeJsonSyntaxError(error2, obj) {
+      var keys = Object.getOwnPropertyNames(error2);
       for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
         if (key !== "stack" && key !== "message") {
-          delete error[key];
+          delete error2[key];
         }
       }
-      error.stack = obj.stack.replace(error.message, obj.message);
-      error.message = obj.message;
-      return error;
+      error2.stack = obj.stack.replace(error2.message, obj.message);
+      error2.message = obj.message;
+      return error2;
     }
     function typeChecker(type) {
       return function checkType(req) {
@@ -14402,7 +14402,7 @@ var require_raw = __commonJS({
         throw new TypeError("option verify must be function");
       }
       var shouldParse = typeof type !== "function" ? typeChecker(type) : type;
-      function parse(buf) {
+      function parse2(buf) {
         return buf;
       }
       return function rawParser(req, res, next) {
@@ -14423,7 +14423,7 @@ var require_raw = __commonJS({
           next();
           return;
         }
-        read(req, res, next, parse, debug, {
+        read(req, res, next, parse2, debug, {
           encoding: null,
           inflate,
           limit,
@@ -14463,7 +14463,7 @@ var require_text = __commonJS({
         throw new TypeError("option verify must be function");
       }
       var shouldParse = typeof type !== "function" ? typeChecker(type) : type;
-      function parse(buf) {
+      function parse2(buf) {
         return buf;
       }
       return function textParser(req, res, next) {
@@ -14485,7 +14485,7 @@ var require_text = __commonJS({
           return;
         }
         var charset = getCharset(req) || defaultCharset;
-        read(req, res, next, parse, debug, {
+        read(req, res, next, parse2, debug, {
           encoding: charset,
           inflate,
           limit,
@@ -14842,14 +14842,14 @@ var require_object_inspect = __commonJS({
         }
       }
       if (typeof obj === "function" && !isRegExp(obj)) {
-        var name = nameOf(obj);
+        var name2 = nameOf(obj);
         var fnDepth = enter();
         var keys = arrObjKeys(obj, inspect);
         leaveIfEmpty(keys, fnDepth);
         if (layout && keys.length > 0) {
-          return breakLines(keys, bracesOf("{", "}", "[Function" + (name ? ": " + name : " (anonymous)") + "]", " "), layout);
+          return breakLines(keys, bracesOf("{", "}", "[Function" + (name2 ? ": " + name2 : " (anonymous)") + "]", " "), layout);
         }
-        return "[Function" + (name ? ": " + name : " (anonymous)") + "]" + (keys.length > 0 ? " { " + $join.call(keys, ", ") + " }" : "");
+        return "[Function" + (name2 ? ": " + name2 : " (anonymous)") + "]" + (keys.length > 0 ? " { " + $join.call(keys, ", ") + " }" : "");
       }
       if (isSymbol(obj)) {
         var symString = hasShammedSymbols ? $replace.call(String(obj), /^(Symbol\(.*\))_[^)]*$/, "$1") : symToString.call(obj);
@@ -15065,11 +15065,11 @@ var require_object_inspect = __commonJS({
       }
       return false;
     }
-    var hasOwn = Object.prototype.hasOwnProperty || function(key) {
+    var hasOwn2 = Object.prototype.hasOwnProperty || function(key) {
       return key in this;
     };
     function has(obj, key) {
-      return hasOwn.call(obj, key);
+      return hasOwn2.call(obj, key);
     }
     function toStr(obj) {
       return objectToString.call(obj);
@@ -15318,27 +15318,27 @@ var require_object_inspect = __commonJS({
       }
       return grouped;
     }
-    function bracesOf(opening, closing, base, padding) {
+    function bracesOf(opening, closing, base2, padding) {
       return [
         opening,
         closing,
-        base,
+        base2,
         padding
       ];
     }
     function breakLines(entries, braces, layout, arrayValue) {
       var output = arrayValue && entries.length > 6 ? groupArrayElements(entries, layout, arrayValue) : entries;
-      var base = braces[2] ? braces[2] + " " : "";
+      var base2 = braces[2] ? braces[2] + " " : "";
       if (layout.state.currentDepth - layout.depth < 3 && output.length === entries.length) {
         var start = output.length + layout.indent.prev.length + braces[0].length + braces[2].length + 10;
         if (isBelowBreakLength(output, start, layout.breakLength)) {
           var joined = $join.call(output, ", ");
           if (indexOf(joined, "\n") < 0) {
-            return base + braces[0] + braces[3] + joined + braces[3] + braces[1];
+            return base2 + braces[0] + braces[3] + joined + braces[3] + braces[1];
           }
         }
       }
-      return base + braces[0] + indentedJoin(output, layout.indent) + braces[1];
+      return base2 + braces[0] + indentedJoin(output, layout.indent) + braces[1];
     }
     function singleLineValues(xs) {
       for (var i = 0; i < xs.length; i++) {
@@ -15641,7 +15641,7 @@ var require_sign = __commonJS({
   "node_modules/math-intrinsics/sign.js"(exports2, module2) {
     "use strict";
     var $isNaN = require_isNaN();
-    module2.exports = function sign(number) {
+    module2.exports = function sign2(number) {
       if ($isNaN(number) || number === 0) {
         return number;
       }
@@ -16000,12 +16000,12 @@ var require_get_intrinsic = __commonJS({
     var $TypeError = require_type();
     var $URIError = require_uri();
     var abs = require_abs();
-    var floor = require_floor();
+    var floor2 = require_floor();
     var max = require_max();
     var min = require_min();
     var pow = require_pow();
     var round = require_round();
-    var sign = require_sign();
+    var sign2 = require_sign();
     var $Function = Function;
     var getEvalledConstructor = function(expressionSyntax) {
       try {
@@ -16114,12 +16114,12 @@ var require_get_intrinsic = __commonJS({
       "%Object.defineProperty%": $defineProperty,
       "%Object.getPrototypeOf%": $ObjectGPO,
       "%Math.abs%": abs,
-      "%Math.floor%": floor,
+      "%Math.floor%": floor2,
       "%Math.max%": max,
       "%Math.min%": min,
       "%Math.pow%": pow,
       "%Math.round%": round,
-      "%Math.sign%": sign,
+      "%Math.sign%": sign2,
       "%Reflect.getPrototypeOf%": $ReflectGPO
     };
     if (getProto) {
@@ -16131,26 +16131,26 @@ var require_get_intrinsic = __commonJS({
       }
     }
     var errorProto;
-    var doEval = function doEval2(name) {
+    var doEval = function doEval2(name2) {
       var value;
-      if (name === "%AsyncFunction%") {
+      if (name2 === "%AsyncFunction%") {
         value = getEvalledConstructor("async function () {}");
-      } else if (name === "%GeneratorFunction%") {
+      } else if (name2 === "%GeneratorFunction%") {
         value = getEvalledConstructor("function* () {}");
-      } else if (name === "%AsyncGeneratorFunction%") {
+      } else if (name2 === "%AsyncGeneratorFunction%") {
         value = getEvalledConstructor("async function* () {}");
-      } else if (name === "%AsyncGenerator%") {
+      } else if (name2 === "%AsyncGenerator%") {
         var fn = doEval2("%AsyncGeneratorFunction%");
         if (fn) {
           value = fn.prototype;
         }
-      } else if (name === "%AsyncIteratorPrototype%") {
+      } else if (name2 === "%AsyncIteratorPrototype%") {
         var gen = doEval2("%AsyncGenerator%");
         if (gen && getProto) {
           value = getProto(gen.prototype);
         }
       }
-      INTRINSICS[name] = value;
+      INTRINSICS[name2] = value;
       return value;
     };
     var LEGACY_ALIASES = {
@@ -16208,7 +16208,7 @@ var require_get_intrinsic = __commonJS({
       "%WeakSetPrototype%": ["WeakSet", "prototype"]
     };
     var bind = require_function_bind();
-    var hasOwn = require_hasown();
+    var hasOwn2 = require_hasown();
     var $concat = bind.call($call, Array.prototype.concat);
     var $spliceApply = bind.call($apply, Array.prototype.splice);
     var $replace = bind.call($call, String.prototype.replace);
@@ -16230,20 +16230,20 @@ var require_get_intrinsic = __commonJS({
       });
       return result;
     };
-    var getBaseIntrinsic = function getBaseIntrinsic2(name, allowMissing) {
-      var intrinsicName = name;
+    var getBaseIntrinsic = function getBaseIntrinsic2(name2, allowMissing) {
+      var intrinsicName = name2;
       var alias;
-      if (hasOwn(LEGACY_ALIASES, intrinsicName)) {
+      if (hasOwn2(LEGACY_ALIASES, intrinsicName)) {
         alias = LEGACY_ALIASES[intrinsicName];
         intrinsicName = "%" + alias[0] + "%";
       }
-      if (hasOwn(INTRINSICS, intrinsicName)) {
+      if (hasOwn2(INTRINSICS, intrinsicName)) {
         var value = INTRINSICS[intrinsicName];
         if (value === needsEval) {
           value = doEval(intrinsicName);
         }
         if (typeof value === "undefined" && !allowMissing) {
-          throw new $TypeError("intrinsic " + name + " exists, but is not available. Please file an issue!");
+          throw new $TypeError("intrinsic " + name2 + " exists, but is not available. Please file an issue!");
         }
         return {
           alias,
@@ -16251,19 +16251,19 @@ var require_get_intrinsic = __commonJS({
           value
         };
       }
-      throw new $SyntaxError("intrinsic " + name + " does not exist!");
+      throw new $SyntaxError("intrinsic " + name2 + " does not exist!");
     };
-    module2.exports = function GetIntrinsic(name, allowMissing) {
-      if (typeof name !== "string" || name.length === 0) {
+    module2.exports = function GetIntrinsic(name2, allowMissing) {
+      if (typeof name2 !== "string" || name2.length === 0) {
         throw new $TypeError("intrinsic name must be a non-empty string");
       }
       if (arguments.length > 1 && typeof allowMissing !== "boolean") {
         throw new $TypeError('"allowMissing" argument must be a boolean');
       }
-      if ($exec(/^%?[^%]*%?$/, name) === null) {
+      if ($exec(/^%?[^%]*%?$/, name2) === null) {
         throw new $SyntaxError("`%` may not be present anywhere but at the beginning and end of the intrinsic name");
       }
-      var parts = stringToPath(name);
+      var parts = stringToPath(name2);
       var intrinsicBaseName = parts.length > 0 ? parts[0] : "";
       var intrinsic = getBaseIntrinsic("%" + intrinsicBaseName + "%", allowMissing);
       var intrinsicRealName = intrinsic.name;
@@ -16286,12 +16286,12 @@ var require_get_intrinsic = __commonJS({
         }
         intrinsicBaseName += "." + part;
         intrinsicRealName = "%" + intrinsicBaseName + "%";
-        if (hasOwn(INTRINSICS, intrinsicRealName)) {
+        if (hasOwn2(INTRINSICS, intrinsicRealName)) {
           value = INTRINSICS[intrinsicRealName];
         } else if (value != null) {
           if (!(part in value)) {
             if (!allowMissing) {
-              throw new $TypeError("base intrinsic for " + name + " exists, but the property is not available.");
+              throw new $TypeError("base intrinsic for " + name2 + " exists, but the property is not available.");
             }
             return void undefined2;
           }
@@ -16304,7 +16304,7 @@ var require_get_intrinsic = __commonJS({
               value = value[part];
             }
           } else {
-            isOwn = hasOwn(value, part);
+            isOwn = hasOwn2(value, part);
             value = value[part];
           }
           if (isOwn && !skipFurtherCaching) {
@@ -16324,12 +16324,12 @@ var require_call_bound = __commonJS({
     var GetIntrinsic = require_get_intrinsic();
     var callBindBasic = require_call_bind_apply_helpers();
     var $indexOf = callBindBasic([GetIntrinsic("%String.prototype.indexOf%")]);
-    module2.exports = function callBoundIntrinsic(name, allowMissing) {
+    module2.exports = function callBoundIntrinsic(name2, allowMissing) {
       var intrinsic = (
         /** @type {(this: unknown, ...args: unknown[]) => unknown} */
-        GetIntrinsic(name, !!allowMissing)
+        GetIntrinsic(name2, !!allowMissing)
       );
-      if (typeof intrinsic === "function" && $indexOf(name, ".prototype.") > -1) {
+      if (typeof intrinsic === "function" && $indexOf(name2, ".prototype.") > -1) {
         return callBindBasic(
           /** @type {const} */
           [intrinsic]
@@ -16742,13 +16742,13 @@ var require_utils = __commonJS({
         return acc;
       }, mergeTarget);
     };
-    var assign = function assignSingleSource(target, source) {
+    var assign2 = function assignSingleSource(target, source) {
       return Object.keys(source).reduce(function(acc, key) {
         setProperty(acc, key, source[key]);
         return acc;
       }, target);
     };
-    var decode = function(str, defaultDecoder, charset) {
+    var decode2 = function(str, defaultDecoder, charset) {
       if (typeof str === "string" && str.indexOf("%") === -1) {
         return str.indexOf("+") === -1 ? str : str.replace(/\+/g, " ");
       }
@@ -16809,7 +16809,7 @@ var require_utils = __commonJS({
       return objectToString.call(value);
     };
     var limit = 1024;
-    var encode = function encode2(str, defaultEncoder, charset, kind, format) {
+    var encode4 = function encode5(str, defaultEncoder, charset, kind, format) {
       if (str.length === 0) {
         return str;
       }
@@ -16924,11 +16924,11 @@ var require_utils = __commonJS({
     };
     module2.exports = {
       arrayToObject,
-      assign,
+      assign: assign2,
       combine,
       compact,
-      decode,
-      encode,
+      decode: decode2,
+      encode: encode4,
       isBuffer,
       isOverflow,
       isRegExp,
@@ -17642,11 +17642,11 @@ var require_lib2 = __commonJS({
   "node_modules/qs/lib/index.js"(exports2, module2) {
     "use strict";
     var stringify = require_stringify();
-    var parse = require_parse();
+    var parse2 = require_parse();
     var formats = require_formats();
     module2.exports = {
       formats,
-      parse,
+      parse: parse2,
       stringify
     };
   }
@@ -17683,7 +17683,7 @@ var require_urlencoded = __commonJS({
       }
       var queryparse = extended ? extendedparser(opts) : simpleparser(opts);
       var shouldParse = typeof type !== "function" ? typeChecker(type) : type;
-      function parse(body) {
+      function parse2(body) {
         return body.length ? queryparse(body) : {};
       }
       return function urlencodedParser(req, res, next) {
@@ -17713,7 +17713,7 @@ var require_urlencoded = __commonJS({
           }));
           return;
         }
-        read(req, res, next, parse, debug, {
+        read(req, res, next, parse2, debug, {
           debug,
           encoding: charset,
           inflate,
@@ -17725,7 +17725,7 @@ var require_urlencoded = __commonJS({
     function extendedparser(options) {
       var parameterLimit = options.parameterLimit !== void 0 ? options.parameterLimit : 1e3;
       var depth = options.depth !== void 0 ? options.depth : 32;
-      var parse = parser("qs");
+      var parse2 = parser("qs");
       if (isNaN(parameterLimit) || parameterLimit < 1) {
         throw new TypeError("option parameterLimit must be a positive number");
       }
@@ -17746,7 +17746,7 @@ var require_urlencoded = __commonJS({
         var arrayLimit = Math.max(100, paramCount);
         debug("parse extended urlencoding");
         try {
-          return parse(body, {
+          return parse2(body, {
             allowPrototypes: true,
             arrayLimit,
             depth,
@@ -17783,12 +17783,12 @@ var require_urlencoded = __commonJS({
       } while (index !== -1);
       return count;
     }
-    function parser(name) {
-      var mod = parsers[name];
+    function parser(name2) {
+      var mod = parsers[name2];
       if (mod !== void 0) {
         return mod.parse;
       }
-      switch (name) {
+      switch (name2) {
         case "qs":
           mod = require_lib2();
           break;
@@ -17796,12 +17796,12 @@ var require_urlencoded = __commonJS({
           mod = require("querystring");
           break;
       }
-      parsers[name] = mod;
+      parsers[name2] = mod;
       return mod.parse;
     }
     function simpleparser(options) {
       var parameterLimit = options.parameterLimit !== void 0 ? options.parameterLimit : 1e3;
-      var parse = parser("querystring");
+      var parse2 = parser("querystring");
       if (isNaN(parameterLimit) || parameterLimit < 1) {
         throw new TypeError("option parameterLimit must be a positive number");
       }
@@ -17817,7 +17817,7 @@ var require_urlencoded = __commonJS({
           });
         }
         debug("parse urlencoding");
-        return parse(body, void 0, void 0, { maxKeys: parameterLimit });
+        return parse2(body, void 0, void 0, { maxKeys: parameterLimit });
       };
     }
     function typeChecker(type) {
@@ -17876,9 +17876,9 @@ var require_body_parser = __commonJS({
         });
       };
     }
-    function createParserGetter(name) {
+    function createParserGetter(name2) {
       return function get2() {
-        return loadParser(name);
+        return loadParser(name2);
       };
     }
     function loadParser(parserName) {
@@ -17921,12 +17921,12 @@ var require_merge_descriptors = __commonJS({
       if (redefine === void 0) {
         redefine = true;
       }
-      Object.getOwnPropertyNames(src).forEach(function forEachOwnPropertyName(name) {
-        if (!redefine && hasOwnProperty.call(dest, name)) {
+      Object.getOwnPropertyNames(src).forEach(function forEachOwnPropertyName(name2) {
+        if (!redefine && hasOwnProperty.call(dest, name2)) {
           return;
         }
-        var descriptor = Object.getOwnPropertyDescriptor(src, name);
-        Object.defineProperty(dest, name, descriptor);
+        var descriptor = Object.getOwnPropertyDescriptor(src, name2);
+        Object.defineProperty(dest, name2, descriptor);
       });
       return dest;
     }
@@ -18000,7 +18000,7 @@ var require_parseurl = __commonJS({
   "node_modules/parseurl/index.js"(exports2, module2) {
     "use strict";
     var url = require("url");
-    var parse = url.parse;
+    var parse2 = url.parse;
     var Url = url.Url;
     module2.exports = parseurl;
     module2.exports.original = originalurl;
@@ -18032,7 +18032,7 @@ var require_parseurl = __commonJS({
     }
     function fastparse(str) {
       if (typeof str !== "string" || str.charCodeAt(0) !== 47) {
-        return parse(str);
+        return parse2(str);
       }
       var pathname = str;
       var query = null;
@@ -18060,7 +18060,7 @@ var require_parseurl = __commonJS({
           /* #  */
           case 160:
           case 65279:
-            return parse(str);
+            return parse2(str);
         }
       }
       var url2 = Url !== void 0 ? new Url() : {};
@@ -18270,7 +18270,7 @@ var require_path_to_regexp = __commonJS({
   "node_modules/path-to-regexp/index.js"(exports2, module2) {
     module2.exports = pathToRegexp;
     var MATCHING_GROUP_REGEXP = /\\.|\((?:\?<(.*?)>)?(?!\?)/g;
-    function pathToRegexp(path7, keys, options) {
+    function pathToRegexp(path9, keys, options) {
       options = options || {};
       keys = keys || [];
       var strict = options.strict;
@@ -18280,31 +18280,31 @@ var require_path_to_regexp = __commonJS({
       var extraOffset = 0;
       var keysOffset = keys.length;
       var i = 0;
-      var name = 0;
+      var name2 = 0;
       var pos = 0;
       var backtrack = "";
       var m;
-      if (path7 instanceof RegExp) {
-        while (m = MATCHING_GROUP_REGEXP.exec(path7.source)) {
+      if (path9 instanceof RegExp) {
+        while (m = MATCHING_GROUP_REGEXP.exec(path9.source)) {
           if (m[0][0] === "\\") continue;
           keys.push({
-            name: m[1] || name++,
+            name: m[1] || name2++,
             optional: false,
             offset: m.index
           });
         }
-        return path7;
+        return path9;
       }
-      if (Array.isArray(path7)) {
-        path7 = path7.map(function(value) {
+      if (Array.isArray(path9)) {
+        path9 = path9.map(function(value) {
           return pathToRegexp(value, keys, options).source;
         });
-        return new RegExp(path7.join("|"), flags);
+        return new RegExp(path9.join("|"), flags);
       }
-      if (typeof path7 !== "string") {
+      if (typeof path9 !== "string") {
         throw new TypeError("path must be a string, array of strings, or regular expression");
       }
-      path7 = path7.replace(
+      path9 = path9.replace(
         /\\.|(\/)?(\.)?:(\w+)(\(.*?\))?(\*)?(\?)?|[.*]|\/\(/g,
         function(match, slash, format, key, capture, star, optional, offset) {
           if (match[0] === "\\") {
@@ -18321,7 +18321,7 @@ var require_path_to_regexp = __commonJS({
           if (slash || format) {
             backtrack = "";
           } else {
-            backtrack += path7.slice(pos, offset);
+            backtrack += path9.slice(pos, offset);
           }
           pos = offset + match.length;
           if (match === "*") {
@@ -18351,11 +18351,11 @@ var require_path_to_regexp = __commonJS({
           return result;
         }
       );
-      while (m = MATCHING_GROUP_REGEXP.exec(path7)) {
+      while (m = MATCHING_GROUP_REGEXP.exec(path9)) {
         if (m[0][0] === "\\") continue;
         if (keysOffset + i === keys.length || keys[keysOffset + i].offset > m.index) {
           keys.splice(keysOffset + i, 0, {
-            name: name++,
+            name: name2++,
             // Unnamed matching groups must be consistently linear.
             optional: false,
             offset: m.index
@@ -18363,13 +18363,13 @@ var require_path_to_regexp = __commonJS({
         }
         i++;
       }
-      path7 += strict ? "" : path7[path7.length - 1] === "/" ? "?" : "/?";
+      path9 += strict ? "" : path9[path9.length - 1] === "/" ? "?" : "/?";
       if (end) {
-        path7 += "$";
-      } else if (path7[path7.length - 1] !== "/") {
-        path7 += lookahead ? "(?=/|$)" : "(?:/|$)";
+        path9 += "$";
+      } else if (path9[path9.length - 1] !== "/") {
+        path9 += lookahead ? "(?=/|$)" : "(?:/|$)";
       }
-      return new RegExp("^" + path7, flags);
+      return new RegExp("^" + path9, flags);
     }
   }
 });
@@ -18382,27 +18382,27 @@ var require_layer = __commonJS({
     var debug = require_src()("express:router:layer");
     var hasOwnProperty = Object.prototype.hasOwnProperty;
     module2.exports = Layer;
-    function Layer(path7, options, fn) {
+    function Layer(path9, options, fn) {
       if (!(this instanceof Layer)) {
-        return new Layer(path7, options, fn);
+        return new Layer(path9, options, fn);
       }
-      debug("new %o", path7);
+      debug("new %o", path9);
       var opts = options || {};
       this.handle = fn;
       this.name = fn.name || "<anonymous>";
       this.params = void 0;
       this.path = void 0;
-      this.regexp = pathRegexp(path7, this.keys = [], opts);
-      this.regexp.fast_star = path7 === "*";
-      this.regexp.fast_slash = path7 === "/" && opts.end === false;
+      this.regexp = pathRegexp(path9, this.keys = [], opts);
+      this.regexp.fast_star = path9 === "*";
+      this.regexp.fast_slash = path9 === "/" && opts.end === false;
     }
-    Layer.prototype.handle_error = function handle_error(error, req, res, next) {
+    Layer.prototype.handle_error = function handle_error(error2, req, res, next) {
       var fn = this.handle;
       if (fn.length !== 4) {
-        return next(error);
+        return next(error2);
       }
       try {
-        fn(error, req, res, next);
+        fn(error2, req, res, next);
       } catch (err) {
         next(err);
       }
@@ -18418,20 +18418,20 @@ var require_layer = __commonJS({
         next(err);
       }
     };
-    Layer.prototype.match = function match(path7) {
+    Layer.prototype.match = function match(path9) {
       var match2;
-      if (path7 != null) {
+      if (path9 != null) {
         if (this.regexp.fast_slash) {
           this.params = {};
           this.path = "";
           return true;
         }
         if (this.regexp.fast_star) {
-          this.params = { "0": decode_param(path7) };
-          this.path = path7;
+          this.params = { "0": decode_param(path9) };
+          this.path = path9;
           return true;
         }
-        match2 = this.regexp.exec(path7);
+        match2 = this.regexp.exec(path9);
       }
       if (!match2) {
         this.params = void 0;
@@ -18473,10 +18473,10 @@ var require_layer = __commonJS({
 var require_methods = __commonJS({
   "node_modules/methods/index.js"(exports2, module2) {
     "use strict";
-    var http = require("http");
+    var http2 = require("http");
     module2.exports = getCurrentNodeMethods() || getBasicNodeMethods();
     function getCurrentNodeMethods() {
-      return http.METHODS && http.METHODS.map(function lowerCaseMethod(method) {
+      return http2.METHODS && http2.METHODS.map(function lowerCaseMethod(method) {
         return method.toLowerCase();
       });
     }
@@ -18524,21 +18524,21 @@ var require_route = __commonJS({
     var slice = Array.prototype.slice;
     var toString = Object.prototype.toString;
     module2.exports = Route;
-    function Route(path7) {
-      this.path = path7;
+    function Route(path9) {
+      this.path = path9;
       this.stack = [];
-      debug("new %o", path7);
+      debug("new %o", path9);
       this.methods = {};
     }
     Route.prototype._handles_method = function _handles_method(method) {
       if (this.methods._all) {
         return true;
       }
-      var name = typeof method === "string" ? method.toLowerCase() : method;
-      if (name === "head" && !this.methods["head"]) {
-        name = "get";
+      var name2 = typeof method === "string" ? method.toLowerCase() : method;
+      if (name2 === "head" && !this.methods["head"]) {
+        name2 = "get";
       }
-      return Boolean(this.methods[name]);
+      return Boolean(this.methods[name2]);
     };
     Route.prototype._options = function _options() {
       var methods2 = Object.keys(this.methods);
@@ -18669,28 +18669,28 @@ var require_router = __commonJS({
       router.stack = [];
       return router;
     };
-    proto.param = function param(name, fn) {
-      if (typeof name === "function") {
+    proto.param = function param(name2, fn) {
+      if (typeof name2 === "function") {
         deprecate("router.param(fn): Refactor to use path params");
-        this._params.push(name);
+        this._params.push(name2);
         return;
       }
       var params = this._params;
       var len = params.length;
       var ret;
-      if (name[0] === ":") {
-        deprecate("router.param(" + JSON.stringify(name) + ", fn): Use router.param(" + JSON.stringify(name.slice(1)) + ", fn) instead");
-        name = name.slice(1);
+      if (name2[0] === ":") {
+        deprecate("router.param(" + JSON.stringify(name2) + ", fn): Use router.param(" + JSON.stringify(name2.slice(1)) + ", fn) instead");
+        name2 = name2.slice(1);
       }
       for (var i = 0; i < len; ++i) {
-        if (ret = params[i](name, fn)) {
+        if (ret = params[i](name2, fn)) {
           fn = ret;
         }
       }
       if ("function" !== typeof fn) {
-        throw new Error("invalid param() call for " + name + ", got " + fn);
+        throw new Error("invalid param() call for " + name2 + ", got " + fn);
       }
-      (this.params[name] = this.params[name] || []).push(fn);
+      (this.params[name2] = this.params[name2] || []).push(fn);
       return this;
     };
     proto.handle = function handle(req, res, out) {
@@ -18709,7 +18709,7 @@ var require_router = __commonJS({
       var done = restore(out, req, "baseUrl", "next", "params");
       req.next = next;
       if (req.method === "OPTIONS") {
-        done = wrap(done, function(old, err) {
+        done = wrap2(done, function(old, err) {
           if (err || options.length === 0) return old(err);
           sendOptionsResponse(res, options, old);
         });
@@ -18739,8 +18739,8 @@ var require_router = __commonJS({
         if (++sync > 100) {
           return setImmediate(next, err);
         }
-        var path7 = getPathname(req);
-        if (path7 == null) {
+        var path9 = getPathname(req);
+        if (path9 == null) {
           return done(layerError);
         }
         var layer;
@@ -18748,7 +18748,7 @@ var require_router = __commonJS({
         var route;
         while (match !== true && idx < stack.length) {
           layer = stack[idx++];
-          match = matchLayer(layer, path7);
+          match = matchLayer(layer, path9);
           route = layer.route;
           if (typeof match !== "boolean") {
             layerError = layerError || match;
@@ -18786,18 +18786,18 @@ var require_router = __commonJS({
           } else if (route) {
             layer.handle_request(req, res, next);
           } else {
-            trim_prefix(layer, layerError, layerPath, path7);
+            trim_prefix(layer, layerError, layerPath, path9);
           }
           sync = 0;
         });
       }
-      function trim_prefix(layer, layerError, layerPath, path7) {
+      function trim_prefix(layer, layerError, layerPath, path9) {
         if (layerPath.length !== 0) {
-          if (layerPath !== path7.slice(0, layerPath.length)) {
+          if (layerPath !== path9.slice(0, layerPath.length)) {
             next(layerError);
             return;
           }
-          var c = path7[layerPath.length];
+          var c = path9[layerPath.length];
           if (c && c !== "/" && c !== ".") return next(layerError);
           debug("trim prefix (%s) from url %s", layerPath, req.url);
           removed = layerPath;
@@ -18823,7 +18823,7 @@ var require_router = __commonJS({
         return done();
       }
       var i = 0;
-      var name;
+      var name2;
       var paramIndex = 0;
       var key;
       var paramVal;
@@ -18838,18 +18838,18 @@ var require_router = __commonJS({
         }
         paramIndex = 0;
         key = keys[i++];
-        name = key.name;
-        paramVal = req.params[name];
-        paramCallbacks = params[name];
-        paramCalled = called[name];
+        name2 = key.name;
+        paramVal = req.params[name2];
+        paramCallbacks = params[name2];
+        paramCalled = called[name2];
         if (paramVal === void 0 || !paramCallbacks) {
           return param();
         }
         if (paramCalled && (paramCalled.match === paramVal || paramCalled.error && paramCalled.error !== "route")) {
-          req.params[name] = paramCalled.value;
+          req.params[name2] = paramCalled.value;
           return param(paramCalled.error);
         }
-        called[name] = paramCalled = {
+        called[name2] = paramCalled = {
           error: null,
           match: paramVal,
           value: paramVal
@@ -18875,7 +18875,7 @@ var require_router = __commonJS({
     };
     proto.use = function use(fn) {
       var offset = 0;
-      var path7 = "/";
+      var path9 = "/";
       if (typeof fn !== "function") {
         var arg = fn;
         while (Array.isArray(arg) && arg.length !== 0) {
@@ -18883,7 +18883,7 @@ var require_router = __commonJS({
         }
         if (typeof arg !== "function") {
           offset = 1;
-          path7 = fn;
+          path9 = fn;
         }
       }
       var callbacks = flatten(slice.call(arguments, offset));
@@ -18895,8 +18895,8 @@ var require_router = __commonJS({
         if (typeof fn !== "function") {
           throw new TypeError("Router.use() requires a middleware function but got a " + gettype(fn));
         }
-        debug("use %o %s", path7, fn.name || "<anonymous>");
-        var layer = new Layer(path7, {
+        debug("use %o %s", path9, fn.name || "<anonymous>");
+        var layer = new Layer(path9, {
           sensitive: this.caseSensitive,
           strict: false,
           end: false
@@ -18906,9 +18906,9 @@ var require_router = __commonJS({
       }
       return this;
     };
-    proto.route = function route(path7) {
-      var route2 = new Route(path7);
-      var layer = new Layer(path7, {
+    proto.route = function route(path9) {
+      var route2 = new Route(path9);
+      var layer = new Layer(path9, {
         sensitive: this.caseSensitive,
         strict: this.strict,
         end: true
@@ -18918,8 +18918,8 @@ var require_router = __commonJS({
       return route2;
     };
     methods.concat("all").forEach(function(method) {
-      proto[method] = function(path7) {
-        var route = this.route(path7);
+      proto[method] = function(path9) {
+        var route = this.route(path9);
         route[method].apply(route, slice.call(arguments, 1));
         return this;
       };
@@ -18955,9 +18955,9 @@ var require_router = __commonJS({
       }
       return toString.call(obj).replace(objectRegExp, "$1");
     }
-    function matchLayer(layer, path7) {
+    function matchLayer(layer, path9) {
       try {
-        return layer.match(path7);
+        return layer.match(path9);
       } catch (err) {
         return err;
       }
@@ -19009,7 +19009,7 @@ var require_router = __commonJS({
         next(err);
       }
     }
-    function wrap(old, fn) {
+    function wrap2(old, fn) {
       return function proxy() {
         var args = new Array(arguments.length + 1);
         args[0] = old;
@@ -19075,24 +19075,24 @@ var require_view = __commonJS({
   "node_modules/express/lib/view.js"(exports2, module2) {
     "use strict";
     var debug = require_src()("express:view");
-    var path7 = require("path");
-    var fs6 = require("fs");
-    var dirname = path7.dirname;
-    var basename = path7.basename;
-    var extname = path7.extname;
-    var join = path7.join;
-    var resolve = path7.resolve;
+    var path9 = require("path");
+    var fs9 = require("fs");
+    var dirname = path9.dirname;
+    var basename = path9.basename;
+    var extname = path9.extname;
+    var join = path9.join;
+    var resolve3 = path9.resolve;
     module2.exports = View;
-    function View(name, options) {
+    function View(name2, options) {
       var opts = options || {};
       this.defaultEngine = opts.defaultEngine;
-      this.ext = extname(name);
-      this.name = name;
+      this.ext = extname(name2);
+      this.name = name2;
       this.root = opts.root;
       if (!this.ext && !this.defaultEngine) {
         throw new Error("No default engine was specified and no extension was provided.");
       }
-      var fileName = name;
+      var fileName = name2;
       if (!this.ext) {
         this.ext = this.defaultEngine[0] !== "." ? "." + this.defaultEngine : this.defaultEngine;
         fileName += this.ext;
@@ -19109,40 +19109,40 @@ var require_view = __commonJS({
       this.engine = opts.engines[this.ext];
       this.path = this.lookup(fileName);
     }
-    View.prototype.lookup = function lookup(name) {
-      var path8;
+    View.prototype.lookup = function lookup(name2) {
+      var path10;
       var roots = [].concat(this.root);
-      debug('lookup "%s"', name);
-      for (var i = 0; i < roots.length && !path8; i++) {
+      debug('lookup "%s"', name2);
+      for (var i = 0; i < roots.length && !path10; i++) {
         var root = roots[i];
-        var loc = resolve(root, name);
+        var loc = resolve3(root, name2);
         var dir = dirname(loc);
         var file = basename(loc);
-        path8 = this.resolve(dir, file);
+        path10 = this.resolve(dir, file);
       }
-      return path8;
+      return path10;
     };
     View.prototype.render = function render(options, callback) {
       debug('render "%s"', this.path);
       this.engine(this.path, options, callback);
     };
-    View.prototype.resolve = function resolve2(dir, file) {
+    View.prototype.resolve = function resolve4(dir, file) {
       var ext = this.ext;
-      var path8 = join(dir, file);
-      var stat = tryStat(path8);
+      var path10 = join(dir, file);
+      var stat = tryStat(path10);
       if (stat && stat.isFile()) {
-        return path8;
+        return path10;
       }
-      path8 = join(dir, basename(file, ext), "index" + ext);
-      stat = tryStat(path8);
+      path10 = join(dir, basename(file, ext), "index" + ext);
+      stat = tryStat(path10);
       if (stat && stat.isFile()) {
-        return path8;
+        return path10;
       }
     };
-    function tryStat(path8) {
-      debug('stat "%s"', path8);
+    function tryStat(path10) {
+      debug('stat "%s"', path10);
       try {
-        return fs6.statSync(path8);
+        return fs9.statSync(path10);
       } catch (e) {
         return void 0;
       }
@@ -19213,7 +19213,7 @@ var require_content_disposition = __commonJS({
   "node_modules/content-disposition/index.js"(exports2, module2) {
     "use strict";
     module2.exports = contentDisposition;
-    module2.exports.parse = parse;
+    module2.exports.parse = parse2;
     var basename = require("path").basename;
     var Buffer2 = require_safe_buffer().Buffer;
     var ENCODE_URL_ATTR_CHAR_REGEXP = /[\x00-\x20"'()*,/:;<=>?@[\\\]{}\x7f]/g;
@@ -19250,15 +19250,15 @@ var require_content_disposition = __commonJS({
       if (typeof fallback === "string" && NON_LATIN1_REGEXP.test(fallback)) {
         throw new TypeError("fallback must be ISO-8859-1 string");
       }
-      var name = basename(filename);
-      var isQuotedString = TEXT_REGEXP.test(name);
-      var fallbackName = typeof fallback !== "string" ? fallback && getlatin1(name) : basename(fallback);
-      var hasFallback = typeof fallbackName === "string" && fallbackName !== name;
-      if (hasFallback || !isQuotedString || HEX_ESCAPE_REGEXP.test(name)) {
-        params["filename*"] = name;
+      var name2 = basename(filename);
+      var isQuotedString = TEXT_REGEXP.test(name2);
+      var fallbackName = typeof fallback !== "string" ? fallback && getlatin1(name2) : basename(fallback);
+      var hasFallback = typeof fallbackName === "string" && fallbackName !== name2;
+      if (hasFallback || !isQuotedString || HEX_ESCAPE_REGEXP.test(name2)) {
+        params["filename*"] = name2;
       }
       if (isQuotedString || hasFallback) {
-        params.filename = hasFallback ? fallbackName : name;
+        params.filename = hasFallback ? fallbackName : name2;
       }
       return params;
     }
@@ -19304,7 +19304,7 @@ var require_content_disposition = __commonJS({
     function getlatin1(val) {
       return String(val).replace(NON_LATIN1_REGEXP, "?");
     }
-    function parse(string) {
+    function parse2(string) {
       if (!string || typeof string !== "string") {
         throw new TypeError("argument string is required");
       }
@@ -19376,14 +19376,14 @@ var require_etag = __commonJS({
   "node_modules/etag/index.js"(exports2, module2) {
     "use strict";
     module2.exports = etag;
-    var crypto2 = require("crypto");
+    var crypto9 = require("crypto");
     var Stats = require("fs").Stats;
     var toString = Object.prototype.toString;
     function entitytag(entity) {
       if (entity.length === 0) {
         return '"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk"';
       }
-      var hash2 = crypto2.createHash("sha1").update(entity, "utf8").digest("base64").substring(0, 27);
+      var hash2 = crypto9.createHash("sha1").update(entity, "utf8").digest("base64").substring(0, 27);
       var len = typeof entity === "string" ? Buffer.byteLength(entity, "utf8") : entity.length;
       return '"' + len.toString(16) + "-" + hash2 + '"';
     }
@@ -19496,15 +19496,15 @@ var require_types = __commonJS({
 // node_modules/mime/mime.js
 var require_mime = __commonJS({
   "node_modules/mime/mime.js"(exports2, module2) {
-    var path7 = require("path");
-    var fs6 = require("fs");
+    var path9 = require("path");
+    var fs9 = require("fs");
     function Mime() {
       this.types = /* @__PURE__ */ Object.create(null);
       this.extensions = /* @__PURE__ */ Object.create(null);
     }
-    Mime.prototype.define = function(map) {
-      for (var type in map) {
-        var exts = map[type];
+    Mime.prototype.define = function(map2) {
+      for (var type in map2) {
+        var exts = map2[type];
         for (var i = 0; i < exts.length; i++) {
           if (process.env.DEBUG_MIME && this.types[exts[i]]) {
             console.warn((this._loading || "define()").replace(/.*\//, ""), 'changes "' + exts[i] + '" extension type from ' + this.types[exts[i]] + " to " + type);
@@ -19518,16 +19518,16 @@ var require_mime = __commonJS({
     };
     Mime.prototype.load = function(file) {
       this._loading = file;
-      var map = {}, content = fs6.readFileSync(file, "ascii"), lines = content.split(/[\r\n]+/);
+      var map2 = {}, content = fs9.readFileSync(file, "ascii"), lines = content.split(/[\r\n]+/);
       lines.forEach(function(line) {
         var fields = line.replace(/\s*#.*|^\s*|\s*$/g, "").split(/\s+/);
-        map[fields.shift()] = fields;
+        map2[fields.shift()] = fields;
       });
-      this.define(map);
+      this.define(map2);
       this._loading = null;
     };
-    Mime.prototype.lookup = function(path8, fallback) {
-      var ext = path8.replace(/^.*[\.\/\\]/, "").toLowerCase();
+    Mime.prototype.lookup = function(path10, fallback) {
+      var ext = path10.replace(/^.*[\.\/\\]/, "").toLowerCase();
       return this.types[ext] || fallback || this.default_type;
     };
     Mime.prototype.extension = function(mimeType) {
@@ -19560,7 +19560,7 @@ var require_ms2 = __commonJS({
       options = options || {};
       var type = typeof val;
       if (type === "string" && val.length > 0) {
-        return parse(val);
+        return parse2(val);
       } else if (type === "number" && isFinite(val)) {
         return options.long ? fmtLong(val) : fmtShort(val);
       }
@@ -19568,7 +19568,7 @@ var require_ms2 = __commonJS({
         "val is not a non-empty string or a valid number. val=" + JSON.stringify(val)
       );
     };
-    function parse(str) {
+    function parse2(str) {
       str = String(str);
       if (str.length > 100) {
         return;
@@ -19656,9 +19656,9 @@ var require_ms2 = __commonJS({
       }
       return ms + " ms";
     }
-    function plural(ms, msAbs, n, name) {
+    function plural(ms, msAbs, n, name2) {
       var isPlural = msAbs >= n * 1.5;
-      return Math.round(ms / n) + " " + name + (isPlural ? "s" : "");
+      return Math.round(ms / n) + " " + name2 + (isPlural ? "s" : "");
     }
   }
 });
@@ -19756,33 +19756,33 @@ var require_send = __commonJS({
     var escapeHtml = require_escape_html();
     var etag = require_etag();
     var fresh = require_fresh();
-    var fs6 = require("fs");
+    var fs9 = require("fs");
     var mime = require_mime();
     var ms = require_ms2();
     var onFinished = require_on_finished();
     var parseRange = require_range_parser();
-    var path7 = require("path");
+    var path9 = require("path");
     var statuses = require_statuses();
-    var Stream = require("stream");
-    var util2 = require("util");
-    var extname = path7.extname;
-    var join = path7.join;
-    var normalize = path7.normalize;
-    var resolve = path7.resolve;
-    var sep = path7.sep;
+    var Stream2 = require("stream");
+    var util4 = require("util");
+    var extname = path9.extname;
+    var join = path9.join;
+    var normalize = path9.normalize;
+    var resolve3 = path9.resolve;
+    var sep = path9.sep;
     var BYTES_RANGE_REGEXP = /^ *bytes=/;
     var MAX_MAXAGE = 60 * 60 * 24 * 365 * 1e3;
     var UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/;
     module2.exports = send;
     module2.exports.mime = mime;
-    function send(req, path8, options) {
-      return new SendStream(req, path8, options);
+    function send(req, path10, options) {
+      return new SendStream(req, path10, options);
     }
-    function SendStream(req, path8, options) {
-      Stream.call(this);
+    function SendStream(req, path10, options) {
+      Stream2.call(this);
       var opts = options || {};
       this.options = opts;
-      this.path = path8;
+      this.path = path10;
       this.req = req;
       this._acceptRanges = opts.acceptRanges !== void 0 ? Boolean(opts.acceptRanges) : true;
       this._cacheControl = opts.cacheControl !== void 0 ? Boolean(opts.cacheControl) : true;
@@ -19805,12 +19805,12 @@ var require_send = __commonJS({
       this._maxage = opts.maxAge || opts.maxage;
       this._maxage = typeof this._maxage === "string" ? ms(this._maxage) : Number(this._maxage);
       this._maxage = !isNaN(this._maxage) ? Math.min(Math.max(0, this._maxage), MAX_MAXAGE) : 0;
-      this._root = opts.root ? resolve(opts.root) : null;
+      this._root = opts.root ? resolve3(opts.root) : null;
       if (!this._root && opts.from) {
         this.from(opts.from);
       }
     }
-    util2.inherits(SendStream, Stream);
+    util4.inherits(SendStream, Stream2);
     SendStream.prototype.etag = deprecate.function(function etag2(val) {
       this._etag = Boolean(val);
       debug("etag %s", this._etag);
@@ -19828,8 +19828,8 @@ var require_send = __commonJS({
       this._index = index2;
       return this;
     }, "send.index: pass index as option");
-    SendStream.prototype.root = function root(path8) {
-      this._root = resolve(String(path8));
+    SendStream.prototype.root = function root(path10) {
+      this._root = resolve3(String(path10));
       debug("root %s", this._root);
       return this;
     };
@@ -19847,7 +19847,7 @@ var require_send = __commonJS({
       debug("max-age %d", this._maxage);
       return this;
     }, "send.maxage: pass maxAge as option");
-    SendStream.prototype.error = function error(status, err) {
+    SendStream.prototype.error = function error2(status, err) {
       if (hasListeners(this, "error")) {
         return this.emit("error", createHttpError(status, err));
       }
@@ -19912,15 +19912,15 @@ var require_send = __commonJS({
       var statusCode = this.res.statusCode;
       return statusCode >= 200 && statusCode < 300 || statusCode === 304;
     };
-    SendStream.prototype.onStatError = function onStatError(error) {
-      switch (error.code) {
+    SendStream.prototype.onStatError = function onStatError(error2) {
+      switch (error2.code) {
         case "ENAMETOOLONG":
         case "ENOENT":
         case "ENOTDIR":
-          this.error(404, error);
+          this.error(404, error2);
           break;
         default:
-          this.error(500, error);
+          this.error(500, error2);
           break;
       }
     };
@@ -19942,10 +19942,10 @@ var require_send = __commonJS({
       var lastModified = this.res.getHeader("Last-Modified");
       return parseHttpDate(lastModified) <= parseHttpDate(ifRange);
     };
-    SendStream.prototype.redirect = function redirect(path8) {
+    SendStream.prototype.redirect = function redirect(path10) {
       var res = this.res;
       if (hasListeners(this, "directory")) {
-        this.emit("directory", res, path8);
+        this.emit("directory", res, path10);
         return;
       }
       if (this.hasTrailingSlash()) {
@@ -19965,42 +19965,42 @@ var require_send = __commonJS({
     SendStream.prototype.pipe = function pipe(res) {
       var root = this._root;
       this.res = res;
-      var path8 = decode(this.path);
-      if (path8 === -1) {
+      var path10 = decode2(this.path);
+      if (path10 === -1) {
         this.error(400);
         return res;
       }
-      if (~path8.indexOf("\0")) {
+      if (~path10.indexOf("\0")) {
         this.error(400);
         return res;
       }
       var parts;
       if (root !== null) {
-        if (path8) {
-          path8 = normalize("." + sep + path8);
+        if (path10) {
+          path10 = normalize("." + sep + path10);
         }
-        if (UP_PATH_REGEXP.test(path8)) {
-          debug('malicious path "%s"', path8);
+        if (UP_PATH_REGEXP.test(path10)) {
+          debug('malicious path "%s"', path10);
           this.error(403);
           return res;
         }
-        parts = path8.split(sep);
-        path8 = normalize(join(root, path8));
+        parts = path10.split(sep);
+        path10 = normalize(join(root, path10));
       } else {
-        if (UP_PATH_REGEXP.test(path8)) {
-          debug('malicious path "%s"', path8);
+        if (UP_PATH_REGEXP.test(path10)) {
+          debug('malicious path "%s"', path10);
           this.error(403);
           return res;
         }
-        parts = normalize(path8).split(sep);
-        path8 = resolve(path8);
+        parts = normalize(path10).split(sep);
+        path10 = resolve3(path10);
       }
       if (containsDotFile(parts)) {
         var access = this._dotfiles;
         if (access === void 0) {
           access = parts[parts.length - 1][0] === "." ? this._hidden ? "allow" : "ignore" : "allow";
         }
-        debug('%s dotfile "%s"', access, path8);
+        debug('%s dotfile "%s"', access, path10);
         switch (access) {
           case "allow":
             break;
@@ -20014,13 +20014,13 @@ var require_send = __commonJS({
         }
       }
       if (this._index.length && this.hasTrailingSlash()) {
-        this.sendIndex(path8);
+        this.sendIndex(path10);
         return res;
       }
-      this.sendFile(path8);
+      this.sendFile(path10);
       return res;
     };
-    SendStream.prototype.send = function send2(path8, stat) {
+    SendStream.prototype.send = function send2(path10, stat) {
       var len = stat.size;
       var options = this.options;
       var opts = {};
@@ -20032,9 +20032,9 @@ var require_send = __commonJS({
         this.headersAlreadySent();
         return;
       }
-      debug('pipe "%s"', path8);
-      this.setHeader(path8, stat);
-      this.type(path8);
+      debug('pipe "%s"', path10);
+      this.setHeader(path10, stat);
+      this.type(path10);
       if (this.isConditionalGET()) {
         if (this.isPreconditionFailure()) {
           this.error(412);
@@ -20083,28 +20083,28 @@ var require_send = __commonJS({
         res.end();
         return;
       }
-      this.stream(path8, opts);
+      this.stream(path10, opts);
     };
-    SendStream.prototype.sendFile = function sendFile(path8) {
+    SendStream.prototype.sendFile = function sendFile(path10) {
       var i = 0;
       var self2 = this;
-      debug('stat "%s"', path8);
-      fs6.stat(path8, function onstat(err, stat) {
-        if (err && err.code === "ENOENT" && !extname(path8) && path8[path8.length - 1] !== sep) {
+      debug('stat "%s"', path10);
+      fs9.stat(path10, function onstat(err, stat) {
+        if (err && err.code === "ENOENT" && !extname(path10) && path10[path10.length - 1] !== sep) {
           return next(err);
         }
         if (err) return self2.onStatError(err);
-        if (stat.isDirectory()) return self2.redirect(path8);
-        self2.emit("file", path8, stat);
-        self2.send(path8, stat);
+        if (stat.isDirectory()) return self2.redirect(path10);
+        self2.emit("file", path10, stat);
+        self2.send(path10, stat);
       });
       function next(err) {
         if (self2._extensions.length <= i) {
           return err ? self2.onStatError(err) : self2.error(404);
         }
-        var p = path8 + "." + self2._extensions[i++];
+        var p = path10 + "." + self2._extensions[i++];
         debug('stat "%s"', p);
-        fs6.stat(p, function(err2, stat) {
+        fs9.stat(p, function(err2, stat) {
           if (err2) return next(err2);
           if (stat.isDirectory()) return next();
           self2.emit("file", p, stat);
@@ -20112,7 +20112,7 @@ var require_send = __commonJS({
         });
       }
     };
-    SendStream.prototype.sendIndex = function sendIndex(path8) {
+    SendStream.prototype.sendIndex = function sendIndex(path10) {
       var i = -1;
       var self2 = this;
       function next(err) {
@@ -20120,9 +20120,9 @@ var require_send = __commonJS({
           if (err) return self2.onStatError(err);
           return self2.error(404);
         }
-        var p = join(path8, self2._index[i]);
+        var p = join(path10, self2._index[i]);
         debug('stat "%s"', p);
-        fs6.stat(p, function(err2, stat) {
+        fs9.stat(p, function(err2, stat) {
           if (err2) return next(err2);
           if (stat.isDirectory()) return next();
           self2.emit("file", p, stat);
@@ -20131,10 +20131,10 @@ var require_send = __commonJS({
       }
       next();
     };
-    SendStream.prototype.stream = function stream(path8, options) {
+    SendStream.prototype.stream = function stream(path10, options) {
       var self2 = this;
       var res = this.res;
-      var stream2 = fs6.createReadStream(path8, options);
+      var stream2 = fs9.createReadStream(path10, options);
       this.emit("stream", stream2);
       stream2.pipe(res);
       function cleanup() {
@@ -20149,10 +20149,10 @@ var require_send = __commonJS({
         self2.emit("end");
       });
     };
-    SendStream.prototype.type = function type(path8) {
+    SendStream.prototype.type = function type(path10) {
       var res = this.res;
       if (res.getHeader("Content-Type")) return;
-      var type2 = mime.lookup(path8);
+      var type2 = mime.lookup(path10);
       if (!type2) {
         debug("no content-type");
         return;
@@ -20161,9 +20161,9 @@ var require_send = __commonJS({
       debug("content-type %s", type2);
       res.setHeader("Content-Type", type2 + (charset ? "; charset=" + charset : ""));
     };
-    SendStream.prototype.setHeader = function setHeader2(path8, stat) {
+    SendStream.prototype.setHeader = function setHeader2(path10, stat) {
       var res = this.res;
-      this.emit("headers", res, path8, stat);
+      this.emit("headers", res, path10, stat);
       if (this._acceptRanges && !res.getHeader("Accept-Ranges")) {
         debug("accept ranges");
         res.setHeader("Accept-Ranges", "bytes");
@@ -20222,9 +20222,9 @@ var require_send = __commonJS({
       }
       return err instanceof Error ? createError(status, err, { expose: false }) : createError(status, err);
     }
-    function decode(path8) {
+    function decode2(path10) {
       try {
-        return decodeURIComponent(path8);
+        return decodeURIComponent(path10);
       } catch (err) {
         return -1;
       }
@@ -20239,11 +20239,11 @@ var require_send = __commonJS({
     function headersSent(res) {
       return typeof res.headersSent !== "boolean" ? Boolean(res._header) : res.headersSent;
     }
-    function normalizeList(val, name) {
+    function normalizeList(val, name2) {
       var list = [].concat(val || []);
       for (var i = 0; i < list.length; i++) {
         if (typeof list[i] !== "string") {
-          throw new TypeError(name + " must be array of strings or false");
+          throw new TypeError(name2 + " must be array of strings or false");
         }
       }
       return list;
@@ -20298,7 +20298,7 @@ var require_forwarded = __commonJS({
       if (!req) {
         throw new TypeError("argument req is required");
       }
-      var proxyAddrs = parse(req.headers["x-forwarded-for"] || "");
+      var proxyAddrs = parse2(req.headers["x-forwarded-for"] || "");
       var socketAddr = getSocketAddr(req);
       var addrs = [socketAddr].concat(proxyAddrs);
       return addrs;
@@ -20306,7 +20306,7 @@ var require_forwarded = __commonJS({
     function getSocketAddr(req) {
       return req.socket ? req.socket.remoteAddress : req.connection.remoteAddress;
     }
-    function parse(header) {
+    function parse2(header) {
       var end = header.length;
       var list = [];
       var start = header.length;
@@ -20857,7 +20857,7 @@ var require_ipaddr = __commonJS({
         return new this(octets);
       };
       ipaddr.IPv4.broadcastAddressFromCIDR = function(string) {
-        var cidr, error, i, ipInterfaceOctets, octets, subnetMaskOctets;
+        var cidr, error2, i, ipInterfaceOctets, octets, subnetMaskOctets;
         try {
           cidr = this.parseCIDR(string);
           ipInterfaceOctets = cidr[0].toByteArray();
@@ -20870,12 +20870,12 @@ var require_ipaddr = __commonJS({
           }
           return new this(octets);
         } catch (error1) {
-          error = error1;
+          error2 = error1;
           throw new Error("ipaddr: the address does not have IPv4 CIDR format");
         }
       };
       ipaddr.IPv4.networkAddressFromCIDR = function(string) {
-        var cidr, error, i, ipInterfaceOctets, octets, subnetMaskOctets;
+        var cidr, error2, i, ipInterfaceOctets, octets, subnetMaskOctets;
         try {
           cidr = this.parseCIDR(string);
           ipInterfaceOctets = cidr[0].toByteArray();
@@ -20888,7 +20888,7 @@ var require_ipaddr = __commonJS({
           }
           return new this(octets);
         } catch (error1) {
-          error = error1;
+          error2 = error1;
           throw new Error("ipaddr: the address does not have IPv4 CIDR format");
         }
       };
@@ -21149,10 +21149,10 @@ var require_utils2 = __commonJS({
     var querystring = require("querystring");
     exports2.etag = createETagGenerator({ weak: false });
     exports2.wetag = createETagGenerator({ weak: true });
-    exports2.isAbsolute = function(path7) {
-      if ("/" === path7[0]) return true;
-      if (":" === path7[1] && ("\\" === path7[2] || "/" === path7[2])) return true;
-      if ("\\\\" === path7.substring(0, 2)) return true;
+    exports2.isAbsolute = function(path9) {
+      if ("/" === path9[0]) return true;
+      if (":" === path9[1] && ("\\" === path9[2] || "/" === path9[2])) return true;
+      if ("\\\\" === path9.substring(0, 2)) return true;
     };
     exports2.flatten = deprecate.function(
       flatten,
@@ -21282,14 +21282,14 @@ var require_application = __commonJS({
     var query = require_query();
     var debug = require_src()("express:application");
     var View = require_view();
-    var http = require("http");
+    var http2 = require("http");
     var compileETag = require_utils2().compileETag;
     var compileQueryParser = require_utils2().compileQueryParser;
     var compileTrust = require_utils2().compileTrust;
     var deprecate = require_depd()("express");
     var flatten = require_array_flatten();
     var merge = require_utils_merge();
-    var resolve = require("path").resolve;
+    var resolve3 = require("path").resolve;
     var setPrototypeOf = require_setprototypeof();
     var hasOwnProperty = Object.prototype.hasOwnProperty;
     var slice = Array.prototype.slice;
@@ -21328,7 +21328,7 @@ var require_application = __commonJS({
       this.mountpath = "/";
       this.locals.settings = this.settings;
       this.set("view", View);
-      this.set("views", resolve("views"));
+      this.set("views", resolve3("views"));
       this.set("jsonp callback name", "callback");
       if (env === "production") {
         this.enable("view cache");
@@ -21364,7 +21364,7 @@ var require_application = __commonJS({
     };
     app2.use = function use(fn) {
       var offset = 0;
-      var path7 = "/";
+      var path9 = "/";
       if (typeof fn !== "function") {
         var arg = fn;
         while (Array.isArray(arg) && arg.length !== 0) {
@@ -21372,7 +21372,7 @@ var require_application = __commonJS({
         }
         if (typeof arg !== "function") {
           offset = 1;
-          path7 = fn;
+          path9 = fn;
         }
       }
       var fns = flatten(slice.call(arguments, offset));
@@ -21383,12 +21383,12 @@ var require_application = __commonJS({
       var router = this._router;
       fns.forEach(function(fn2) {
         if (!fn2 || !fn2.handle || !fn2.set) {
-          return router.use(path7, fn2);
+          return router.use(path9, fn2);
         }
-        debug(".use app under %s", path7);
-        fn2.mountpath = path7;
+        debug(".use app under %s", path9);
+        fn2.mountpath = path9;
         fn2.parent = this;
-        router.use(path7, function mounted_app(req, res, next) {
+        router.use(path9, function mounted_app(req, res, next) {
           var orig = req.app;
           fn2.handle(req, res, function(err) {
             setPrototypeOf(req, orig.request);
@@ -21400,9 +21400,9 @@ var require_application = __commonJS({
       }, this);
       return this;
     };
-    app2.route = function route(path7) {
+    app2.route = function route(path9) {
       this.lazyrouter();
-      return this._router.route(path7);
+      return this._router.route(path9);
     };
     app2.engine = function engine(ext, fn) {
       if (typeof fn !== "function") {
@@ -21412,15 +21412,15 @@ var require_application = __commonJS({
       this.engines[extension] = fn;
       return this;
     };
-    app2.param = function param(name, fn) {
+    app2.param = function param(name2, fn) {
       this.lazyrouter();
-      if (Array.isArray(name)) {
-        for (var i = 0; i < name.length; i++) {
-          this.param(name[i], fn);
+      if (Array.isArray(name2)) {
+        for (var i = 0; i < name2.length; i++) {
+          this.param(name2[i], fn);
         }
         return this;
       }
-      this._router.param(name, fn);
+      this._router.param(name2, fn);
       return this;
     };
     app2.set = function set(setting, val) {
@@ -21453,7 +21453,7 @@ var require_application = __commonJS({
       }
       return this;
     };
-    app2.path = function path7() {
+    app2.path = function path9() {
       return this.parent ? this.parent.path() + this.mountpath : "";
     };
     app2.enabled = function enabled(setting) {
@@ -21469,19 +21469,19 @@ var require_application = __commonJS({
       return this.set(setting, false);
     };
     methods.forEach(function(method) {
-      app2[method] = function(path7) {
+      app2[method] = function(path9) {
         if (method === "get" && arguments.length === 1) {
-          return this.set(path7);
+          return this.set(path9);
         }
         this.lazyrouter();
-        var route = this._router.route(path7);
+        var route = this._router.route(path9);
         route[method].apply(route, slice.call(arguments, 1));
         return this;
       };
     });
-    app2.all = function all(path7) {
+    app2.all = function all(path9) {
       this.lazyrouter();
-      var route = this._router.route(path7);
+      var route = this._router.route(path9);
       var args = slice.call(arguments, 1);
       for (var i = 0; i < methods.length; i++) {
         route[methods[i]].apply(route, args);
@@ -21489,7 +21489,7 @@ var require_application = __commonJS({
       return this;
     };
     app2.del = deprecate.function(app2.delete, "app.del: Use app.delete instead");
-    app2.render = function render(name, options, callback) {
+    app2.render = function render(name2, options, callback) {
       var cache = this.cache;
       var done = callback;
       var engines = this.engines;
@@ -21509,29 +21509,29 @@ var require_application = __commonJS({
         renderOptions.cache = this.enabled("view cache");
       }
       if (renderOptions.cache) {
-        view = cache[name];
+        view = cache[name2];
       }
       if (!view) {
         var View2 = this.get("view");
-        view = new View2(name, {
+        view = new View2(name2, {
           defaultEngine: this.get("view engine"),
           root: this.get("views"),
           engines
         });
         if (!view.path) {
           var dirs = Array.isArray(view.root) && view.root.length > 1 ? 'directories "' + view.root.slice(0, -1).join('", "') + '" or "' + view.root[view.root.length - 1] + '"' : 'directory "' + view.root + '"';
-          var err = new Error('Failed to lookup view "' + name + '" in views ' + dirs);
+          var err = new Error('Failed to lookup view "' + name2 + '" in views ' + dirs);
           err.view = view;
           return done(err);
         }
         if (renderOptions.cache) {
-          cache[name] = view;
+          cache[name2] = view;
         }
       }
       tryRender(view, renderOptions, done);
     };
     app2.listen = function listen() {
-      var server = http.createServer(this);
+      var server = http2.createServer(this);
       return server.listen.apply(server, arguments);
     };
     function logerror(err) {
@@ -22133,21 +22133,21 @@ var require_request = __commonJS({
     var deprecate = require_depd()("express");
     var isIP = require("net").isIP;
     var typeis = require_type_is();
-    var http = require("http");
+    var http2 = require("http");
     var fresh = require_fresh();
     var parseRange = require_range_parser();
-    var parse = require_parseurl();
+    var parse2 = require_parseurl();
     var proxyaddr = require_proxy_addr();
-    var req = Object.create(http.IncomingMessage.prototype);
+    var req = Object.create(http2.IncomingMessage.prototype);
     module2.exports = req;
-    req.get = req.header = function header(name) {
-      if (!name) {
+    req.get = req.header = function header(name2) {
+      if (!name2) {
         throw new TypeError("name argument is required to req.get");
       }
-      if (typeof name !== "string") {
+      if (typeof name2 !== "string") {
         throw new TypeError("name must be a string to req.get");
       }
-      var lc = name.toLowerCase();
+      var lc = name2.toLowerCase();
       switch (lc) {
         case "referer":
         case "referrer":
@@ -22189,15 +22189,15 @@ var require_request = __commonJS({
       if (!range2) return;
       return parseRange(size, range2, options);
     };
-    req.param = function param(name, defaultValue) {
+    req.param = function param(name2, defaultValue) {
       var params = this.params || {};
       var body = this.body || {};
       var query = this.query || {};
       var args = arguments.length === 1 ? "name" : "name, default";
       deprecate("req.param(" + args + "): Use req.params, req.body, or req.query instead");
-      if (null != params[name] && params.hasOwnProperty(name)) return params[name];
-      if (null != body[name]) return body[name];
-      if (null != query[name]) return query[name];
+      if (null != params[name2] && params.hasOwnProperty(name2)) return params[name2];
+      if (null != body[name2]) return body[name2];
+      if (null != query[name2]) return query[name2];
       return defaultValue;
     };
     req.is = function is(types2) {
@@ -22240,8 +22240,8 @@ var require_request = __commonJS({
       var subdomains2 = !isIP(hostname) ? hostname.split(".").reverse() : [hostname];
       return subdomains2.slice(offset);
     });
-    defineGetter(req, "path", function path7() {
-      return parse(this).pathname;
+    defineGetter(req, "path", function path9() {
+      return parse2(this).pathname;
     });
     defineGetter(req, "hostname", function hostname() {
       var trust = this.app.get("trust proxy fn");
@@ -22279,8 +22279,8 @@ var require_request = __commonJS({
       var val = this.get("X-Requested-With") || "";
       return val.toLowerCase() === "xmlhttprequest";
     });
-    function defineGetter(obj, name, getter) {
-      Object.defineProperty(obj, name, {
+    function defineGetter(obj, name2, getter) {
+      Object.defineProperty(obj, name2, {
         configurable: true,
         enumerable: true,
         get: getter
@@ -22292,11 +22292,11 @@ var require_request = __commonJS({
 // node_modules/cookie-signature/index.js
 var require_cookie_signature = __commonJS({
   "node_modules/cookie-signature/index.js"(exports2) {
-    var crypto2 = require("crypto");
+    var crypto9 = require("crypto");
     exports2.sign = function(val, secret) {
       if ("string" !== typeof val) throw new TypeError("Cookie value must be provided as a string.");
       if (null == secret) throw new TypeError("Secret key must be provided.");
-      return val + "." + crypto2.createHmac("sha256", secret).update(val).digest("base64").replace(/\=+$/, "");
+      return val + "." + crypto9.createHmac("sha256", secret).update(val).digest("base64").replace(/\=+$/, "");
     };
     exports2.unsign = function(val, secret) {
       if ("string" !== typeof val) throw new TypeError("Signed cookie string must be provided.");
@@ -22305,7 +22305,7 @@ var require_cookie_signature = __commonJS({
       return sha1(mac) == sha1(val) ? str : false;
     };
     function sha1(str) {
-      return crypto2.createHash("sha1").update(str).digest("hex");
+      return crypto9.createHash("sha1").update(str).digest("hex");
     }
   }
 });
@@ -22314,7 +22314,7 @@ var require_cookie_signature = __commonJS({
 var require_cookie = __commonJS({
   "node_modules/cookie/index.js"(exports2) {
     "use strict";
-    exports2.parse = parse;
+    exports2.parse = parse2;
     exports2.serialize = serialize;
     var __toString = Object.prototype.toString;
     var __hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -22322,14 +22322,14 @@ var require_cookie = __commonJS({
     var cookieValueRegExp = /^("?)[\u0021\u0023-\u002B\u002D-\u003A\u003C-\u005B\u005D-\u007E]*\1$/;
     var domainValueRegExp = /^([.]?[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)([.][a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)*$/i;
     var pathValueRegExp = /^[\u0020-\u003A\u003D-\u007E]*$/;
-    function parse(str, opt) {
+    function parse2(str, opt) {
       if (typeof str !== "string") {
         throw new TypeError("argument str must be a string");
       }
       var obj = {};
       var len = str.length;
       if (len < 2) return obj;
-      var dec = opt && opt.decode || decode;
+      var dec = opt && opt.decode || decode2;
       var index = 0;
       var eqIdx = 0;
       var endIdx = 0;
@@ -22374,19 +22374,19 @@ var require_cookie = __commonJS({
       }
       return min;
     }
-    function serialize(name, val, opt) {
+    function serialize(name2, val, opt) {
       var enc = opt && opt.encode || encodeURIComponent;
       if (typeof enc !== "function") {
         throw new TypeError("option encode is invalid");
       }
-      if (!cookieNameRegExp.test(name)) {
+      if (!cookieNameRegExp.test(name2)) {
         throw new TypeError("argument name is invalid");
       }
       var value = enc(val);
       if (!cookieValueRegExp.test(value)) {
         throw new TypeError("argument val is invalid");
       }
-      var str = name + "=" + value;
+      var str = name2 + "=" + value;
       if (!opt) return str;
       if (null != opt.maxAge) {
         var maxAge = Math.floor(opt.maxAge);
@@ -22460,15 +22460,15 @@ var require_cookie = __commonJS({
       }
       return str;
     }
-    function decode(str) {
+    function decode2(str) {
       return str.indexOf("%") !== -1 ? decodeURIComponent(str) : str;
     }
     function isDate(val) {
       return __toString.call(val) === "[object Date]";
     }
-    function tryDecode(str, decode2) {
+    function tryDecode(str, decode3) {
       try {
-        return decode2(str);
+        return decode3(str);
       } catch (e) {
         return str;
       }
@@ -22490,7 +22490,7 @@ var require_vary = __commonJS({
       if (!field) {
         throw new TypeError("field argument is required");
       }
-      var fields = !Array.isArray(field) ? parse(String(field)) : field;
+      var fields = !Array.isArray(field) ? parse2(String(field)) : field;
       for (var j = 0; j < fields.length; j++) {
         if (!FIELD_NAME_REGEXP.test(fields[j])) {
           throw new TypeError("field argument contains an invalid header name");
@@ -22500,7 +22500,7 @@ var require_vary = __commonJS({
         return header;
       }
       var val = header;
-      var vals = parse(header.toLowerCase());
+      var vals = parse2(header.toLowerCase());
       if (fields.indexOf("*") !== -1 || vals.indexOf("*") !== -1) {
         return "*";
       }
@@ -22513,7 +22513,7 @@ var require_vary = __commonJS({
       }
       return val;
     }
-    function parse(header) {
+    function parse2(header) {
       var end = 0;
       var list = [];
       var start = 0;
@@ -22559,23 +22559,23 @@ var require_response = __commonJS({
     var deprecate = require_depd()("express");
     var encodeUrl = require_encodeurl();
     var escapeHtml = require_escape_html();
-    var http = require("http");
+    var http2 = require("http");
     var isAbsolute = require_utils2().isAbsolute;
     var onFinished = require_on_finished();
-    var path7 = require("path");
+    var path9 = require("path");
     var statuses = require_statuses();
     var merge = require_utils_merge();
-    var sign = require_cookie_signature().sign;
+    var sign2 = require_cookie_signature().sign;
     var normalizeType = require_utils2().normalizeType;
     var normalizeTypes = require_utils2().normalizeTypes;
     var setCharset = require_utils2().setCharset;
     var cookie = require_cookie();
     var send = require_send();
-    var extname = path7.extname;
+    var extname = path9.extname;
     var mime = send.mime;
-    var resolve = path7.resolve;
+    var resolve3 = path9.resolve;
     var vary = require_vary();
-    var res = Object.create(http.ServerResponse.prototype);
+    var res = Object.create(http2.ServerResponse.prototype);
     module2.exports = res;
     var charsetRegExp = /;\s*charset\s*=/;
     res.status = function status(code) {
@@ -22750,26 +22750,26 @@ var require_response = __commonJS({
       this.type("txt");
       return this.send(body);
     };
-    res.sendFile = function sendFile(path8, options, callback) {
+    res.sendFile = function sendFile(path10, options, callback) {
       var done = callback;
       var req = this.req;
       var res2 = this;
       var next = req.next;
       var opts = options || {};
-      if (!path8) {
+      if (!path10) {
         throw new TypeError("path argument is required to res.sendFile");
       }
-      if (typeof path8 !== "string") {
+      if (typeof path10 !== "string") {
         throw new TypeError("path must be a string to res.sendFile");
       }
       if (typeof options === "function") {
         done = options;
         opts = {};
       }
-      if (!opts.root && !isAbsolute(path8)) {
+      if (!opts.root && !isAbsolute(path10)) {
         throw new TypeError("path must be absolute or specify root to res.sendFile");
       }
-      var pathname = encodeURI(path8);
+      var pathname = encodeURI(path10);
       var file = send(req, pathname, opts);
       sendfile(res2, file, opts, function(err) {
         if (done) return done(err);
@@ -22779,7 +22779,7 @@ var require_response = __commonJS({
         }
       });
     };
-    res.sendfile = function(path8, options, callback) {
+    res.sendfile = function(path10, options, callback) {
       var done = callback;
       var req = this.req;
       var res2 = this;
@@ -22789,7 +22789,7 @@ var require_response = __commonJS({
         done = options;
         opts = {};
       }
-      var file = send(req, path8, opts);
+      var file = send(req, path10, opts);
       sendfile(res2, file, opts, function(err) {
         if (done) return done(err);
         if (err && err.code === "EISDIR") return next();
@@ -22802,24 +22802,24 @@ var require_response = __commonJS({
       res.sendfile,
       "res.sendfile: Use res.sendFile instead"
     );
-    res.download = function download(path8, filename, options, callback) {
+    res.download = function download(path10, filename, options, callback) {
       var done = callback;
-      var name = filename;
+      var name2 = filename;
       var opts = options || null;
       if (typeof filename === "function") {
         done = filename;
-        name = null;
+        name2 = null;
         opts = null;
       } else if (typeof options === "function") {
         done = options;
         opts = null;
       }
       if (typeof filename === "object" && (typeof options === "function" || options === void 0)) {
-        name = null;
+        name2 = null;
         opts = filename;
       }
       var headers = {
-        "Content-Disposition": contentDisposition(name || path8)
+        "Content-Disposition": contentDisposition(name2 || path10)
       };
       if (opts && opts.headers) {
         var keys = Object.keys(opts.headers);
@@ -22832,7 +22832,7 @@ var require_response = __commonJS({
       }
       opts = Object.create(opts);
       opts.headers = headers;
-      var fullPath = !opts.root ? resolve(path8) : path8;
+      var fullPath = !opts.root ? resolve3(path10) : path10;
       return this.sendFile(fullPath, opts, done);
     };
     res.contentType = res.type = function contentType(type) {
@@ -22899,7 +22899,7 @@ var require_response = __commonJS({
     res.get = function(field) {
       return this.getHeader(field);
     };
-    res.clearCookie = function clearCookie(name, options) {
+    res.clearCookie = function clearCookie(name2, options) {
       if (options) {
         if (options.maxAge) {
           deprecate('res.clearCookie: Passing "options.maxAge" is deprecated. In v5.0.0 of Express, this option will be ignored, as res.clearCookie will automatically set cookies to expire immediately. Please update your code to omit this option.');
@@ -22909,9 +22909,9 @@ var require_response = __commonJS({
         }
       }
       var opts = merge({ expires: /* @__PURE__ */ new Date(1), path: "/" }, options);
-      return this.cookie(name, "", opts);
+      return this.cookie(name2, "", opts);
     };
-    res.cookie = function(name, value, options) {
+    res.cookie = function(name2, value, options) {
       var opts = merge({}, options);
       var secret = this.req.secret;
       var signed = opts.signed;
@@ -22920,7 +22920,7 @@ var require_response = __commonJS({
       }
       var val = typeof value === "object" ? "j:" + JSON.stringify(value) : String(value);
       if (signed) {
-        val = "s:" + sign(val, secret);
+        val = "s:" + sign2(val, secret);
       }
       if (opts.maxAge != null) {
         var maxAge = opts.maxAge - 0;
@@ -22932,7 +22932,7 @@ var require_response = __commonJS({
       if (opts.path == null) {
         opts.path = "/";
       }
-      this.append("Set-Cookie", cookie.serialize(name, String(val), opts));
+      this.append("Set-Cookie", cookie.serialize(name2, String(val), opts));
       return this;
     };
     res.location = function location2(url) {
@@ -23098,7 +23098,7 @@ var require_serve_static = __commonJS({
     var encodeUrl = require_encodeurl();
     var escapeHtml = require_escape_html();
     var parseUrl = require_parseurl();
-    var resolve = require("path").resolve;
+    var resolve3 = require("path").resolve;
     var send = require_send();
     var url = require("url");
     module2.exports = serveStatic;
@@ -23118,7 +23118,7 @@ var require_serve_static = __commonJS({
         throw new TypeError("option setHeaders must be function");
       }
       opts.maxage = opts.maxage || opts.maxAge || 0;
-      opts.root = resolve(root);
+      opts.root = resolve3(root);
       var onDirectory = redirect ? createRedirectDirectoryListener() : createNotFoundDirectoryListener();
       return function serveStatic2(req, res, next) {
         if (req.method !== "GET" && req.method !== "HEAD") {
@@ -23133,11 +23133,11 @@ var require_serve_static = __commonJS({
         }
         var forwardError = !fallthrough;
         var originalUrl = parseUrl.original(req);
-        var path7 = parseUrl(req).pathname;
-        if (path7 === "/" && originalUrl.pathname.substr(-1) !== "/") {
-          path7 = "";
+        var path9 = parseUrl(req).pathname;
+        if (path9 === "/" && originalUrl.pathname.substr(-1) !== "/") {
+          path9 = "";
         }
-        var stream = send(req, path7, opts);
+        var stream = send(req, path9, opts);
         stream.on("directory", onDirectory);
         if (setHeaders) {
           stream.on("headers", setHeaders);
@@ -23147,7 +23147,7 @@ var require_serve_static = __commonJS({
             forwardError = true;
           });
         }
-        stream.on("error", function error(err) {
+        stream.on("error", function error2(err) {
           if (forwardError || !(err.statusCode < 500)) {
             next(err);
             return;
@@ -23201,7 +23201,7 @@ var require_express = __commonJS({
   "node_modules/express/lib/express.js"(exports2, module2) {
     "use strict";
     var bodyParser = require_body_parser();
-    var EventEmitter2 = require("events").EventEmitter;
+    var EventEmitter8 = require("events").EventEmitter;
     var mixin = require_merge_descriptors();
     var proto = require_application();
     var Route = require_route();
@@ -23213,7 +23213,7 @@ var require_express = __commonJS({
       var app2 = function(req2, res2, next) {
         app2.handle(req2, res2, next);
       };
-      mixin(app2, EventEmitter2.prototype, false);
+      mixin(app2, EventEmitter8.prototype, false);
       mixin(app2, proto, false);
       app2.request = Object.create(req, {
         app: { configurable: true, enumerable: true, writable: true, value: app2 }
@@ -23254,10 +23254,10 @@ var require_express = __commonJS({
       "multipart",
       "staticCache"
     ];
-    removedMiddlewares.forEach(function(name) {
-      Object.defineProperty(exports2, name, {
+    removedMiddlewares.forEach(function(name2) {
+      Object.defineProperty(exports2, name2, {
         get: function() {
-          throw new Error("Most middleware (like " + name + ") is no longer bundled with Express and must be installed separately. Please see https://github.com/senchalabs/connect#middleware.");
+          throw new Error("Most middleware (like " + name2 + ") is no longer bundled with Express and must be installed separately. Please see https://github.com/senchalabs/connect#middleware.");
         },
         configurable: true
       });
@@ -23348,7 +23348,7 @@ var require_lib3 = __commonJS({
   "node_modules/cors/lib/index.js"(exports2, module2) {
     (function() {
       "use strict";
-      var assign = require_object_assign();
+      var assign2 = require_object_assign();
       var vary = require_vary();
       var defaults2 = {
         origin: "*",
@@ -23521,7 +23521,7 @@ var require_lib3 = __commonJS({
             if (err) {
               next(err);
             } else {
-              var corsOptions = assign({}, defaults2, options);
+              var corsOptions = assign2({}, defaults2, options);
               var originCallback = null;
               if (corsOptions.origin && typeof corsOptions.origin === "function") {
                 originCallback = corsOptions.origin;
@@ -23622,14 +23622,14 @@ var require_package = __commonJS({
 // node_modules/dotenv/lib/main.js
 var require_main = __commonJS({
   "node_modules/dotenv/lib/main.js"(exports2, module2) {
-    var fs6 = require("fs");
-    var path7 = require("path");
-    var os2 = require("os");
-    var crypto2 = require("crypto");
+    var fs9 = require("fs");
+    var path9 = require("path");
+    var os4 = require("os");
+    var crypto9 = require("crypto");
     var packageJson = require_package();
-    var version3 = packageJson.version;
+    var version4 = packageJson.version;
     var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
-    function parse(src) {
+    function parse2(src) {
       const obj = {};
       let lines = src.toString();
       lines = lines.replace(/\r\n?/mg, "\n");
@@ -23667,22 +23667,22 @@ var require_main = __commonJS({
           const attrs = _instructions(result, key);
           decrypted = DotenvModule.decrypt(attrs.ciphertext, attrs.key);
           break;
-        } catch (error) {
+        } catch (error2) {
           if (i + 1 >= length) {
-            throw error;
+            throw error2;
           }
         }
       }
       return DotenvModule.parse(decrypted);
     }
     function _warn(message) {
-      console.log(`[dotenv@${version3}][WARN] ${message}`);
+      console.log(`[dotenv@${version4}][WARN] ${message}`);
     }
     function _debug(message) {
-      console.log(`[dotenv@${version3}][DEBUG] ${message}`);
+      console.log(`[dotenv@${version4}][DEBUG] ${message}`);
     }
     function _log(message) {
-      console.log(`[dotenv@${version3}] ${message}`);
+      console.log(`[dotenv@${version4}] ${message}`);
     }
     function _dotenvKey(options) {
       if (options && options.DOTENV_KEY && options.DOTENV_KEY.length > 0) {
@@ -23697,13 +23697,13 @@ var require_main = __commonJS({
       let uri;
       try {
         uri = new URL(dotenvKey);
-      } catch (error) {
-        if (error.code === "ERR_INVALID_URL") {
+      } catch (error2) {
+        if (error2.code === "ERR_INVALID_URL") {
           const err = new Error("INVALID_DOTENV_KEY: Wrong format. Must be in valid uri format like dotenv://:key_1234@dotenvx.com/vault/.env.vault?environment=development");
           err.code = "INVALID_DOTENV_KEY";
           throw err;
         }
-        throw error;
+        throw error2;
       }
       const key = uri.password;
       if (!key) {
@@ -23731,7 +23731,7 @@ var require_main = __commonJS({
       if (options && options.path && options.path.length > 0) {
         if (Array.isArray(options.path)) {
           for (const filepath of options.path) {
-            if (fs6.existsSync(filepath)) {
+            if (fs9.existsSync(filepath)) {
               possibleVaultPath = filepath.endsWith(".vault") ? filepath : `${filepath}.vault`;
             }
           }
@@ -23739,15 +23739,15 @@ var require_main = __commonJS({
           possibleVaultPath = options.path.endsWith(".vault") ? options.path : `${options.path}.vault`;
         }
       } else {
-        possibleVaultPath = path7.resolve(process.cwd(), ".env.vault");
+        possibleVaultPath = path9.resolve(process.cwd(), ".env.vault");
       }
-      if (fs6.existsSync(possibleVaultPath)) {
+      if (fs9.existsSync(possibleVaultPath)) {
         return possibleVaultPath;
       }
       return null;
     }
     function _resolveHome(envPath) {
-      return envPath[0] === "~" ? path7.join(os2.homedir(), envPath.slice(1)) : envPath;
+      return envPath[0] === "~" ? path9.join(os4.homedir(), envPath.slice(1)) : envPath;
     }
     function _configVault(options) {
       const debug = Boolean(options && options.debug);
@@ -23764,7 +23764,7 @@ var require_main = __commonJS({
       return { parsed };
     }
     function configDotenv(options) {
-      const dotenvPath = path7.resolve(process.cwd(), ".env");
+      const dotenvPath = path9.resolve(process.cwd(), ".env");
       let encoding = "utf8";
       const debug = Boolean(options && options.debug);
       const quiet = options && "quiet" in options ? options.quiet : true;
@@ -23788,13 +23788,13 @@ var require_main = __commonJS({
       }
       let lastError;
       const parsedAll = {};
-      for (const path8 of optionPaths) {
+      for (const path10 of optionPaths) {
         try {
-          const parsed = DotenvModule.parse(fs6.readFileSync(path8, { encoding }));
+          const parsed = DotenvModule.parse(fs9.readFileSync(path10, { encoding }));
           DotenvModule.populate(parsedAll, parsed, options);
         } catch (e) {
           if (debug) {
-            _debug(`Failed to load ${path8} ${e.message}`);
+            _debug(`Failed to load ${path10} ${e.message}`);
           }
           lastError = e;
         }
@@ -23809,7 +23809,7 @@ var require_main = __commonJS({
         const shortPaths = [];
         for (const filePath of optionPaths) {
           try {
-            const relative = path7.relative(process.cwd(), filePath);
+            const relative = path9.relative(process.cwd(), filePath);
             shortPaths.push(relative);
           } catch (e) {
             if (debug) {
@@ -23844,13 +23844,13 @@ var require_main = __commonJS({
       const authTag = ciphertext.subarray(-16);
       ciphertext = ciphertext.subarray(12, -16);
       try {
-        const aesgcm = crypto2.createDecipheriv("aes-256-gcm", key, nonce);
+        const aesgcm = crypto9.createDecipheriv("aes-256-gcm", key, nonce);
         aesgcm.setAuthTag(authTag);
         return `${aesgcm.update(ciphertext)}${aesgcm.final()}`;
-      } catch (error) {
-        const isRange = error instanceof RangeError;
-        const invalidKeyLength = error.message === "Invalid key length";
-        const decryptionFailed = error.message === "Unsupported state or unable to authenticate data";
+      } catch (error2) {
+        const isRange = error2 instanceof RangeError;
+        const invalidKeyLength = error2.message === "Invalid key length";
+        const decryptionFailed = error2.message === "Unsupported state or unable to authenticate data";
         if (isRange || invalidKeyLength) {
           const err = new Error("INVALID_DOTENV_KEY: It must be 64 characters long (or more)");
           err.code = "INVALID_DOTENV_KEY";
@@ -23860,7 +23860,7 @@ var require_main = __commonJS({
           err.code = "DECRYPTION_FAILED";
           throw err;
         } else {
-          throw error;
+          throw error2;
         }
       }
     }
@@ -23895,7 +23895,7 @@ var require_main = __commonJS({
       _parseVault,
       config: config2,
       decrypt,
-      parse,
+      parse: parse2,
       populate
     };
     module2.exports.configDotenv = DotenvModule.configDotenv;
@@ -24093,9 +24093,9 @@ var require_postgres_date = __commonJS({
       if (type === "Z") {
         return 0;
       }
-      var sign = type === "-" ? -1 : 1;
+      var sign2 = type === "-" ? -1 : 1;
       var offset = parseInt(zone[2], 10) * 3600 + parseInt(zone[3] || 0, 10) * 60 + parseInt(zone[4] || 0, 10);
-      return offset * sign * 1e3;
+      return offset * sign2 * 1e3;
     }
     function bcYearToNegativeYear(year) {
       return -(year - 1);
@@ -24135,7 +24135,7 @@ var require_postgres_interval = __commonJS({
       if (!(this instanceof PostgresInterval)) {
         return new PostgresInterval(raw);
       }
-      extend(this, parse(raw));
+      extend(this, parse2(raw));
     }
     var properties = ["seconds", "minutes", "hours", "days", "months", "years"];
     PostgresInterval.prototype.toPostgres = function() {
@@ -24196,7 +24196,7 @@ var require_postgres_interval = __commonJS({
       var microseconds = fraction + "000000".slice(fraction.length);
       return parseInt(microseconds, 10) / 1e3;
     }
-    function parse(interval) {
+    function parse2(interval) {
       if (!interval) return {};
       var matches = INTERVAL.exec(interval);
       var isNegative = matches[8] === "-";
@@ -24460,11 +24460,11 @@ var require_pg_int8 = __commonJS({
     function readInt8(buffer) {
       var high = buffer.readInt32BE(0);
       var low = buffer.readUInt32BE(4);
-      var sign = "";
+      var sign2 = "";
       if (high < 0) {
         high = ~high + (low === 0);
         low = ~low + 1 >>> 0;
-        sign = "-";
+        sign2 = "-";
       }
       var result = "";
       var carry;
@@ -24480,7 +24480,7 @@ var require_pg_int8 = __commonJS({
         low = t / BASE >>> 0;
         digits = "" + (t - BASE * low);
         if (low === 0 && high === 0) {
-          return sign + digits + result;
+          return sign2 + digits + result;
         }
         pad = "";
         l = 6 - digits.length;
@@ -24496,7 +24496,7 @@ var require_pg_int8 = __commonJS({
         low = t / BASE >>> 0;
         digits = "" + (t - BASE * low);
         if (low === 0 && high === 0) {
-          return sign + digits + result;
+          return sign2 + digits + result;
         }
         pad = "";
         l = 6 - digits.length;
@@ -24512,7 +24512,7 @@ var require_pg_int8 = __commonJS({
         low = t / BASE >>> 0;
         digits = "" + (t - BASE * low);
         if (low === 0 && high === 0) {
-          return sign + digits + result;
+          return sign2 + digits + result;
         }
         pad = "";
         l = 6 - digits.length;
@@ -24525,7 +24525,7 @@ var require_pg_int8 = __commonJS({
         carry = high % BASE;
         t = 4294967296 * carry + low;
         digits = "" + t % BASE;
-        return sign + digits + result;
+        return sign2 + digits + result;
       }
     }
     module2.exports = readInt8;
@@ -24574,7 +24574,7 @@ var require_binaryParsers = __commonJS({
     };
     var parseFloatFromBits = function(data, precisionBits, exponentBits) {
       var bias = Math.pow(2, exponentBits - 1) - 1;
-      var sign = parseBits(data, 1);
+      var sign2 = parseBits(data, 1);
       var exponent = parseBits(data, exponentBits, 1);
       if (exponent === 0) {
         return 0;
@@ -24595,11 +24595,11 @@ var require_binaryParsers = __commonJS({
       var mantissa = parseBits(data, precisionBits, exponentBits + 1, false, parsePrecisionBits);
       if (exponent == Math.pow(2, exponentBits + 1) - 1) {
         if (mantissa === 0) {
-          return sign === 0 ? Infinity : -Infinity;
+          return sign2 === 0 ? Infinity : -Infinity;
         }
         return NaN;
       }
-      return (sign === 0 ? 1 : -1) * Math.pow(2, exponent - bias) * mantissa;
+      return (sign2 === 0 ? 1 : -1) * Math.pow(2, exponent - bias) * mantissa;
     };
     var parseInt16 = function(value) {
       if (parseBits(value, 1) == 1) {
@@ -24620,8 +24620,8 @@ var require_binaryParsers = __commonJS({
       return parseFloatFromBits(value, 52, 11);
     };
     var parseNumeric = function(value) {
-      var sign = parseBits(value, 16, 32);
-      if (sign == 49152) {
+      var sign2 = parseBits(value, 16, 32);
+      if (sign2 == 49152) {
         return NaN;
       }
       var weight = Math.pow(1e4, parseBits(value, 16, 16));
@@ -24633,12 +24633,12 @@ var require_binaryParsers = __commonJS({
         weight /= 1e4;
       }
       var scale = Math.pow(10, parseBits(value, 16, 48));
-      return (sign === 0 ? 1 : -1) * Math.round(result * scale) / scale;
+      return (sign2 === 0 ? 1 : -1) * Math.round(result * scale) / scale;
     };
     var parseDate = function(isUTC, value) {
-      var sign = parseBits(value, 1);
+      var sign2 = parseBits(value, 1);
       var rawValue = parseBits(value, 63, 1);
-      var result = new Date((sign === 0 ? 1 : -1) * rawValue / 1e3 + 9466848e5);
+      var result = new Date((sign2 === 0 ? 1 : -1) * rawValue / 1e3 + 9466848e5);
       if (!isUTC) {
         result.setTime(result.getTime() + result.getTimezoneOffset() * 6e4);
       }
@@ -24683,13 +24683,13 @@ var require_binaryParsers = __commonJS({
           console.log("ERROR: ElementType not implemented: " + elementType2);
         }
       };
-      var parse = function(dimension, elementType2) {
+      var parse2 = function(dimension, elementType2) {
         var array = [];
         var i2;
         if (dimension.length > 1) {
           var count = dimension.shift();
           for (i2 = 0; i2 < count; i2++) {
-            array[i2] = parse(dimension, elementType2);
+            array[i2] = parse2(dimension, elementType2);
           }
           dimension.unshift(count);
         } else {
@@ -24699,7 +24699,7 @@ var require_binaryParsers = __commonJS({
         }
         return array;
       };
-      return parse(dims, elementType);
+      return parse2(dims, elementType);
     };
     var parseText = function(value) {
       return value.toString("utf8");
@@ -25242,7 +25242,7 @@ var require_cert_signatures = __commonJS({
 var require_sasl = __commonJS({
   "node_modules/pg/lib/crypto/sasl.js"(exports2, module2) {
     "use strict";
-    var crypto2 = require_utils4();
+    var crypto9 = require_utils4();
     var { signatureAlgorithmHashFromCertificate } = require_cert_signatures();
     function saslprep(password) {
       const nonAsciiSpace = /[\u00A0\u1680\u2000-\u200B\u202F\u205F\u3000]/g;
@@ -25260,7 +25260,7 @@ var require_sasl = __commonJS({
       if (mechanism === "SCRAM-SHA-256-PLUS" && typeof stream.getPeerCertificate !== "function") {
         throw new Error("SASL: Mechanism SCRAM-SHA-256-PLUS requires a certificate");
       }
-      const clientNonce = crypto2.randomBytes(18).toString("base64");
+      const clientNonce = crypto9.randomBytes(18).toString("base64");
       const gs2Header = mechanism === "SCRAM-SHA-256-PLUS" ? "p=tls-server-end-point" : stream ? "y" : "n";
       return {
         mechanism,
@@ -25302,20 +25302,20 @@ var require_sasl = __commonJS({
         const peerCert = stream.getPeerCertificate().raw;
         let hashName = signatureAlgorithmHashFromCertificate(peerCert);
         if (hashName === "MD5" || hashName === "SHA-1") hashName = "SHA-256";
-        const certHash = await crypto2.hashByName(hashName, peerCert);
+        const certHash = await crypto9.hashByName(hashName, peerCert);
         const bindingData = Buffer.concat([Buffer.from("p=tls-server-end-point,,"), Buffer.from(certHash)]);
         channelBinding = bindingData.toString("base64");
       }
       const clientFinalMessageWithoutProof = "c=" + channelBinding + ",r=" + sv.nonce;
       const authMessage = clientFirstMessageBare + "," + serverFirstMessage + "," + clientFinalMessageWithoutProof;
       const saltBytes = Buffer.from(sv.salt, "base64");
-      const saltedPassword = await crypto2.deriveKey(saslprep(password), saltBytes, sv.iteration);
-      const clientKey = await crypto2.hmacSha256(saltedPassword, "Client Key");
-      const storedKey = await crypto2.sha256(clientKey);
-      const clientSignature = await crypto2.hmacSha256(storedKey, authMessage);
+      const saltedPassword = await crypto9.deriveKey(saslprep(password), saltBytes, sv.iteration);
+      const clientKey = await crypto9.hmacSha256(saltedPassword, "Client Key");
+      const storedKey = await crypto9.sha256(clientKey);
+      const clientSignature = await crypto9.hmacSha256(storedKey, authMessage);
       const clientProof = xorBuffers(Buffer.from(clientKey), Buffer.from(clientSignature)).toString("base64");
-      const serverKey = await crypto2.hmacSha256(saltedPassword, "Server Key");
-      const serverSignatureBytes = await crypto2.hmacSha256(serverKey, authMessage);
+      const serverKey = await crypto9.hmacSha256(saltedPassword, "Server Key");
+      const serverSignatureBytes = await crypto9.hmacSha256(serverKey, authMessage);
       session.message = "SASLResponse";
       session.serverSignature = Buffer.from(serverSignatureBytes).toString("base64");
       session.response = clientFinalMessageWithoutProof + ",p=" + clientProof;
@@ -25350,9 +25350,9 @@ var require_sasl = __commonJS({
           if (!/^.=/.test(attrValue)) {
             throw new Error("SASL: Invalid attribute pair entry");
           }
-          const name = attrValue[0];
+          const name2 = attrValue[0];
           const value = attrValue.substring(2);
-          return [name, value];
+          return [name2, value];
         })
       );
     }
@@ -25385,10 +25385,10 @@ var require_sasl = __commonJS({
     }
     function parseServerFinalMessage(serverData) {
       const attrPairs = parseAttributePairs(serverData);
-      const error = attrPairs.get("e");
+      const error2 = attrPairs.get("e");
       const serverSignature = attrPairs.get("v");
-      if (error) {
-        throw new Error(`SASL: SCRAM-SERVER-FINAL-MESSAGE: server returned error: "${error}"`);
+      if (error2) {
+        throw new Error(`SASL: SCRAM-SERVER-FINAL-MESSAGE: server returned error: "${error2}"`);
       }
       if (!serverSignature) {
         throw new Error("SASL: SCRAM-SERVER-FINAL-MESSAGE: server signature is missing");
@@ -25462,7 +25462,7 @@ var require_type_overrides = __commonJS({
 var require_pg_connection_string = __commonJS({
   "node_modules/pg-connection-string/index.js"(exports2, module2) {
     "use strict";
-    function parse(str, options = {}) {
+    function parse2(str, options = {}) {
       if (str.charAt(0) === "/") {
         const config3 = str.split(" ");
         return { host: config3[0], database: config3[1] };
@@ -25518,15 +25518,15 @@ var require_pg_connection_string = __commonJS({
       if (config2.sslnegotiation === "direct" && config2.ssl === void 0) {
         config2.ssl = true;
       }
-      const fs6 = config2.sslcert || config2.sslkey || config2.sslrootcert ? require("fs") : null;
+      const fs9 = config2.sslcert || config2.sslkey || config2.sslrootcert ? require("fs") : null;
       if (config2.sslcert) {
-        config2.ssl.cert = fs6.readFileSync(config2.sslcert).toString();
+        config2.ssl.cert = fs9.readFileSync(config2.sslcert).toString();
       }
       if (config2.sslkey) {
-        config2.ssl.key = fs6.readFileSync(config2.sslkey).toString();
+        config2.ssl.key = fs9.readFileSync(config2.sslkey).toString();
       }
       if (config2.sslrootcert) {
-        config2.ssl.ca = fs6.readFileSync(config2.sslrootcert).toString();
+        config2.ssl.ca = fs9.readFileSync(config2.sslrootcert).toString();
       }
       if (options.useLibpqCompat && config2.uselibpqcompat) {
         throw new Error("Both useLibpqCompat and uselibpqcompat are set. Please use only one of them.");
@@ -25624,7 +25624,7 @@ var require_pg_connection_string = __commonJS({
       return poolConfig;
     }
     function parseIntoClientConfig(str) {
-      return toClientConfig(parse(str));
+      return toClientConfig(parse2(str));
     }
     function deprecatedSslModeWarning(sslmode) {
       if (!deprecatedSslModeWarning.warned && typeof process !== "undefined" && process.emitWarning) {
@@ -25639,10 +25639,10 @@ To prepare for this change:
 See https://www.postgresql.org/docs/current/libpq-ssl.html for libpq SSL mode definitions.`);
       }
     }
-    module2.exports = parse;
-    parse.parse = parse;
-    parse.toClientConfig = toClientConfig;
-    parse.parseIntoClientConfig = parseIntoClientConfig;
+    module2.exports = parse2;
+    parse2.parse = parse2;
+    parse2.toClientConfig = toClientConfig;
+    parse2.parseIntoClientConfig = parseIntoClientConfig;
   }
 });
 
@@ -25650,9 +25650,9 @@ See https://www.postgresql.org/docs/current/libpq-ssl.html for libpq SSL mode de
 var require_connection_parameters = __commonJS({
   "node_modules/pg/lib/connection-parameters.js"(exports2, module2) {
     "use strict";
-    var dns = require("dns");
+    var dns3 = require("dns");
     var defaults2 = require_defaults();
-    var parse = require_pg_connection_string().parse;
+    var parse2 = require_pg_connection_string().parse;
     var val = function(key, config2, envVar) {
       if (config2[key]) {
         return config2[key];
@@ -25690,9 +25690,9 @@ var require_connection_parameters = __commonJS({
     };
     var ConnectionParameters = class {
       constructor(config2) {
-        config2 = typeof config2 === "string" ? parse(config2) : config2 || {};
+        config2 = typeof config2 === "string" ? parse2(config2) : config2 || {};
         if (config2.connectionString) {
-          config2 = Object.assign({}, config2, parse(config2.connectionString));
+          config2 = Object.assign({}, config2, parse2(config2.connectionString));
         }
         this.user = val("user", config2);
         this.database = val("database", config2);
@@ -25786,7 +25786,7 @@ var require_connection_parameters = __commonJS({
         if (this.client_encoding) {
           params.push("client_encoding=" + quoteParamValue(this.client_encoding));
         }
-        dns.lookup(this.host, function(err, address) {
+        dns3.lookup(this.host, function(err, address) {
           if (err) return cb(err, null);
           params.push("hostaddr=" + quoteParamValue(address));
           return cb(null, params.join(" "));
@@ -25892,10 +25892,10 @@ var require_result = __commonJS({
 var require_query2 = __commonJS({
   "node_modules/pg/lib/query.js"(exports2, module2) {
     "use strict";
-    var { EventEmitter: EventEmitter2 } = require("events");
+    var { EventEmitter: EventEmitter8 } = require("events");
     var Result2 = require_result();
     var utils = require_utils3();
-    var Query2 = class extends EventEmitter2 {
+    var Query2 = class extends EventEmitter8 {
       constructor(config2, values, callback) {
         super();
         config2 = utils.normalizeQueryConfig(config2, values, callback);
@@ -26129,10 +26129,10 @@ var require_messages = __commonJS({
       length: 4
     };
     var DatabaseError2 = class extends Error {
-      constructor(message, length, name) {
+      constructor(message, length, name2) {
         super(message);
         this.length = length;
-        this.name = name;
+        this.name = name2;
       }
     };
     exports2.DatabaseError = DatabaseError2;
@@ -26145,17 +26145,17 @@ var require_messages = __commonJS({
     };
     exports2.CopyDataMessage = CopyDataMessage;
     var CopyResponse = class {
-      constructor(length, name, binary, columnCount) {
+      constructor(length, name2, binary, columnCount) {
         this.length = length;
-        this.name = name;
+        this.name = name2;
         this.binary = binary;
         this.columnTypes = new Array(columnCount);
       }
     };
     exports2.CopyResponse = CopyResponse;
     var Field = class {
-      constructor(name, tableID, columnID, dataTypeID, dataTypeSize, dataTypeModifier, format) {
-        this.name = name;
+      constructor(name2, tableID, columnID, dataTypeID, dataTypeSize, dataTypeModifier, format) {
+        this.name = name2;
         this.tableID = tableID;
         this.columnID = columnID;
         this.dataTypeID = dataTypeID;
@@ -26418,16 +26418,16 @@ var require_serializer = __commonJS({
       );
     };
     var emptyArray = [];
-    var parse = (query2) => {
-      const name = query2.name || "";
-      if (name.length > 63) {
+    var parse2 = (query2) => {
+      const name2 = query2.name || "";
+      if (name2.length > 63) {
         console.error("Warning! Postgres only supports 63 characters for query names.");
-        console.error("You supplied %s (%s)", name, name.length);
+        console.error("You supplied %s (%s)", name2, name2.length);
         console.error("This can cause conflicts and silent errors executing queries");
       }
       const types2 = query2.types || emptyArray;
       const len = types2.length;
-      const buffer = writer.addCString(name).addCString(query2.text).addInt16(len);
+      const buffer = writer.addCString(name2).addCString(query2.text).addInt16(len);
       for (let i = 0; i < len; i++) {
         buffer.addInt32(types2[i]);
       }
@@ -26565,7 +26565,7 @@ var require_serializer = __commonJS({
       sendSASLInitialResponseMessage,
       sendSCRAMClientFinalMessage,
       query,
-      parse,
+      parse: parse2,
       bind,
       execute,
       describe,
@@ -26835,14 +26835,14 @@ var require_parser = __commonJS({
       return message;
     };
     var parseField = (reader) => {
-      const name = reader.cstring();
+      const name2 = reader.cstring();
       const tableID = reader.uint32();
       const columnID = reader.int16();
       const dataTypeID = reader.uint32();
       const dataTypeSize = reader.int16();
       const dataTypeModifier = reader.int32();
       const mode = reader.int16() === 0 ? "text" : "binary";
-      return new messages_1.Field(name, tableID, columnID, dataTypeID, dataTypeSize, dataTypeModifier, mode);
+      return new messages_1.Field(name2, tableID, columnID, dataTypeID, dataTypeSize, dataTypeModifier, mode);
     };
     var parseParameterDescriptionMessage = (reader) => {
       const parameterCount = reader.int16();
@@ -26862,9 +26862,9 @@ var require_parser = __commonJS({
       return new messages_1.DataRowMessage(LATEINIT_LENGTH, fields);
     };
     var parseParameterStatusMessage = (reader) => {
-      const name = reader.cstring();
+      const name2 = reader.cstring();
       const value = reader.cstring();
-      return new messages_1.ParameterStatusMessage(LATEINIT_LENGTH, name, value);
+      return new messages_1.ParameterStatusMessage(LATEINIT_LENGTH, name2, value);
     };
     var parseBackendKeyData = (reader) => {
       const processID = reader.int32();
@@ -26918,7 +26918,7 @@ var require_parser = __commonJS({
       }
       return message;
     };
-    var parseErrorMessage = (reader, name) => {
+    var parseErrorMessage = (reader, name2) => {
       const fields = {};
       let fieldType = reader.string(1);
       while (fieldType !== "\0") {
@@ -26926,7 +26926,7 @@ var require_parser = __commonJS({
         fieldType = reader.string(1);
       }
       const messageValue = fields.M;
-      const message = name === "notice" ? new messages_1.NoticeMessage(LATEINIT_LENGTH, messageValue) : new messages_1.DatabaseError(messageValue, LATEINIT_LENGTH, name);
+      const message = name2 === "notice" ? new messages_1.NoticeMessage(LATEINIT_LENGTH, messageValue) : new messages_1.DatabaseError(messageValue, LATEINIT_LENGTH, name2);
       message.severity = fields.S;
       message.code = fields.C;
       message.detail = fields.D;
@@ -26954,7 +26954,7 @@ var require_dist = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.DatabaseError = exports2.serialize = void 0;
-    exports2.parse = parse;
+    exports2.parse = parse2;
     var messages_1 = require_messages();
     Object.defineProperty(exports2, "DatabaseError", { enumerable: true, get: function() {
       return messages_1.DatabaseError;
@@ -26964,10 +26964,10 @@ var require_dist = __commonJS({
       return serializer_1.serialize;
     } });
     var parser_1 = require_parser();
-    function parse(stream, callback) {
+    function parse2(stream, callback) {
       const parser = new parser_1.Parser();
       stream.on("data", (buffer) => parser.parse(buffer, callback));
-      return new Promise((resolve) => stream.on("end", () => resolve()));
+      return new Promise((resolve3) => stream.on("end", () => resolve3()));
     }
   }
 });
@@ -27000,12 +27000,12 @@ var require_stream = __commonJS({
     };
     function getNodejsStreamFuncs() {
       function getStream2(ssl) {
-        const net = require("net");
-        return new net.Socket();
+        const net8 = require("net");
+        return new net8.Socket();
       }
       function getSecureStream2(options) {
-        const tls = require("tls");
-        return tls.connect(options);
+        const tls3 = require("tls");
+        return tls3.connect(options);
       }
       return {
         getStream: getStream2,
@@ -27051,14 +27051,14 @@ var require_stream = __commonJS({
 var require_connection = __commonJS({
   "node_modules/pg/lib/connection.js"(exports2, module2) {
     "use strict";
-    var EventEmitter2 = require("events").EventEmitter;
-    var { parse, serialize } = require_dist();
+    var EventEmitter8 = require("events").EventEmitter;
+    var { parse: parse2, serialize } = require_dist();
     var stream = require_stream();
     var { getStream } = stream;
     var flushBuffer = serialize.flush();
     var syncBuffer = serialize.sync();
     var endBuffer = serialize.end();
-    var Connection2 = class extends EventEmitter2 {
+    var Connection2 = class extends EventEmitter8 {
       constructor(config2) {
         super();
         config2 = config2 || {};
@@ -27092,11 +27092,11 @@ var require_connection = __commonJS({
           }
           self2.emit("connect");
         });
-        const reportStreamError = function(error) {
-          if (self2._ending && (error.code === "ECONNRESET" || error.code === "EPIPE")) {
+        const reportStreamError = function(error2) {
+          if (self2._ending && (error2.code === "ECONNRESET" || error2.code === "EPIPE")) {
             return;
           }
-          self2.emit("error", error);
+          self2.emit("error", error2);
         };
         this.stream.on("error", reportStreamError);
         this.stream.on("close", function() {
@@ -27144,8 +27144,8 @@ var require_connection = __commonJS({
         if (self2.sslNegotiation === "direct") {
           options.ALPNProtocols = ["postgresql"];
         }
-        const net = require("net");
-        if (net.isIP && net.isIP(host) === 0) {
+        const net8 = require("net");
+        if (net8.isIP && net8.isIP(host) === 0) {
           options.servername = host;
         }
         try {
@@ -27158,7 +27158,7 @@ var require_connection = __commonJS({
         self2.emit("sslconnect");
       }
       attachListeners(stream2) {
-        parse(stream2, (msg) => {
+        parse2(stream2, (msg) => {
           const eventName = msg.name === "error" ? "errorMessage" : msg.name;
           if (this._emitMessage) {
             this.emit("message", msg);
@@ -27253,7 +27253,7 @@ var require_connection = __commonJS({
 var require_split2 = __commonJS({
   "node_modules/split2/index.js"(exports2, module2) {
     "use strict";
-    var { Transform } = require("stream");
+    var { Transform: Transform9 } = require("stream");
     var { StringDecoder } = require("string_decoder");
     var kLast = /* @__PURE__ */ Symbol("last");
     var kDecoder = /* @__PURE__ */ Symbol("decoder");
@@ -27273,8 +27273,8 @@ var require_split2 = __commonJS({
       for (let i = 0; i < list.length; i++) {
         try {
           push(this, this.mapper(list[i]));
-        } catch (error) {
-          return cb(error);
+        } catch (error2) {
+          return cb(error2);
         }
       }
       this.overflow = this[kLast].length > this.maxLength;
@@ -27289,8 +27289,8 @@ var require_split2 = __commonJS({
       if (this[kLast]) {
         try {
           push(this, this.mapper(this[kLast]));
-        } catch (error) {
-          return cb(error);
+        } catch (error2) {
+          return cb(error2);
         }
       }
       cb();
@@ -27332,7 +27332,7 @@ var require_split2 = __commonJS({
       options.transform = transform;
       options.flush = flush;
       options.readableObjectMode = true;
-      const stream = new Transform(options);
+      const stream = new Transform9(options);
       stream[kLast] = "";
       stream[kDecoder] = new StringDecoder("utf8");
       stream.matcher = matcher;
@@ -27354,10 +27354,10 @@ var require_split2 = __commonJS({
 var require_helper = __commonJS({
   "node_modules/pgpass/lib/helper.js"(exports2, module2) {
     "use strict";
-    var path7 = require("path");
-    var Stream = require("stream").Stream;
+    var path9 = require("path");
+    var Stream2 = require("stream").Stream;
     var split = require_split2();
-    var util2 = require("util");
+    var util4 = require("util");
     var defaultPort = 5432;
     var isWin = process.platform === "win32";
     var warnStream = process.stderr;
@@ -27372,10 +27372,10 @@ var require_helper = __commonJS({
     var nrOfFields = fieldNames.length;
     var passKey = fieldNames[nrOfFields - 1];
     function warn() {
-      var isWritable = warnStream instanceof Stream && true === warnStream.writable;
+      var isWritable = warnStream instanceof Stream2 && true === warnStream.writable;
       if (isWritable) {
         var args = Array.prototype.slice.call(arguments).concat("\n");
-        warnStream.write(util2.format.apply(util2, args));
+        warnStream.write(util4.format.apply(util4, args));
       }
     }
     Object.defineProperty(module2.exports, "isWin", {
@@ -27393,7 +27393,7 @@ var require_helper = __commonJS({
     };
     module2.exports.getFileName = function(rawEnv) {
       var env = rawEnv || process.env;
-      var file = env.PGPASSFILE || (isWin ? path7.join(env.APPDATA || "./", "postgresql", "pgpass.conf") : path7.join(env.HOME || "./", ".pgpass"));
+      var file = env.PGPASSFILE || (isWin ? path9.join(env.APPDATA || "./", "postgresql", "pgpass.conf") : path9.join(env.HOME || "./", ".pgpass"));
       return file;
     };
     module2.exports.usePgPass = function(stats, fname) {
@@ -27525,16 +27525,16 @@ var require_helper = __commonJS({
 var require_lib4 = __commonJS({
   "node_modules/pgpass/lib/index.js"(exports2, module2) {
     "use strict";
-    var path7 = require("path");
-    var fs6 = require("fs");
+    var path9 = require("path");
+    var fs9 = require("fs");
     var helper = require_helper();
     module2.exports = function(connInfo, cb) {
       var file = helper.getFileName();
-      fs6.stat(file, function(err, stat) {
+      fs9.stat(file, function(err, stat) {
         if (err || !helper.usePgPass(stat, file)) {
           return cb(void 0);
         }
-        var st = fs6.createReadStream(file);
+        var st = fs9.createReadStream(file);
         helper.getPassword(connInfo, st, cb);
       });
     };
@@ -27545,7 +27545,7 @@ var require_lib4 = __commonJS({
 // node_modules/pg/lib/client.js
 var require_client = __commonJS({
   "node_modules/pg/lib/client.js"(exports2, module2) {
-    var EventEmitter2 = require("events").EventEmitter;
+    var EventEmitter8 = require("events").EventEmitter;
     var utils = require_utils3();
     var nodeUtils = require("util");
     var sasl = require_sasl();
@@ -27554,7 +27554,7 @@ var require_client = __commonJS({
     var Query2 = require_query2();
     var defaults2 = require_defaults();
     var Connection2 = require_connection();
-    var crypto2 = require_utils4();
+    var crypto9 = require_utils4();
     var activeQueryDeprecationNotice = nodeUtils.deprecate(
       () => {
       },
@@ -27590,7 +27590,7 @@ var require_client = __commonJS({
       }
       return defaultValue;
     }
-    var Client2 = class extends EventEmitter2 {
+    var Client2 = class extends EventEmitter8 {
       constructor(config2) {
         super();
         this.connectionParameters = new ConnectionParameters(config2);
@@ -27711,19 +27711,19 @@ var require_client = __commonJS({
         });
         this._attachListeners(con);
         con.once("end", () => {
-          const error = this._ending ? new Error("Connection terminated") : new Error("Connection terminated unexpectedly");
+          const error2 = this._ending ? new Error("Connection terminated") : new Error("Connection terminated unexpectedly");
           clearTimeout(this.connectionTimeoutHandle);
-          this._errorAllQueries(error);
+          this._errorAllQueries(error2);
           this._ended = true;
           if (!this._ending) {
             if (this._connecting && !this._connectionError) {
               if (this._connectionCallback) {
-                this._connectionCallback(error);
+                this._connectionCallback(error2);
               } else {
-                this._handleErrorEvent(error);
+                this._handleErrorEvent(error2);
               }
             } else if (!this._connectionError) {
-              this._handleErrorEvent(error);
+              this._handleErrorEvent(error2);
             }
           }
           process.nextTick(() => {
@@ -27736,12 +27736,12 @@ var require_client = __commonJS({
           this._connect(callback);
           return;
         }
-        return new this._Promise((resolve, reject) => {
-          this._connect((error) => {
-            if (error) {
-              reject(error);
+        return new this._Promise((resolve3, reject) => {
+          this._connect((error2) => {
+            if (error2) {
+              reject(error2);
             } else {
-              resolve(this);
+              resolve3(this);
             }
           });
         });
@@ -27809,7 +27809,7 @@ var require_client = __commonJS({
       _handleAuthMD5Password(msg) {
         this._getPassword(async () => {
           try {
-            const hashedPassword = await crypto2.postgresMd5PasswordHash(this.user, this.password, msg.salt);
+            const hashedPassword = await crypto9.postgresMd5PasswordHash(this.user, this.password, msg.salt);
             this.connection.password(hashedPassword);
           } catch (e) {
             this.emit("error", e);
@@ -27918,8 +27918,8 @@ var require_client = __commonJS({
       _handleRowDescription(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error = new Error("Received unexpected rowDescription message from backend.");
-          this._handleErrorEvent(error);
+          const error2 = new Error("Received unexpected rowDescription message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleRowDescription(msg);
@@ -27927,8 +27927,8 @@ var require_client = __commonJS({
       _handleDataRow(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error = new Error("Received unexpected dataRow message from backend.");
-          this._handleErrorEvent(error);
+          const error2 = new Error("Received unexpected dataRow message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleDataRow(msg);
@@ -27936,8 +27936,8 @@ var require_client = __commonJS({
       _handlePortalSuspended(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error = new Error("Received unexpected portalSuspended message from backend.");
-          this._handleErrorEvent(error);
+          const error2 = new Error("Received unexpected portalSuspended message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handlePortalSuspended(this.connection);
@@ -27945,8 +27945,8 @@ var require_client = __commonJS({
       _handleEmptyQuery(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error = new Error("Received unexpected emptyQuery message from backend.");
-          this._handleErrorEvent(error);
+          const error2 = new Error("Received unexpected emptyQuery message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleEmptyQuery(this.connection);
@@ -27954,8 +27954,8 @@ var require_client = __commonJS({
       _handleCommandComplete(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error = new Error("Received unexpected commandComplete message from backend.");
-          this._handleErrorEvent(error);
+          const error2 = new Error("Received unexpected commandComplete message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleCommandComplete(msg, this.connection);
@@ -27963,8 +27963,8 @@ var require_client = __commonJS({
       _handleParseComplete() {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error = new Error("Received unexpected parseComplete message from backend.");
-          this._handleErrorEvent(error);
+          const error2 = new Error("Received unexpected parseComplete message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         if (activeQuery.name) {
@@ -27975,8 +27975,8 @@ var require_client = __commonJS({
       _handleCopyInResponse(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error = new Error("Received unexpected copyInResponse message from backend.");
-          this._handleErrorEvent(error);
+          const error2 = new Error("Received unexpected copyInResponse message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleCopyInResponse(this.connection);
@@ -27984,8 +27984,8 @@ var require_client = __commonJS({
       _handleCopyData(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error = new Error("Received unexpected copyData message from backend.");
-          this._handleErrorEvent(error);
+          const error2 = new Error("Received unexpected copyData message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleCopyData(msg, this.connection);
@@ -28123,8 +28123,8 @@ var require_client = __commonJS({
         } else {
           query = new Query2(config2, values, callback);
           if (!query.callback) {
-            result = new this._Promise((resolve, reject) => {
-              query.callback = (err, res) => err ? reject(err) : resolve(res);
+            result = new this._Promise((resolve3, reject) => {
+              query.callback = (err, res) => err ? reject(err) : resolve3(res);
             }).catch((err) => {
               Error.captureStackTrace(err);
               throw err;
@@ -28138,11 +28138,11 @@ var require_client = __commonJS({
           const queryCallback = query.callback || (() => {
           });
           const readTimeoutTimer = setTimeout(() => {
-            const error = new Error("Query read timeout");
+            const error2 = new Error("Query read timeout");
             process.nextTick(() => {
-              query.handleError(error, this.connection);
+              query.handleError(error2, this.connection);
             });
-            queryCallback(error);
+            queryCallback(error2);
             query.callback = () => {
             };
             const index = this._queryQueue.indexOf(query);
@@ -28224,8 +28224,8 @@ var require_client = __commonJS({
         if (cb) {
           this.connection.once("end", cb);
         } else {
-          return new this._Promise((resolve) => {
-            this.connection.once("end", resolve);
+          return new this._Promise((resolve3) => {
+            this.connection.once("end", resolve3);
           });
         }
       }
@@ -28243,7 +28243,7 @@ var require_client = __commonJS({
 var require_pg_pool = __commonJS({
   "node_modules/pg-pool/index.js"(exports2, module2) {
     "use strict";
-    var EventEmitter2 = require("events").EventEmitter;
+    var EventEmitter8 = require("events").EventEmitter;
     var NOOP = function() {
     };
     var removeWhere = (list, predicate) => {
@@ -28274,8 +28274,8 @@ var require_pg_pool = __commonJS({
       const cb = function(err, client) {
         err ? rej(err) : res(client);
       };
-      const result = new Promise2(function(resolve, reject) {
-        res = resolve;
+      const result = new Promise2(function(resolve3, reject) {
+        res = resolve3;
         rej = reject;
       }).catch((err) => {
         Error.captureStackTrace(err);
@@ -28294,7 +28294,7 @@ var require_pg_pool = __commonJS({
         pool.emit("error", err, client);
       };
     }
-    var Pool2 = class extends EventEmitter2 {
+    var Pool2 = class extends EventEmitter8 {
       constructor(options, Client2) {
         super();
         this.options = Object.assign({}, options);
@@ -28336,7 +28336,7 @@ var require_pg_pool = __commonJS({
         if (typeof Promise2.try === "function") {
           return Promise2.try(f);
         }
-        return new Promise2((resolve) => resolve(f()));
+        return new Promise2((resolve3) => resolve3(f()));
       }
       _isFull() {
         return this._clients.length >= this.options.max;
@@ -28669,11 +28669,11 @@ var require_pg_pool = __commonJS({
 var require_query3 = __commonJS({
   "node_modules/pg/lib/native/query.js"(exports2, module2) {
     "use strict";
-    var EventEmitter2 = require("events").EventEmitter;
-    var util2 = require("util");
+    var EventEmitter8 = require("events").EventEmitter;
+    var util4 = require("util");
     var utils = require_utils3();
     var NativeQuery = module2.exports = function(config2, values, callback) {
-      EventEmitter2.call(this);
+      EventEmitter8.call(this);
       config2 = utils.normalizeQueryConfig(config2, values, callback);
       this.text = config2.text;
       this.values = config2.values;
@@ -28690,7 +28690,7 @@ var require_query3 = __commonJS({
         }.bind(this)
       );
     };
-    util2.inherits(NativeQuery, EventEmitter2);
+    util4.inherits(NativeQuery, EventEmitter8);
     var errorFieldMap = {
       sqlState: "code",
       statementPosition: "position",
@@ -28731,8 +28731,8 @@ var require_query3 = __commonJS({
     NativeQuery.prototype._getPromise = function() {
       if (this._promise) return this._promise;
       this._promise = new Promise(
-        function(resolve, reject) {
-          this._once("end", resolve);
+        function(resolve3, reject) {
+          this._once("end", resolve3);
           this._once("error", reject);
         }.bind(this)
       );
@@ -28819,8 +28819,8 @@ var require_client2 = __commonJS({
       throw e;
     }
     var TypeOverrides2 = require_type_overrides();
-    var EventEmitter2 = require("events").EventEmitter;
-    var util2 = require("util");
+    var EventEmitter8 = require("events").EventEmitter;
+    var util4 = require("util");
     var ConnectionParameters = require_connection_parameters();
     var NativeQuery = require_query3();
     var queryQueueLengthDeprecationNotice = nodeUtils.deprecate(
@@ -28829,7 +28829,7 @@ var require_client2 = __commonJS({
       "Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead."
     );
     var Client2 = module2.exports = function(config2) {
-      EventEmitter2.call(this);
+      EventEmitter8.call(this);
       config2 = config2 || {};
       this._Promise = config2.Promise || global.Promise;
       this._types = new TypeOverrides2(config2.types);
@@ -28858,7 +28858,7 @@ var require_client2 = __commonJS({
       this.namedQueries = {};
     };
     Client2.Query = NativeQuery;
-    util2.inherits(Client2, EventEmitter2);
+    util4.inherits(Client2, EventEmitter8);
     Client2.prototype._errorAllQueries = function(err) {
       const enqueueError = (query) => {
         process.nextTick(() => {
@@ -28911,12 +28911,12 @@ var require_client2 = __commonJS({
         this._connect(callback);
         return;
       }
-      return new this._Promise((resolve, reject) => {
-        this._connect((error) => {
-          if (error) {
-            reject(error);
+      return new this._Promise((resolve3, reject) => {
+        this._connect((error2) => {
+          if (error2) {
+            reject(error2);
           } else {
-            resolve(this);
+            resolve3(this);
           }
         });
       });
@@ -28940,8 +28940,8 @@ var require_client2 = __commonJS({
         query = new NativeQuery(config2, values, callback);
         if (!query.callback) {
           let resolveOut, rejectOut;
-          result = new this._Promise((resolve, reject) => {
-            resolveOut = resolve;
+          result = new this._Promise((resolve3, reject) => {
+            resolveOut = resolve3;
             rejectOut = reject;
           }).catch((err) => {
             Error.captureStackTrace(err);
@@ -28954,11 +28954,11 @@ var require_client2 = __commonJS({
         queryCallback = query.callback || (() => {
         });
         readTimeoutTimer = setTimeout(() => {
-          const error = new Error("Query read timeout");
+          const error2 = new Error("Query read timeout");
           process.nextTick(() => {
-            query.handleError(error, this.connection);
+            query.handleError(error2, this.connection);
           });
-          queryCallback(error);
+          queryCallback(error2);
           query.callback = () => {
           };
           const index = this._queryQueue.indexOf(query);
@@ -29004,8 +29004,8 @@ var require_client2 = __commonJS({
       }
       let result;
       if (!cb) {
-        result = new this._Promise(function(resolve, reject) {
-          cb = (err) => err ? reject(err) : resolve();
+        result = new this._Promise(function(resolve3, reject) {
+          cb = (err) => err ? reject(err) : resolve3();
         });
       }
       const doEnd = function() {
@@ -29224,9 +29224,9 @@ var require_lib5 = __commonJS({
 var require_data_stream = __commonJS({
   "node_modules/jws/lib/data-stream.js"(exports2, module2) {
     var Buffer2 = require_safe_buffer().Buffer;
-    var Stream = require("stream");
-    var util2 = require("util");
-    function DataStream(data) {
+    var Stream2 = require("stream");
+    var util4 = require("util");
+    function DataStream2(data) {
       this.buffer = null;
       this.writable = true;
       this.readable = true;
@@ -29251,12 +29251,12 @@ var require_data_stream = __commonJS({
       }
       throw new TypeError("Unexpected data type (" + typeof data + ")");
     }
-    util2.inherits(DataStream, Stream);
-    DataStream.prototype.write = function write(data) {
+    util4.inherits(DataStream2, Stream2);
+    DataStream2.prototype.write = function write(data) {
       this.buffer = Buffer2.concat([this.buffer, Buffer2.from(data)]);
       this.emit("data", data);
     };
-    DataStream.prototype.end = function end(data) {
+    DataStream2.prototype.end = function end(data) {
       if (data)
         this.write(data);
       this.emit("end", data);
@@ -29264,7 +29264,7 @@ var require_data_stream = __commonJS({
       this.writable = false;
       this.readable = false;
     };
-    module2.exports = DataStream;
+    module2.exports = DataStream2;
   }
 });
 
@@ -29470,14 +29470,14 @@ var require_buffer_equal_constant_time = __commonJS({
 var require_jwa = __commonJS({
   "node_modules/jwa/index.js"(exports2, module2) {
     var Buffer2 = require_safe_buffer().Buffer;
-    var crypto2 = require("crypto");
+    var crypto9 = require("crypto");
     var formatEcdsa = require_ecdsa_sig_formatter();
-    var util2 = require("util");
+    var util4 = require("util");
     var MSG_INVALID_ALGORITHM = '"%s" is not a valid algorithm.\n  Supported algorithms are:\n  "HS256", "HS384", "HS512", "RS256", "RS384", "RS512", "PS256", "PS384", "PS512", "ES256", "ES384", "ES512" and "none".';
     var MSG_INVALID_SECRET = "secret must be a string or buffer";
     var MSG_INVALID_VERIFIER_KEY = "key must be a string or a buffer";
     var MSG_INVALID_SIGNER_KEY = "key must be a string, a buffer or an object";
-    var supportsKeyObjects = typeof crypto2.createPublicKey === "function";
+    var supportsKeyObjects = typeof crypto9.createPublicKey === "function";
     if (supportsKeyObjects) {
       MSG_INVALID_VERIFIER_KEY += " or a KeyObject";
       MSG_INVALID_SECRET += "or a KeyObject";
@@ -29552,7 +29552,7 @@ var require_jwa = __commonJS({
     }
     function typeError(template) {
       var args = [].slice.call(arguments, 1);
-      var errMsg = util2.format.bind(util2, template).apply(null, args);
+      var errMsg = util4.format.bind(util4, template).apply(null, args);
       return new TypeError(errMsg);
     }
     function bufferOrString(obj) {
@@ -29564,20 +29564,20 @@ var require_jwa = __commonJS({
       return thing;
     }
     function createHmacSigner(bits) {
-      return function sign(thing, secret) {
+      return function sign2(thing, secret) {
         checkIsSecretKey(secret);
         thing = normalizeInput(thing);
-        var hmac = crypto2.createHmac("sha" + bits, secret);
+        var hmac = crypto9.createHmac("sha" + bits, secret);
         var sig = (hmac.update(thing), hmac.digest("base64"));
         return fromBase64(sig);
       };
     }
     var bufferEqual;
-    var timingSafeEqual = "timingSafeEqual" in crypto2 ? function timingSafeEqual2(a, b) {
+    var timingSafeEqual = "timingSafeEqual" in crypto9 ? function timingSafeEqual2(a, b) {
       if (a.byteLength !== b.byteLength) {
         return false;
       }
-      return crypto2.timingSafeEqual(a, b);
+      return crypto9.timingSafeEqual(a, b);
     } : function timingSafeEqual2(a, b) {
       if (!bufferEqual) {
         bufferEqual = require_buffer_equal_constant_time();
@@ -29591,10 +29591,10 @@ var require_jwa = __commonJS({
       };
     }
     function createKeySigner(bits) {
-      return function sign(thing, privateKey) {
+      return function sign2(thing, privateKey) {
         checkIsPrivateKey(privateKey);
         thing = normalizeInput(thing);
-        var signer = crypto2.createSign("RSA-SHA" + bits);
+        var signer = crypto9.createSign("RSA-SHA" + bits);
         var sig = (signer.update(thing), signer.sign(privateKey, "base64"));
         return fromBase64(sig);
       };
@@ -29604,20 +29604,20 @@ var require_jwa = __commonJS({
         checkIsPublicKey(publicKey);
         thing = normalizeInput(thing);
         signature = toBase64(signature);
-        var verifier = crypto2.createVerify("RSA-SHA" + bits);
+        var verifier = crypto9.createVerify("RSA-SHA" + bits);
         verifier.update(thing);
         return verifier.verify(publicKey, signature, "base64");
       };
     }
     function createPSSKeySigner(bits) {
-      return function sign(thing, privateKey) {
+      return function sign2(thing, privateKey) {
         checkIsPrivateKey(privateKey);
         thing = normalizeInput(thing);
-        var signer = crypto2.createSign("RSA-SHA" + bits);
+        var signer = crypto9.createSign("RSA-SHA" + bits);
         var sig = (signer.update(thing), signer.sign({
           key: privateKey,
-          padding: crypto2.constants.RSA_PKCS1_PSS_PADDING,
-          saltLength: crypto2.constants.RSA_PSS_SALTLEN_DIGEST
+          padding: crypto9.constants.RSA_PKCS1_PSS_PADDING,
+          saltLength: crypto9.constants.RSA_PSS_SALTLEN_DIGEST
         }, "base64"));
         return fromBase64(sig);
       };
@@ -29627,18 +29627,18 @@ var require_jwa = __commonJS({
         checkIsPublicKey(publicKey);
         thing = normalizeInput(thing);
         signature = toBase64(signature);
-        var verifier = crypto2.createVerify("RSA-SHA" + bits);
+        var verifier = crypto9.createVerify("RSA-SHA" + bits);
         verifier.update(thing);
         return verifier.verify({
           key: publicKey,
-          padding: crypto2.constants.RSA_PKCS1_PSS_PADDING,
-          saltLength: crypto2.constants.RSA_PSS_SALTLEN_DIGEST
+          padding: crypto9.constants.RSA_PKCS1_PSS_PADDING,
+          saltLength: crypto9.constants.RSA_PSS_SALTLEN_DIGEST
         }, signature, "base64");
       };
     }
     function createECDSASigner(bits) {
       var inner = createKeySigner(bits);
-      return function sign() {
+      return function sign2() {
         var signature = inner.apply(null, arguments);
         signature = formatEcdsa.derToJose(signature, "ES" + bits);
         return signature;
@@ -29653,7 +29653,7 @@ var require_jwa = __commonJS({
       };
     }
     function createNoneSigner() {
-      return function sign() {
+      return function sign2() {
         return "";
       };
     }
@@ -29708,11 +29708,11 @@ var require_tostring = __commonJS({
 var require_sign_stream = __commonJS({
   "node_modules/jws/lib/sign-stream.js"(exports2, module2) {
     var Buffer2 = require_safe_buffer().Buffer;
-    var DataStream = require_data_stream();
+    var DataStream2 = require_data_stream();
     var jwa = require_jwa();
-    var Stream = require("stream");
+    var Stream2 = require("stream");
     var toString = require_tostring();
-    var util2 = require("util");
+    var util4 = require("util");
     function base64url(string, encoding) {
       return Buffer2.from(string, encoding).toString("base64").replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
     }
@@ -29720,7 +29720,7 @@ var require_sign_stream = __commonJS({
       encoding = encoding || "utf8";
       var encodedHeader = base64url(toString(header), "binary");
       var encodedPayload = base64url(toString(payload), encoding);
-      return util2.format("%s.%s", encodedHeader, encodedPayload);
+      return util4.format("%s.%s", encodedHeader, encodedPayload);
     }
     function jwsSign(opts) {
       var header = opts.header;
@@ -29730,7 +29730,7 @@ var require_sign_stream = __commonJS({
       var algo = jwa(header.alg);
       var securedInput = jwsSecuredInput(header, payload, encoding);
       var signature = algo.sign(securedInput, secretOrKey);
-      return util2.format("%s.%s", securedInput, signature);
+      return util4.format("%s.%s", securedInput, signature);
     }
     function SignStream(opts) {
       var secret = opts.secret;
@@ -29739,12 +29739,12 @@ var require_sign_stream = __commonJS({
       if (/^hs/i.test(opts.header.alg) === true && secret == null) {
         throw new TypeError("secret must be a string or buffer or a KeyObject");
       }
-      var secretStream = new DataStream(secret);
+      var secretStream = new DataStream2(secret);
       this.readable = true;
       this.header = opts.header;
       this.encoding = opts.encoding;
       this.secret = this.privateKey = this.key = secretStream;
-      this.payload = new DataStream(opts.payload);
+      this.payload = new DataStream2(opts.payload);
       this.secret.once("close", function() {
         if (!this.payload.writable && this.readable)
           this.sign();
@@ -29754,8 +29754,8 @@ var require_sign_stream = __commonJS({
           this.sign();
       }.bind(this));
     }
-    util2.inherits(SignStream, Stream);
-    SignStream.prototype.sign = function sign() {
+    util4.inherits(SignStream, Stream2);
+    SignStream.prototype.sign = function sign2() {
       try {
         var signature = jwsSign({
           header: this.header,
@@ -29783,11 +29783,11 @@ var require_sign_stream = __commonJS({
 var require_verify_stream = __commonJS({
   "node_modules/jws/lib/verify-stream.js"(exports2, module2) {
     var Buffer2 = require_safe_buffer().Buffer;
-    var DataStream = require_data_stream();
+    var DataStream2 = require_data_stream();
     var jwa = require_jwa();
-    var Stream = require("stream");
+    var Stream2 = require("stream");
     var toString = require_tostring();
-    var util2 = require("util");
+    var util4 = require("util");
     var JWS_REGEX = /^[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)?$/;
     function isObject(thing) {
       return Object.prototype.toString.call(thing) === "[object Object]";
@@ -29856,12 +29856,12 @@ var require_verify_stream = __commonJS({
       if (/^hs/i.test(opts.algorithm) === true && secretOrKey == null) {
         throw new TypeError("secret must be a string or buffer or a KeyObject");
       }
-      var secretStream = new DataStream(secretOrKey);
+      var secretStream = new DataStream2(secretOrKey);
       this.readable = true;
       this.algorithm = opts.algorithm;
       this.encoding = opts.encoding;
       this.secret = this.publicKey = this.key = secretStream;
-      this.signature = new DataStream(opts.signature);
+      this.signature = new DataStream2(opts.signature);
       this.secret.once("close", function() {
         if (!this.signature.writable && this.readable)
           this.verify();
@@ -29871,7 +29871,7 @@ var require_verify_stream = __commonJS({
           this.verify();
       }.bind(this));
     }
-    util2.inherits(VerifyStream, Stream);
+    util4.inherits(VerifyStream, Stream2);
     VerifyStream.prototype.verify = function verify() {
       try {
         var valid = jwsVerify(this.signature.buffer, this.algorithm, this.key.buffer);
@@ -29962,14 +29962,14 @@ var require_decode = __commonJS({
 // node_modules/jsonwebtoken/lib/JsonWebTokenError.js
 var require_JsonWebTokenError = __commonJS({
   "node_modules/jsonwebtoken/lib/JsonWebTokenError.js"(exports2, module2) {
-    var JsonWebTokenError = function(message, error) {
+    var JsonWebTokenError = function(message, error2) {
       Error.call(this, message);
       if (Error.captureStackTrace) {
         Error.captureStackTrace(this, this.constructor);
       }
       this.name = "JsonWebTokenError";
       this.message = message;
-      if (error) this.inner = error;
+      if (error2) this.inner = error2;
     };
     JsonWebTokenError.prototype = Object.create(Error.prototype);
     JsonWebTokenError.prototype.constructor = JsonWebTokenError;
@@ -30020,7 +30020,7 @@ var require_ms3 = __commonJS({
       options = options || {};
       var type = typeof val;
       if (type === "string" && val.length > 0) {
-        return parse(val);
+        return parse2(val);
       } else if (type === "number" && isFinite(val)) {
         return options.long ? fmtLong(val) : fmtShort(val);
       }
@@ -30028,7 +30028,7 @@ var require_ms3 = __commonJS({
         "val is not a non-empty string or a valid number. val=" + JSON.stringify(val)
       );
     };
-    function parse(str) {
+    function parse2(str) {
       str = String(str);
       if (str.length > 100) {
         return;
@@ -30116,9 +30116,9 @@ var require_ms3 = __commonJS({
       }
       return ms + " ms";
     }
-    function plural(ms, msAbs, n, name) {
+    function plural(ms, msAbs, n, name2) {
       var isPlural = msAbs >= n * 1.5;
-      return Math.round(ms / n) + " " + name + (isPlural ? "s" : "");
+      return Math.round(ms / n) + " " + name2 + (isPlural ? "s" : "");
     }
   }
 });
@@ -30243,11 +30243,11 @@ var require_re = __commonJS({
       }
       return value;
     };
-    var createToken = (name, value, isGlobal) => {
+    var createToken = (name2, value, isGlobal) => {
       const safe = makeSafeRegex(value);
       const index = R++;
-      debug(name, index, value);
-      t[name] = index;
+      debug(name2, index, value);
+      t[name2] = index;
       src[index] = value;
       safeSrc[index] = safe;
       re[index] = new RegExp(value, isGlobal ? "g" : void 0);
@@ -30368,31 +30368,31 @@ var require_semver = __commonJS({
       return true;
     };
     var SemVer = class _SemVer {
-      constructor(version3, options) {
+      constructor(version4, options) {
         options = parseOptions(options);
-        if (version3 instanceof _SemVer) {
-          if (version3.loose === !!options.loose && version3.includePrerelease === !!options.includePrerelease) {
-            return version3;
+        if (version4 instanceof _SemVer) {
+          if (version4.loose === !!options.loose && version4.includePrerelease === !!options.includePrerelease) {
+            return version4;
           } else {
-            version3 = version3.version;
+            version4 = version4.version;
           }
-        } else if (typeof version3 !== "string") {
-          throw new TypeError(`Invalid version. Must be a string. Got type "${typeof version3}".`);
+        } else if (typeof version4 !== "string") {
+          throw new TypeError(`Invalid version. Must be a string. Got type "${typeof version4}".`);
         }
-        if (version3.length > MAX_LENGTH) {
+        if (version4.length > MAX_LENGTH) {
           throw new TypeError(
             `version is longer than ${MAX_LENGTH} characters`
           );
         }
-        debug("SemVer", version3, options);
+        debug("SemVer", version4, options);
         this.options = options;
         this.loose = !!options.loose;
         this.includePrerelease = !!options.includePrerelease;
-        const m = version3.trim().match(options.loose ? re[t.LOOSE] : re[t.FULL]);
+        const m = version4.trim().match(options.loose ? re[t.LOOSE] : re[t.FULL]);
         if (!m) {
-          throw new TypeError(`Invalid Version: ${version3}`);
+          throw new TypeError(`Invalid Version: ${version4}`);
         }
-        this.raw = version3;
+        this.raw = version4;
         this.major = +m[1];
         this.minor = +m[2];
         this.patch = +m[3];
@@ -30590,9 +30590,9 @@ var require_semver = __commonJS({
           // This probably shouldn't be used publicly.
           // 1.0.0 'pre' would become 1.0.0-0 which is the wrong direction.
           case "pre": {
-            const base = Number(identifierBase) ? 1 : 0;
+            const base2 = Number(identifierBase) ? 1 : 0;
             if (this.prerelease.length === 0) {
-              this.prerelease = [base];
+              this.prerelease = [base2];
             } else {
               let i = this.prerelease.length;
               while (--i >= 0) {
@@ -30605,11 +30605,11 @@ var require_semver = __commonJS({
                 if (identifier === this.prerelease.join(".") && identifierBase === false) {
                   throw new Error("invalid increment argument: identifier already exists");
                 }
-                this.prerelease.push(base);
+                this.prerelease.push(base2);
               }
             }
             if (identifier) {
-              let prerelease = [identifier, base];
+              let prerelease = [identifier, base2];
               if (identifierBase === false) {
                 prerelease = [identifier];
               }
@@ -30643,12 +30643,12 @@ var require_parse2 = __commonJS({
   "node_modules/semver/functions/parse.js"(exports2, module2) {
     "use strict";
     var SemVer = require_semver();
-    var parse = (version3, options, throwErrors = false) => {
-      if (version3 instanceof SemVer) {
-        return version3;
+    var parse2 = (version4, options, throwErrors = false) => {
+      if (version4 instanceof SemVer) {
+        return version4;
       }
       try {
-        return new SemVer(version3, options);
+        return new SemVer(version4, options);
       } catch (er) {
         if (!throwErrors) {
           return null;
@@ -30656,7 +30656,7 @@ var require_parse2 = __commonJS({
         throw er;
       }
     };
-    module2.exports = parse;
+    module2.exports = parse2;
   }
 });
 
@@ -30664,9 +30664,9 @@ var require_parse2 = __commonJS({
 var require_valid = __commonJS({
   "node_modules/semver/functions/valid.js"(exports2, module2) {
     "use strict";
-    var parse = require_parse2();
-    var valid = (version3, options) => {
-      const v = parse(version3, options);
+    var parse2 = require_parse2();
+    var valid = (version4, options) => {
+      const v = parse2(version4, options);
       return v ? v.version : null;
     };
     module2.exports = valid;
@@ -30677,9 +30677,9 @@ var require_valid = __commonJS({
 var require_clean = __commonJS({
   "node_modules/semver/functions/clean.js"(exports2, module2) {
     "use strict";
-    var parse = require_parse2();
-    var clean = (version3, options) => {
-      const s = parse(version3.trim().replace(/^[=v]+/, ""), options);
+    var parse2 = require_parse2();
+    var clean = (version4, options) => {
+      const s = parse2(version4.trim().replace(/^[=v]+/, ""), options);
       return s ? s.version : null;
     };
     module2.exports = clean;
@@ -30691,7 +30691,7 @@ var require_inc = __commonJS({
   "node_modules/semver/functions/inc.js"(exports2, module2) {
     "use strict";
     var SemVer = require_semver();
-    var inc = (version3, release, options, identifier, identifierBase) => {
+    var inc = (version4, release, options, identifier, identifierBase) => {
       if (typeof options === "string") {
         identifierBase = identifier;
         identifier = options;
@@ -30699,7 +30699,7 @@ var require_inc = __commonJS({
       }
       try {
         return new SemVer(
-          version3 instanceof SemVer ? version3.version : version3,
+          version4 instanceof SemVer ? version4.version : version4,
           options
         ).inc(release, identifier, identifierBase).version;
       } catch (er) {
@@ -30714,10 +30714,10 @@ var require_inc = __commonJS({
 var require_diff = __commonJS({
   "node_modules/semver/functions/diff.js"(exports2, module2) {
     "use strict";
-    var parse = require_parse2();
+    var parse2 = require_parse2();
     var diff = (version1, version22) => {
-      const v1 = parse(version1, null, true);
-      const v2 = parse(version22, null, true);
+      const v1 = parse2(version1, null, true);
+      const v2 = parse2(version22, null, true);
       const comparison = v1.compare(v2);
       if (comparison === 0) {
         return null;
@@ -30788,9 +30788,9 @@ var require_patch = __commonJS({
 var require_prerelease = __commonJS({
   "node_modules/semver/functions/prerelease.js"(exports2, module2) {
     "use strict";
-    var parse = require_parse2();
-    var prerelease = (version3, options) => {
-      const parsed = parse(version3, options);
+    var parse2 = require_parse2();
+    var prerelease = (version4, options) => {
+      const parsed = parse2(version4, options);
       return parsed && parsed.prerelease.length ? parsed.prerelease : null;
     };
     module2.exports = prerelease;
@@ -30976,26 +30976,26 @@ var require_coerce = __commonJS({
   "node_modules/semver/functions/coerce.js"(exports2, module2) {
     "use strict";
     var SemVer = require_semver();
-    var parse = require_parse2();
+    var parse2 = require_parse2();
     var { safeRe: re, t } = require_re();
-    var coerce2 = (version3, options) => {
-      if (version3 instanceof SemVer) {
-        return version3;
+    var coerce2 = (version4, options) => {
+      if (version4 instanceof SemVer) {
+        return version4;
       }
-      if (typeof version3 === "number") {
-        version3 = String(version3);
+      if (typeof version4 === "number") {
+        version4 = String(version4);
       }
-      if (typeof version3 !== "string") {
+      if (typeof version4 !== "string") {
         return null;
       }
       options = options || {};
       let match = null;
       if (!options.rtl) {
-        match = version3.match(options.includePrerelease ? re[t.COERCEFULL] : re[t.COERCE]);
+        match = version4.match(options.includePrerelease ? re[t.COERCEFULL] : re[t.COERCE]);
       } else {
         const coerceRtlRegex = options.includePrerelease ? re[t.COERCERTLFULL] : re[t.COERCERTL];
         let next;
-        while ((next = coerceRtlRegex.exec(version3)) && (!match || match.index + match[0].length !== version3.length)) {
+        while ((next = coerceRtlRegex.exec(version4)) && (!match || match.index + match[0].length !== version4.length)) {
           if (!match || next.index + next[0].length !== match.index + match[0].length) {
             match = next;
           }
@@ -31011,7 +31011,7 @@ var require_coerce = __commonJS({
       const patch = match[4] || "0";
       const prerelease = options.includePrerelease && match[5] ? `-${match[5]}` : "";
       const build = options.includePrerelease && match[6] ? `+${match[6]}` : "";
-      return parse(`${major}.${minor}.${patch}${prerelease}${build}`, options);
+      return parse2(`${major}.${minor}.${patch}${prerelease}${build}`, options);
     };
     module2.exports = coerce2;
   }
@@ -31021,35 +31021,35 @@ var require_coerce = __commonJS({
 var require_truncate = __commonJS({
   "node_modules/semver/functions/truncate.js"(exports2, module2) {
     "use strict";
-    var parse = require_parse2();
+    var parse2 = require_parse2();
     var constants = require_constants();
     var SemVer = require_semver();
-    var truncate = (version3, truncation, options) => {
+    var truncate = (version4, truncation, options) => {
       if (!constants.RELEASE_TYPES.includes(truncation)) {
         return null;
       }
-      const clonedVersion = cloneInputVersion(version3, options);
+      const clonedVersion = cloneInputVersion(version4, options);
       return clonedVersion && doTruncation(clonedVersion, truncation);
     };
-    var cloneInputVersion = (version3, options) => {
-      const versionStringToParse = version3 instanceof SemVer ? version3.version : version3;
-      return parse(versionStringToParse, options);
+    var cloneInputVersion = (version4, options) => {
+      const versionStringToParse = version4 instanceof SemVer ? version4.version : version4;
+      return parse2(versionStringToParse, options);
     };
-    var doTruncation = (version3, truncation) => {
+    var doTruncation = (version4, truncation) => {
       if (isPrerelease(truncation)) {
-        return version3.version;
+        return version4.version;
       }
-      version3.prerelease = [];
+      version4.prerelease = [];
       switch (truncation) {
         case "major":
-          version3.minor = 0;
-          version3.patch = 0;
+          version4.minor = 0;
+          version4.patch = 0;
           break;
         case "minor":
-          version3.patch = 0;
+          version4.patch = 0;
           break;
       }
-      return version3.format();
+      return version4.format();
     };
     var isPrerelease = (type) => {
       return type.startsWith("pre");
@@ -31109,8 +31109,8 @@ var require_trim_comparator_whitespace = __commonJS({
     for (const char of WHITESPACE_CHARACTERS) {
       whitespace[char.charCodeAt(0)] = 1;
     }
-    var isWhitespace = (char) => char !== void 0 && whitespace[char.charCodeAt(0)] === 1;
-    var isVersionPrefix = (char) => char === "v" || char === "=" || isWhitespace(char);
+    var isWhitespace2 = (char) => char !== void 0 && whitespace[char.charCodeAt(0)] === 1;
+    var isVersionPrefix = (char) => char === "v" || char === "=" || isWhitespace2(char);
     var isDigit = (char) => char !== void 0 && char >= "0" && char <= "9";
     var isLetter = (char) => char !== void 0 && (char >= "a" && char <= "z" || char >= "A" && char <= "Z");
     var isIdentifierCharacter = (char) => isDigit(char) || isLetter(char) || char === "-";
@@ -31244,7 +31244,7 @@ var require_trim_comparator_whitespace = __commonJS({
     };
     var findRemovableWhitespaceIndex = (range, matchStart) => {
       let position = matchStart;
-      if (isWhitespace(range[position])) {
+      if (isWhitespace2(range[position])) {
         position++;
       }
       if (range[position] === "<" || range[position] === ">") {
@@ -31253,7 +31253,7 @@ var require_trim_comparator_whitespace = __commonJS({
       if (range[position] === "=") {
         position++;
       }
-      return isWhitespace(range[position]) ? position : -1;
+      return isWhitespace2(range[position]) ? position : -1;
     };
     var trimComparatorWhitespace = (range) => {
       let result = "";
@@ -31412,19 +31412,19 @@ var require_range2 = __commonJS({
         });
       }
       // if ANY of the sets match ALL of its comparators, then pass
-      test(version3) {
-        if (!version3) {
+      test(version4) {
+        if (!version4) {
           return false;
         }
-        if (typeof version3 === "string") {
+        if (typeof version4 === "string") {
           try {
-            version3 = new SemVer(version3, this.options);
+            version4 = new SemVer(version4, this.options);
           } catch (er) {
             return false;
           }
         }
         for (let i = 0; i < this.set.length; i++) {
-          if (testSet(this.set[i], version3, this.options)) {
+          if (testSet(this.set[i], version4, this.options)) {
             return true;
           }
         }
@@ -31646,13 +31646,13 @@ var require_range2 = __commonJS({
       }
       return `${from} ${to}`.trim();
     };
-    var testSet = (set, version3, options) => {
+    var testSet = (set, version4, options) => {
       for (let i = 0; i < set.length; i++) {
-        if (!set[i].test(version3)) {
+        if (!set[i].test(version4)) {
           return false;
         }
       }
-      if (version3.prerelease.length && !options.includePrerelease) {
+      if (version4.prerelease.length && !options.includePrerelease) {
         for (let i = 0; i < set.length; i++) {
           debug(set[i].semver);
           if (set[i].semver === Comparator.ANY) {
@@ -31660,7 +31660,7 @@ var require_range2 = __commonJS({
           }
           if (set[i].semver.prerelease.length > 0) {
             const allowed = set[i].semver;
-            if (allowed.major === version3.major && allowed.minor === version3.minor && allowed.patch === version3.patch) {
+            if (allowed.major === version4.major && allowed.minor === version4.minor && allowed.patch === version4.patch) {
               return true;
             }
           }
@@ -31721,19 +31721,19 @@ var require_comparator = __commonJS({
       toString() {
         return this.value;
       }
-      test(version3) {
-        debug("Comparator.test", version3, this.options.loose);
-        if (this.semver === ANY || version3 === ANY) {
+      test(version4) {
+        debug("Comparator.test", version4, this.options.loose);
+        if (this.semver === ANY || version4 === ANY) {
           return true;
         }
-        if (typeof version3 === "string") {
+        if (typeof version4 === "string") {
           try {
-            version3 = new SemVer(version3, this.options);
+            version4 = new SemVer(version4, this.options);
           } catch (er) {
             return false;
           }
         }
-        return cmp(version3, this.operator, this.semver, this.options);
+        return cmp(version4, this.operator, this.semver, this.options);
       }
       intersects(comp, options) {
         if (!(comp instanceof _Comparator)) {
@@ -31790,13 +31790,13 @@ var require_satisfies = __commonJS({
   "node_modules/semver/functions/satisfies.js"(exports2, module2) {
     "use strict";
     var Range = require_range2();
-    var satisfies = (version3, range, options) => {
+    var satisfies = (version4, range, options) => {
       try {
         range = new Range(range, options);
       } catch (er) {
         return false;
       }
-      return range.test(version3);
+      return range.test(version4);
     };
     module2.exports = satisfies;
   }
@@ -31958,8 +31958,8 @@ var require_outside = __commonJS({
     var lt = require_lt();
     var lte = require_lte();
     var gte = require_gte();
-    var outside = (version3, range, hilo, options) => {
-      version3 = new SemVer(version3, options);
+    var outside = (version4, range, hilo, options) => {
+      version4 = new SemVer(version4, options);
       range = new Range(range, options);
       let gtfn, ltefn, ltfn, comp, ecomp;
       switch (hilo) {
@@ -31980,7 +31980,7 @@ var require_outside = __commonJS({
         default:
           throw new TypeError('Must provide a hilo val of "<" or ">"');
       }
-      if (satisfies(version3, range, options)) {
+      if (satisfies(version4, range, options)) {
         return false;
       }
       for (let i = 0; i < range.set.length; ++i) {
@@ -32002,9 +32002,9 @@ var require_outside = __commonJS({
         if (high.operator === comp || high.operator === ecomp) {
           return false;
         }
-        if ((!low.operator || low.operator === comp) && ltefn(version3, low.semver)) {
+        if ((!low.operator || low.operator === comp) && ltefn(version4, low.semver)) {
           return false;
-        } else if (low.operator === ecomp && ltfn(version3, low.semver)) {
+        } else if (low.operator === ecomp && ltfn(version4, low.semver)) {
           return false;
         }
       }
@@ -32019,7 +32019,7 @@ var require_gtr = __commonJS({
   "node_modules/semver/ranges/gtr.js"(exports2, module2) {
     "use strict";
     var outside = require_outside();
-    var gtr = (version3, range, options) => outside(version3, range, ">", options);
+    var gtr = (version4, range, options) => outside(version4, range, ">", options);
     module2.exports = gtr;
   }
 });
@@ -32029,7 +32029,7 @@ var require_ltr = __commonJS({
   "node_modules/semver/ranges/ltr.js"(exports2, module2) {
     "use strict";
     var outside = require_outside();
-    var ltr = (version3, range, options) => outside(version3, range, "<", options);
+    var ltr = (version4, range, options) => outside(version4, range, "<", options);
     module2.exports = ltr;
   }
 });
@@ -32059,12 +32059,12 @@ var require_simplify = __commonJS({
       let first = null;
       let prev = null;
       const v = versions.sort((a, b) => compare2(a, b, options));
-      for (const version3 of v) {
-        const included = satisfies(version3, range, options);
+      for (const version4 of v) {
+        const included = satisfies(version4, range, options);
         if (included) {
-          prev = version3;
+          prev = version4;
           if (!first) {
-            first = version3;
+            first = version4;
           }
         } else {
           if (prev) {
@@ -32268,7 +32268,7 @@ var require_semver2 = __commonJS({
     var constants = require_constants();
     var SemVer = require_semver();
     var identifiers = require_identifiers();
-    var parse = require_parse2();
+    var parse2 = require_parse2();
     var valid = require_valid();
     var clean = require_clean();
     var inc = require_inc();
@@ -32307,7 +32307,7 @@ var require_semver2 = __commonJS({
     var simplifyRange = require_simplify();
     var subset = require_subset();
     module2.exports = {
-      parse,
+      parse: parse2,
       valid,
       clean,
       inc,
@@ -32440,7 +32440,7 @@ var require_verify = __commonJS({
     var JsonWebTokenError = require_JsonWebTokenError();
     var NotBeforeError = require_NotBeforeError();
     var TokenExpiredError = require_TokenExpiredError();
-    var decode = require_decode();
+    var decode2 = require_decode();
     var timespan = require_timespan();
     var validateAsymmetricKey = require_validateAsymmetricKey();
     var PS_SUPPORTED = require_psSupported();
@@ -32494,7 +32494,7 @@ var require_verify = __commonJS({
       }
       let decodedToken;
       try {
-        decodedToken = decode(jwtString, { complete: true });
+        decodedToken = decode2(jwtString, { complete: true });
       } catch (err) {
         return done(err);
       }
@@ -32796,8 +32796,8 @@ var require_lodash = __commonJS({
       }
       value = toNumber(value);
       if (value === INFINITY || value === -INFINITY) {
-        var sign = value < 0 ? -1 : 1;
-        return sign * MAX_INTEGER;
+        var sign2 = value < 0 ? -1 : 1;
+        return sign2 * MAX_INTEGER;
       }
       return value === value ? value : 0;
     }
@@ -32882,8 +32882,8 @@ var require_lodash3 = __commonJS({
       }
       value = toNumber(value);
       if (value === INFINITY || value === -INFINITY) {
-        var sign = value < 0 ? -1 : 1;
-        return sign * MAX_INTEGER;
+        var sign2 = value < 0 ? -1 : 1;
+        return sign2 * MAX_INTEGER;
       }
       return value === value ? value : 0;
     }
@@ -33040,8 +33040,8 @@ var require_lodash7 = __commonJS({
       }
       value = toNumber(value);
       if (value === INFINITY || value === -INFINITY) {
-        var sign = value < 0 ? -1 : 1;
-        return sign * MAX_INTEGER;
+        var sign2 = value < 0 ? -1 : 1;
+        return sign2 * MAX_INTEGER;
       }
       return value === value ? value : 0;
     }
@@ -33204,8 +33204,8 @@ var require_sign2 = __commonJS({
       } else if (isObjectPayload) {
         try {
           validatePayload(payload);
-        } catch (error) {
-          return failure(error);
+        } catch (error2) {
+          return failure(error2);
         }
         if (!options.mutatePayload) {
           payload = Object.assign({}, payload);
@@ -33226,14 +33226,14 @@ var require_sign2 = __commonJS({
       }
       try {
         validateOptions(options);
-      } catch (error) {
-        return failure(error);
+      } catch (error2) {
+        return failure(error2);
       }
       if (!options.allowInvalidAsymmetricKeyTypes) {
         try {
           validateAsymmetricKey(header.alg, secretOrPrivateKey);
-        } catch (error) {
-          return failure(error);
+        } catch (error2) {
+          return failure(error2);
         }
       }
       const timestamp = payload.iat || Math.floor(Date.now() / 1e3);
@@ -33321,7 +33321,7 @@ var require_utils5 = __commonJS({
       let i = 0;
       for (; i < str.length; ++i) {
         const code = str.charCodeAt(i);
-        if (TOKEN[code] !== 1) {
+        if (TOKEN2[code] !== 1) {
           if (code !== 47 || i === 0)
             return;
           break;
@@ -33333,7 +33333,7 @@ var require_utils5 = __commonJS({
       const subtypeStart = ++i;
       for (; i < str.length; ++i) {
         const code = str.charCodeAt(i);
-        if (TOKEN[code] !== 1) {
+        if (TOKEN2[code] !== 1) {
           if (i === subtypeStart)
             return;
           if (parseContentTypeParams(str, i, params) === void 0)
@@ -33364,11 +33364,11 @@ var require_utils5 = __commonJS({
         }
         if (i === str.length)
           return;
-        let name;
+        let name2;
         const nameStart = i;
         for (; i < str.length; ++i) {
           const code = str.charCodeAt(i);
-          if (TOKEN[code] !== 1) {
+          if (TOKEN2[code] !== 1) {
             if (code !== 61)
               return;
             break;
@@ -33376,7 +33376,7 @@ var require_utils5 = __commonJS({
         }
         if (i === str.length)
           return;
-        name = str.slice(nameStart, i);
+        name2 = str.slice(nameStart, i);
         ++i;
         if (i === str.length)
           return;
@@ -33420,7 +33420,7 @@ var require_utils5 = __commonJS({
           valueStart = i;
           for (; i < str.length; ++i) {
             const code = str.charCodeAt(i);
-            if (TOKEN[code] !== 1) {
+            if (TOKEN2[code] !== 1) {
               if (i === valueStart)
                 return;
               break;
@@ -33428,9 +33428,9 @@ var require_utils5 = __commonJS({
           }
           value = str.slice(valueStart, i);
         }
-        name = name.toLowerCase();
-        if (params[name] === void 0)
-          params[name] = value;
+        name2 = name2.toLowerCase();
+        if (params[name2] === void 0)
+          params[name2] = value;
       }
       return params;
     }
@@ -33441,7 +33441,7 @@ var require_utils5 = __commonJS({
       let i = 0;
       for (; i < str.length; ++i) {
         const code = str.charCodeAt(i);
-        if (TOKEN[code] !== 1) {
+        if (TOKEN2[code] !== 1) {
           if (parseDispositionParams(str, i, params, defDecoder) === void 0)
             return;
           break;
@@ -33468,11 +33468,11 @@ var require_utils5 = __commonJS({
         }
         if (i === str.length)
           return;
-        let name;
+        let name2;
         const nameStart = i;
         for (; i < str.length; ++i) {
           const code = str.charCodeAt(i);
-          if (TOKEN[code] !== 1) {
+          if (TOKEN2[code] !== 1) {
             if (code === 61)
               break;
             return;
@@ -33483,8 +33483,8 @@ var require_utils5 = __commonJS({
         let value = "";
         let valueStart;
         let charset;
-        name = str.slice(nameStart, i);
-        if (name.charCodeAt(name.length - 1) === 42) {
+        name2 = str.slice(nameStart, i);
+        if (name2.charCodeAt(name2.length - 1) === 42) {
           const charsetStart = ++i;
           for (; i < str.length; ++i) {
             const code = str.charCodeAt(i);
@@ -33509,7 +33509,7 @@ var require_utils5 = __commonJS({
           if (i === str.length)
             return;
           valueStart = i;
-          let encode = 0;
+          let encode4 = 0;
           for (; i < str.length; ++i) {
             const code = str.charCodeAt(i);
             if (EXTENDED_VALUE[code] !== 1) {
@@ -33523,9 +33523,9 @@ var require_utils5 = __commonJS({
                   i += 2;
                   valueStart = i + 1;
                   if (byteVal >= 128)
-                    encode = 2;
-                  else if (encode === 0)
-                    encode = 1;
+                    encode4 = 2;
+                  else if (encode4 === 0)
+                    encode4 = 1;
                   continue;
                 }
                 return;
@@ -33534,7 +33534,7 @@ var require_utils5 = __commonJS({
             }
           }
           value += str.slice(valueStart, i);
-          value = convertToUTF8(value, charset, encode);
+          value = convertToUTF8(value, charset, encode4);
           if (value === void 0)
             return;
         } else {
@@ -33579,7 +33579,7 @@ var require_utils5 = __commonJS({
             valueStart = i;
             for (; i < str.length; ++i) {
               const code = str.charCodeAt(i);
-              if (TOKEN[code] !== 1) {
+              if (TOKEN2[code] !== 1) {
                 if (i === valueStart)
                   return;
                 break;
@@ -33591,9 +33591,9 @@ var require_utils5 = __commonJS({
           if (value === void 0)
             return;
         }
-        name = name.toLowerCase();
-        if (params[name] === void 0)
-          params[name] = value;
+        name2 = name2.toLowerCase();
+        if (params[name2] === void 0)
+          params[name2] = value;
       }
       return params;
     }
@@ -33679,25 +33679,25 @@ var require_utils5 = __commonJS({
       }
     };
     function convertToUTF8(data, charset, hint) {
-      const decode = getDecoder(charset);
-      if (decode)
-        return decode(data, hint);
+      const decode2 = getDecoder(charset);
+      if (decode2)
+        return decode2(data, hint);
     }
-    function basename(path7) {
-      if (typeof path7 !== "string")
+    function basename(path9) {
+      if (typeof path9 !== "string")
         return "";
-      for (let i = path7.length - 1; i >= 0; --i) {
-        switch (path7.charCodeAt(i)) {
+      for (let i = path9.length - 1; i >= 0; --i) {
+        switch (path9.charCodeAt(i)) {
           case 47:
           // '/'
           case 92:
-            path7 = path7.slice(i + 1);
-            return path7 === ".." || path7 === "." ? "" : path7;
+            path9 = path9.slice(i + 1);
+            return path9 === ".." || path9 === "." ? "" : path9;
         }
       }
-      return path7 === ".." || path7 === "." ? "" : path7;
+      return path9 === ".." || path9 === "." ? "" : path9;
     }
-    var TOKEN = [
+    var TOKEN2 = [
       0,
       0,
       0,
@@ -35448,7 +35448,7 @@ var require_multipart = __commonJS({
                   return -1;
                 ++this.byteCount;
                 const code = chunk[pos];
-                if (TOKEN[code] !== 1) {
+                if (TOKEN2[code] !== 1) {
                   if (code !== 58)
                     return -1;
                   this.name += chunk.latin1Slice(start, pos);
@@ -35921,7 +35921,7 @@ var require_multipart = __commonJS({
       if (!self2._complete)
         return new Error("Unexpected end of form");
     }
-    var TOKEN = [
+    var TOKEN2 = [
       0,
       0,
       0,
@@ -37190,12 +37190,12 @@ var require_append_field = __commonJS({
 // node_modules/multer/lib/counter.js
 var require_counter = __commonJS({
   "node_modules/multer/lib/counter.js"(exports2, module2) {
-    var EventEmitter2 = require("events").EventEmitter;
+    var EventEmitter8 = require("events").EventEmitter;
     function Counter() {
-      EventEmitter2.call(this);
+      EventEmitter8.call(this);
       this.value = 0;
     }
-    Counter.prototype = Object.create(EventEmitter2.prototype);
+    Counter.prototype = Object.create(EventEmitter8.prototype);
     Counter.prototype.increment = function increment() {
       this.value++;
     };
@@ -37216,7 +37216,7 @@ var require_counter = __commonJS({
 // node_modules/multer/lib/multer-error.js
 var require_multer_error = __commonJS({
   "node_modules/multer/lib/multer-error.js"(exports2, module2) {
-    var util2 = require("util");
+    var util4 = require("util");
     var errorMessages = {
       LIMIT_PART_COUNT: "Too many parts",
       LIMIT_FILE_SIZE: "File too large",
@@ -37234,7 +37234,7 @@ var require_multer_error = __commonJS({
       this.code = code;
       if (field) this.field = field;
     }
-    util2.inherits(MulterError, Error);
+    util4.inherits(MulterError, Error);
     module2.exports = MulterError;
   }
 });
@@ -37322,20 +37322,20 @@ var require_remove_uploaded_files = __commonJS({
   "node_modules/multer/lib/remove-uploaded-files.js"(exports2, module2) {
     function removeUploadedFiles(uploadedFiles, remove2, cb) {
       var length = uploadedFiles.length;
-      var errors = [];
-      if (length === 0) return cb(null, errors);
+      var errors2 = [];
+      if (length === 0) return cb(null, errors2);
       function handleFile(idx) {
         var file = uploadedFiles[idx];
         remove2(file, function(err) {
           if (err) {
             err.file = file;
             err.field = file.fieldname;
-            errors.push(err);
+            errors2.push(err);
           }
           if (idx < length - 1) {
             handleFile(idx + 1);
           } else {
-            cb(null, errors);
+            cb(null, errors2);
           }
         });
       }
@@ -37497,8 +37497,8 @@ var require_make_middleware = __commonJS({
 // node_modules/mkdirp/index.js
 var require_mkdirp = __commonJS({
   "node_modules/mkdirp/index.js"(exports2, module2) {
-    var path7 = require("path");
-    var fs6 = require("fs");
+    var path9 = require("path");
+    var fs9 = require("fs");
     var _0777 = parseInt("0777", 8);
     module2.exports = mkdirP.mkdirp = mkdirP.mkdirP = mkdirP;
     function mkdirP(p, opts, f, made) {
@@ -37509,7 +37509,7 @@ var require_mkdirp = __commonJS({
         opts = { mode: opts };
       }
       var mode = opts.mode;
-      var xfs = opts.fs || fs6;
+      var xfs = opts.fs || fs9;
       if (mode === void 0) {
         mode = _0777;
       }
@@ -37517,7 +37517,7 @@ var require_mkdirp = __commonJS({
       var cb = f || /* istanbul ignore next */
       function() {
       };
-      p = path7.resolve(p);
+      p = path9.resolve(p);
       xfs.mkdir(p, mode, function(er) {
         if (!er) {
           made = made || p;
@@ -37525,8 +37525,8 @@ var require_mkdirp = __commonJS({
         }
         switch (er.code) {
           case "ENOENT":
-            if (path7.dirname(p) === p) return cb(er);
-            mkdirP(path7.dirname(p), opts, function(er2, made2) {
+            if (path9.dirname(p) === p) return cb(er);
+            mkdirP(path9.dirname(p), opts, function(er2, made2) {
               if (er2) cb(er2, made2);
               else mkdirP(p, opts, cb, made2);
             });
@@ -37548,19 +37548,19 @@ var require_mkdirp = __commonJS({
         opts = { mode: opts };
       }
       var mode = opts.mode;
-      var xfs = opts.fs || fs6;
+      var xfs = opts.fs || fs9;
       if (mode === void 0) {
         mode = _0777;
       }
       if (!made) made = null;
-      p = path7.resolve(p);
+      p = path9.resolve(p);
       try {
         xfs.mkdirSync(p, mode);
         made = made || p;
       } catch (err0) {
         switch (err0.code) {
           case "ENOENT":
-            made = sync(path7.dirname(p), opts, made);
+            made = sync(path9.dirname(p), opts, made);
             sync(p, opts, made);
             break;
           // In the case of any other error, just see if there's a dir
@@ -37585,18 +37585,18 @@ var require_mkdirp = __commonJS({
 // node_modules/multer/storage/disk.js
 var require_disk = __commonJS({
   "node_modules/multer/storage/disk.js"(exports2, module2) {
-    var fs6 = require("fs");
-    var os2 = require("os");
-    var path7 = require("path");
-    var crypto2 = require("crypto");
+    var fs9 = require("fs");
+    var os4 = require("os");
+    var path9 = require("path");
+    var crypto9 = require("crypto");
     var mkdirp = require_mkdirp();
     function getFilename(req, file, cb) {
-      crypto2.randomBytes(16, function(err, raw) {
+      crypto9.randomBytes(16, function(err, raw) {
         cb(err, err ? void 0 : raw.toString("hex"));
       });
     }
     function getDestination(req, file, cb) {
-      cb(null, os2.tmpdir());
+      cb(null, os4.tmpdir());
     }
     function DiskStorage(opts) {
       this.getFilename = opts.filename || getFilename;
@@ -37615,8 +37615,8 @@ var require_disk = __commonJS({
         if (err) return cb(err);
         that.getFilename(req, file, function(err2, filename) {
           if (err2) return cb(err2);
-          var finalPath = path7.join(destination, filename);
-          var outStream = fs6.createWriteStream(finalPath);
+          var finalPath = path9.join(destination, filename);
+          var outStream = fs9.createWriteStream(finalPath);
           file.stream.pipe(outStream);
           outStream.on("error", cb);
           outStream.on("finish", function() {
@@ -37631,11 +37631,11 @@ var require_disk = __commonJS({
       });
     };
     DiskStorage.prototype._removeFile = function _removeFile(req, file, cb) {
-      var path8 = file.path;
+      var path10 = file.path;
       delete file.destination;
       delete file.filename;
       delete file.path;
-      fs6.unlink(path8, cb);
+      fs9.unlink(path10, cb);
     };
     module2.exports = function(opts) {
       return new DiskStorage(opts);
@@ -37842,7 +37842,7 @@ var require_BufferList = __commonJS({
       }
     }
     var Buffer2 = require_safe_buffer2().Buffer;
-    var util2 = require("util");
+    var util4 = require("util");
     function copyBuffer(src, target, offset) {
       src.copy(target, offset);
     }
@@ -37901,9 +37901,9 @@ var require_BufferList = __commonJS({
       };
       return BufferList;
     })();
-    if (util2 && util2.inspect && util2.inspect.custom) {
-      module2.exports.prototype[util2.inspect.custom] = function() {
-        var obj = util2.inspect({ length: this.length });
+    if (util4 && util4.inspect && util4.inspect.custom) {
+      module2.exports.prototype[util4.inspect.custom] = function() {
+        var obj = util4.inspect({ length: this.length });
         return this.constructor.name + " " + obj;
       };
     }
@@ -38003,12 +38003,12 @@ var require_stream_writable = __commonJS({
     var asyncWrite = !process.browser && ["v0.10", "v0.9."].indexOf(process.version.slice(0, 5)) > -1 ? setImmediate : pna.nextTick;
     var Duplex;
     Writable.WritableState = WritableState;
-    var util2 = Object.create(require_util());
-    util2.inherits = require_inherits();
+    var util4 = Object.create(require_util());
+    util4.inherits = require_inherits();
     var internalUtil = {
       deprecate: require_node2()
     };
-    var Stream = require_stream2();
+    var Stream2 = require_stream2();
     var Buffer2 = require_safe_buffer2().Buffer;
     var OurUint8Array = (typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {}).Uint8Array || function() {
     };
@@ -38019,7 +38019,7 @@ var require_stream_writable = __commonJS({
       return Buffer2.isBuffer(obj) || obj instanceof OurUint8Array;
     }
     var destroyImpl = require_destroy2();
-    util2.inherits(Writable, Stream);
+    util4.inherits(Writable, Stream2);
     function nop() {
     }
     function WritableState(options, stream) {
@@ -38109,7 +38109,7 @@ var require_stream_writable = __commonJS({
         if (typeof options.destroy === "function") this._destroy = options.destroy;
         if (typeof options.final === "function") this._final = options.final;
       }
-      Stream.call(this);
+      Stream2.call(this);
     }
     Writable.prototype.pipe = function() {
       this.emit("error", new Error("Cannot pipe, not readable"));
@@ -38256,19 +38256,19 @@ var require_stream_writable = __commonJS({
       onwriteStateUpdate(state);
       if (er) onwriteError(stream, state, sync, er, cb);
       else {
-        var finished = needFinish(state);
-        if (!finished && !state.corked && !state.bufferProcessing && state.bufferedRequest) {
+        var finished3 = needFinish(state);
+        if (!finished3 && !state.corked && !state.bufferProcessing && state.bufferedRequest) {
           clearBuffer(stream, state);
         }
         if (sync) {
-          asyncWrite(afterWrite, stream, state, finished, cb);
+          asyncWrite(afterWrite, stream, state, finished3, cb);
         } else {
-          afterWrite(stream, state, finished, cb);
+          afterWrite(stream, state, finished3, cb);
         }
       }
     }
-    function afterWrite(stream, state, finished, cb) {
-      if (!finished) onwriteDrain(stream, state);
+    function afterWrite(stream, state, finished3, cb) {
+      if (!finished3) onwriteDrain(stream, state);
       state.pendingcb--;
       cb();
       finishMaybe(stream, state);
@@ -38439,11 +38439,11 @@ var require_stream_duplex = __commonJS({
       return keys2;
     };
     module2.exports = Duplex;
-    var util2 = Object.create(require_util());
-    util2.inherits = require_inherits();
+    var util4 = Object.create(require_util());
+    util4.inherits = require_inherits();
     var Readable = require_stream_readable();
     var Writable = require_stream_writable();
-    util2.inherits(Duplex, Readable);
+    util4.inherits(Duplex, Readable);
     {
       keys = objectKeys(Writable.prototype);
       for (v = 0; v < keys.length; v++) {
@@ -38811,7 +38811,7 @@ var require_stream_readable = __commonJS({
     var EElistenerCount = function(emitter, type) {
       return emitter.listeners(type).length;
     };
-    var Stream = require_stream2();
+    var Stream2 = require_stream2();
     var Buffer2 = require_safe_buffer2().Buffer;
     var OurUint8Array = (typeof global !== "undefined" ? global : typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : {}).Uint8Array || function() {
     };
@@ -38821,8 +38821,8 @@ var require_stream_readable = __commonJS({
     function _isUint8Array(obj) {
       return Buffer2.isBuffer(obj) || obj instanceof OurUint8Array;
     }
-    var util2 = Object.create(require_util());
-    util2.inherits = require_inherits();
+    var util4 = Object.create(require_util());
+    util4.inherits = require_inherits();
     var debugUtil = require("util");
     var debug = void 0;
     if (debugUtil && debugUtil.debuglog) {
@@ -38834,7 +38834,7 @@ var require_stream_readable = __commonJS({
     var BufferList = require_BufferList();
     var destroyImpl = require_destroy2();
     var StringDecoder;
-    util2.inherits(Readable, Stream);
+    util4.inherits(Readable, Stream2);
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
     function prependListener(emitter, event, fn) {
       if (typeof emitter.prependListener === "function") return emitter.prependListener(event, fn);
@@ -38889,7 +38889,7 @@ var require_stream_readable = __commonJS({
         if (typeof options.read === "function") this._read = options.read;
         if (typeof options.destroy === "function") this._destroy = options.destroy;
       }
-      Stream.call(this);
+      Stream2.call(this);
     }
     Object.defineProperty(Readable.prototype, "destroyed", {
       get: function() {
@@ -39263,7 +39263,7 @@ var require_stream_readable = __commonJS({
       return this;
     };
     Readable.prototype.on = function(ev, fn) {
-      var res = Stream.prototype.on.call(this, ev, fn);
+      var res = Stream2.prototype.on.call(this, ev, fn);
       if (ev === "data") {
         if (this._readableState.flowing !== false) this.resume();
       } else if (ev === "readable") {
@@ -39488,11 +39488,11 @@ var require_stream_readable = __commonJS({
 var require_stream_transform = __commonJS({
   "node_modules/readable-stream/lib/_stream_transform.js"(exports2, module2) {
     "use strict";
-    module2.exports = Transform;
+    module2.exports = Transform9;
     var Duplex = require_stream_duplex();
-    var util2 = Object.create(require_util());
-    util2.inherits = require_inherits();
-    util2.inherits(Transform, Duplex);
+    var util4 = Object.create(require_util());
+    util4.inherits = require_inherits();
+    util4.inherits(Transform9, Duplex);
     function afterTransform(er, data) {
       var ts = this._transformState;
       ts.transforming = false;
@@ -39511,8 +39511,8 @@ var require_stream_transform = __commonJS({
         this._read(rs.highWaterMark);
       }
     }
-    function Transform(options) {
-      if (!(this instanceof Transform)) return new Transform(options);
+    function Transform9(options) {
+      if (!(this instanceof Transform9)) return new Transform9(options);
       Duplex.call(this, options);
       this._transformState = {
         afterTransform: afterTransform.bind(this),
@@ -39540,14 +39540,14 @@ var require_stream_transform = __commonJS({
         done(this, null, null);
       }
     }
-    Transform.prototype.push = function(chunk, encoding) {
+    Transform9.prototype.push = function(chunk, encoding) {
       this._transformState.needTransform = false;
       return Duplex.prototype.push.call(this, chunk, encoding);
     };
-    Transform.prototype._transform = function(chunk, encoding, cb) {
+    Transform9.prototype._transform = function(chunk, encoding, cb) {
       throw new Error("_transform() is not implemented");
     };
-    Transform.prototype._write = function(chunk, encoding, cb) {
+    Transform9.prototype._write = function(chunk, encoding, cb) {
       var ts = this._transformState;
       ts.writecb = cb;
       ts.writechunk = chunk;
@@ -39557,7 +39557,7 @@ var require_stream_transform = __commonJS({
         if (ts.needTransform || rs.needReadable || rs.length < rs.highWaterMark) this._read(rs.highWaterMark);
       }
     };
-    Transform.prototype._read = function(n) {
+    Transform9.prototype._read = function(n) {
       var ts = this._transformState;
       if (ts.writechunk !== null && ts.writecb && !ts.transforming) {
         ts.transforming = true;
@@ -39566,7 +39566,7 @@ var require_stream_transform = __commonJS({
         ts.needTransform = true;
       }
     };
-    Transform.prototype._destroy = function(err, cb) {
+    Transform9.prototype._destroy = function(err, cb) {
       var _this2 = this;
       Duplex.prototype._destroy.call(this, err, function(err2) {
         cb(err2);
@@ -39588,16 +39588,16 @@ var require_stream_transform = __commonJS({
 var require_stream_passthrough = __commonJS({
   "node_modules/readable-stream/lib/_stream_passthrough.js"(exports2, module2) {
     "use strict";
-    module2.exports = PassThrough;
-    var Transform = require_stream_transform();
-    var util2 = Object.create(require_util());
-    util2.inherits = require_inherits();
-    util2.inherits(PassThrough, Transform);
-    function PassThrough(options) {
-      if (!(this instanceof PassThrough)) return new PassThrough(options);
-      Transform.call(this, options);
+    module2.exports = PassThrough5;
+    var Transform9 = require_stream_transform();
+    var util4 = Object.create(require_util());
+    util4.inherits = require_inherits();
+    util4.inherits(PassThrough5, Transform9);
+    function PassThrough5(options) {
+      if (!(this instanceof PassThrough5)) return new PassThrough5(options);
+      Transform9.call(this, options);
     }
-    PassThrough.prototype._transform = function(chunk, encoding, cb) {
+    PassThrough5.prototype._transform = function(chunk, encoding, cb) {
       cb(null, chunk);
     };
   }
@@ -39606,19 +39606,19 @@ var require_stream_passthrough = __commonJS({
 // node_modules/readable-stream/readable.js
 var require_readable = __commonJS({
   "node_modules/readable-stream/readable.js"(exports2, module2) {
-    var Stream = require("stream");
-    if (process.env.READABLE_STREAM === "disable" && Stream) {
-      module2.exports = Stream;
-      exports2 = module2.exports = Stream.Readable;
-      exports2.Readable = Stream.Readable;
-      exports2.Writable = Stream.Writable;
-      exports2.Duplex = Stream.Duplex;
-      exports2.Transform = Stream.Transform;
-      exports2.PassThrough = Stream.PassThrough;
-      exports2.Stream = Stream;
+    var Stream2 = require("stream");
+    if (process.env.READABLE_STREAM === "disable" && Stream2) {
+      module2.exports = Stream2;
+      exports2 = module2.exports = Stream2.Readable;
+      exports2.Readable = Stream2.Readable;
+      exports2.Writable = Stream2.Writable;
+      exports2.Duplex = Stream2.Duplex;
+      exports2.Transform = Stream2.Transform;
+      exports2.PassThrough = Stream2.PassThrough;
+      exports2.Stream = Stream2;
     } else {
       exports2 = module2.exports = require_stream_readable();
-      exports2.Stream = Stream || exports2;
+      exports2.Stream = Stream2 || exports2;
       exports2.Readable = exports2;
       exports2.Writable = require_stream_writable();
       exports2.Duplex = require_stream_duplex();
@@ -39708,7 +39708,7 @@ var require_typedarray = __commonJS({
     })();
     var LN2 = Math.LN2;
     var abs = Math.abs;
-    var floor = Math.floor;
+    var floor2 = Math.floor;
     var log = Math.log;
     var min = Math.min;
     var pow = Math.pow;
@@ -39834,7 +39834,7 @@ var require_typedarray = __commonJS({
     function packIEEE754(v, ebits, fbits) {
       var bias = (1 << ebits - 1) - 1, s, e, f, ln, i, bits, str, bytes;
       function roundToEven(n) {
-        var w = floor(n), f2 = n - w;
+        var w = floor2(n), f2 = n - w;
         if (f2 < 0.5)
           return w;
         if (f2 > 0.5)
@@ -39857,7 +39857,7 @@ var require_typedarray = __commonJS({
         s = v < 0;
         v = abs(v);
         if (v >= pow(2, 1 - bias)) {
-          e = min(floor(log(v) / LN2), 1023);
+          e = min(floor2(log(v) / LN2), 1023);
           f = roundToEven(v / pow(2, e) * pow(2, fbits));
           if (f / pow(2, fbits) >= 2) {
             e = e + 1;
@@ -39878,11 +39878,11 @@ var require_typedarray = __commonJS({
       bits = [];
       for (i = fbits; i; i -= 1) {
         bits.push(f % 2 ? 1 : 0);
-        f = floor(f / 2);
+        f = floor2(f / 2);
       }
       for (i = ebits; i; i -= 1) {
         bits.push(e % 2 ? 1 : 0);
-        e = floor(e / 2);
+        e = floor2(e / 2);
       }
       bits.push(s ? 1 : 0);
       bits.reverse();
@@ -40413,11 +40413,11 @@ var require_multer = __commonJS({
       }
       return makeMiddleware(setup.bind(this));
     };
-    Multer.prototype.single = function(name) {
-      return this._makeMiddleware([{ name, maxCount: 1 }], "VALUE");
+    Multer.prototype.single = function(name2) {
+      return this._makeMiddleware([{ name: name2, maxCount: 1 }], "VALUE");
     };
-    Multer.prototype.array = function(name, maxCount) {
-      return this._makeMiddleware([{ name, maxCount }], "ARRAY");
+    Multer.prototype.array = function(name2, maxCount) {
+      return this._makeMiddleware([{ name: name2, maxCount }], "ARRAY");
     };
     Multer.prototype.fields = function(fields) {
       return this._makeMiddleware(fields, "OBJECT");
@@ -40563,20 +40563,20 @@ function __runInitializers(thisArg, initializers, value) {
 function __propKey(x) {
   return typeof x === "symbol" ? x : "".concat(x);
 }
-function __setFunctionName(f, name, prefix) {
-  if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
-  return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+function __setFunctionName(f, name2, prefix) {
+  if (typeof name2 === "symbol") name2 = name2.description ? "[".concat(name2.description, "]") : "";
+  return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name2) : name2 });
 }
 function __metadata(metadataKey, metadataValue) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
 }
 function __awaiter(thisArg, _arguments, P, generator) {
   function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve) {
-      resolve(value);
+    return value instanceof P ? value : new P(function(resolve3) {
+      resolve3(value);
     });
   }
-  return new (P || (P = Promise))(function(resolve, reject) {
+  return new (P || (P = Promise))(function(resolve3, reject) {
     function fulfilled(value) {
       try {
         step(generator.next(value));
@@ -40592,7 +40592,7 @@ function __awaiter(thisArg, _arguments, P, generator) {
       }
     }
     function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+      result.done ? resolve3(result.value) : adopt(result.value).then(fulfilled, rejected);
     }
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
@@ -40686,8 +40686,8 @@ function __read(o, n) {
   var i = m.call(o), r, ar = [], e;
   try {
     while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-  } catch (error) {
-    e = { error };
+  } catch (error2) {
+    e = { error: error2 };
   } finally {
     try {
       if (r && !r.done && (m = i["return"])) m.call(i);
@@ -40783,14 +40783,14 @@ function __asyncValues(o) {
   }, i);
   function verb(n) {
     i[n] = o[n] && function(v) {
-      return new Promise(function(resolve, reject) {
-        v = o[n](v), settle(resolve, reject, v.done, v.value);
+      return new Promise(function(resolve3, reject) {
+        v = o[n](v), settle(resolve3, reject, v.done, v.value);
       });
     };
   }
-  function settle(resolve, reject, d, v) {
+  function settle(resolve3, reject, d, v) {
     Promise.resolve(v).then(function(v2) {
-      resolve({ value: v2, done: d });
+      resolve3({ value: v2, done: d });
     }, reject);
   }
 }
@@ -40882,13 +40882,13 @@ function __disposeResources(env) {
   }
   return next();
 }
-function __rewriteRelativeImportExtension(path7, preserveJsx) {
-  if (typeof path7 === "string" && /^\.\.?\//.test(path7)) {
-    return path7.replace(/\.(tsx)$|((?:\.d)?)((?:\.[^./]+?)?)\.([cm]?)ts$/i, function(m, tsx, d, ext, cm) {
+function __rewriteRelativeImportExtension(path9, preserveJsx) {
+  if (typeof path9 === "string" && /^\.\.?\//.test(path9)) {
+    return path9.replace(/\.(tsx)$|((?:\.d)?)((?:\.[^./]+?)?)\.([cm]?)ts$/i, function(m, tsx, d, ext, cm) {
       return tsx ? preserveJsx ? ".jsx" : ".js" : d && (!ext || !cm) ? m : d + ext + "." + cm.toLowerCase() + "js";
     });
   }
-  return path7;
+  return path9;
 }
 var extendStatics, __assign, __createBinding, __setModuleDefault, ownKeys, _SuppressedError, tslib_es6_default;
 var init_tslib_es6 = __esm({
@@ -40937,9 +40937,9 @@ var init_tslib_es6 = __esm({
       };
       return ownKeys(o);
     };
-    _SuppressedError = typeof SuppressedError === "function" ? SuppressedError : function(error, suppressed, message) {
+    _SuppressedError = typeof SuppressedError === "function" ? SuppressedError : function(error2, suppressed, message) {
       var e = new Error(message);
-      return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+      return e.name = "SuppressedError", e.error = error2, e.suppressed = suppressed, e;
     };
     tslib_es6_default = {
       __extends,
@@ -41001,9 +41001,9 @@ var require_types2 = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.FunctionRegion = exports2.FunctionsHttpError = exports2.FunctionsRelayError = exports2.FunctionsFetchError = exports2.FunctionsError = void 0;
     var FunctionsError2 = class extends Error {
-      constructor(message, name = "FunctionsError", context) {
+      constructor(message, name2 = "FunctionsError", context) {
         super(message);
-        this.name = name;
+        this.name = name2;
         this.context = context;
       }
       toJSON() {
@@ -41319,11 +41319,11 @@ var require_FunctionsClient = __commonJS({
               data = yield response.text();
             }
             return { data, error: null, response };
-          } catch (error) {
+          } catch (error2) {
             return {
               data: null,
-              error,
-              response: error instanceof types_1.FunctionsHttpError || error instanceof types_1.FunctionsRelayError ? error.context : void 0
+              error: error2,
+              response: error2 instanceof types_1.FunctionsHttpError || error2 instanceof types_1.FunctionsRelayError ? error2.context : void 0
             };
           } finally {
             if (timeoutId) {
@@ -41883,8 +41883,8 @@ var require_phoenix_cjs = __commonJS({
     var __getOwnPropNames2 = Object.getOwnPropertyNames;
     var __hasOwnProp2 = Object.prototype.hasOwnProperty;
     var __export2 = (target, all) => {
-      for (var name in all)
-        __defProp2(target, name, { get: all[name], enumerable: true });
+      for (var name2 in all)
+        __defProp2(target, name2, { get: all[name2], enumerable: true });
     };
     var __copyProps2 = (to, from, except, desc) => {
       if (from && typeof from === "object" || typeof from === "function") {
@@ -41923,7 +41923,7 @@ var require_phoenix_cjs = __commonJS({
     var phxWindow = typeof window !== "undefined" ? window : null;
     var global2 = globalSelf || phxWindow || globalThis;
     var DEFAULT_VSN = "2.0.0";
-    var DEFAULT_TIMEOUT = 1e4;
+    var DEFAULT_TIMEOUT2 = 1e4;
     var WS_CLOSE_NORMAL = 1e3;
     var MAX_LONGPOLL_BATCH_SIZE = 100;
     var SOCKET_STATES = (
@@ -42982,9 +42982,9 @@ var require_phoenix_cjs = __commonJS({
         combined.set(new Uint8Array(payload), header.byteLength);
         return combined.buffer;
       },
-      assertFieldSize(size, name) {
+      assertFieldSize(size, name2) {
         if (size > 255) {
-          throw new Error(`unable to convert ${name} to binary: must be less than or equal to 255 bytes, but is ${size} bytes`);
+          throw new Error(`unable to convert ${name2} to binary: must be less than or equal to 255 bytes, but is ${size} bytes`);
         }
       },
       /**
@@ -43067,7 +43067,7 @@ var require_phoenix_cjs = __commonJS({
         this.sendBuffer = [];
         this.ref = 0;
         this.fallbackRef = null;
-        this.timeout = opts.timeout || DEFAULT_TIMEOUT;
+        this.timeout = opts.timeout || DEFAULT_TIMEOUT2;
         this.transport = opts.transport || global2.WebSocket || LongPoll;
         this.conn = void 0;
         this.primaryPassedHealthCheck = false;
@@ -43371,7 +43371,7 @@ var require_phoenix_cjs = __commonJS({
         this.conn.binaryType = this.binaryType;
         this.conn.timeout = this.longpollerTimeout;
         this.conn.onopen = () => this.onConnOpen();
-        this.conn.onerror = (error) => this.onConnError(error);
+        this.conn.onerror = (error2) => this.onConnError(error2);
         this.conn.onmessage = (event) => this.onConnMessage(event);
         this.conn.onclose = (event) => this.onConnClose(event);
       }
@@ -43534,13 +43534,13 @@ var require_phoenix_cjs = __commonJS({
        * @private
        * @param {Event} error
        */
-      onConnError(error) {
-        if (this.hasLogger()) this.log("transport", "error", error);
+      onConnError(error2) {
+        if (this.hasLogger()) this.log("transport", "error", error2);
         let transportBefore = this.transport;
         let establishedBefore = this.establishedConnections;
-        this.triggerStateCallbacks("error", error, transportBefore, establishedBefore);
+        this.triggerStateCallbacks("error", error2, transportBefore, establishedBefore);
         if (transportBefore === this.transport || establishedBefore > 0) {
-          this.triggerChanError(error);
+          this.triggerChanError(error2);
         }
       }
       /**
@@ -43948,7 +43948,7 @@ var require_channelAdapter = __commonJS({
         let push;
         try {
           push = this.channel.push(event, payload, timeout);
-        } catch (error) {
+        } catch (error2) {
           throw new Error(`tried to push '${event}' to '${this.channel.topic}' before joining. Use channel.subscribe() before pushing events`);
         }
         if (this.channel.pushBuffer.length > constants_1.MAX_PUSH_BUFFER_SIZE) {
@@ -44291,10 +44291,10 @@ var require_RealtimeChannel = __commonJS({
               return;
             }
             this._updatePostgresBindings(postgres_changes2, callback);
-          }).receive("error", (error) => {
+          }).receive("error", (error2) => {
             this.state = constants_1.CHANNEL_STATES.errored;
-            const message = Object.values(error).join(", ") || "error";
-            callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.CHANNEL_ERROR, new Error(message, { cause: error }));
+            const message = Object.values(error2).join(", ") || "error";
+            callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.CHANNEL_ERROR, new Error(message, { cause: error2 }));
           }).receive("timeout", () => {
             callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.TIMED_OUT);
           });
@@ -44703,23 +44703,23 @@ var require_RealtimeChannel = __commonJS({
             const response = await this._fetchWithTimeout(this.broadcastEndpointURL, options, (_a = opts.timeout) !== null && _a !== void 0 ? _a : this.timeout);
             await ((_b = response.body) === null || _b === void 0 ? void 0 : _b.cancel());
             return response.ok ? "ok" : "error";
-          } catch (error) {
-            if (error instanceof Error && error.name === "AbortError") {
+          } catch (error2) {
+            if (error2 instanceof Error && error2.name === "AbortError") {
               return "timed out";
             } else {
               return "error";
             }
           }
         } else {
-          return new Promise((resolve) => {
+          return new Promise((resolve3) => {
             var _a2, _b2, _c;
             const push = this.channelAdapter.push(args.type, args, opts.timeout || this.timeout);
             if (args.type === "broadcast" && !((_c = (_b2 = (_a2 = this.params) === null || _a2 === void 0 ? void 0 : _a2.config) === null || _b2 === void 0 ? void 0 : _b2.broadcast) === null || _c === void 0 ? void 0 : _c.ack)) {
-              resolve("ok");
+              resolve3("ok");
             }
-            push.receive("ok", () => resolve("ok"));
-            push.receive("error", (response) => resolve(args.persist && typeof (response === null || response === void 0 ? void 0 : response.error) === "string" ? response.error : "error"));
-            push.receive("timeout", () => resolve("timed out"));
+            push.receive("ok", () => resolve3("ok"));
+            push.receive("error", (response) => resolve3(args.persist && typeof (response === null || response === void 0 ? void 0 : response.error) === "string" ? response.error : "error"));
+            push.receive("timeout", () => resolve3("timed out"));
           });
         }
       }
@@ -44744,8 +44744,8 @@ var require_RealtimeChannel = __commonJS({
        * @category Realtime
        */
       async unsubscribe(timeout = this.timeout) {
-        return new Promise((resolve) => {
-          this.channelAdapter.unsubscribe(timeout).receive("ok", () => resolve("ok")).receive("timeout", () => resolve("timed out")).receive("error", () => resolve("error"));
+        return new Promise((resolve3) => {
+          this.channelAdapter.unsubscribe(timeout).receive("ok", () => resolve3("ok")).receive("timeout", () => resolve3("timed out")).receive("error", () => resolve3("error"));
         });
       }
       /**
@@ -44838,8 +44838,8 @@ var require_RealtimeChannel = __commonJS({
       }
       /** @internal */
       _notThisChannelEvent(event, ref) {
-        const { close, error, leave, join } = constants_1.CHANNEL_EVENTS;
-        const events = [close, error, leave, join];
+        const { close, error: error2, leave, join } = constants_1.CHANNEL_EVENTS;
+        const events = [close, error2, leave, join];
         return ref && events.includes(event) && ref !== this.joinPush.ref;
       }
       /** @internal */
@@ -44847,7 +44847,7 @@ var require_RealtimeChannel = __commonJS({
         this.channelAdapter.updatePayloadTransform((event, payload, ref) => {
           if (typeof payload === "object" && "ids" in payload) {
             const postgresChanges = payload.data;
-            const { schema, table, commit_timestamp, type, errors } = postgresChanges;
+            const { schema, table, commit_timestamp, type, errors: errors2 } = postgresChanges;
             const enrichedPayload = {
               schema,
               table,
@@ -44855,7 +44855,7 @@ var require_RealtimeChannel = __commonJS({
               eventType: type,
               new: {},
               old: {},
-              errors
+              errors: errors2
             };
             return Object.assign(Object.assign({}, enrichedPayload), this._getPayloadRecords(postgresChanges));
           }
@@ -44972,11 +44972,11 @@ var require_socketAdapter = __commonJS({
         this.socket.connect();
       }
       disconnect(callback, code, reason, timeout = 1e4) {
-        return new Promise((resolve) => {
-          setTimeout(() => resolve("timeout"), timeout);
+        return new Promise((resolve3) => {
+          setTimeout(() => resolve3("timeout"), timeout);
           this.socket.disconnect(() => {
             callback();
-            resolve("ok");
+            resolve3("ok");
           }, code, reason);
         });
       }
@@ -45230,8 +45230,8 @@ var require_RealtimeClient = __commonJS({
         this._setupConnectionHandlers();
         try {
           this.socketAdapter.connect();
-        } catch (error) {
-          const errorMessage = error.message;
+        } catch (error2) {
+          const errorMessage = error2.message;
           throw new Error(`WebSocket not available: ${errorMessage}`);
         }
         this._handleNodeJsRaceCondition();
@@ -45608,8 +45608,8 @@ var require_RealtimeClient = __commonJS({
         }
         const objectUrl = this._workerObjectUrl(this.workerUrl);
         this.workerRef = new Worker(objectUrl);
-        this.workerRef.onerror = (error) => {
-          this.log("worker", "worker error", error.message);
+        this.workerRef.onerror = (error2) => {
+          this.log("worker", "worker error", error2.message);
           this._terminateWorker();
           this.disconnect();
         };
@@ -45828,8 +45828,8 @@ var require_errors = __commonJS({
       }
     };
     exports2.AuthError = AuthError;
-    function isAuthError(error) {
-      return typeof error === "object" && error !== null && "__isAuthError" in error;
+    function isAuthError(error2) {
+      return typeof error2 === "object" && error2 !== null && "__isAuthError" in error2;
     }
     var AuthApiError = class extends AuthError {
       constructor(message, status, code) {
@@ -45840,8 +45840,8 @@ var require_errors = __commonJS({
       }
     };
     exports2.AuthApiError = AuthApiError;
-    function isAuthApiError(error) {
-      return isAuthError(error) && error.name === "AuthApiError";
+    function isAuthApiError(error2) {
+      return isAuthError(error2) && error2.name === "AuthApiError";
     }
     var AuthUnknownError = class extends AuthError {
       constructor(message, originalError) {
@@ -45852,9 +45852,9 @@ var require_errors = __commonJS({
     };
     exports2.AuthUnknownError = AuthUnknownError;
     var CustomAuthError = class extends AuthError {
-      constructor(message, name, status, code) {
+      constructor(message, name2, status, code) {
         super(message, status, code);
-        this.name = name;
+        this.name = name2;
         this.status = status;
       }
     };
@@ -45865,8 +45865,8 @@ var require_errors = __commonJS({
       }
     };
     exports2.AuthSessionMissingError = AuthSessionMissingError;
-    function isAuthSessionMissingError(error) {
-      return isAuthError(error) && error.name === "AuthSessionMissingError";
+    function isAuthSessionMissingError(error2) {
+      return isAuthError(error2) && error2.name === "AuthSessionMissingError";
     }
     var AuthInvalidTokenResponseError = class extends CustomAuthError {
       constructor() {
@@ -45891,8 +45891,8 @@ var require_errors = __commonJS({
       }
     };
     exports2.AuthImplicitGrantRedirectError = AuthImplicitGrantRedirectError;
-    function isAuthImplicitGrantRedirectError(error) {
-      return isAuthError(error) && error.name === "AuthImplicitGrantRedirectError";
+    function isAuthImplicitGrantRedirectError(error2) {
+      return isAuthError(error2) && error2.name === "AuthImplicitGrantRedirectError";
     }
     var AuthPKCEGrantCodeExchangeError = class extends CustomAuthError {
       constructor(message, details = null) {
@@ -45911,8 +45911,8 @@ var require_errors = __commonJS({
       }
     };
     exports2.AuthPKCECodeVerifierMissingError = AuthPKCECodeVerifierMissingError;
-    function isAuthPKCECodeVerifierMissingError(error) {
-      return isAuthError(error) && error.name === "AuthPKCECodeVerifierMissingError";
+    function isAuthPKCECodeVerifierMissingError(error2) {
+      return isAuthError(error2) && error2.name === "AuthPKCECodeVerifierMissingError";
     }
     var AuthRetryableFetchError = class extends CustomAuthError {
       constructor(message, status) {
@@ -45920,8 +45920,8 @@ var require_errors = __commonJS({
       }
     };
     exports2.AuthRetryableFetchError = AuthRetryableFetchError;
-    function isAuthRetryableFetchError(error) {
-      return isAuthError(error) && error.name === "AuthRetryableFetchError";
+    function isAuthRetryableFetchError(error2) {
+      return isAuthError(error2) && error2.name === "AuthRetryableFetchError";
     }
     var AuthRefreshDiscardedError = class extends CustomAuthError {
       constructor(message = "Refresh result discarded: session state changed mid-flight (e.g., concurrent signOut)") {
@@ -45929,8 +45929,8 @@ var require_errors = __commonJS({
       }
     };
     exports2.AuthRefreshDiscardedError = AuthRefreshDiscardedError;
-    function isAuthRefreshDiscardedError(error) {
-      return isAuthError(error) && error.name === "AuthRefreshDiscardedError";
+    function isAuthRefreshDiscardedError(error2) {
+      return isAuthError(error2) && error2.name === "AuthRefreshDiscardedError";
     }
     var AuthWeakPasswordError = class extends CustomAuthError {
       constructor(message, status, reasons) {
@@ -45942,8 +45942,8 @@ var require_errors = __commonJS({
       }
     };
     exports2.AuthWeakPasswordError = AuthWeakPasswordError;
-    function isAuthWeakPasswordError(error) {
-      return isAuthError(error) && error.name === "AuthWeakPasswordError";
+    function isAuthWeakPasswordError(error2) {
+      return isAuthError(error2) && error2.name === "AuthWeakPasswordError";
     }
     var AuthInvalidJwtError = class extends CustomAuthError {
       constructor(message) {
@@ -46435,16 +46435,16 @@ var require_helpers = __commonJS({
     }
     function appendFlowIdToRedirectTo(redirectTo, flowId) {
       const hashIndex = redirectTo.indexOf("#");
-      let base = hashIndex === -1 ? redirectTo : redirectTo.slice(0, hashIndex);
+      let base2 = hashIndex === -1 ? redirectTo : redirectTo.slice(0, hashIndex);
       const fragment = hashIndex === -1 ? "" : redirectTo.slice(hashIndex);
-      const queryIndex = base.indexOf("?");
+      const queryIndex = base2.indexOf("?");
       if (queryIndex !== -1) {
-        const path7 = base.slice(0, queryIndex);
-        const remaining = base.slice(queryIndex + 1).split("&").filter((pair) => pair !== "" && pair !== constants_1.PKCE_FLOW_ID_PARAM && !pair.startsWith(`${constants_1.PKCE_FLOW_ID_PARAM}=`));
-        base = remaining.length > 0 ? `${path7}?${remaining.join("&")}` : path7;
+        const path9 = base2.slice(0, queryIndex);
+        const remaining = base2.slice(queryIndex + 1).split("&").filter((pair) => pair !== "" && pair !== constants_1.PKCE_FLOW_ID_PARAM && !pair.startsWith(`${constants_1.PKCE_FLOW_ID_PARAM}=`));
+        base2 = remaining.length > 0 ? `${path9}?${remaining.join("&")}` : path9;
       }
-      const separator = base.includes("?") ? "&" : "?";
-      return `${base}${separator}${constants_1.PKCE_FLOW_ID_PARAM}=${encodeURIComponent(flowId)}${fragment}`;
+      const separator = base2.includes("?") ? "&" : "?";
+      return `${base2}${separator}${constants_1.PKCE_FLOW_ID_PARAM}=${encodeURIComponent(flowId)}${fragment}`;
     }
     async function getCodeChallengeAndMethod(storage2, storageKey, isPasswordRecovery = false, onEvictFlow) {
       const codeVerifier = generatePKCEVerifier();
@@ -46609,25 +46609,25 @@ var require_fetch = __commonJS({
       529,
       530
     ];
-    async function handleError2(error) {
+    async function handleError2(error2) {
       var _a;
-      if (!(0, helpers_1.looksLikeFetchResponse)(error)) {
-        throw new errors_1.AuthRetryableFetchError(_getErrorMessage2(error), 0);
+      if (!(0, helpers_1.looksLikeFetchResponse)(error2)) {
+        throw new errors_1.AuthRetryableFetchError(_getErrorMessage2(error2), 0);
       }
       let data;
       try {
-        data = await error.json();
+        data = await error2.json();
       } catch (e) {
-        if (NETWORK_ERROR_CODES.includes(error.status)) {
-          throw new errors_1.AuthRetryableFetchError(error.statusText || `HTTP ${error.status}`, error.status);
+        if (NETWORK_ERROR_CODES.includes(error2.status)) {
+          throw new errors_1.AuthRetryableFetchError(error2.statusText || `HTTP ${error2.status}`, error2.status);
         }
         throw new errors_1.AuthUnknownError(_getErrorMessage2(e), e);
       }
-      if (NETWORK_ERROR_CODES.includes(error.status)) {
-        throw new errors_1.AuthRetryableFetchError(_getErrorMessage2(data), error.status);
+      if (NETWORK_ERROR_CODES.includes(error2.status)) {
+        throw new errors_1.AuthRetryableFetchError(_getErrorMessage2(data), error2.status);
       }
       let errorCode = void 0;
-      const responseAPIVersion = (0, helpers_1.parseResponseAPIVersion)(error);
+      const responseAPIVersion = (0, helpers_1.parseResponseAPIVersion)(error2);
       if (responseAPIVersion && responseAPIVersion.getTime() >= constants_1.API_VERSIONS["2024-01-01"].timestamp && typeof data === "object" && data && typeof data.code === "string") {
         errorCode = data.code;
       } else if (typeof data === "object" && data && typeof data.error_code === "string") {
@@ -46635,14 +46635,14 @@ var require_fetch = __commonJS({
       }
       if (!errorCode) {
         if (typeof data === "object" && data && typeof data.weak_password === "object" && data.weak_password && Array.isArray(data.weak_password.reasons) && data.weak_password.reasons.length && data.weak_password.reasons.reduce((a, i) => a && typeof i === "string", true)) {
-          throw new errors_1.AuthWeakPasswordError(_getErrorMessage2(data), error.status, data.weak_password.reasons);
+          throw new errors_1.AuthWeakPasswordError(_getErrorMessage2(data), error2.status, data.weak_password.reasons);
         }
       } else if (errorCode === "weak_password") {
-        throw new errors_1.AuthWeakPasswordError(_getErrorMessage2(data), error.status, ((_a = data.weak_password) === null || _a === void 0 ? void 0 : _a.reasons) || []);
+        throw new errors_1.AuthWeakPasswordError(_getErrorMessage2(data), error2.status, ((_a = data.weak_password) === null || _a === void 0 ? void 0 : _a.reasons) || []);
       } else if (errorCode === "session_not_found") {
         throw new errors_1.AuthSessionMissingError();
       }
-      throw new errors_1.AuthApiError(_getErrorMessage2(data), error.status || 500, errorCode);
+      throw new errors_1.AuthApiError(_getErrorMessage2(data), error2.status || 500, errorCode);
     }
     var _getRequestParams2 = (method, options, parameters, body) => {
       const params = { method, headers: (options === null || options === void 0 ? void 0 : options.headers) || {} };
@@ -46837,11 +46837,11 @@ var require_GoTrueAdminApi = __commonJS({
             noResolveJson: true
           });
           return { data: null, error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -46916,11 +46916,11 @@ var require_GoTrueAdminApi = __commonJS({
             redirectTo: options.redirectTo,
             xform: fetch_1._userResponse
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: { user: null }, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: { user: null }, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47051,17 +47051,17 @@ var require_GoTrueAdminApi = __commonJS({
             xform: fetch_1._generateLinkResponse,
             redirectTo: options === null || options === void 0 ? void 0 : options.redirectTo
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
             return {
               data: {
                 properties: null,
                 user: null
               },
-              error
+              error: error2
             };
           }
-          throw error;
+          throw error2;
         }
       }
       // User Admin API
@@ -47152,11 +47152,11 @@ var require_GoTrueAdminApi = __commonJS({
             headers: this.headers,
             xform: fetch_1._userResponse
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: { user: null }, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: { user: null }, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47211,11 +47211,11 @@ var require_GoTrueAdminApi = __commonJS({
             pagination.total = parseInt(total);
           }
           return { data: Object.assign(Object.assign({}, users), pagination), error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: { users: [] }, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: { users: [] }, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47287,11 +47287,11 @@ var require_GoTrueAdminApi = __commonJS({
             headers: this.headers,
             xform: fetch_1._userResponse
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: { user: null }, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: { user: null }, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47446,11 +47446,11 @@ var require_GoTrueAdminApi = __commonJS({
             headers: this.headers,
             xform: fetch_1._userResponse
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: { user: null }, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: { user: null }, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47497,9 +47497,9 @@ var require_GoTrueAdminApi = __commonJS({
       async deleteUser(id, shouldSoftDelete = false) {
         (0, helpers_1.validateUUID)(id);
         try {
-          const { data, error } = await this.getUserById(id);
-          if (error) {
-            return { data: { user: null }, error };
+          const { data, error: error2 } = await this.getUserById(id);
+          if (error2) {
+            return { data: { user: null }, error: error2 };
           }
           await (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/admin/users/${id}`, {
             headers: this.headers,
@@ -47509,28 +47509,28 @@ var require_GoTrueAdminApi = __commonJS({
             noResolveJson: true
           });
           return { data, error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: { user: null }, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: { user: null }, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       async _listFactors(params) {
         (0, helpers_1.validateUUID)(params.userId);
         try {
-          const { data, error } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/admin/users/${params.userId}/factors`, {
+          const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/admin/users/${params.userId}/factors`, {
             headers: this.headers,
             xform: (factors) => {
               return { data: { factors }, error: null };
             }
           });
-          return { data, error };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+          return { data, error: error2 };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       async _deleteFactor(params) {
@@ -47541,11 +47541,11 @@ var require_GoTrueAdminApi = __commonJS({
             headers: this.headers
           });
           return { data, error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47581,11 +47581,11 @@ var require_GoTrueAdminApi = __commonJS({
             pagination.total = parseInt(total);
           }
           return { data: Object.assign(Object.assign({}, clients), pagination), error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: { clients: [] }, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: { clients: [] }, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47603,11 +47603,11 @@ var require_GoTrueAdminApi = __commonJS({
               return { data: client, error: null };
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47624,11 +47624,11 @@ var require_GoTrueAdminApi = __commonJS({
               return { data: client, error: null };
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47646,11 +47646,11 @@ var require_GoTrueAdminApi = __commonJS({
               return { data: client, error: null };
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47666,11 +47666,11 @@ var require_GoTrueAdminApi = __commonJS({
             noResolveJson: true
           });
           return { data: null, error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47687,11 +47687,11 @@ var require_GoTrueAdminApi = __commonJS({
               return { data: client, error: null };
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47713,11 +47713,11 @@ var require_GoTrueAdminApi = __commonJS({
               return { data: { providers: (_a = data === null || data === void 0 ? void 0 : data.providers) !== null && _a !== void 0 ? _a : [] }, error: null };
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: { providers: [] }, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: { providers: [] }, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47740,11 +47740,11 @@ var require_GoTrueAdminApi = __commonJS({
               return { data: provider, error: null };
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47760,11 +47760,11 @@ var require_GoTrueAdminApi = __commonJS({
               return { data: provider, error: null };
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47786,11 +47786,11 @@ var require_GoTrueAdminApi = __commonJS({
               return { data: provider, error: null };
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47805,11 +47805,11 @@ var require_GoTrueAdminApi = __commonJS({
             noResolveJson: true
           });
           return { data: null, error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47821,11 +47821,11 @@ var require_GoTrueAdminApi = __commonJS({
         (0, helpers_1.validateUUID)(params.userId);
         try {
           return await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/admin/users/${params.userId}/passkeys`, { headers: this.headers, xform: (data) => ({ data, error: null }) });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -47839,11 +47839,11 @@ var require_GoTrueAdminApi = __commonJS({
         try {
           await (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/admin/users/${params.userId}/passkeys/${params.passkeyId}`, { headers: this.headers, noResolveJson: true });
           return { data: null, error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
-          throw error;
+          throw error2;
         }
       }
     };
@@ -47901,9 +47901,9 @@ var require_locks = __commonJS({
     var ProcessLockAcquireTimeoutError = class extends LockAcquireTimeoutError {
     };
     exports2.ProcessLockAcquireTimeoutError = ProcessLockAcquireTimeoutError;
-    async function navigatorLock(name, acquireTimeout, fn) {
+    async function navigatorLock(name2, acquireTimeout, fn) {
       if (exports2.internals.debug) {
-        console.log("@supabase/gotrue-js: navigatorLock: acquire lock", name, acquireTimeout);
+        console.log("@supabase/gotrue-js: navigatorLock: acquire lock", name2, acquireTimeout);
       }
       const abortController = new globalThis.AbortController();
       let acquireTimeoutTimer;
@@ -47911,13 +47911,13 @@ var require_locks = __commonJS({
         acquireTimeoutTimer = setTimeout(() => {
           abortController.abort();
           if (exports2.internals.debug) {
-            console.log("@supabase/gotrue-js: navigatorLock acquire timed out", name);
+            console.log("@supabase/gotrue-js: navigatorLock acquire timed out", name2);
           }
         }, acquireTimeout);
       }
       await Promise.resolve();
       try {
-        return await globalThis.navigator.locks.request(name, acquireTimeout === 0 ? {
+        return await globalThis.navigator.locks.request(name2, acquireTimeout === 0 ? {
           mode: "exclusive",
           ifAvailable: true
         } : {
@@ -47927,21 +47927,21 @@ var require_locks = __commonJS({
           if (lock) {
             clearTimeout(acquireTimeoutTimer);
             if (exports2.internals.debug) {
-              console.log("@supabase/gotrue-js: navigatorLock: acquired", name, lock.name);
+              console.log("@supabase/gotrue-js: navigatorLock: acquired", name2, lock.name);
             }
             try {
               return await fn();
             } finally {
               if (exports2.internals.debug) {
-                console.log("@supabase/gotrue-js: navigatorLock: released", name, lock.name);
+                console.log("@supabase/gotrue-js: navigatorLock: released", name2, lock.name);
               }
             }
           } else {
             if (acquireTimeout === 0) {
               if (exports2.internals.debug) {
-                console.log("@supabase/gotrue-js: navigatorLock: not immediately available", name);
+                console.log("@supabase/gotrue-js: navigatorLock: not immediately available", name2);
               }
-              throw new NavigatorLockAcquireTimeoutError(`Acquiring an exclusive Navigator LockManager lock "${name}" immediately failed`);
+              throw new NavigatorLockAcquireTimeoutError(`Acquiring an exclusive Navigator LockManager lock "${name2}" immediately failed`);
             } else {
               if (exports2.internals.debug) {
                 try {
@@ -47962,22 +47962,22 @@ var require_locks = __commonJS({
         if (e !== null && typeof e === "object" && "name" in e && e.name === "AbortError") {
           if (abortController.signal.aborted) {
             if (exports2.internals.debug) {
-              console.log("@supabase/gotrue-js: navigatorLock: acquire timeout, recovering by stealing lock", name);
+              console.log("@supabase/gotrue-js: navigatorLock: acquire timeout, recovering by stealing lock", name2);
             }
-            console.warn(`@supabase/gotrue-js: Lock "${name}" was not released within ${acquireTimeout}ms. This may indicate an orphaned lock from a component unmount (e.g., React Strict Mode). Forcefully acquiring the lock to recover.`);
-            return await Promise.resolve().then(() => globalThis.navigator.locks.request(name, {
+            console.warn(`@supabase/gotrue-js: Lock "${name2}" was not released within ${acquireTimeout}ms. This may indicate an orphaned lock from a component unmount (e.g., React Strict Mode). Forcefully acquiring the lock to recover.`);
+            return await Promise.resolve().then(() => globalThis.navigator.locks.request(name2, {
               mode: "exclusive",
               steal: true
             }, async (lock) => {
               if (lock) {
                 if (exports2.internals.debug) {
-                  console.log("@supabase/gotrue-js: navigatorLock: recovered (stolen)", name, lock.name);
+                  console.log("@supabase/gotrue-js: navigatorLock: recovered (stolen)", name2, lock.name);
                 }
                 try {
                   return await fn();
                 } finally {
                   if (exports2.internals.debug) {
-                    console.log("@supabase/gotrue-js: navigatorLock: released (stolen)", name, lock.name);
+                    console.log("@supabase/gotrue-js: navigatorLock: released (stolen)", name2, lock.name);
                   }
                 }
               } else {
@@ -47987,18 +47987,18 @@ var require_locks = __commonJS({
             }));
           } else {
             if (exports2.internals.debug) {
-              console.log("@supabase/gotrue-js: navigatorLock: lock was stolen by another request", name);
+              console.log("@supabase/gotrue-js: navigatorLock: lock was stolen by another request", name2);
             }
-            throw new NavigatorLockAcquireTimeoutError(`Lock "${name}" was released because another request stole it`);
+            throw new NavigatorLockAcquireTimeoutError(`Lock "${name2}" was released because another request stole it`);
           }
         }
         throw e;
       }
     }
     var PROCESS_LOCKS = {};
-    async function processLock(name, acquireTimeout, fn) {
+    async function processLock(name2, acquireTimeout, fn) {
       var _a;
-      const previousOperation = (_a = PROCESS_LOCKS[name]) !== null && _a !== void 0 ? _a : Promise.resolve();
+      const previousOperation = (_a = PROCESS_LOCKS[name2]) !== null && _a !== void 0 ? _a : Promise.resolve();
       const previousOperationHandled = (async () => {
         try {
           await previousOperation;
@@ -48012,8 +48012,8 @@ var require_locks = __commonJS({
         try {
           const timeoutPromise = acquireTimeout >= 0 ? new Promise((_, reject) => {
             timeoutId = setTimeout(() => {
-              console.warn(`@supabase/gotrue-js: Lock "${name}" acquisition timed out after ${acquireTimeout}ms. This may be caused by another operation holding the lock. Consider increasing lockAcquireTimeout or checking for stuck operations.`);
-              reject(new ProcessLockAcquireTimeoutError(`Acquiring process lock with name "${name}" timed out`));
+              console.warn(`@supabase/gotrue-js: Lock "${name2}" acquisition timed out after ${acquireTimeout}ms. This may be caused by another operation holding the lock. Consider increasing lockAcquireTimeout or checking for stuck operations.`);
+              reject(new ProcessLockAcquireTimeoutError(`Acquiring process lock with name "${name2}" timed out`));
             }, acquireTimeout);
           }) : null;
           await Promise.race([previousOperationHandled, timeoutPromise].filter((x) => x));
@@ -48030,7 +48030,7 @@ var require_locks = __commonJS({
         }
         return await fn();
       })();
-      PROCESS_LOCKS[name] = (async () => {
+      PROCESS_LOCKS[name2] = (async () => {
         try {
           return await currentOperation;
         } catch (e) {
@@ -48101,7 +48101,7 @@ var require_ethereum = __commonJS({
     }
     function createSiweMessage(parameters) {
       var _a;
-      const { chainId, domain, expirationTime, issuedAt = /* @__PURE__ */ new Date(), nonce, notBefore, requestId, resources, scheme, uri, version: version3 } = parameters;
+      const { chainId, domain, expirationTime, issuedAt = /* @__PURE__ */ new Date(), nonce, notBefore, requestId, resources, scheme, uri, version: version4 } = parameters;
       {
         if (!Number.isInteger(chainId))
           throw new Error(`@supabase/auth-js: Invalid SIWE message field "chainId". Chain ID must be a EIP-155 chain ID. Provided value: ${chainId}`);
@@ -48111,8 +48111,8 @@ var require_ethereum = __commonJS({
           throw new Error(`@supabase/auth-js: Invalid SIWE message field "nonce". Nonce must be at least 8 characters. Provided value: ${nonce}`);
         if (!uri)
           throw new Error(`@supabase/auth-js: Invalid SIWE message field "uri". URI must be provided.`);
-        if (version3 !== "1")
-          throw new Error(`@supabase/auth-js: Invalid SIWE message field "version". Version must be '1'. Provided value: ${version3}`);
+        if (version4 !== "1")
+          throw new Error(`@supabase/auth-js: Invalid SIWE message field "version". Version must be '1'. Provided value: ${version4}`);
         if ((_a = parameters.statement) === null || _a === void 0 ? void 0 : _a.includes("\n"))
           throw new Error(`@supabase/auth-js: Invalid SIWE message field "statement". Statement must not include '\\n'. Provided value: ${parameters.statement}`);
       }
@@ -48125,7 +48125,7 @@ ${address}
 
 ${statement}`;
       let suffix = `URI: ${uri}
-Version: ${version3}
+Version: ${version4}
 Chain ID: ${chainId}${nonce ? `
 Nonce: ${nonce}` : ""}
 Issued At: ${issuedAt.toISOString()}`;
@@ -48165,11 +48165,11 @@ var require_webauthn_errors = __commonJS({
     exports2.identifyAuthenticationError = identifyAuthenticationError;
     var webauthn_1 = require_webauthn();
     var WebAuthnError = class extends Error {
-      constructor({ message, code, cause, name }) {
+      constructor({ message, code, cause, name: name2 }) {
         var _a;
         super(message, { cause });
         this.__isWebAuthnError = true;
-        this.name = (_a = name !== null && name !== void 0 ? name : cause instanceof Error ? cause.name : void 0) !== null && _a !== void 0 ? _a : "Unknown Error";
+        this.name = (_a = name2 !== null && name2 !== void 0 ? name2 : cause instanceof Error ? cause.name : void 0) !== null && _a !== void 0 ? _a : "Unknown Error";
         this.code = code;
       }
       toJSON() {
@@ -48193,29 +48193,29 @@ var require_webauthn_errors = __commonJS({
       }
     };
     exports2.WebAuthnUnknownError = WebAuthnUnknownError;
-    function isWebAuthnError(error) {
-      return typeof error === "object" && error !== null && "__isWebAuthnError" in error;
+    function isWebAuthnError(error2) {
+      return typeof error2 === "object" && error2 !== null && "__isWebAuthnError" in error2;
     }
-    function identifyRegistrationError({ error, options }) {
+    function identifyRegistrationError({ error: error2, options }) {
       var _a, _b, _c;
       const { publicKey } = options;
       if (!publicKey) {
         throw Error("options was missing required publicKey property");
       }
-      if (error.name === "AbortError") {
+      if (error2.name === "AbortError") {
         if (options.signal instanceof AbortSignal) {
           return new WebAuthnError({
             message: "Registration ceremony was sent an abort signal",
             code: "ERROR_CEREMONY_ABORTED",
-            cause: error
+            cause: error2
           });
         }
-      } else if (error.name === "ConstraintError") {
+      } else if (error2.name === "ConstraintError") {
         if (((_a = publicKey.authenticatorSelection) === null || _a === void 0 ? void 0 : _a.requireResidentKey) === true) {
           return new WebAuthnError({
             message: "Discoverable credentials were required but no available authenticator supported it",
             code: "ERROR_AUTHENTICATOR_MISSING_DISCOVERABLE_CREDENTIAL_SUPPORT",
-            cause: error
+            cause: error2
           });
         } else if (
           // @ts-ignore: `mediation` doesn't yet exist on CredentialCreationOptions but it's possible as of Sept 2024
@@ -48224,122 +48224,122 @@ var require_webauthn_errors = __commonJS({
           return new WebAuthnError({
             message: "User verification was required during automatic registration but it could not be performed",
             code: "ERROR_AUTO_REGISTER_USER_VERIFICATION_FAILURE",
-            cause: error
+            cause: error2
           });
         } else if (((_c = publicKey.authenticatorSelection) === null || _c === void 0 ? void 0 : _c.userVerification) === "required") {
           return new WebAuthnError({
             message: "User verification was required but no available authenticator supported it",
             code: "ERROR_AUTHENTICATOR_MISSING_USER_VERIFICATION_SUPPORT",
-            cause: error
+            cause: error2
           });
         }
-      } else if (error.name === "InvalidStateError") {
+      } else if (error2.name === "InvalidStateError") {
         return new WebAuthnError({
           message: "The authenticator was previously registered",
           code: "ERROR_AUTHENTICATOR_PREVIOUSLY_REGISTERED",
-          cause: error
+          cause: error2
         });
-      } else if (error.name === "NotAllowedError") {
+      } else if (error2.name === "NotAllowedError") {
         return new WebAuthnError({
-          message: error.message,
+          message: error2.message,
           code: "ERROR_PASSTHROUGH_SEE_CAUSE_PROPERTY",
-          cause: error
+          cause: error2
         });
-      } else if (error.name === "NotSupportedError") {
+      } else if (error2.name === "NotSupportedError") {
         const validPubKeyCredParams = publicKey.pubKeyCredParams.filter((param) => param.type === "public-key");
         if (validPubKeyCredParams.length === 0) {
           return new WebAuthnError({
             message: 'No entry in pubKeyCredParams was of type "public-key"',
             code: "ERROR_MALFORMED_PUBKEYCREDPARAMS",
-            cause: error
+            cause: error2
           });
         }
         return new WebAuthnError({
           message: "No available authenticator supported any of the specified pubKeyCredParams algorithms",
           code: "ERROR_AUTHENTICATOR_NO_SUPPORTED_PUBKEYCREDPARAMS_ALG",
-          cause: error
+          cause: error2
         });
-      } else if (error.name === "SecurityError") {
+      } else if (error2.name === "SecurityError") {
         const effectiveDomain = window.location.hostname;
         if (!(0, webauthn_1.isValidDomain)(effectiveDomain)) {
           return new WebAuthnError({
             message: `${window.location.hostname} is an invalid domain`,
             code: "ERROR_INVALID_DOMAIN",
-            cause: error
+            cause: error2
           });
         } else if (publicKey.rp.id !== effectiveDomain) {
           return new WebAuthnError({
             message: `The RP ID "${publicKey.rp.id}" is invalid for this domain`,
             code: "ERROR_INVALID_RP_ID",
-            cause: error
+            cause: error2
           });
         }
-      } else if (error.name === "TypeError") {
+      } else if (error2.name === "TypeError") {
         if (publicKey.user.id.byteLength < 1 || publicKey.user.id.byteLength > 64) {
           return new WebAuthnError({
             message: "User ID was not between 1 and 64 characters",
             code: "ERROR_INVALID_USER_ID_LENGTH",
-            cause: error
+            cause: error2
           });
         }
-      } else if (error.name === "UnknownError") {
+      } else if (error2.name === "UnknownError") {
         return new WebAuthnError({
           message: "The authenticator was unable to process the specified options, or could not create a new credential",
           code: "ERROR_AUTHENTICATOR_GENERAL_ERROR",
-          cause: error
+          cause: error2
         });
       }
       return new WebAuthnError({
         message: "a Non-Webauthn related error has occurred",
         code: "ERROR_PASSTHROUGH_SEE_CAUSE_PROPERTY",
-        cause: error
+        cause: error2
       });
     }
-    function identifyAuthenticationError({ error, options }) {
+    function identifyAuthenticationError({ error: error2, options }) {
       const { publicKey } = options;
       if (!publicKey) {
         throw Error("options was missing required publicKey property");
       }
-      if (error.name === "AbortError") {
+      if (error2.name === "AbortError") {
         if (options.signal instanceof AbortSignal) {
           return new WebAuthnError({
             message: "Authentication ceremony was sent an abort signal",
             code: "ERROR_CEREMONY_ABORTED",
-            cause: error
+            cause: error2
           });
         }
-      } else if (error.name === "NotAllowedError") {
+      } else if (error2.name === "NotAllowedError") {
         return new WebAuthnError({
-          message: error.message,
+          message: error2.message,
           code: "ERROR_PASSTHROUGH_SEE_CAUSE_PROPERTY",
-          cause: error
+          cause: error2
         });
-      } else if (error.name === "SecurityError") {
+      } else if (error2.name === "SecurityError") {
         const effectiveDomain = window.location.hostname;
         if (!(0, webauthn_1.isValidDomain)(effectiveDomain)) {
           return new WebAuthnError({
             message: `${window.location.hostname} is an invalid domain`,
             code: "ERROR_INVALID_DOMAIN",
-            cause: error
+            cause: error2
           });
         } else if (publicKey.rpId !== effectiveDomain) {
           return new WebAuthnError({
             message: `The RP ID "${publicKey.rpId}" is invalid for this domain`,
             code: "ERROR_INVALID_RP_ID",
-            cause: error
+            cause: error2
           });
         }
-      } else if (error.name === "UnknownError") {
+      } else if (error2.name === "UnknownError") {
         return new WebAuthnError({
           message: "The authenticator was unable to process the specified options, or could not create a new assertion signature",
           code: "ERROR_AUTHENTICATOR_GENERAL_ERROR",
-          cause: error
+          cause: error2
         });
       }
       return new WebAuthnError({
         message: "a Non-Webauthn related error has occurred",
         code: "ERROR_PASSTHROUGH_SEE_CAUSE_PROPERTY",
-        cause: error
+        cause: error2
       });
     }
   }
@@ -48703,7 +48703,7 @@ var require_webauthn = __commonJS({
           switch (challengeResponse.webauthn.type) {
             case "create": {
               const options = mergeCredentialCreationOptions(challengeResponse.webauthn.credential_options.publicKey, overrides === null || overrides === void 0 ? void 0 : overrides.create);
-              const { data, error } = await createCredential({
+              const { data, error: error2 } = await createCredential({
                 publicKey: options,
                 signal: abortSignal
               });
@@ -48720,11 +48720,11 @@ var require_webauthn = __commonJS({
                   error: null
                 };
               }
-              return { data: null, error };
+              return { data: null, error: error2 };
             }
             case "request": {
               const options = mergeCredentialRequestOptions(challengeResponse.webauthn.credential_options.publicKey, overrides === null || overrides === void 0 ? void 0 : overrides.request);
-              const { data, error } = await getCredential(Object.assign(Object.assign({}, challengeResponse.webauthn.credential_options), { publicKey: options, signal: abortSignal }));
+              const { data, error: error2 } = await getCredential(Object.assign(Object.assign({}, challengeResponse.webauthn.credential_options), { publicKey: options, signal: abortSignal }));
               if (data) {
                 return {
                   data: {
@@ -48738,16 +48738,16 @@ var require_webauthn = __commonJS({
                   error: null
                 };
               }
-              return { data: null, error };
+              return { data: null, error: error2 };
             }
           }
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
           return {
             data: null,
-            error: new errors_1.AuthUnknownError("Unexpected error in challenge", error)
+            error: new errors_1.AuthUnknownError("Unexpected error in challenge", error2)
           };
         }
       }
@@ -48819,13 +48819,13 @@ var require_webauthn = __commonJS({
               credential_response: webauthn.credential_response
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
           return {
             data: null,
-            error: new errors_1.AuthUnknownError("Unexpected error in authenticate", error)
+            error: new errors_1.AuthUnknownError("Unexpected error in authenticate", error2)
           };
         }
       }
@@ -48889,13 +48889,13 @@ var require_webauthn = __commonJS({
               credential_response: challengeResponse.webauthn.credential_response
             }
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return { data: null, error };
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return { data: null, error: error2 };
           }
           return {
             data: null,
-            error: new errors_1.AuthUnknownError("Unexpected error in register", error)
+            error: new errors_1.AuthUnknownError("Unexpected error in register", error2)
           };
         }
       }
@@ -49109,14 +49109,14 @@ var require_GoTrueClient = __commonJS({
             }
             try {
               await this._notifyAllSubscribers(event.data.event, event.data.session, false);
-            } catch (error) {
-              this._debug("#broadcastChannel", "error", error);
+            } catch (error2) {
+              this._debug("#broadcastChannel", "error", error2);
             }
           });
         }
         if (!settings.skipAutoInitialize) {
-          this.initialize().catch((error) => {
-            this._debug("#initialize()", "error", error);
+          this.initialize().catch((error2) => {
+            this._debug("#initialize()", "error", error2);
           });
         }
       }
@@ -49206,16 +49206,16 @@ var require_GoTrueClient = __commonJS({
             }
           }
           if ((0, helpers_1.isBrowser)() && this.detectSessionInUrl && callbackUrlType !== "none") {
-            const { data, error } = await this._getSessionFromURL(params, callbackUrlType);
-            if (error) {
-              this._debug("#_initialize()", "error detecting session from URL", error);
-              if ((0, errors_1.isAuthImplicitGrantRedirectError)(error)) {
-                const errorCode = (_a = error.details) === null || _a === void 0 ? void 0 : _a.code;
+            const { data, error: error2 } = await this._getSessionFromURL(params, callbackUrlType);
+            if (error2) {
+              this._debug("#_initialize()", "error detecting session from URL", error2);
+              if ((0, errors_1.isAuthImplicitGrantRedirectError)(error2)) {
+                const errorCode = (_a = error2.details) === null || _a === void 0 ? void 0 : _a.code;
                 if (errorCode === "identity_already_exists" || errorCode === "identity_not_found" || errorCode === "single_identity_not_deletable") {
-                  return { error };
+                  return { error: error2 };
                 }
               }
-              return { error };
+              return { error: error2 };
             }
             const { session, redirectType } = data;
             this._debug("#_initialize()", "detected session in URL", session, "redirect type", redirectType);
@@ -49231,12 +49231,12 @@ var require_GoTrueClient = __commonJS({
           }
           await this._recoverAndRefresh();
           return { error: null };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ error: error2 });
           }
           return this._returnResult({
-            error: new errors_1.AuthUnknownError("Unexpected error during initialization", error)
+            error: new errors_1.AuthUnknownError("Unexpected error during initialization", error2)
           });
         } finally {
           await this._handleVisibilityChange();
@@ -49327,9 +49327,9 @@ var require_GoTrueClient = __commonJS({
             },
             xform: fetch_1._sessionResponse
           });
-          const { data, error } = res;
-          if (error || !data) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          const { data, error: error2 } = res;
+          if (error2 || !data) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
           const session = data.session;
           const user = data.user;
@@ -49338,11 +49338,11 @@ var require_GoTrueClient = __commonJS({
             await this._notifyAllSubscribers("SIGNED_IN", session);
           }
           return this._returnResult({ data: { user, session }, error: null });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -49564,10 +49564,10 @@ var require_GoTrueClient = __commonJS({
           } else {
             throw new errors_1.AuthInvalidCredentialsError("You must provide either an email or phone number and a password");
           }
-          const { data, error } = res;
-          if (error || !data) {
+          const { data, error: error2 } = res;
+          if (error2 || !data) {
             await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-            return this._returnResult({ data: { user: null, session: null }, error });
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
           const session = data.session;
           const user = data.user;
@@ -49576,12 +49576,12 @@ var require_GoTrueClient = __commonJS({
             await this._notifyAllSubscribers("SIGNED_IN", session);
           }
           return this._returnResult({ data: { user, session }, error: null });
-        } catch (error) {
+        } catch (error2) {
           await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -49744,9 +49744,9 @@ var require_GoTrueClient = __commonJS({
           } else {
             throw new errors_1.AuthInvalidCredentialsError("You must provide either an email or phone number and a password");
           }
-          const { data, error } = res;
-          if (error) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          const { data, error: error2 } = res;
+          if (error2) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           } else if (!data || !data.session || !data.user) {
             const invalidTokenError = new errors_1.AuthInvalidTokenResponseError();
             return this._returnResult({ data: { user: null, session: null }, error: invalidTokenError });
@@ -49757,13 +49757,13 @@ var require_GoTrueClient = __commonJS({
           }
           return this._returnResult({
             data: Object.assign({ user: data.user, session: data.session }, data.weak_password ? { weakPassword: data.weak_password } : null),
-            error
+            error: error2
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -50213,7 +50213,7 @@ var require_GoTrueClient = __commonJS({
           });
         }
         try {
-          const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
+          const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
             headers: this.headers,
             body: Object.assign({
               chain: "ethereum",
@@ -50222,8 +50222,8 @@ var require_GoTrueClient = __commonJS({
             }, ((_l = credentials.options) === null || _l === void 0 ? void 0 : _l.captchaToken) ? { gotrue_meta_security: { captcha_token: (_m = credentials.options) === null || _m === void 0 ? void 0 : _m.captchaToken } } : null),
             xform: fetch_1._sessionResponse
           });
-          if (error) {
-            throw error;
+          if (error2) {
+            throw error2;
           }
           if (!data || !data.session || !data.user) {
             const invalidTokenError = new errors_1.AuthInvalidTokenResponseError();
@@ -50233,12 +50233,12 @@ var require_GoTrueClient = __commonJS({
             await this._saveSession(data.session);
             await this._notifyAllSubscribers("SIGNED_IN", data.session);
           }
-          return this._returnResult({ data: Object.assign({}, data), error });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          return this._returnResult({ data: Object.assign({}, data), error: error2 });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       async signInWithSolana(credentials) {
@@ -50317,13 +50317,13 @@ var require_GoTrueClient = __commonJS({
           }
         }
         try {
-          const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
+          const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
             headers: this.headers,
             body: Object.assign({ chain: "solana", message, signature: (0, base64url_1.bytesToBase64URL)(signature) }, ((_m = credentials.options) === null || _m === void 0 ? void 0 : _m.captchaToken) ? { gotrue_meta_security: { captcha_token: (_o = credentials.options) === null || _o === void 0 ? void 0 : _o.captchaToken } } : null),
             xform: fetch_1._sessionResponse
           });
-          if (error) {
-            throw error;
+          if (error2) {
+            throw error2;
           }
           if (!data || !data.session || !data.user) {
             const invalidTokenError = new errors_1.AuthInvalidTokenResponseError();
@@ -50333,12 +50333,12 @@ var require_GoTrueClient = __commonJS({
             await this._saveSession(data.session);
             await this._notifyAllSubscribers("SIGNED_IN", data.session);
           }
-          return this._returnResult({ data: Object.assign({}, data), error });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          return this._returnResult({ data: Object.assign({}, data), error: error2 });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       async _exchangeCodeForSession(authCode, options) {
@@ -50353,7 +50353,7 @@ var require_GoTrueClient = __commonJS({
           if (!codeVerifier && this.flowType === "pkce") {
             throw new errors_1.AuthPKCECodeVerifierMissingError();
           }
-          const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=pkce`, {
+          const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=pkce`, {
             headers: this.headers,
             body: {
               auth_code: authCode,
@@ -50362,8 +50362,8 @@ var require_GoTrueClient = __commonJS({
             xform: fetch_1._sessionResponse
           });
           await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-          if (error) {
-            throw error;
+          if (error2) {
+            throw error2;
           }
           if (!data || !data.session || !data.user) {
             const invalidTokenError = new errors_1.AuthInvalidTokenResponseError();
@@ -50376,16 +50376,16 @@ var require_GoTrueClient = __commonJS({
             await this._saveSession(data.session);
             await this._notifyAllSubscribers(redirectType === "recovery" ? "PASSWORD_RECOVERY" : "SIGNED_IN", data.session);
           }
-          return this._returnResult({ data: Object.assign(Object.assign({}, data), { redirectType: redirectType !== null && redirectType !== void 0 ? redirectType : null }), error });
-        } catch (error) {
+          return this._returnResult({ data: Object.assign(Object.assign({}, data), { redirectType: redirectType !== null && redirectType !== void 0 ? redirectType : null }), error: error2 });
+        } catch (error2) {
           await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-          if ((0, errors_1.isAuthError)(error)) {
+          if ((0, errors_1.isAuthError)(error2)) {
             return this._returnResult({
               data: { user: null, session: null, redirectType: null },
-              error
+              error: error2
             });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -50477,9 +50477,9 @@ var require_GoTrueClient = __commonJS({
             },
             xform: fetch_1._sessionResponse
           });
-          const { data, error } = res;
-          if (error) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          const { data, error: error2 } = res;
+          if (error2) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           } else if (!data || !data.session || !data.user) {
             const invalidTokenError = new errors_1.AuthInvalidTokenResponseError();
             return this._returnResult({ data: { user: null, session: null }, error: invalidTokenError });
@@ -50488,12 +50488,12 @@ var require_GoTrueClient = __commonJS({
             await this._saveSession(data.session);
             await this._notifyAllSubscribers("SIGNED_IN", data.session);
           }
-          return this._returnResult({ data, error });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          return this._returnResult({ data, error: error2 });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -50585,7 +50585,7 @@ var require_GoTrueClient = __commonJS({
               ;
               [codeChallenge, codeChallengeMethod, flowId] = await this._getCodeChallengeAndMethod();
             }
-            const { error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/otp`, {
+            const { error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/otp`, {
               headers: this.headers,
               body: {
                 email,
@@ -50597,11 +50597,11 @@ var require_GoTrueClient = __commonJS({
               },
               redirectTo: this._maybeAppendFlowIdToRedirect(options === null || options === void 0 ? void 0 : options.emailRedirectTo, flowId)
             });
-            return this._returnResult({ data: { user: null, session: null }, error });
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
           if ("phone" in credentials) {
             const { phone, options } = credentials;
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/otp`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/otp`, {
               headers: this.headers,
               body: {
                 phone,
@@ -50613,16 +50613,16 @@ var require_GoTrueClient = __commonJS({
             });
             return this._returnResult({
               data: { user: null, session: null, messageId: data === null || data === void 0 ? void 0 : data.message_id },
-              error
+              error: error2
             });
           }
           throw new errors_1.AuthInvalidCredentialsError("You must provide either an email or phone number.");
-        } catch (error) {
+        } catch (error2) {
           await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -50771,14 +50771,14 @@ var require_GoTrueClient = __commonJS({
             redirectTo = (_a = params.options) === null || _a === void 0 ? void 0 : _a.redirectTo;
             captchaToken = (_b = params.options) === null || _b === void 0 ? void 0 : _b.captchaToken;
           }
-          const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/verify`, {
+          const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/verify`, {
             headers: this.headers,
             body: Object.assign(Object.assign({}, params), { gotrue_meta_security: { captcha_token: captchaToken } }),
             redirectTo,
             xform: fetch_1._sessionResponse
           });
-          if (error) {
-            throw error;
+          if (error2) {
+            throw error2;
           }
           if (!data) {
             const tokenVerificationError = new Error("An error occurred on token verification.");
@@ -50791,11 +50791,11 @@ var require_GoTrueClient = __commonJS({
             await this._notifyAllSubscribers(params.type == "recovery" ? "PASSWORD_RECOVERY" : "SIGNED_IN", session);
           }
           return this._returnResult({ data: { user, session }, error: null });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -50870,12 +50870,12 @@ var require_GoTrueClient = __commonJS({
             window.location.assign(result.data.url);
           }
           return this._returnResult(result);
-        } catch (error) {
+        } catch (error2) {
           await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -50916,17 +50916,17 @@ var require_GoTrueClient = __commonJS({
               throw sessionError;
             if (!session)
               throw new errors_1.AuthSessionMissingError();
-            const { error } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/reauthenticate`, {
+            const { error: error2 } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/reauthenticate`, {
               headers: this.headers,
               jwt: session.access_token
             });
-            return this._returnResult({ data: { user: null, session: null }, error });
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -51000,7 +51000,7 @@ var require_GoTrueClient = __commonJS({
               ;
               [codeChallenge, codeChallengeMethod, flowId] = await this._getCodeChallengeAndMethod();
             }
-            const { error } = await (0, fetch_1._request)(this.fetch, "POST", endpoint, {
+            const { error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", endpoint, {
               headers: this.headers,
               body: {
                 email,
@@ -51011,13 +51011,13 @@ var require_GoTrueClient = __commonJS({
               },
               redirectTo: this._maybeAppendFlowIdToRedirect(options === null || options === void 0 ? void 0 : options.emailRedirectTo, flowId)
             });
-            if (error) {
+            if (error2) {
               await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
             }
-            return this._returnResult({ data: { user: null, session: null }, error });
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           } else if ("phone" in credentials) {
             const { phone, type, options } = credentials;
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", endpoint, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", endpoint, {
               headers: this.headers,
               body: {
                 phone,
@@ -51027,16 +51027,16 @@ var require_GoTrueClient = __commonJS({
             });
             return this._returnResult({
               data: { user: null, session: null, messageId: data === null || data === void 0 ? void 0 : data.message_id },
-              error
+              error: error2
             });
           }
           throw new errors_1.AuthInvalidCredentialsError("You must provide either an email or phone number and a type");
-        } catch (error) {
+        } catch (error2) {
           await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -51232,8 +51232,8 @@ var require_GoTrueClient = __commonJS({
           if (!hasExpired) {
             return { data: { session: await this._hydrateSessionUser(currentSession) }, error: null };
           }
-          const { data: session, error } = await this._callRefreshToken(currentSession.refresh_token);
-          if (error) {
+          const { data: session, error: error2 } = await this._callRefreshToken(currentSession.refresh_token);
+          if (error2) {
             const stored = await (0, helpers_1.getItemAsync)(this.storage, this.storageKey);
             if (stored && this._isValidSession(stored) && stored.expires_at && stored.expires_at * 1e3 > Date.now()) {
               return this._returnResult({
@@ -51241,7 +51241,7 @@ var require_GoTrueClient = __commonJS({
                 error: null
               });
             }
-            return this._returnResult({ data: { session: null }, error });
+            return this._returnResult({ data: { session: null }, error: error2 });
           }
           return this._returnResult({ data: { session }, error: null });
         } finally {
@@ -51373,9 +51373,9 @@ var require_GoTrueClient = __commonJS({
           }
           return await this._useSession(async (result) => {
             var _a, _b, _c;
-            const { data, error } = result;
-            if (error) {
-              throw error;
+            const { data, error: error2 } = result;
+            if (error2) {
+              throw error2;
             }
             if (!((_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) && !this.hasCustomAuthorizationHeader) {
               return { data: { user: null }, error: new errors_1.AuthSessionMissingError() };
@@ -51386,14 +51386,14 @@ var require_GoTrueClient = __commonJS({
               xform: fetch_1._userResponse
             });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            if ((0, errors_1.isAuthSessionMissingError)(error)) {
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            if ((0, errors_1.isAuthSessionMissingError)(error2)) {
               await this._removeSession();
             }
-            return this._returnResult({ data: { user: null }, error });
+            return this._returnResult({ data: { user: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -51552,12 +51552,12 @@ var require_GoTrueClient = __commonJS({
             await this._notifyAllSubscribers("USER_UPDATED", session);
             return this._returnResult({ data: { user: session.user }, error: null });
           });
-        } catch (error) {
+        } catch (error2) {
           await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null }, error });
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -51708,18 +51708,18 @@ var require_GoTrueClient = __commonJS({
             hasExpired = expiresAt <= timeNow;
           }
           if (hasExpired) {
-            const { data: refreshedSession, error } = await this._callRefreshToken(currentSession.refresh_token);
-            if (error) {
-              return this._returnResult({ data: { user: null, session: null }, error });
+            const { data: refreshedSession, error: error2 } = await this._callRefreshToken(currentSession.refresh_token);
+            if (error2) {
+              return this._returnResult({ data: { user: null, session: null }, error: error2 });
             }
             if (!refreshedSession) {
               return { data: { user: null, session: null }, error: null };
             }
             session = refreshedSession;
           } else {
-            const { data, error } = await this._getUser(currentSession.access_token);
-            if (error) {
-              return this._returnResult({ data: { user: null, session: null }, error });
+            const { data, error: error2 } = await this._getUser(currentSession.access_token);
+            if (error2) {
+              return this._returnResult({ data: { user: null, session: null }, error: error2 });
             }
             session = {
               access_token: currentSession.access_token,
@@ -51733,11 +51733,11 @@ var require_GoTrueClient = __commonJS({
             await this._notifyAllSubscribers("SIGNED_IN", session);
           }
           return this._returnResult({ data: { user: session.user, session }, error: null });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { session: null, user: null }, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { session: null, user: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -51879,29 +51879,29 @@ var require_GoTrueClient = __commonJS({
           return await this._useSession(async (result) => {
             var _a;
             if (!currentSession) {
-              const { data, error: error2 } = result;
-              if (error2) {
-                throw error2;
+              const { data, error: error3 } = result;
+              if (error3) {
+                throw error3;
               }
               currentSession = (_a = data.session) !== null && _a !== void 0 ? _a : void 0;
             }
             if (!(currentSession === null || currentSession === void 0 ? void 0 : currentSession.refresh_token)) {
               throw new errors_1.AuthSessionMissingError();
             }
-            const { data: session, error } = await this._callRefreshToken(currentSession.refresh_token);
-            if (error) {
-              return this._returnResult({ data: { user: null, session: null }, error });
+            const { data: session, error: error2 } = await this._callRefreshToken(currentSession.refresh_token);
+            if (error2) {
+              return this._returnResult({ data: { user: null, session: null }, error: error2 });
             }
             if (!session) {
               return this._returnResult({ data: { user: null, session: null }, error: null });
             }
             return this._returnResult({ data: { user: session.user, session }, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { user: null, session: null }, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { user: null, session: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -51935,11 +51935,11 @@ var require_GoTrueClient = __commonJS({
             this._debug("#_initialize()", "begin", "is PKCE flow", true);
             if (!params.code)
               throw new errors_1.AuthPKCEGrantCodeExchangeError("No code detected.");
-            const { data: data2, error: error2 } = await this._exchangeCodeForSession(params.code, {
+            const { data: data2, error: error3 } = await this._exchangeCodeForSession(params.code, {
               flowId: params[constants_1.PKCE_FLOW_ID_PARAM]
             });
-            if (error2)
-              throw error2;
+            if (error3)
+              throw error3;
             const url = new URL(window.location.href);
             url.searchParams.delete("code");
             url.searchParams.delete(constants_1.PKCE_FLOW_ID_PARAM);
@@ -51969,9 +51969,9 @@ var require_GoTrueClient = __commonJS({
           } else if (timeNow - issuedAt < 0) {
             console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued in the future? Check the device clock for skew", issuedAt, expiresAt, timeNow);
           }
-          const { data, error } = await this._getUser(access_token);
-          if (error)
-            throw error;
+          const { data, error: error2 } = await this._getUser(access_token);
+          if (error2)
+            throw error2;
           const session = {
             provider_token,
             provider_refresh_token,
@@ -51985,11 +51985,11 @@ var require_GoTrueClient = __commonJS({
           window.location.hash = "";
           this._debug("#_getSessionFromURL()", "clearing window.location.hash");
           return this._returnResult({ data: { session, redirectType: params.type }, error: null });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { session: null, redirectType: null }, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { session: null, redirectType: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -52123,9 +52123,9 @@ var require_GoTrueClient = __commonJS({
             }
           }
           if (accessToken) {
-            const { error } = await this.admin.signOut(accessToken, scope);
-            if (error && !((0, errors_1.isAuthApiError)(error) && (error.status === 404 || error.status === 401 || error.status === 403) || (0, errors_1.isAuthSessionMissingError)(error))) {
-              return finish(this._returnResult({ error }));
+            const { error: error2 } = await this.admin.signOut(accessToken, scope);
+            if (error2 && !((0, errors_1.isAuthApiError)(error2) && (error2.status === 404 || error2.status === 401 || error2.status === 403) || (0, errors_1.isAuthSessionMissingError)(error2))) {
+              return finish(this._returnResult({ error: error2 }));
             }
           }
           if (scope === "global") {
@@ -52339,9 +52339,9 @@ var require_GoTrueClient = __commonJS({
         return await this._useSession(async (result) => {
           var _a, _b;
           try {
-            const { data: { session }, error } = result;
-            if (error)
-              throw error;
+            const { data: { session }, error: error2 } = result;
+            if (error2)
+              throw error2;
             await ((_a = this.stateChangeEmitters.get(id)) === null || _a === void 0 ? void 0 : _a.callback("INITIAL_SESSION", session));
             this._debug("INITIAL_SESSION", "callback id", id, "session", session);
           } catch (err) {
@@ -52447,12 +52447,12 @@ var require_GoTrueClient = __commonJS({
             headers: this.headers,
             redirectTo: this._maybeAppendFlowIdToRedirect(options.redirectTo, flowId)
           });
-        } catch (error) {
+        } catch (error2) {
           await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, flowId);
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -52498,15 +52498,15 @@ var require_GoTrueClient = __commonJS({
       async getUserIdentities() {
         var _a;
         try {
-          const { data, error } = await this.getUser();
-          if (error)
-            throw error;
+          const { data, error: error2 } = await this.getUser();
+          if (error2)
+            throw error2;
           return this._returnResult({ data: { identities: (_a = data.user.identities) !== null && _a !== void 0 ? _a : [] }, error: null });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**  *
@@ -52547,11 +52547,11 @@ var require_GoTrueClient = __commonJS({
         var _a;
         let flowId = null;
         try {
-          const { data, error } = await this._useSession(async (result) => {
+          const { data, error: error2 } = await this._useSession(async (result) => {
             var _a2, _b, _c, _d, _f;
-            const { data: data2, error: error2 } = result;
-            if (error2)
-              throw error2;
+            const { data: data2, error: error3 } = result;
+            if (error3)
+              throw error3;
             const { url, flowId: urlFlowId } = await this._getUrlForProvider(`${this.url}/user/identities/authorize`, credentials.provider, {
               redirectTo: (_a2 = credentials.options) === null || _a2 === void 0 ? void 0 : _a2.redirectTo,
               scopes: (_b = credentials.options) === null || _b === void 0 ? void 0 : _b.scopes,
@@ -52564,8 +52564,8 @@ var require_GoTrueClient = __commonJS({
               jwt: (_f = (_d = data2.session) === null || _d === void 0 ? void 0 : _d.access_token) !== null && _f !== void 0 ? _f : void 0
             });
           });
-          if (error)
-            throw error;
+          if (error2)
+            throw error2;
           if ((0, helpers_1.isBrowser)() && !((_a = credentials.options) === null || _a === void 0 ? void 0 : _a.skipBrowserRedirect)) {
             window.location.assign(data === null || data === void 0 ? void 0 : data.url);
           }
@@ -52573,14 +52573,14 @@ var require_GoTrueClient = __commonJS({
             data: { provider: credentials.provider, url: data === null || data === void 0 ? void 0 : data.url, flowId },
             error: null
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
             return this._returnResult({
               data: { provider: credentials.provider, url: null, flowId },
-              error
+              error: error2
             });
           }
-          throw error;
+          throw error2;
         }
       }
       async linkIdentityIdToken(credentials) {
@@ -52604,9 +52604,9 @@ var require_GoTrueClient = __commonJS({
               },
               xform: fetch_1._sessionResponse
             });
-            const { data, error } = res;
-            if (error) {
-              return this._returnResult({ data: { user: null, session: null }, error });
+            const { data, error: error2 } = res;
+            if (error2) {
+              return this._returnResult({ data: { user: null, session: null }, error: error2 });
             } else if (!data || !data.session || !data.user) {
               return this._returnResult({
                 data: { user: null, session: null },
@@ -52617,13 +52617,13 @@ var require_GoTrueClient = __commonJS({
               await this._saveSession(data.session);
               await this._notifyAllSubscribers("USER_UPDATED", data.session);
             }
-            return this._returnResult({ data, error });
-          } catch (error) {
+            return this._returnResult({ data, error: error2 });
+          } catch (error2) {
             await (0, helpers_1.removePKCEVerifier)(this.storage, this.storageKey, null);
-            if ((0, errors_1.isAuthError)(error)) {
-              return this._returnResult({ data: { user: null, session: null }, error });
+            if ((0, errors_1.isAuthError)(error2)) {
+              return this._returnResult({ data: { user: null, session: null }, error: error2 });
             }
-            throw error;
+            throw error2;
           }
         });
       }
@@ -52656,20 +52656,20 @@ var require_GoTrueClient = __commonJS({
         try {
           return await this._useSession(async (result) => {
             var _a, _b;
-            const { data, error } = result;
-            if (error) {
-              throw error;
+            const { data, error: error2 } = result;
+            if (error2) {
+              throw error2;
             }
             return await (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/user/identities/${identity.identity_id}`, {
               headers: this.headers,
               jwt: (_b = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : void 0
             });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -52691,17 +52691,17 @@ var require_GoTrueClient = __commonJS({
               headers: this.headers,
               xform: fetch_1._sessionResponse
             });
-          }, (attempt, error) => {
+          }, (attempt, error2) => {
             const nextBackOffInterval = 200 * Math.pow(2, attempt);
-            return error && (0, errors_1.isAuthRetryableFetchError)(error) && // retryable only if the request can be sent before the backoff overflows the tick duration
+            return error2 && (0, errors_1.isAuthRetryableFetchError)(error2) && // retryable only if the request can be sent before the backoff overflows the tick duration
             Date.now() + nextBackOffInterval - startedAt < constants_1.AUTO_REFRESH_TICK_DURATION_MS;
           });
-        } catch (error) {
-          this._debug(debugName, "error", error);
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: { session: null, user: null }, error });
+        } catch (error2) {
+          this._debug(debugName, "error", error2);
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: { session: null, user: null }, error: error2 });
           }
-          throw error;
+          throw error2;
         } finally {
           this._debug(debugName, "end");
         }
@@ -52763,12 +52763,12 @@ var require_GoTrueClient = __commonJS({
           this._debug(debugName, `session has${expiresWithMargin ? "" : " not"} expired with margin of ${constants_1.EXPIRY_MARGIN_MS}s`);
           if (expiresWithMargin) {
             if (this.autoRefreshToken && currentSession.refresh_token) {
-              const { error } = await this._callRefreshToken(currentSession.refresh_token);
-              if (error) {
-                if ((0, errors_1.isAuthRefreshDiscardedError)(error)) {
-                  this._debug(debugName, "refresh discarded by commit guard", error);
+              const { error: error2 } = await this._callRefreshToken(currentSession.refresh_token);
+              if (error2) {
+                if ((0, errors_1.isAuthRefreshDiscardedError)(error2)) {
+                  this._debug(debugName, "refresh discarded by commit guard", error2);
                 } else {
-                  this._debug(debugName, "refresh failed", error);
+                  this._debug(debugName, "refresh failed", error2);
                 }
               }
             }
@@ -52820,9 +52820,9 @@ var require_GoTrueClient = __commonJS({
           this.refreshingDeferred.promise.then(void 0, () => {
           });
           const storedAtStart = await (0, helpers_1.getItemAsync)(this.storage, this.storageKey);
-          const { data, error } = await this._refreshAccessToken(refreshToken);
-          if (error)
-            throw error;
+          const { data, error: error2 } = await this._refreshAccessToken(refreshToken);
+          if (error2)
+            throw error2;
           if (!data.session)
             throw new errors_1.AuthSessionMissingError();
           const storedAfter = await (0, helpers_1.getItemAsync)(this.storage, this.storageKey);
@@ -52861,11 +52861,11 @@ var require_GoTrueClient = __commonJS({
           this.lastRefreshFailure = null;
           this.refreshingDeferred.resolve(result);
           return result;
-        } catch (error) {
-          this._debug(debugName, "error", error);
-          if ((0, errors_1.isAuthError)(error)) {
-            const result = { data: null, error };
-            if (!(0, errors_1.isAuthRetryableFetchError)(error)) {
+        } catch (error2) {
+          this._debug(debugName, "error", error2);
+          if ((0, errors_1.isAuthError)(error2)) {
+            const result = { data: null, error: error2 };
+            if (!(0, errors_1.isAuthRetryableFetchError)(error2)) {
               const storedNow = await (0, helpers_1.getItemAsync)(this.storage, this.storageKey);
               const accessTokenStillValid = !!((storedNow === null || storedNow === void 0 ? void 0 : storedNow.expires_at) && storedNow.expires_at * 1e3 > Date.now());
               if (accessTokenStillValid) {
@@ -52882,8 +52882,8 @@ var require_GoTrueClient = __commonJS({
             (_a = this.refreshingDeferred) === null || _a === void 0 ? void 0 : _a.resolve(result);
             return result;
           }
-          (_b = this.refreshingDeferred) === null || _b === void 0 ? void 0 : _b.reject(error);
-          throw error;
+          (_b = this.refreshingDeferred) === null || _b === void 0 ? void 0 : _b.reject(error2);
+          throw error2;
         } finally {
           this.refreshingDeferred = null;
           this._debug(debugName, "end");
@@ -52900,20 +52900,20 @@ var require_GoTrueClient = __commonJS({
           if (this.broadcastChannel && broadcast) {
             this.broadcastChannel.postMessage({ event, session });
           }
-          const errors = [];
+          const errors2 = [];
           const promises = Array.from(this.stateChangeEmitters.values()).map(async (x) => {
             try {
               await x.callback(event, session);
             } catch (e) {
-              errors.push(e);
+              errors2.push(e);
             }
           });
           await Promise.all(promises);
-          if (errors.length > 0) {
-            for (let i = 0; i < errors.length; i += 1) {
-              console.error(errors[i]);
+          if (errors2.length > 0) {
+            for (let i = 0; i < errors2.length; i += 1) {
+              console.error(errors2[i]);
             }
-            throw errors[0];
+            throw errors2[0];
           }
         } finally {
           this._debug(debugName, "end");
@@ -53219,14 +53219,14 @@ var require_GoTrueClient = __commonJS({
           this.visibilityChangedCallback = async () => {
             try {
               await this._onVisibilityChanged(false);
-            } catch (error) {
-              this._debug("#visibilityChangedCallback", "error", error);
+            } catch (error2) {
+              this._debug("#visibilityChangedCallback", "error", error2);
             }
           };
           window === null || window === void 0 ? void 0 : window.addEventListener("visibilitychange", this.visibilityChangedCallback);
           await this._onVisibilityChanged(true);
-        } catch (error) {
-          console.error("_handleVisibilityChange", error);
+        } catch (error2) {
+          console.error("_handleVisibilityChange", error2);
         }
       }
       /**
@@ -53335,11 +53335,11 @@ var require_GoTrueClient = __commonJS({
               jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
             });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       async _enroll(params) {
@@ -53351,24 +53351,24 @@ var require_GoTrueClient = __commonJS({
               return this._returnResult({ data: null, error: sessionError });
             }
             const body = Object.assign({ friendly_name: params.friendlyName, factor_type: params.factorType }, params.factorType === "phone" ? { phone: params.phone } : params.factorType === "totp" ? { issuer: params.issuer } : {});
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors`, {
               body,
               headers: this.headers,
               jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             if (params.factorType === "totp" && data.type === "totp" && ((_b = data === null || data === void 0 ? void 0 : data.totp) === null || _b === void 0 ? void 0 : _b.qr_code)) {
               data.totp.qr_code = `data:image/svg+xml;utf-8,${data.totp.qr_code}`;
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       async _verify(params) {
@@ -53383,23 +53383,23 @@ var require_GoTrueClient = __commonJS({
               const body = Object.assign({ challenge_id: params.challengeId }, "webauthn" in params ? {
                 webauthn: Object.assign(Object.assign({}, params.webauthn), { credential_response: params.webauthn.type === "create" ? (0, webauthn_1.serializeCredentialCreationResponse)(params.webauthn.credential_response) : (0, webauthn_1.serializeCredentialRequestResponse)(params.webauthn.credential_response) })
               } : { code: params.code });
-              const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/${params.factorId}/verify`, {
+              const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/${params.factorId}/verify`, {
                 body,
                 headers: this.headers,
                 jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
               });
-              if (error) {
-                return this._returnResult({ data: null, error });
+              if (error2) {
+                return this._returnResult({ data: null, error: error2 });
               }
               await this._saveSession(Object.assign({ expires_at: Math.round(Date.now() / 1e3) + data.expires_in }, data));
               await this._notifyAllSubscribers("MFA_CHALLENGE_VERIFIED", data);
-              return this._returnResult({ data, error });
+              return this._returnResult({ data, error: error2 });
             });
-          } catch (error) {
-            if ((0, errors_1.isAuthError)(error)) {
-              return this._returnResult({ data: null, error });
+          } catch (error2) {
+            if ((0, errors_1.isAuthError)(error2)) {
+              return this._returnResult({ data: null, error: error2 });
             }
-            throw error;
+            throw error2;
           }
         };
         if (this.lock != null) {
@@ -53441,11 +53441,11 @@ var require_GoTrueClient = __commonJS({
                   };
               }
             });
-          } catch (error) {
-            if ((0, errors_1.isAuthError)(error)) {
-              return this._returnResult({ data: null, error });
+          } catch (error2) {
+            if ((0, errors_1.isAuthError)(error2)) {
+              return this._returnResult({ data: null, error: error2 });
             }
-            throw error;
+            throw error2;
           }
         };
         if (this.lock != null) {
@@ -53520,11 +53520,11 @@ var require_GoTrueClient = __commonJS({
             }
             const currentAuthenticationMethods2 = payload2.amr || [];
             return { data: { currentLevel: currentLevel2, nextLevel: nextLevel2, currentAuthenticationMethods: currentAuthenticationMethods2 }, error: null };
-          } catch (error) {
-            if ((0, errors_1.isAuthError)(error)) {
-              return this._returnResult({ data: null, error });
+          } catch (error2) {
+            if ((0, errors_1.isAuthError)(error2)) {
+              return this._returnResult({ data: null, error: error2 });
             }
-            throw error;
+            throw error2;
           }
         }
         const { data: { session }, error: sessionError } = await this.getSession();
@@ -53562,20 +53562,20 @@ var require_GoTrueClient = __commonJS({
             if (sessionError) {
               return this._returnResult({ data: null, error: sessionError });
             }
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/factors/recovery-codes`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/factors/recovery-codes`, {
               headers: this.headers,
               jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -53590,22 +53590,22 @@ var require_GoTrueClient = __commonJS({
             if (sessionError) {
               return this._returnResult({ data: null, error: sessionError });
             }
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/recovery-codes`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/recovery-codes`, {
               // The body is optional server-side; only send one when a name was given.
               body: (params === null || params === void 0 ? void 0 : params.friendlyName) ? { friendly_name: params.friendlyName } : void 0,
               headers: this.headers,
               jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -53621,24 +53621,24 @@ var require_GoTrueClient = __commonJS({
               if (sessionError) {
                 return this._returnResult({ data: null, error: sessionError });
               }
-              const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/recovery-codes/verify`, {
+              const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/recovery-codes/verify`, {
                 body: { code: params.code },
                 headers: this.headers,
                 jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
               });
-              if (error) {
-                return this._returnResult({ data: null, error });
+              if (error2) {
+                return this._returnResult({ data: null, error: error2 });
               }
               const session = Object.assign({ expires_at: (0, helpers_1.expiresAt)(data.expires_in) }, data);
               await this._saveSession(session);
               await this._notifyAllSubscribers("MFA_CHALLENGE_VERIFIED", session);
               return this._returnResult({ data, error: null });
             });
-          } catch (error) {
-            if ((0, errors_1.isAuthError)(error)) {
-              return this._returnResult({ data: null, error });
+          } catch (error2) {
+            if ((0, errors_1.isAuthError)(error2)) {
+              return this._returnResult({ data: null, error: error2 });
             }
-            throw error;
+            throw error2;
           }
         };
         if (this.lock != null) {
@@ -53658,20 +53658,20 @@ var require_GoTrueClient = __commonJS({
             if (sessionError) {
               return this._returnResult({ data: null, error: sessionError });
             }
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/recovery-codes/regenerate`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/recovery-codes/regenerate`, {
               headers: this.headers,
               jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -53686,20 +53686,20 @@ var require_GoTrueClient = __commonJS({
             if (sessionError) {
               return this._returnResult({ data: null, error: sessionError });
             }
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/factors/recovery-codes`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/factors/recovery-codes`, {
               headers: this.headers,
               jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -53726,11 +53726,11 @@ var require_GoTrueClient = __commonJS({
               xform: (data) => ({ data, error: null })
             });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -53760,11 +53760,11 @@ var require_GoTrueClient = __commonJS({
             }
             return response;
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -53794,11 +53794,11 @@ var require_GoTrueClient = __commonJS({
             }
             return response;
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -53821,11 +53821,11 @@ var require_GoTrueClient = __commonJS({
               xform: (data) => ({ data, error: null })
             });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -53850,11 +53850,11 @@ var require_GoTrueClient = __commonJS({
             });
             return { data: {}, error: null };
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       async fetchJwk(kid, jwks = { keys: [] }) {
@@ -53867,11 +53867,11 @@ var require_GoTrueClient = __commonJS({
         if (jwk && this.jwks_cached_at + constants_1.JWKS_TTL > now) {
           return jwk;
         }
-        const { data, error } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/.well-known/jwks.json`, {
+        const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/.well-known/jwks.json`, {
           headers: this.headers
         });
-        if (error) {
-          throw error;
+        if (error2) {
+          throw error2;
         }
         if (!data.keys || data.keys.length === 0) {
           return null;
@@ -53953,9 +53953,9 @@ var require_GoTrueClient = __commonJS({
         try {
           let token = jwt2;
           if (!token) {
-            const { data, error } = await this.getSession();
-            if (error || !data.session) {
-              return this._returnResult({ data: null, error });
+            const { data, error: error2 } = await this.getSession();
+            if (error2 || !data.session) {
+              return this._returnResult({ data: null, error: error2 });
             }
             token = data.session.access_token;
           }
@@ -53969,9 +53969,9 @@ var require_GoTrueClient = __commonJS({
           }
           const signingKey = !header.alg || header.alg.startsWith("HS") || !header.kid || !("crypto" in globalThis && "subtle" in globalThis.crypto) ? null : await this.fetchJwk(header.kid, (options === null || options === void 0 ? void 0 : options.keys) ? { keys: options.keys } : options === null || options === void 0 ? void 0 : options.jwks);
           if (!signingKey) {
-            const { error } = await this.getUser(token);
-            if (error) {
-              throw error;
+            const { error: error2 } = await this.getUser(token);
+            if (error2) {
+              throw error2;
             }
             return {
               data: {
@@ -53998,11 +53998,11 @@ var require_GoTrueClient = __commonJS({
             },
             error: null
           };
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       // --- Passkey Methods ---
@@ -54072,11 +54072,11 @@ var require_GoTrueClient = __commonJS({
             challengeId: options.challenge_id,
             credential: serialized
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -54119,11 +54119,11 @@ var require_GoTrueClient = __commonJS({
             challengeId: options.challenge_id,
             credential: serialized
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -54140,21 +54140,21 @@ var require_GoTrueClient = __commonJS({
             if (!session) {
               return this._returnResult({ data: null, error: new errors_1.AuthSessionMissingError() });
             }
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/passkeys/registration/options`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/passkeys/registration/options`, {
               headers: this.headers,
               jwt: session.access_token,
               body: {}
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -54171,7 +54171,7 @@ var require_GoTrueClient = __commonJS({
             if (!session) {
               return this._returnResult({ data: null, error: new errors_1.AuthSessionMissingError() });
             }
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/passkeys/registration/verify`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/passkeys/registration/verify`, {
               headers: this.headers,
               jwt: session.access_token,
               body: {
@@ -54179,16 +54179,16 @@ var require_GoTrueClient = __commonJS({
                 credential: params.credential
               }
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -54198,21 +54198,21 @@ var require_GoTrueClient = __commonJS({
       async _startPasskeyAuthentication(params) {
         var _a;
         try {
-          const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/passkeys/authentication/options`, {
+          const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/passkeys/authentication/options`, {
             headers: this.headers,
             body: {
               gotrue_meta_security: { captcha_token: (_a = params === null || params === void 0 ? void 0 : params.options) === null || _a === void 0 ? void 0 : _a.captchaToken }
             }
           });
-          if (error) {
-            return this._returnResult({ data: null, error });
+          if (error2) {
+            return this._returnResult({ data: null, error: error2 });
           }
           return this._returnResult({ data, error: null });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -54221,7 +54221,7 @@ var require_GoTrueClient = __commonJS({
        */
       async _verifyPasskeyAuthentication(params) {
         try {
-          const { data, error } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/passkeys/authentication/verify`, {
+          const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "POST", `${this.url}/passkeys/authentication/verify`, {
             headers: this.headers,
             body: {
               challenge_id: params.challengeId,
@@ -54229,19 +54229,19 @@ var require_GoTrueClient = __commonJS({
             },
             xform: fetch_1._sessionResponse
           });
-          if (error) {
-            return this._returnResult({ data: null, error });
+          if (error2) {
+            return this._returnResult({ data: null, error: error2 });
           }
           if (data.session) {
             await this._saveSession(data.session);
             await this._notifyAllSubscribers("SIGNED_IN", data.session);
           }
           return this._returnResult({ data, error: null });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -54257,21 +54257,21 @@ var require_GoTrueClient = __commonJS({
             if (!session) {
               return this._returnResult({ data: null, error: new errors_1.AuthSessionMissingError() });
             }
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/passkeys`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "GET", `${this.url}/passkeys`, {
               headers: this.headers,
               jwt: session.access_token,
               xform: (data2) => ({ data: data2, error: null })
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -54287,21 +54287,21 @@ var require_GoTrueClient = __commonJS({
             if (!session) {
               return this._returnResult({ data: null, error: new errors_1.AuthSessionMissingError() });
             }
-            const { data, error } = await (0, fetch_1._request)(this.fetch, "PATCH", `${this.url}/passkeys/${params.passkeyId}`, {
+            const { data, error: error2 } = await (0, fetch_1._request)(this.fetch, "PATCH", `${this.url}/passkeys/${params.passkeyId}`, {
               headers: this.headers,
               jwt: session.access_token,
               body: { friendly_name: params.friendlyName }
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
       /**
@@ -54317,21 +54317,21 @@ var require_GoTrueClient = __commonJS({
             if (!session) {
               return this._returnResult({ data: null, error: new errors_1.AuthSessionMissingError() });
             }
-            const { error } = await (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/passkeys/${params.passkeyId}`, {
+            const { error: error2 } = await (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/passkeys/${params.passkeyId}`, {
               headers: this.headers,
               jwt: session.access_token,
               noResolveJson: true
             });
-            if (error) {
-              return this._returnResult({ data: null, error });
+            if (error2) {
+              return this._returnResult({ data: null, error: error2 });
             }
             return this._returnResult({ data: null, error: null });
           });
-        } catch (error) {
-          if ((0, errors_1.isAuthError)(error)) {
-            return this._returnResult({ data: null, error });
+        } catch (error2) {
+          if ((0, errors_1.isAuthError)(error2)) {
+            return this._returnResult({ data: null, error: error2 });
           }
-          throw error;
+          throw error2;
         }
       }
     };
@@ -54425,6 +54425,13 @@ var config = {
   supabaseAnonKey: process.env.SUPABASE_ANON_KEY || "",
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY || "",
   resendApiKey: process.env.RESEND_API_KEY || "",
+  resendFromEmail: process.env.RESEND_FROM_EMAIL || "NEXUS AI <onboarding@resend.dev>",
+  smtpHost: process.env.SMTP_HOST || "",
+  smtpPort: parseInt(process.env.SMTP_PORT || "587", 10),
+  smtpUser: process.env.SMTP_USER || "",
+  smtpPass: process.env.SMTP_PASS || "",
+  smtpSecure: process.env.SMTP_SECURE === "true",
+  smtpFrom: process.env.SMTP_FROM || "",
   exchangeRateApiUrl: process.env.EXCHANGE_RATE_API_URL || "https://api.frankfurter.app",
   demoMode: process.env.DEMO_MODE !== "false",
   enableHumanApproval: process.env.ENABLE_HUMAN_APPROVAL !== "false",
@@ -55249,13 +55256,13 @@ function genSalt(rounds, seed_length, callback) {
       throw Error("Illegal callback: " + typeof callback);
     _async(callback);
   } else
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve3, reject) {
       _async(function(err, res) {
         if (err) {
           reject(err);
           return;
         }
-        resolve(res);
+        resolve3(res);
       });
     });
 }
@@ -55287,13 +55294,13 @@ function hash(password, salt, callback, progressCallback) {
       throw Error("Illegal callback: " + typeof callback);
     _async(callback);
   } else
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve3, reject) {
       _async(function(err, res) {
         if (err) {
           reject(err);
           return;
         }
-        resolve(res);
+        resolve3(res);
       });
     });
 }
@@ -55345,13 +55352,13 @@ function compare(password, hashValue, callback, progressCallback) {
       throw Error("Illegal callback: " + typeof callback);
     _async(callback);
   } else
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve3, reject) {
       _async(function(err, res) {
         if (err) {
           reject(err);
           return;
         }
-        resolve(res);
+        resolve3(res);
       });
     });
 }
@@ -57446,37 +57453,37 @@ __export(external_exports, {
 
 // node_modules/zod/v3/helpers/util.js
 var util;
-(function(util2) {
-  util2.assertEqual = (_) => {
+(function(util4) {
+  util4.assertEqual = (_) => {
   };
   function assertIs(_arg) {
   }
-  util2.assertIs = assertIs;
+  util4.assertIs = assertIs;
   function assertNever(_x) {
     throw new Error();
   }
-  util2.assertNever = assertNever;
-  util2.arrayToEnum = (items) => {
+  util4.assertNever = assertNever;
+  util4.arrayToEnum = (items) => {
     const obj = {};
     for (const item of items) {
       obj[item] = item;
     }
     return obj;
   };
-  util2.getValidEnumValues = (obj) => {
-    const validKeys = util2.objectKeys(obj).filter((k) => typeof obj[obj[k]] !== "number");
+  util4.getValidEnumValues = (obj) => {
+    const validKeys = util4.objectKeys(obj).filter((k) => typeof obj[obj[k]] !== "number");
     const filtered = {};
     for (const k of validKeys) {
       filtered[k] = obj[k];
     }
-    return util2.objectValues(filtered);
+    return util4.objectValues(filtered);
   };
-  util2.objectValues = (obj) => {
-    return util2.objectKeys(obj).map(function(e) {
+  util4.objectValues = (obj) => {
+    return util4.objectKeys(obj).map(function(e) {
       return obj[e];
     });
   };
-  util2.objectKeys = typeof Object.keys === "function" ? (obj) => Object.keys(obj) : (object) => {
+  util4.objectKeys = typeof Object.keys === "function" ? (obj) => Object.keys(obj) : (object) => {
     const keys = [];
     for (const key in object) {
       if (Object.prototype.hasOwnProperty.call(object, key)) {
@@ -57485,19 +57492,19 @@ var util;
     }
     return keys;
   };
-  util2.find = (arr, checker) => {
+  util4.find = (arr, checker) => {
     for (const item of arr) {
       if (checker(item))
         return item;
     }
     return void 0;
   };
-  util2.isInteger = typeof Number.isInteger === "function" ? (val) => Number.isInteger(val) : (val) => typeof val === "number" && Number.isFinite(val) && Math.floor(val) === val;
+  util4.isInteger = typeof Number.isInteger === "function" ? (val) => Number.isInteger(val) : (val) => typeof val === "number" && Number.isFinite(val) && Math.floor(val) === val;
   function joinValues(array, separator = " | ") {
     return array.map((val) => typeof val === "string" ? `'${val}'` : val).join(separator);
   }
-  util2.joinValues = joinValues;
-  util2.jsonStringifyReplacer = (_, value) => {
+  util4.joinValues = joinValues;
+  util4.jsonStringifyReplacer = (_, value) => {
     if (typeof value === "bigint") {
       return value.toString();
     }
@@ -57628,8 +57635,8 @@ var ZodError = class _ZodError extends Error {
       return issue.message;
     };
     const fieldErrors = { _errors: [] };
-    const processError = (error) => {
-      for (const issue of error.issues) {
+    const processError = (error2) => {
+      for (const issue of error2.issues) {
         if (issue.code === "invalid_union") {
           issue.unionErrors.map(processError);
         } else if (issue.code === "invalid_return_type") {
@@ -57692,8 +57699,8 @@ var ZodError = class _ZodError extends Error {
   }
 };
 ZodError.create = (issues) => {
-  const error = new ZodError(issues);
-  return error;
+  const error2 = new ZodError(issues);
+  return error2;
 };
 
 // node_modules/zod/v3/locales/en.js
@@ -57801,8 +57808,8 @@ var en_default = errorMap;
 
 // node_modules/zod/v3/errors.js
 var overrideErrorMap = en_default;
-function setErrorMap(map) {
-  overrideErrorMap = map;
+function setErrorMap(map2) {
+  overrideErrorMap = map2;
 }
 function getErrorMap() {
   return overrideErrorMap;
@@ -57810,8 +57817,8 @@ function getErrorMap() {
 
 // node_modules/zod/v3/helpers/parseUtil.js
 var makeIssue = (params) => {
-  const { data, path: path7, errorMaps, issueData } = params;
-  const fullPath = [...path7, ...issueData.path || []];
+  const { data, path: path9, errorMaps, issueData } = params;
+  const fullPath = [...path9, ...issueData.path || []];
   const fullIssue = {
     ...issueData,
     path: fullPath
@@ -57825,8 +57832,8 @@ var makeIssue = (params) => {
   }
   let errorMessage = "";
   const maps = errorMaps.filter((m) => !!m).slice().reverse();
-  for (const map of maps) {
-    errorMessage = map(fullIssue, { data, defaultError: errorMessage }).message;
+  for (const map2 of maps) {
+    errorMessage = map2(fullIssue, { data, defaultError: errorMessage }).message;
   }
   return {
     ...issueData,
@@ -57927,11 +57934,11 @@ var errorUtil;
 
 // node_modules/zod/v3/types.js
 var ParseInputLazyPath = class {
-  constructor(parent, value, path7, key) {
+  constructor(parent, value, path9, key) {
     this._cachedPath = [];
     this.parent = parent;
     this.data = value;
-    this._path = path7;
+    this._path = path9;
     this._key = key;
   }
   get path() {
@@ -57957,8 +57964,8 @@ var handleResult = (ctx, result) => {
       get error() {
         if (this._error)
           return this._error;
-        const error = new ZodError(ctx.common.issues);
-        this._error = error;
+        const error2 = new ZodError(ctx.common.issues);
+        this._error = error2;
         return this._error;
       }
     };
@@ -58310,11 +58317,11 @@ function datetimeRegex(args) {
   regex = `${regex}(${opts.join("|")})`;
   return new RegExp(`^${regex}$`);
 }
-function isValidIP(ip, version3) {
-  if ((version3 === "v4" || !version3) && ipv4Regex.test(ip)) {
+function isValidIP(ip, version4) {
+  if ((version4 === "v4" || !version4) && ipv4Regex.test(ip)) {
     return true;
   }
-  if ((version3 === "v6" || !version3) && ipv6Regex.test(ip)) {
+  if ((version4 === "v6" || !version4) && ipv6Regex.test(ip)) {
     return true;
   }
   return false;
@@ -58341,11 +58348,11 @@ function isValidJWT(jwt2, alg) {
     return false;
   }
 }
-function isValidCidr(ip, version3) {
-  if ((version3 === "v4" || !version3) && ipv4CidrRegex.test(ip)) {
+function isValidCidr(ip, version4) {
+  if ((version4 === "v4" || !version4) && ipv4CidrRegex.test(ip)) {
     return true;
   }
-  if ((version3 === "v6" || !version3) && ipv6CidrRegex.test(ip)) {
+  if ((version4 === "v6" || !version4) && ipv6CidrRegex.test(ip)) {
     return true;
   }
   return false;
@@ -60613,25 +60620,25 @@ var ZodFunction = class _ZodFunction extends ZodType {
       });
       return INVALID;
     }
-    function makeArgsIssue(args, error) {
+    function makeArgsIssue(args, error2) {
       return makeIssue({
         data: args,
         path: ctx.path,
         errorMaps: [ctx.common.contextualErrorMap, ctx.schemaErrorMap, getErrorMap(), en_default].filter((x) => !!x),
         issueData: {
           code: ZodIssueCode.invalid_arguments,
-          argumentsError: error
+          argumentsError: error2
         }
       });
     }
-    function makeReturnsIssue(returns, error) {
+    function makeReturnsIssue(returns, error2) {
       return makeIssue({
         data: returns,
         path: ctx.path,
         errorMaps: [ctx.common.contextualErrorMap, ctx.schemaErrorMap, getErrorMap(), en_default].filter((x) => !!x),
         issueData: {
           code: ZodIssueCode.invalid_return_type,
-          returnTypeError: error
+          returnTypeError: error2
         }
       });
     }
@@ -60640,15 +60647,15 @@ var ZodFunction = class _ZodFunction extends ZodType {
     if (this._def.returns instanceof ZodPromise) {
       const me = this;
       return OK(async function(...args) {
-        const error = new ZodError([]);
+        const error2 = new ZodError([]);
         const parsedArgs = await me._def.args.parseAsync(args, params).catch((e) => {
-          error.addIssue(makeArgsIssue(args, e));
-          throw error;
+          error2.addIssue(makeArgsIssue(args, e));
+          throw error2;
         });
         const result = await Reflect.apply(fn, this, parsedArgs);
         const parsedReturns = await me._def.returns._def.type.parseAsync(result, params).catch((e) => {
-          error.addIssue(makeReturnsIssue(result, e));
-          throw error;
+          error2.addIssue(makeReturnsIssue(result, e));
+          throw error2;
         });
         return parsedReturns;
       });
@@ -60981,23 +60988,23 @@ var ZodEffects = class extends ZodType {
     }
     if (effect.type === "transform") {
       if (ctx.common.async === false) {
-        const base = this._def.schema._parseSync({
+        const base2 = this._def.schema._parseSync({
           data: ctx.data,
           path: ctx.path,
           parent: ctx
         });
-        if (!isValid(base))
+        if (!isValid(base2))
           return INVALID;
-        const result = effect.transform(base.value, checkCtx);
+        const result = effect.transform(base2.value, checkCtx);
         if (result instanceof Promise) {
           throw new Error(`Asynchronous transform encountered during synchronous parse operation. Use .parseAsync instead.`);
         }
         return { status: status.value, value: result };
       } else {
-        return this._def.schema._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx }).then((base) => {
-          if (!isValid(base))
+        return this._def.schema._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx }).then((base2) => {
+          if (!isValid(base2))
             return INVALID;
-          return Promise.resolve(effect.transform(base.value, checkCtx)).then((result) => ({
+          return Promise.resolve(effect.transform(base2.value, checkCtx)).then((result) => ({
             status: status.value,
             value: result
           }));
@@ -61468,6 +61475,13379 @@ function requireRole(allowedRoles) {
   };
 }
 
+// node_modules/nodemailer/dist/esm/mailer/index.js
+var import_node_events = require("node:events");
+
+// node_modules/nodemailer/dist/esm/shared/url.js
+var import_node_net = __toESM(require("node:net"), 1);
+var import_node_url = __toESM(require("node:url"), 1);
+
+// node_modules/nodemailer/dist/esm/punycode/index.js
+var maxInt = 2147483647;
+var base = 36;
+var tMin = 1;
+var tMax = 26;
+var skew = 38;
+var damp = 700;
+var initialBias = 72;
+var initialN = 128;
+var delimiter = "-";
+var regexPunycode = /^xn--/;
+var regexNonASCII = /[^\0-\x7F]/;
+var regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g;
+var errors = {
+  overflow: "Overflow: input needs wider integers to process",
+  "not-basic": "Illegal input >= 0x80 (not a basic code point)",
+  "invalid-input": "Invalid input"
+};
+var baseMinusTMin = base - tMin;
+var floor = Math.floor;
+var stringFromCharCode = String.fromCharCode;
+function error(type) {
+  throw new RangeError(errors[type]);
+}
+function map(array, callback) {
+  const result = [];
+  let length = array.length;
+  while (length--) {
+    result[length] = callback(array[length]);
+  }
+  return result;
+}
+function mapDomain(domain, callback) {
+  const parts = domain.split("@");
+  let result = "";
+  if (parts.length > 1) {
+    result = parts[0] + "@";
+    domain = parts[1];
+  }
+  domain = domain.replace(regexSeparators, ".");
+  const labels = domain.split(".");
+  const encoded = map(labels, callback).join(".");
+  return result + encoded;
+}
+function ucs2decode(string) {
+  const output = [];
+  let counter = 0;
+  const length = string.length;
+  while (counter < length) {
+    const value = string.charCodeAt(counter++);
+    if (value >= 55296 && value <= 56319 && counter < length) {
+      const extra = string.charCodeAt(counter++);
+      if ((extra & 64512) == 56320) {
+        output.push(((value & 1023) << 10) + (extra & 1023) + 65536);
+      } else {
+        output.push(value);
+        counter--;
+      }
+    } else {
+      output.push(value);
+    }
+  }
+  return output;
+}
+var basicToDigit = function(codePoint) {
+  if (codePoint >= 48 && codePoint < 58) {
+    return 26 + (codePoint - 48);
+  }
+  if (codePoint >= 65 && codePoint < 91) {
+    return codePoint - 65;
+  }
+  if (codePoint >= 97 && codePoint < 123) {
+    return codePoint - 97;
+  }
+  return base;
+};
+var digitToBasic = function(digit, flag) {
+  return digit + 22 + 75 * Number(digit < 26) - (Number(flag != 0) << 5);
+};
+var adapt = function(delta, numPoints, firstTime) {
+  let k = 0;
+  delta = firstTime ? floor(delta / damp) : delta >> 1;
+  delta += floor(delta / numPoints);
+  for (
+    ;
+    /* no initialization */
+    delta > baseMinusTMin * tMax >> 1;
+    k += base
+  ) {
+    delta = floor(delta / baseMinusTMin);
+  }
+  return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
+};
+var decode = function(input) {
+  const output = [];
+  const inputLength = input.length;
+  let i = 0;
+  let n = initialN;
+  let bias = initialBias;
+  let basic = input.lastIndexOf(delimiter);
+  if (basic < 0) {
+    basic = 0;
+  }
+  for (let j = 0; j < basic; ++j) {
+    if (input.charCodeAt(j) >= 128) {
+      error("not-basic");
+    }
+    output.push(input.charCodeAt(j));
+  }
+  for (let index = basic > 0 ? basic + 1 : 0; index < inputLength; ) {
+    const oldi = i;
+    for (let w = 1, k = base; ; k += base) {
+      if (index >= inputLength) {
+        error("invalid-input");
+      }
+      const digit = basicToDigit(input.charCodeAt(index++));
+      if (digit >= base) {
+        error("invalid-input");
+      }
+      if (digit > floor((maxInt - i) / w)) {
+        error("overflow");
+      }
+      i += digit * w;
+      const t = k <= bias ? tMin : k >= bias + tMax ? tMax : k - bias;
+      if (digit < t) {
+        break;
+      }
+      const baseMinusT = base - t;
+      if (w > floor(maxInt / baseMinusT)) {
+        error("overflow");
+      }
+      w *= baseMinusT;
+    }
+    const out = output.length + 1;
+    bias = adapt(i - oldi, out, oldi == 0);
+    if (floor(i / out) > maxInt - n) {
+      error("overflow");
+    }
+    n += floor(i / out);
+    i %= out;
+    output.splice(i++, 0, n);
+  }
+  return String.fromCodePoint(...output);
+};
+var encode = function(input) {
+  const output = [];
+  const codePoints = ucs2decode(input);
+  const inputLength = codePoints.length;
+  let n = initialN;
+  let delta = 0;
+  let bias = initialBias;
+  for (const currentValue of codePoints) {
+    if (currentValue < 128) {
+      output.push(stringFromCharCode(currentValue));
+    }
+  }
+  const basicLength = output.length;
+  let handledCPCount = basicLength;
+  if (basicLength) {
+    output.push(delimiter);
+  }
+  while (handledCPCount < inputLength) {
+    let m = maxInt;
+    for (const currentValue of codePoints) {
+      if (currentValue >= n && currentValue < m) {
+        m = currentValue;
+      }
+    }
+    const handledCPCountPlusOne = handledCPCount + 1;
+    if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
+      error("overflow");
+    }
+    delta += (m - n) * handledCPCountPlusOne;
+    n = m;
+    for (const currentValue of codePoints) {
+      if (currentValue < n && ++delta > maxInt) {
+        error("overflow");
+      }
+      if (currentValue === n) {
+        let q = delta;
+        for (let k = base; ; k += base) {
+          const t = k <= bias ? tMin : k >= bias + tMax ? tMax : k - bias;
+          if (q < t) {
+            break;
+          }
+          const qMinusT = q - t;
+          const baseMinusT = base - t;
+          output.push(stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0)));
+          q = floor(qMinusT / baseMinusT);
+        }
+        output.push(stringFromCharCode(digitToBasic(q, 0)));
+        bias = adapt(delta, handledCPCountPlusOne, handledCPCount === basicLength);
+        delta = 0;
+        ++handledCPCount;
+      }
+    }
+    ++delta;
+    ++n;
+  }
+  return output.join("");
+};
+var toUnicode = function(input) {
+  return mapDomain(input, function(string) {
+    return regexPunycode.test(string) ? decode(string.slice(4).toLowerCase()) : string;
+  });
+};
+var toASCII = function(input) {
+  return mapDomain(input, function(string) {
+    return regexNonASCII.test(string) ? "xn--" + encode(string) : string;
+  });
+};
+
+// node_modules/nodemailer/dist/esm/shared/url.js
+var SLASHLESS_AUTHORITY = /^([a-zA-Z][a-zA-Z0-9+.-]*:)(?!\/\/)([\s\S]+)$/;
+function stripSurroundingWhitespace(input) {
+  let start = 0;
+  let end = input.length;
+  while (start < end && input.charCodeAt(start) <= 32) {
+    start++;
+  }
+  while (end > start && input.charCodeAt(end - 1) <= 32) {
+    end--;
+  }
+  return input.slice(start, end);
+}
+var LEGACY_TRIM = /^[\x00-\x20\u00a0\ufeff]+/;
+var AUTHORITY = /^([a-zA-Z0-9+.-]+:)?[\\/]{2}([^\\/?#]*)/;
+var FORBIDDEN_HOST_CHARS = /[\x00-\x20#/:<>?@[\\\]^|\x7f]/;
+var CONTROL_CHARS = /[\x00-\x1f\x7f]/;
+function invalidUrl(input) {
+  const err = new TypeError("Invalid URL");
+  err.code = "ERR_INVALID_URL";
+  err.input = input;
+  return err;
+}
+function legacyParse(input, parseQueryString, whatwgError, slashesDenoteHost) {
+  const parsed = import_node_url.default.parse(input, parseQueryString, slashesDenoteHost);
+  const authority = AUTHORITY.exec(input.replace(LEGACY_TRIM, ""));
+  if (authority && (authority[1] || parsed.hostname !== null)) {
+    const written = authority[2].slice(authority[2].lastIndexOf("@") + 1);
+    if (!written || CONTROL_CHARS.test(written) || (parsed.host || "").toLowerCase() !== toASCII(written.toLowerCase())) {
+      throw whatwgError;
+    }
+    if (written.charAt(0) === "[" && !import_node_net.default.isIPv6(written.slice(1, written.indexOf("]")))) {
+      throw whatwgError;
+    }
+  } else if (parsed.hostname !== null) {
+    throw whatwgError;
+  }
+  const legacyAuth = parsed.auth === null || parsed.auth === void 0 ? null : parsed.auth.split(":");
+  const result = parsed;
+  result.username = legacyAuth ? legacyAuth.shift() : null;
+  result.password = legacyAuth && legacyAuth.length ? legacyAuth.join(":") : null;
+  return result;
+}
+function safeDecode(str) {
+  try {
+    return decodeURIComponent(str);
+  } catch (_err) {
+    return str;
+  }
+}
+function normalizeHostname(raw, href) {
+  const hostname = raw || "";
+  if (!hostname) {
+    return "";
+  }
+  if (hostname.charAt(0) === "[" && hostname.charAt(hostname.length - 1) === "]") {
+    return hostname.slice(1, -1);
+  }
+  const decoded = safeDecode(hostname);
+  const mapped = FORBIDDEN_HOST_CHARS.test(decoded) ? "" : import_node_url.default.domainToASCII(decoded);
+  if (!mapped) {
+    throw invalidUrl(href);
+  }
+  return mapped;
+}
+var parse = (input, parseQueryString) => {
+  input = stripSurroundingWhitespace(input || "");
+  const slashless = SLASHLESS_AUTHORITY.exec(input);
+  const normalized2 = slashless ? slashless[1] + "//" + slashless[2] : input;
+  let u;
+  try {
+    u = new URL(normalized2);
+  } catch (err) {
+    return legacyParse(normalized2, parseQueryString, err);
+  }
+  const hostname = normalizeHostname(u.hostname, u.href);
+  const port = u.port || null;
+  const pathname = u.pathname || null;
+  const search = u.search || null;
+  let auth = null;
+  let username = null;
+  let password = null;
+  if (u.username || u.password) {
+    username = safeDecode(u.username);
+    password = u.password ? safeDecode(u.password) : null;
+    auth = username + (password !== null ? ":" + password : "");
+  }
+  let query;
+  if (parseQueryString) {
+    const parsed = /* @__PURE__ */ Object.create(null);
+    u.searchParams.forEach((value, key) => {
+      if (Object.prototype.hasOwnProperty.call(parsed, key)) {
+        const existing = parsed[key];
+        if (Array.isArray(existing)) {
+          existing.push(value);
+        } else {
+          parsed[key] = [existing, value];
+        }
+      } else {
+        parsed[key] = value;
+      }
+    });
+    query = parsed;
+  } else {
+    query = search ? search.slice(1) : null;
+  }
+  return {
+    protocol: u.protocol || null,
+    host: u.host || null,
+    hostname,
+    port,
+    pathname,
+    search,
+    path: (pathname || "") + (search || "") || null,
+    href: u.href,
+    auth,
+    username,
+    password,
+    query
+  };
+};
+var resolve = (from, to) => {
+  try {
+    return new URL(to, from).href;
+  } catch (err) {
+    legacyParse(from, false, err, true);
+    legacyParse(to, false, err, true);
+    return import_node_url.default.resolve(from, to);
+  }
+};
+
+// node_modules/nodemailer/dist/esm/shared/index.js
+var import_node_util = __toESM(require("node:util"), 1);
+var import_node_fs = __toESM(require("node:fs"), 1);
+
+// node_modules/nodemailer/dist/esm/fetch/index.js
+var import_node_http = __toESM(require("node:http"), 1);
+var import_node_https = __toESM(require("node:https"), 1);
+var import_node_zlib = __toESM(require("node:zlib"), 1);
+var import_node_stream = require("node:stream");
+
+// node_modules/nodemailer/dist/esm/fetch/cookies.js
+var import_node_net2 = __toESM(require("node:net"), 1);
+var SESSION_TIMEOUT = 1800;
+var Cookies = class {
+  constructor(options) {
+    this.options = options || {};
+    this.cookies = [];
+  }
+  /**
+   * Stores a cookie string to the cookie storage
+   *
+   * @param cookieStr Value from the 'Set-Cookie:' header
+   * @param url Current URL
+   */
+  set(cookieStr, url) {
+    const urlparts = parse(url || "");
+    const cookie = this.parse(cookieStr);
+    let domain;
+    if (cookie.domain) {
+      domain = cookie.domain.replace(/^\./, "");
+      if (
+        // can't be valid if the requested domain is shorter than current hostname
+        urlparts.hostname.length < domain.length || // a top level domain is not a valid scope, 'Domain=com' would otherwise be
+        // sent to every .com host. A trailing dot does not make 'com.' any better
+        domain.indexOf(".") < 0 || domain.endsWith(".") || // an IP address has no subdomains, so cookies set on it stay host-only
+        import_node_net2.default.isIP(urlparts.hostname) || // prefix domains with dot to be sure that partial matches are not used
+        !("." + urlparts.hostname).endsWith("." + domain)
+      ) {
+        cookie.domain = urlparts.hostname;
+      }
+    } else {
+      cookie.domain = urlparts.hostname;
+    }
+    if (!cookie.path) {
+      cookie.path = this.getPath(urlparts.pathname);
+    }
+    if (!cookie.expires) {
+      cookie.expires = new Date(Date.now() + (Number(this.options.sessionTimeout || SESSION_TIMEOUT) || SESSION_TIMEOUT) * 1e3);
+    }
+    if (urlparts.protocol !== "https:" && (cookie.secure || this.cookies.some((stored) => stored.secure && this.compare(stored, cookie)))) {
+      return false;
+    }
+    return this.add(cookie);
+  }
+  /**
+   * Returns cookie string for the 'Cookie:' header.
+   *
+   * @param url URL to check for
+   * @returns Cookie header or empty string if no matches were found
+   */
+  get(url) {
+    return this.list(url).map((cookie) => cookie.name + "=" + cookie.value).join("; ");
+  }
+  /**
+   * Lists all valied cookie objects for the specified URL
+   *
+   * @param url URL to check for
+   * @returns An array of cookie objects
+   */
+  list(url) {
+    const result = [];
+    for (let i = this.cookies.length - 1; i >= 0; i--) {
+      const cookie = this.cookies[i];
+      if (this.isExpired(cookie)) {
+        this.cookies.splice(i, 1);
+        continue;
+      }
+      if (this.match(cookie, url)) {
+        result.unshift(cookie);
+      }
+    }
+    return result;
+  }
+  /**
+   * Parses cookie string from the 'Set-Cookie:' header
+   *
+   * @param cookieStr String from the 'Set-Cookie:' header
+   * @returns Cookie object
+   */
+  parse(cookieStr) {
+    const cookie = {};
+    let hasNameValue = false;
+    let hasMaxAge = false;
+    (cookieStr || "").toString().split(";").forEach((cookiePart) => {
+      if (!cookiePart.trim()) {
+        return;
+      }
+      const valueParts = cookiePart.split("=");
+      const name2 = valueParts.shift().trim();
+      let value = valueParts.join("=").trim();
+      let domain;
+      if (!hasNameValue) {
+        hasNameValue = true;
+        if (name2) {
+          cookie.name = name2;
+          cookie.value = value;
+        }
+        return;
+      }
+      switch (name2.toLowerCase()) {
+        case "expires": {
+          const expires = new Date(value);
+          if (expires.toString() !== "Invalid Date" && !hasMaxAge) {
+            cookie.expires = expires;
+          }
+          break;
+        }
+        case "path":
+          cookie.path = value;
+          break;
+        case "domain":
+          domain = value.toLowerCase();
+          if (domain.length && domain.charAt(0) !== ".") {
+            domain = "." + domain;
+          }
+          cookie.domain = domain;
+          break;
+        case "max-age":
+          cookie.expires = new Date(Date.now() + (Number(value) || 0) * 1e3);
+          hasMaxAge = true;
+          break;
+        case "secure":
+          cookie.secure = true;
+          break;
+        case "httponly":
+          cookie.httponly = true;
+          break;
+      }
+    });
+    return cookie;
+  }
+  /**
+   * Checks if a cookie object is valid for a specified URL
+   *
+   * @param cookie Cookie object
+   * @param url URL to check for
+   * @returns true if cookie is valid for specifiec URL
+   */
+  match(cookie, url) {
+    const urlparts = parse(url || "");
+    if (urlparts.hostname !== cookie.domain && (cookie.domain.charAt(0) !== "." || ("." + urlparts.hostname).substr(-cookie.domain.length) !== cookie.domain)) {
+      return false;
+    }
+    const pathname = urlparts.pathname || "/";
+    const cookiePath = cookie.path;
+    const pathMatches = pathname === cookiePath || pathname.startsWith(cookiePath) && (cookiePath.endsWith("/") || pathname.charAt(cookiePath.length) === "/");
+    if (!pathMatches) {
+      return false;
+    }
+    if (cookie.secure && urlparts.protocol !== "https:") {
+      return false;
+    }
+    return true;
+  }
+  /**
+   * Adds (or updates/removes if needed) a cookie object to the cookie storage
+   *
+   * @param cookie Cookie value to be stored
+   */
+  add(cookie) {
+    if (!cookie || !cookie.name) {
+      return false;
+    }
+    for (let i = 0, len = this.cookies.length; i < len; i++) {
+      if (this.compare(this.cookies[i], cookie)) {
+        if (this.isExpired(cookie)) {
+          this.cookies.splice(i, 1);
+          return false;
+        }
+        this.cookies[i] = cookie;
+        return true;
+      }
+    }
+    if (!this.isExpired(cookie)) {
+      this.cookies.push(cookie);
+    }
+    return true;
+  }
+  /**
+   * Checks if two cookie objects are the same cookie. A cookie is identified by its
+   * name, domain and path (RFC 6265 section 5.3), the Secure and HttpOnly flags are
+   * attributes of the stored cookie that an update replaces
+   *
+   * @param a Cookie to check against
+   * @param b Cookie to check against
+   * @returns True, if the cookies are the same
+   */
+  compare(a, b) {
+    return a.name === b.name && a.path === b.path && a.domain === b.domain;
+  }
+  /**
+   * Checks if a cookie is expired
+   *
+   * @param cookie Cookie object to check against
+   * @returns True, if the cookie is expired
+   */
+  isExpired(cookie) {
+    return cookie.expires && cookie.expires < /* @__PURE__ */ new Date() || !cookie.value;
+  }
+  /**
+   * Returns the default path for an URL path argument, the default-path of
+   * RFC 6265 section 5.1.4. A cookie that carries no Path attribute is scoped
+   * to the directory of the URL it was set from
+   *
+   * @param pathname
+   * @returns Default path
+   */
+  getPath(pathname) {
+    const pathParts = (pathname || "/").split("/");
+    pathParts.pop();
+    const path9 = pathParts.join("/").trim();
+    if (path9.charAt(0) !== "/") {
+      return "/";
+    }
+    return path9;
+  }
+};
+var cookies_default = Cookies;
+
+// node_modules/nodemailer/dist/esm/package-info.js
+var name = "nodemailer";
+var version = "10.6.1";
+var homepage = "https://nodemailer.com/";
+
+// node_modules/nodemailer/dist/esm/fetch/index.js
+var import_node_net3 = __toESM(require("node:net"), 1);
+
+// node_modules/nodemailer/dist/esm/errors.js
+var ECONNECTION = "ECONNECTION";
+var ETIMEDOUT = "ETIMEDOUT";
+var ESOCKET = "ESOCKET";
+var EENVELOPE = "EENVELOPE";
+var EMESSAGE = "EMESSAGE";
+var EOTP = "EOTP";
+var ESTREAM = "ESTREAM";
+var EABORT = "EABORT";
+var ENOAUTH = "ENOAUTH";
+var EOAUTH2 = "EOAUTH2";
+var EMAXLIMIT = "EMAXLIMIT";
+var EMAXRECIPIENTS = "EMAXRECIPIENTS";
+var ESENDMAIL = "ESENDMAIL";
+var ESES = "ESES";
+var ECONFIG = "ECONFIG";
+var EPROXY = "EPROXY";
+var EFILEACCESS = "EFILEACCESS";
+var EURLACCESS = "EURLACCESS";
+var EFETCH = "EFETCH";
+var createAbortError = (signal) => {
+  const err = new Error("Message sending aborted", { cause: signal.reason });
+  err.name = "AbortError";
+  err.code = EABORT;
+  return err;
+};
+var isTransientError = (err) => err.responseCode === 421 || err.code === ECONNECTION || err.code === ESOCKET || err.code === ETIMEDOUT;
+var isPermanentResponseCode = (responseCode) => responseCode >= 500 && responseCode < 600 && responseCode !== 503;
+var ERR_ACCESS_DENIED = "ERR_ACCESS_DENIED";
+
+// node_modules/nodemailer/dist/esm/shared/objects.js
+var isProtoKey = (key) => key === "__proto__";
+var copyOwnKeys = (target, source, skip) => {
+  Object.keys(source || {}).forEach((key) => {
+    if (isProtoKey(key) || skip && skip(key)) {
+      return;
+    }
+    target[key] = source[key];
+  });
+  return target;
+};
+
+// node_modules/nodemailer/dist/esm/fetch/index.js
+var MAX_REDIRECTS = 5;
+var DEFAULT_TIMEOUT = 60 * 1e3;
+var DEFAULT_MAX_TIME = 2 * 60 * 1e3;
+var DEFAULT_MAX_BYTES = 64 * 1024 * 1024;
+var TLS_OPTION_KEYS = [
+  "ALPNProtocols",
+  "ca",
+  "cert",
+  "checkServerIdentity",
+  "ciphers",
+  "crl",
+  "dhparam",
+  "ecdhCurve",
+  "honorCipherOrder",
+  "key",
+  "maxVersion",
+  "minVersion",
+  "passphrase",
+  "pfx",
+  "rejectUnauthorized",
+  "secureContext",
+  "secureOptions",
+  "secureProtocol",
+  "servername",
+  "sessionIdContext",
+  "sigalgs"
+];
+function setFetchCode(err) {
+  if (err.code !== ERR_ACCESS_DENIED) {
+    err.code = EFETCH;
+  }
+}
+function parseFetchUrl(url) {
+  let parsed;
+  try {
+    parsed = parse(url);
+  } catch (_err) {
+    return false;
+  }
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    return false;
+  }
+  return parsed;
+}
+function fetchPort(parsed) {
+  return parsed.port ? Number(parsed.port) : parsed.protocol === "https:" ? 443 : 80;
+}
+function nmfetch(url, options) {
+  options = options || {};
+  options.fetchRes = options.fetchRes || new import_node_stream.PassThrough();
+  options.cookies = options.cookies || new cookies_default();
+  options.redirects = options.redirects || 0;
+  options.maxRedirects = isNaN(options.maxRedirects) ? MAX_REDIRECTS : options.maxRedirects;
+  if (!options.deadline) {
+    options.maxTime = typeof options.maxTime === "number" && options.maxTime >= 0 ? options.maxTime : DEFAULT_MAX_TIME;
+    options.deadline = options.maxTime ? Date.now() + options.maxTime : 0;
+  }
+  const fetchRes = options.fetchRes;
+  const parsed = parseFetchUrl(url);
+  if (!parsed) {
+    if (options.body && typeof options.body.destroy === "function") {
+      options.body.on("error", () => false);
+      options.body.destroy();
+    }
+    setImmediate(() => {
+      const err = new Error("Unsupported protocol for URL " + url);
+      err.code = EFETCH;
+      err.sourceUrl = url;
+      fetchRes.emit("error", err);
+    });
+    return fetchRes;
+  }
+  if (options.cookie) {
+    [].concat(options.cookie || []).forEach((cookie) => {
+      options.cookies.set(cookie, url);
+    });
+    options.cookie = false;
+  }
+  let method = (options.method || "").toString().trim().toUpperCase() || "GET";
+  let finished3 = false;
+  let cookies;
+  let body;
+  const handler2 = parsed.protocol === "https:" ? import_node_https.default : import_node_http.default;
+  const headers = {
+    "accept-encoding": "gzip,deflate",
+    "user-agent": "nodemailer/" + version
+  };
+  Object.keys(options.headers || {}).forEach((key) => {
+    if (isProtoKey(key.toLowerCase().trim())) {
+      return;
+    }
+    headers[key.toLowerCase().trim()] = options.headers[key];
+  });
+  if (options.userAgent) {
+    headers["user-agent"] = options.userAgent;
+  }
+  if (parsed.auth) {
+    headers.Authorization = "Basic " + Buffer.from(parsed.auth).toString("base64");
+  }
+  if (cookies = options.cookies.get(url)) {
+    headers.cookie = cookies;
+  }
+  if (options.body) {
+    if (options.contentType !== false) {
+      headers["Content-Type"] = options.contentType || "application/x-www-form-urlencoded";
+    }
+    if (typeof options.body.pipe === "function") {
+      headers["Transfer-Encoding"] = "chunked";
+      body = options.body;
+      body.on("error", (err) => {
+        if (finished3) {
+          return;
+        }
+        finished3 = true;
+        setFetchCode(err);
+        err.sourceUrl = url;
+        fetchRes.emit("error", err);
+      });
+    } else {
+      if (options.body instanceof Buffer) {
+        body = options.body;
+      } else if (typeof options.body === "object") {
+        try {
+          body = Buffer.from(Object.keys(options.body).map((key) => {
+            const value = options.body[key].toString().trim();
+            return encodeURIComponent(key) + "=" + encodeURIComponent(value);
+          }).join("&"));
+        } catch (E) {
+          finished3 = true;
+          E.code = EFETCH;
+          E.sourceUrl = url;
+          setImmediate(() => fetchRes.emit("error", E));
+          return fetchRes;
+        }
+      } else {
+        body = Buffer.from(options.body.toString().trim());
+      }
+      headers["Content-Type"] = options.contentType || "application/x-www-form-urlencoded";
+      headers["Content-Length"] = body.length;
+    }
+    method = (options.method || "").toString().trim().toUpperCase() || "POST";
+  }
+  let req;
+  const reqOptions = {
+    method,
+    host: parsed.hostname,
+    path: parsed.path,
+    port: fetchPort(parsed),
+    headers,
+    // Validate TLS certificates by default. Callers that genuinely need to
+    // reach a self-signed/internal host opt out explicitly with
+    // options.tls = { rejectUnauthorized: false }.
+    rejectUnauthorized: true,
+    agent: false
+  };
+  if (options.tls) {
+    Object.keys(options.tls).forEach((key) => {
+      if (TLS_OPTION_KEYS.includes(key)) {
+        reqOptions[key] = options.tls[key];
+      }
+    });
+  }
+  if (parsed.protocol === "https:" && parsed.hostname && parsed.hostname !== reqOptions.host && !import_node_net3.default.isIP(parsed.hostname) && !reqOptions.servername) {
+    reqOptions.servername = parsed.hostname;
+  }
+  try {
+    req = handler2.request(reqOptions);
+  } catch (E) {
+    finished3 = true;
+    setImmediate(() => {
+      setFetchCode(E);
+      E.sourceUrl = url;
+      fetchRes.emit("error", E);
+    });
+    return fetchRes;
+  }
+  let deadlineTimer;
+  const clearDeadline = () => {
+    if (deadlineTimer) {
+      clearTimeout(deadlineTimer);
+      deadlineTimer = void 0;
+    }
+  };
+  const fail = (err, sourceUrl = url) => {
+    if (finished3) {
+      return;
+    }
+    finished3 = true;
+    clearDeadline();
+    setFetchCode(err);
+    err.sourceUrl = sourceUrl;
+    fetchRes.emit("error", err);
+    req.abort();
+  };
+  const timeout = typeof options.timeout === "number" && options.timeout >= 0 ? options.timeout : DEFAULT_TIMEOUT;
+  if (timeout) {
+    req.setTimeout(timeout, () => fail(new Error("Request Timeout")));
+  }
+  if (options.deadline) {
+    deadlineTimer = setTimeout(() => fail(new Error("Request exceeded the allowed " + options.maxTime + " ms")), Math.max(options.deadline - Date.now(), 1));
+    deadlineTimer.unref();
+  }
+  req.on("error", (err) => fail(err));
+  fetchRes.once("close", () => {
+    clearDeadline();
+    if (finished3 || fetchRes.readableEnded) {
+      return;
+    }
+    finished3 = true;
+    req.destroy();
+  });
+  req.on("response", (res) => {
+    let inflate;
+    if (finished3) {
+      return;
+    }
+    switch (res.headers["content-encoding"]) {
+      case "gzip":
+      case "deflate":
+        inflate = import_node_zlib.default.createUnzip();
+        break;
+    }
+    if (res.headers["set-cookie"]) {
+      [].concat(res.headers["set-cookie"] || []).forEach((cookie) => {
+        options.cookies.set(cookie, url);
+      });
+    }
+    if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location) {
+      options.redirects++;
+      if (options.redirects > options.maxRedirects) {
+        return fail(new Error("Maximum redirect count exceeded"));
+      }
+      options.method = "GET";
+      options.body = false;
+      let redirectUrl;
+      try {
+        redirectUrl = resolve(url, res.headers.location);
+      } catch (_err) {
+        redirectUrl = res.headers.location;
+      }
+      const redirectParsed = parseFetchUrl(redirectUrl);
+      if (!redirectParsed) {
+        return fail(new Error("Unsupported protocol for URL " + redirectUrl), redirectUrl);
+      }
+      const crossOrigin = redirectParsed.protocol !== parsed.protocol || redirectParsed.hostname !== parsed.hostname || fetchPort(redirectParsed) !== fetchPort(parsed);
+      if (options.headers && crossOrigin) {
+        const sensitive = ["authorization", "cookie", "proxy-authorization"];
+        Object.keys(options.headers).forEach((key) => {
+          if (sensitive.includes(key.toLowerCase().trim())) {
+            delete options.headers[key];
+          }
+        });
+      }
+      finished3 = true;
+      clearDeadline();
+      res.resume();
+      req.abort();
+      return nmfetch(redirectUrl, options);
+    }
+    fetchRes.statusCode = res.statusCode;
+    fetchRes.headers = res.headers;
+    if (res.statusCode >= 300 && !options.allowErrorResponse) {
+      return fail(new Error("Invalid status code " + res.statusCode));
+    }
+    res.on("error", (err) => fail(err));
+    res.once("end", () => clearDeadline());
+    const maxBytes = typeof options.maxBytes === "number" && options.maxBytes > 0 ? options.maxBytes : DEFAULT_MAX_BYTES;
+    const source = inflate || res;
+    let received = 0;
+    source.on("data", (chunk) => {
+      received += chunk.length;
+      if (received <= maxBytes || finished3) {
+        return;
+      }
+      source.unpipe(fetchRes);
+      fail(new Error("Response size exceeds the allowed " + maxBytes + " bytes"));
+    });
+    if (inflate) {
+      res.pipe(inflate).pipe(fetchRes);
+      inflate.on("error", (err) => fail(err));
+    } else {
+      res.pipe(fetchRes);
+    }
+  });
+  setImmediate(() => {
+    if (body) {
+      try {
+        if (typeof body.pipe === "function") {
+          return body.pipe(req);
+        }
+        req.write(body);
+      } catch (err) {
+        return fail(err);
+      }
+    }
+    req.end();
+  });
+  return fetchRes;
+}
+nmfetch.Cookies = cookies_default;
+nmfetch.DEFAULT_TIMEOUT = DEFAULT_TIMEOUT;
+nmfetch.DEFAULT_MAX_TIME = DEFAULT_MAX_TIME;
+var fetch_default = nmfetch;
+
+// node_modules/nodemailer/dist/esm/shared/index.js
+var import_node_dns = __toESM(require("node:dns"), 1);
+var import_node_net4 = __toESM(require("node:net"), 1);
+var import_node_os = __toESM(require("node:os"), 1);
+var import_node_url2 = __toESM(require("node:url"), 1);
+var import_node_stream2 = require("node:stream");
+var DNS_TTL = 5 * 60 * 1e3;
+var CACHE_CLEANUP_INTERVAL = 30 * 1e3;
+var MAX_CACHE_SIZE = 1e3;
+var lastCacheCleanup = 0;
+var networkInterfaces;
+var networkInterfacesRead = false;
+var _readNetworkInterfaces = () => {
+  if (!networkInterfacesRead) {
+    networkInterfacesRead = true;
+    try {
+      networkInterfaces = import_node_os.default.networkInterfaces();
+    } catch (_err) {
+    }
+  }
+  return networkInterfaces;
+};
+var isFamilySupported = (family, allowInternal) => {
+  const addresses = Object.values(_readNetworkInterfaces() || {}).flat();
+  if (!addresses.length) {
+    return true;
+  }
+  return addresses.filter((i) => !i.internal || allowInternal).some((i) => i.family === "IPv" + family || i.family === family);
+};
+var resolve2 = (family, hostname, options, callback) => {
+  options = options || {};
+  if (!isFamilySupported(family, options.allowInternalNetworkInterfaces)) {
+    callback(null, []);
+    return null;
+  }
+  const dnsResolver = import_node_dns.default.Resolver ? new import_node_dns.default.Resolver(options) : import_node_dns.default;
+  dnsResolver["resolve" + family](hostname, (err, addresses) => {
+    if (err) {
+      switch (err.code) {
+        case import_node_dns.default.NODATA:
+        case import_node_dns.default.NOTFOUND:
+        case import_node_dns.default.NOTIMP:
+        case import_node_dns.default.SERVFAIL:
+        case import_node_dns.default.CONNREFUSED:
+        case import_node_dns.default.REFUSED:
+        case "EAI_AGAIN":
+          return callback(null, []);
+      }
+      return callback(err);
+    }
+    return callback(null, Array.isArray(addresses) ? addresses : [].concat(addresses || []));
+  });
+  return import_node_dns.default.Resolver ? dnsResolver : null;
+};
+var dnsCache = /* @__PURE__ */ new Map();
+var formatDNSValue = (value, extra) => {
+  if (!value) {
+    return Object.assign({}, extra || {});
+  }
+  const addresses = value.addresses || [];
+  const host = addresses.length > 0 ? addresses[Math.floor(Math.random() * addresses.length)] : null;
+  return Object.assign({
+    host,
+    // Include all addresses for connection fallback support
+    _addresses: addresses
+  }, extra || {});
+};
+var resolveHostname = (options, callback) => {
+  options = options || {};
+  if (!options.host && options.servername) {
+    options.host = options.servername;
+  }
+  if (!options.host || import_node_net4.default.isIP(options.host)) {
+    const value = {
+      addresses: [options.host]
+    };
+    return callback(null, formatDNSValue(value, {
+      servername: options.servername || false,
+      cached: false
+    }));
+  }
+  const host = options.host;
+  const servername = options.servername || host;
+  let cached;
+  if (dnsCache.has(options.host)) {
+    cached = dnsCache.get(options.host);
+    const now = Date.now();
+    if (now - lastCacheCleanup > CACHE_CLEANUP_INTERVAL) {
+      lastCacheCleanup = now;
+      for (const [host2, entry] of dnsCache.entries()) {
+        if (entry.expires && entry.expires < now) {
+          dnsCache.delete(host2);
+        }
+      }
+      if (dnsCache.size > MAX_CACHE_SIZE) {
+        const toDelete = Math.floor(MAX_CACHE_SIZE * 0.1);
+        const keys = Array.from(dnsCache.keys()).slice(0, toDelete);
+        keys.forEach((key) => dnsCache.delete(key));
+      }
+    }
+    if (!cached.expires || cached.expires >= now) {
+      return callback(null, formatDNSValue(cached.value, {
+        servername,
+        cached: true
+      }));
+    }
+  }
+  let responded = false;
+  let deadline;
+  const respond = (err, result) => {
+    if (responded) {
+      return;
+    }
+    responded = true;
+    clearTimeout(deadline);
+    callback(err, result);
+  };
+  const respondCached = (error2) => {
+    if (!cached) {
+      return false;
+    }
+    dnsCache.set(host, {
+      value: cached.value,
+      expires: Date.now() + (options.dnsTtl || DNS_TTL)
+    });
+    respond(null, formatDNSValue(cached.value, {
+      servername,
+      cached: true,
+      error: error2
+    }));
+    return true;
+  };
+  const resolvers = [];
+  const timeout = Number(options.timeout) || 0;
+  if (timeout > 0) {
+    deadline = setTimeout(() => {
+      for (const resolver of resolvers) {
+        if (typeof resolver.cancel === "function") {
+          resolver.cancel();
+        }
+      }
+      const err = new Error("DNS lookup for " + host + " timed out");
+      err.code = import_node_dns.default.TIMEOUT;
+      if (!respondCached(err)) {
+        respond(err);
+      }
+    }, timeout);
+  }
+  let ipv4Addresses = [];
+  let ipv6Addresses = [];
+  let ipv4Error = null;
+  let ipv6Error = null;
+  let pending = 2;
+  const onResolved = () => {
+    if (--pending || responded) {
+      return;
+    }
+    const allAddresses = ipv4Addresses.concat(ipv6Addresses);
+    if (allAddresses.length) {
+      const value = {
+        addresses: allAddresses
+      };
+      dnsCache.set(host, {
+        value,
+        expires: Date.now() + (options.dnsTtl || DNS_TTL)
+      });
+      return respond(null, formatDNSValue(value, {
+        servername,
+        cached: false
+      }));
+    }
+    if (ipv4Error && ipv6Error && respondCached(ipv4Error)) {
+      return;
+    }
+    try {
+      import_node_dns.default.lookup(host, { all: true }, (err, addresses) => {
+        if (err) {
+          if (respondCached(err)) {
+            return;
+          }
+          return respond(err);
+        }
+        const supportedAddresses = addresses ? addresses.filter((addr) => isFamilySupported(addr.family)).map((addr) => addr.address) : [];
+        if (addresses && addresses.length && !supportedAddresses.length) {
+          console.warn(`Failed to resolve IPv${addresses[0].family} addresses with current network`);
+        }
+        if (!supportedAddresses.length && cached) {
+          return respond(null, formatDNSValue(cached.value, {
+            servername,
+            cached: true
+          }));
+        }
+        const value = {
+          addresses: supportedAddresses.length ? supportedAddresses : [host]
+        };
+        dnsCache.set(host, {
+          value,
+          expires: Date.now() + (options.dnsTtl || DNS_TTL)
+        });
+        return respond(null, formatDNSValue(value, {
+          servername,
+          cached: false
+        }));
+      });
+    } catch (lookupErr) {
+      if (respondCached(lookupErr)) {
+        return;
+      }
+      return respond(ipv4Error || ipv6Error || lookupErr);
+    }
+  };
+  for (const family of [4, 6]) {
+    const resolver = resolve2(family, host, options, (err, addresses) => {
+      if (family === 4) {
+        ipv4Error = err;
+        ipv4Addresses = addresses || [];
+      } else {
+        ipv6Error = err;
+        ipv6Addresses = addresses || [];
+      }
+      onResolved();
+    });
+    if (resolver) {
+      resolvers.push(resolver);
+    }
+  }
+};
+var parseConnectionUrl = (str) => {
+  str = str || "";
+  const options = {};
+  const url = parse(str, true);
+  switch (url.protocol) {
+    case "smtp:":
+      options.secure = false;
+      break;
+    case "smtps:":
+      options.secure = true;
+      break;
+    case "direct:":
+      options.direct = true;
+      break;
+  }
+  if (!isNaN(url.port) && Number(url.port)) {
+    options.port = Number(url.port);
+  }
+  if (url.hostname) {
+    options.host = url.hostname;
+  }
+  if (url.username || url.password) {
+    options.auth = {
+      user: url.username || "",
+      pass: url.password || ""
+    };
+  }
+  Object.keys(url.query || {}).forEach((key) => {
+    let obj = options;
+    let lKey = key;
+    let value = url.query[key];
+    if (!isNaN(value)) {
+      value = Number(value);
+    }
+    switch (value) {
+      case "true":
+        value = true;
+        break;
+      case "false":
+        value = false;
+        break;
+    }
+    if (key.indexOf("tls.") === 0) {
+      lKey = key.substr(4);
+      if (!options.tls) {
+        options.tls = {};
+      }
+      obj = options.tls;
+    } else if (key.indexOf(".") >= 0) {
+      return;
+    }
+    if (!isProtoKey(lKey) && !(lKey in obj)) {
+      obj[lKey] = value;
+    }
+  });
+  return options;
+};
+var _logFunc = (logger, level, defaults2, data, message, ...args) => {
+  const entry = Object.assign({}, defaults2 || {}, data || {});
+  delete entry.level;
+  let logLevel = level;
+  if (typeof logger[logLevel] !== "function") {
+    logLevel = ["info", "debug", "log", "trace", "warn", "error"].find((name2) => typeof logger[name2] === "function");
+  }
+  if (logLevel) {
+    logger[logLevel](entry, message, ...args);
+  }
+};
+var getLogger = (options, defaults2) => {
+  options = options || {};
+  const response = {};
+  const levels = ["trace", "debug", "info", "warn", "error", "fatal"];
+  if (!options.logger) {
+    levels.forEach((level) => {
+      response[level] = () => false;
+    });
+    return response;
+  }
+  const logger = options.logger === true ? createDefaultLogger(levels) : options.logger;
+  levels.forEach((level) => {
+    response[level] = (...args) => {
+      const data = typeof args[0] === "string" ? void 0 : args.shift();
+      _logFunc(logger, level, defaults2, data, ...args);
+    };
+  });
+  return response;
+};
+var callbackPromise = (resolve3, reject) => function(...args) {
+  const err = args.shift();
+  if (err) {
+    reject(err);
+  } else {
+    resolve3(...args);
+  }
+};
+var parseDataURI = (uri) => {
+  if (typeof uri !== "string") {
+    return null;
+  }
+  if (!uri.startsWith("data:")) {
+    return null;
+  }
+  const commaPos = uri.indexOf(",");
+  if (commaPos === -1) {
+    return null;
+  }
+  const data = uri.substring(commaPos + 1);
+  const metaStr = uri.substring("data:".length, commaPos);
+  let encoding;
+  const metaEntries = metaStr.split(";");
+  if (metaEntries.length > 0) {
+    const lastEntry = metaEntries[metaEntries.length - 1].toLowerCase().trim();
+    if (["base64", "utf8", "utf-8"].includes(lastEntry) && lastEntry.indexOf("=") === -1) {
+      encoding = lastEntry;
+      metaEntries.pop();
+    }
+  }
+  const contentType = metaEntries.length > 0 ? metaEntries.shift() : "application/octet-stream";
+  const params = {};
+  for (let i = 0; i < metaEntries.length; i++) {
+    const entry = metaEntries[i];
+    const sepPos = entry.indexOf("=");
+    if (sepPos > 0) {
+      const key = entry.substring(0, sepPos).trim();
+      const value = entry.substring(sepPos + 1).trim();
+      if (key && !isProtoKey(key)) {
+        params[key] = value;
+      }
+    }
+  }
+  let bufferData;
+  try {
+    if (encoding === "base64") {
+      bufferData = Buffer.from(data, "base64");
+    } else {
+      try {
+        bufferData = Buffer.from(decodeURIComponent(data));
+      } catch (_decodeError) {
+        bufferData = Buffer.from(data);
+      }
+    }
+  } catch (_bufferError) {
+    bufferData = Buffer.alloc(0);
+  }
+  return {
+    data: bufferData,
+    encoding: encoding || null,
+    contentType: contentType || "application/octet-stream",
+    params
+  };
+};
+function resolveContent(data, key, options, callback) {
+  if (!callback && typeof options === "function") {
+    callback = options;
+    options = false;
+  }
+  options = options || {};
+  let promise;
+  if (!callback) {
+    promise = new Promise((resolve3, reject) => {
+      callback = callbackPromise(resolve3, reject);
+    });
+  }
+  resolveContentValue(data, key, options, callback);
+  return promise;
+}
+function resolveContentValue(data, key, options, callback) {
+  let content = data && data[key] && data[key].content || data[key];
+  const encoding = (typeof data[key] === "object" && data[key].encoding || "utf8").toString().toLowerCase().replace(/[-_\s]/g, "");
+  if (!content) {
+    return callback(null, content);
+  }
+  if (typeof content === "object") {
+    if (typeof content.pipe === "function") {
+      return resolveStream(content, (err, value) => {
+        if (err) {
+          return callback(err);
+        }
+        if (data[key].content) {
+          data[key].content = value;
+        } else {
+          data[key] = value;
+        }
+        callback(null, value);
+      });
+    } else if (/^data:/i.test(content.path || content.href)) {
+      const parsedDataUri = parseDataURI(content.path || content.href);
+      return callback(null, parsedDataUri && parsedDataUri.data ? parsedDataUri.data : Buffer.alloc(0));
+    } else if (content.href || /^https?:\/\//i.test(content.path)) {
+      const url = content.href || content.path;
+      if (options.disableUrlAccess) {
+        setImmediate(() => {
+          const err = new Error("Url access rejected for " + url);
+          err.code = EURLACCESS;
+          callback(err);
+        });
+        return;
+      }
+      return resolveStream(fetch_default(url, { headers: content.httpHeaders, tls: content.tls }), callback);
+    } else if (content.path) {
+      if (options.disableFileAccess) {
+        setImmediate(() => {
+          const err = new Error("File access rejected for " + content.path);
+          err.code = EFILEACCESS;
+          callback(err);
+        });
+        return;
+      }
+      return resolveStream(import_node_fs.default.createReadStream(content.path), callback);
+    }
+  }
+  if (typeof data[key].content === "string" && !["utf8", "usascii", "ascii"].includes(encoding)) {
+    content = Buffer.from(data[key].content, encoding);
+  }
+  setImmediate(() => callback(null, content));
+}
+var assign = function(...args) {
+  const target = args.shift() || {};
+  args.forEach((source) => {
+    Object.keys(source || {}).forEach((key) => {
+      if (isProtoKey(key)) {
+        return;
+      }
+      if (["tls", "auth"].includes(key) && source[key] && typeof source[key] === "object") {
+        target[key] = copyOwnKeys(target[key] || {}, source[key]);
+      } else {
+        target[key] = source[key];
+      }
+    });
+  });
+  return target;
+};
+var encodeXText = (str) => {
+  if (!/[^\x21-\x2A\x2C-\x3C\x3E-\x7E]/.test(str)) {
+    return str;
+  }
+  const buf = Buffer.from(str);
+  let result = "";
+  for (let i = 0, len = buf.length; i < len; i++) {
+    const c = buf[i];
+    if (c < 33 || c > 126 || c === 43 || c === 61) {
+      result += "+" + (c < 16 ? "0" : "") + c.toString(16).toUpperCase();
+    } else {
+      result += String.fromCharCode(c);
+    }
+  }
+  return result;
+};
+var streamErrors = /* @__PURE__ */ new WeakMap();
+function recordStreamErrors(stream) {
+  stream.on("error", (err) => {
+    if (!streamErrors.has(stream)) {
+      streamErrors.set(stream, err);
+    }
+  });
+}
+function destroyStream(value) {
+  const stream = value;
+  if (stream && typeof stream.pipe === "function" && typeof stream.destroy === "function" && !stream.destroyed) {
+    stream.destroy();
+  }
+}
+function unreadableStreamError(stream) {
+  const err = streamErrors.get(stream) || stream.errored;
+  if (err) {
+    return err;
+  }
+  if (stream.readableEnded || stream.destroyed) {
+    const unreadable = new Error("Content stream was already read or destroyed");
+    unreadable.code = ESTREAM;
+    return unreadable;
+  }
+  return null;
+}
+function resolveStream(stream, callback) {
+  let responded = false;
+  const respond = (err, value) => {
+    if (responded) {
+      return;
+    }
+    responded = true;
+    callback(err, value);
+  };
+  const unreadable = unreadableStreamError(stream);
+  if (unreadable) {
+    stream.on("error", () => false);
+    setImmediate(() => respond(unreadable));
+    return;
+  }
+  const chunks = [];
+  let chunklen = 0;
+  stream.on("data", (chunk) => {
+    if (typeof chunk === "string") {
+      chunk = Buffer.from(chunk);
+    }
+    chunks.push(chunk);
+    chunklen += chunk.length;
+  });
+  (0, import_node_stream2.finished)(stream, { writable: false }, (err) => {
+    if (err) {
+      return respond(err);
+    }
+    let value;
+    try {
+      value = Buffer.concat(chunks, chunklen);
+    } catch (E) {
+      return respond(E);
+    }
+    respond(null, value);
+  });
+}
+function createDefaultLogger(levels) {
+  const levelMaxLen = levels.reduce((max, level) => Math.max(max, level.length), 0);
+  const levelNames = /* @__PURE__ */ new Map();
+  levels.forEach((level) => {
+    let levelName = level.toUpperCase();
+    if (levelName.length < levelMaxLen) {
+      levelName += " ".repeat(levelMaxLen - levelName.length);
+    }
+    levelNames.set(level, levelName);
+  });
+  const print = (level, entry, message, ...args) => {
+    let prefix = "";
+    if (entry) {
+      if (entry.tnx === "server") {
+        prefix = "S: ";
+      } else if (entry.tnx === "client") {
+        prefix = "C: ";
+      }
+      if (entry.sid) {
+        prefix = "[" + entry.sid + "] " + prefix;
+      }
+      if (entry.cid) {
+        prefix = "[#" + entry.cid + "] " + prefix;
+      }
+    }
+    message = import_node_util.default.format(message, ...args);
+    message.split(/\r?\n/).forEach((line) => {
+      console.log("[%s] %s %s", (/* @__PURE__ */ new Date()).toISOString().substr(0, 19).replace(/T/, " "), levelNames.get(level), prefix + line);
+    });
+  };
+  const logger = {};
+  levels.forEach((level) => {
+    logger[level] = print.bind(null, level);
+  });
+  return logger;
+}
+var URL_PARSER_UNSAFE = /[/\\?#%\x00-\x20\x7F]/;
+var MAX_DOMAIN_LENGTH = 253;
+var MAX_LABEL_LENGTH = 63;
+function exceedsDomainLimits(domain) {
+  let total = 0;
+  let label = 0;
+  for (const char of domain) {
+    total++;
+    if (char === "." || char === "\u3002" || char === "\uFF0E" || char === "\uFF61") {
+      label = 0;
+    } else if (++label > MAX_LABEL_LENGTH) {
+      return true;
+    }
+  }
+  return total > MAX_DOMAIN_LENGTH;
+}
+function normalizeDomain(domain, toUnicode2) {
+  if (typeof import_node_url2.default.domainToASCII === "function" && typeof import_node_url2.default.domainToUnicode === "function" && !URL_PARSER_UNSAFE.test(domain)) {
+    const ascii = import_node_url2.default.domainToASCII(domain);
+    const mapped = ascii && toUnicode2 ? import_node_url2.default.domainToUnicode(ascii) : ascii;
+    if (mapped) {
+      return mapped;
+    }
+  }
+  domain = domain.toLowerCase();
+  if (exceedsDomainLimits(domain)) {
+    return domain;
+  }
+  return toUnicode2 ? toUnicode(domain) : toASCII(domain);
+}
+
+// node_modules/nodemailer/dist/esm/mime-funcs/mime-types.js
+var import_node_path = __toESM(require("node:path"), 1);
+var defaultMimeType = "application/octet-stream";
+var defaultExtension = "bin";
+var mimeTypes = /* @__PURE__ */ new Map([
+  ["application/acad", "dwg"],
+  ["application/applixware", "aw"],
+  ["application/arj", "arj"],
+  ["application/atom+xml", "xml"],
+  ["application/atomcat+xml", "atomcat"],
+  ["application/atomsvc+xml", "atomsvc"],
+  ["application/base64", ["mm", "mme"]],
+  ["application/binhex", "hqx"],
+  ["application/binhex4", "hqx"],
+  ["application/book", ["book", "boo"]],
+  ["application/ccxml+xml,", "ccxml"],
+  ["application/cdf", "cdf"],
+  ["application/cdmi-capability", "cdmia"],
+  ["application/cdmi-container", "cdmic"],
+  ["application/cdmi-domain", "cdmid"],
+  ["application/cdmi-object", "cdmio"],
+  ["application/cdmi-queue", "cdmiq"],
+  ["application/clariscad", "ccad"],
+  ["application/commonground", "dp"],
+  ["application/cu-seeme", "cu"],
+  ["application/davmount+xml", "davmount"],
+  ["application/drafting", "drw"],
+  ["application/dsptype", "tsp"],
+  ["application/dssc+der", "dssc"],
+  ["application/dssc+xml", "xdssc"],
+  ["application/dxf", "dxf"],
+  ["application/ecmascript", ["js", "es"]],
+  ["application/emma+xml", "emma"],
+  ["application/envoy", "evy"],
+  ["application/epub+zip", "epub"],
+  ["application/excel", ["xls", "xl", "xla", "xlb", "xlc", "xld", "xlk", "xll", "xlm", "xlt", "xlv", "xlw"]],
+  ["application/exi", "exi"],
+  ["application/font-tdpfr", "pfr"],
+  ["application/fractals", "fif"],
+  ["application/freeloader", "frl"],
+  ["application/futuresplash", "spl"],
+  ["application/geo+json", "geojson"],
+  ["application/gnutar", "tgz"],
+  ["application/groupwise", "vew"],
+  ["application/hlp", "hlp"],
+  ["application/hta", "hta"],
+  ["application/hyperstudio", "stk"],
+  ["application/i-deas", "unv"],
+  ["application/iges", ["iges", "igs"]],
+  ["application/inf", "inf"],
+  ["application/internet-property-stream", "acx"],
+  ["application/ipfix", "ipfix"],
+  ["application/java", "class"],
+  ["application/java-archive", "jar"],
+  ["application/java-byte-code", "class"],
+  ["application/java-serialized-object", "ser"],
+  ["application/java-vm", "class"],
+  ["application/javascript", "js"],
+  ["application/json", "json"],
+  ["application/lha", "lha"],
+  ["application/lzx", "lzx"],
+  ["application/mac-binary", "bin"],
+  ["application/mac-binhex", "hqx"],
+  ["application/mac-binhex40", "hqx"],
+  ["application/mac-compactpro", "cpt"],
+  ["application/macbinary", "bin"],
+  ["application/mads+xml", "mads"],
+  ["application/marc", "mrc"],
+  ["application/marcxml+xml", "mrcx"],
+  ["application/mathematica", "ma"],
+  ["application/mathml+xml", "mathml"],
+  ["application/mbedlet", "mbd"],
+  ["application/mbox", "mbox"],
+  ["application/mcad", "mcd"],
+  ["application/mediaservercontrol+xml", "mscml"],
+  ["application/metalink4+xml", "meta4"],
+  ["application/mets+xml", "mets"],
+  ["application/mime", "aps"],
+  ["application/mods+xml", "mods"],
+  ["application/mp21", "m21"],
+  ["application/mp4", "mp4"],
+  ["application/mspowerpoint", ["ppt", "pot", "pps", "ppz"]],
+  ["application/msword", ["doc", "dot", "w6w", "wiz", "word"]],
+  ["application/mswrite", "wri"],
+  ["application/mxf", "mxf"],
+  ["application/netmc", "mcp"],
+  ["application/octet-stream", ["*"]],
+  ["application/oda", "oda"],
+  ["application/oebps-package+xml", "opf"],
+  ["application/ogg", "ogx"],
+  ["application/olescript", "axs"],
+  ["application/onenote", "onetoc"],
+  ["application/patch-ops-error+xml", "xer"],
+  ["application/pdf", "pdf"],
+  ["application/pgp-encrypted", "asc"],
+  ["application/pgp-signature", "pgp"],
+  ["application/pics-rules", "prf"],
+  ["application/pkcs-12", "p12"],
+  ["application/pkcs-crl", "crl"],
+  ["application/pkcs10", "p10"],
+  ["application/pkcs7-mime", ["p7c", "p7m"]],
+  ["application/pkcs7-signature", "p7s"],
+  ["application/pkcs8", "p8"],
+  ["application/pkix-attr-cert", "ac"],
+  ["application/pkix-cert", ["cer", "crt"]],
+  ["application/pkix-crl", "crl"],
+  ["application/pkix-pkipath", "pkipath"],
+  ["application/pkixcmp", "pki"],
+  ["application/plain", "text"],
+  ["application/pls+xml", "pls"],
+  ["application/postscript", ["ps", "ai", "eps"]],
+  ["application/powerpoint", "ppt"],
+  ["application/pro_eng", ["part", "prt"]],
+  ["application/prs.cww", "cww"],
+  ["application/pskc+xml", "pskcxml"],
+  ["application/rdf+xml", "rdf"],
+  ["application/reginfo+xml", "rif"],
+  ["application/relax-ng-compact-syntax", "rnc"],
+  ["application/resource-lists+xml", "rl"],
+  ["application/resource-lists-diff+xml", "rld"],
+  ["application/ringing-tones", "rng"],
+  ["application/rls-services+xml", "rs"],
+  ["application/rsd+xml", "rsd"],
+  ["application/rss+xml", "xml"],
+  ["application/rtf", ["rtf", "rtx"]],
+  ["application/sbml+xml", "sbml"],
+  ["application/scvp-cv-request", "scq"],
+  ["application/scvp-cv-response", "scs"],
+  ["application/scvp-vp-request", "spq"],
+  ["application/scvp-vp-response", "spp"],
+  ["application/sdp", "sdp"],
+  ["application/sea", "sea"],
+  ["application/set", "set"],
+  ["application/set-payment-initiation", "setpay"],
+  ["application/set-registration-initiation", "setreg"],
+  ["application/shf+xml", "shf"],
+  ["application/sla", "stl"],
+  ["application/smil", ["smi", "smil"]],
+  ["application/smil+xml", "smi"],
+  ["application/solids", "sol"],
+  ["application/sounder", "sdr"],
+  ["application/sparql-query", "rq"],
+  ["application/sparql-results+xml", "srx"],
+  ["application/srgs", "gram"],
+  ["application/srgs+xml", "grxml"],
+  ["application/sru+xml", "sru"],
+  ["application/ssml+xml", "ssml"],
+  ["application/step", ["step", "stp"]],
+  ["application/streamingmedia", "ssm"],
+  ["application/tei+xml", "tei"],
+  ["application/thraud+xml", "tfi"],
+  ["application/timestamped-data", "tsd"],
+  ["application/toolbook", "tbk"],
+  ["application/vda", "vda"],
+  ["application/vnd.3gpp.pic-bw-large", "plb"],
+  ["application/vnd.3gpp.pic-bw-small", "psb"],
+  ["application/vnd.3gpp.pic-bw-var", "pvb"],
+  ["application/vnd.3gpp2.tcap", "tcap"],
+  ["application/vnd.3m.post-it-notes", "pwn"],
+  ["application/vnd.accpac.simply.aso", "aso"],
+  ["application/vnd.accpac.simply.imp", "imp"],
+  ["application/vnd.acucobol", "acu"],
+  ["application/vnd.acucorp", "atc"],
+  ["application/vnd.adobe.air-application-installer-package+zip", "air"],
+  ["application/vnd.adobe.fxp", "fxp"],
+  ["application/vnd.adobe.xdp+xml", "xdp"],
+  ["application/vnd.adobe.xfdf", "xfdf"],
+  ["application/vnd.ahead.space", "ahead"],
+  ["application/vnd.airzip.filesecure.azf", "azf"],
+  ["application/vnd.airzip.filesecure.azs", "azs"],
+  ["application/vnd.amazon.ebook", "azw"],
+  ["application/vnd.americandynamics.acc", "acc"],
+  ["application/vnd.amiga.ami", "ami"],
+  ["application/vnd.android.package-archive", "apk"],
+  ["application/vnd.anser-web-certificate-issue-initiation", "cii"],
+  ["application/vnd.anser-web-funds-transfer-initiation", "fti"],
+  ["application/vnd.antix.game-component", "atx"],
+  ["application/vnd.apple.installer+xml", "mpkg"],
+  ["application/vnd.apple.mpegurl", "m3u8"],
+  ["application/vnd.aristanetworks.swi", "swi"],
+  ["application/vnd.audiograph", "aep"],
+  ["application/vnd.blueice.multipass", "mpm"],
+  ["application/vnd.bmi", "bmi"],
+  ["application/vnd.businessobjects", "rep"],
+  ["application/vnd.chemdraw+xml", "cdxml"],
+  ["application/vnd.chipnuts.karaoke-mmd", "mmd"],
+  ["application/vnd.cinderella", "cdy"],
+  ["application/vnd.claymore", "cla"],
+  ["application/vnd.cloanto.rp9", "rp9"],
+  ["application/vnd.clonk.c4group", "c4g"],
+  ["application/vnd.cluetrust.cartomobile-config", "c11amc"],
+  ["application/vnd.cluetrust.cartomobile-config-pkg", "c11amz"],
+  ["application/vnd.commonspace", "csp"],
+  ["application/vnd.contact.cmsg", "cdbcmsg"],
+  ["application/vnd.cosmocaller", "cmc"],
+  ["application/vnd.crick.clicker", "clkx"],
+  ["application/vnd.crick.clicker.keyboard", "clkk"],
+  ["application/vnd.crick.clicker.palette", "clkp"],
+  ["application/vnd.crick.clicker.template", "clkt"],
+  ["application/vnd.crick.clicker.wordbank", "clkw"],
+  ["application/vnd.criticaltools.wbs+xml", "wbs"],
+  ["application/vnd.ctc-posml", "pml"],
+  ["application/vnd.cups-ppd", "ppd"],
+  ["application/vnd.curl.car", "car"],
+  ["application/vnd.curl.pcurl", "pcurl"],
+  ["application/vnd.data-vision.rdz", "rdz"],
+  ["application/vnd.denovo.fcselayout-link", "fe_launch"],
+  ["application/vnd.dna", "dna"],
+  ["application/vnd.dolby.mlp", "mlp"],
+  ["application/vnd.dpgraph", "dpg"],
+  ["application/vnd.dreamfactory", "dfac"],
+  ["application/vnd.dvb.ait", "ait"],
+  ["application/vnd.dvb.service", "svc"],
+  ["application/vnd.dynageo", "geo"],
+  ["application/vnd.ecowin.chart", "mag"],
+  ["application/vnd.enliven", "nml"],
+  ["application/vnd.epson.esf", "esf"],
+  ["application/vnd.epson.msf", "msf"],
+  ["application/vnd.epson.quickanime", "qam"],
+  ["application/vnd.epson.salt", "slt"],
+  ["application/vnd.epson.ssf", "ssf"],
+  ["application/vnd.eszigno3+xml", "es3"],
+  ["application/vnd.ezpix-album", "ez2"],
+  ["application/vnd.ezpix-package", "ez3"],
+  ["application/vnd.fdf", "fdf"],
+  ["application/vnd.fdsn.seed", "seed"],
+  ["application/vnd.flographit", "gph"],
+  ["application/vnd.fluxtime.clip", "ftc"],
+  ["application/vnd.framemaker", "fm"],
+  ["application/vnd.frogans.fnc", "fnc"],
+  ["application/vnd.frogans.ltf", "ltf"],
+  ["application/vnd.fsc.weblaunch", "fsc"],
+  ["application/vnd.fujitsu.oasys", "oas"],
+  ["application/vnd.fujitsu.oasys2", "oa2"],
+  ["application/vnd.fujitsu.oasys3", "oa3"],
+  ["application/vnd.fujitsu.oasysgp", "fg5"],
+  ["application/vnd.fujitsu.oasysprs", "bh2"],
+  ["application/vnd.fujixerox.ddd", "ddd"],
+  ["application/vnd.fujixerox.docuworks", "xdw"],
+  ["application/vnd.fujixerox.docuworks.binder", "xbd"],
+  ["application/vnd.fuzzysheet", "fzs"],
+  ["application/vnd.genomatix.tuxedo", "txd"],
+  ["application/vnd.geogebra.file", "ggb"],
+  ["application/vnd.geogebra.tool", "ggt"],
+  ["application/vnd.geometry-explorer", "gex"],
+  ["application/vnd.geonext", "gxt"],
+  ["application/vnd.geoplan", "g2w"],
+  ["application/vnd.geospace", "g3w"],
+  ["application/vnd.gmx", "gmx"],
+  ["application/vnd.google-earth.kml+xml", "kml"],
+  ["application/vnd.google-earth.kmz", "kmz"],
+  ["application/vnd.grafeq", "gqf"],
+  ["application/vnd.groove-account", "gac"],
+  ["application/vnd.groove-help", "ghf"],
+  ["application/vnd.groove-identity-message", "gim"],
+  ["application/vnd.groove-injector", "grv"],
+  ["application/vnd.groove-tool-message", "gtm"],
+  ["application/vnd.groove-tool-template", "tpl"],
+  ["application/vnd.groove-vcard", "vcg"],
+  ["application/vnd.hal+xml", "hal"],
+  ["application/vnd.handheld-entertainment+xml", "zmm"],
+  ["application/vnd.hbci", "hbci"],
+  ["application/vnd.hhe.lesson-player", "les"],
+  ["application/vnd.hp-hpgl", ["hgl", "hpg", "hpgl"]],
+  ["application/vnd.hp-hpid", "hpid"],
+  ["application/vnd.hp-hps", "hps"],
+  ["application/vnd.hp-jlyt", "jlt"],
+  ["application/vnd.hp-pcl", "pcl"],
+  ["application/vnd.hp-pclxl", "pclxl"],
+  ["application/vnd.hydrostatix.sof-data", "sfd-hdstx"],
+  ["application/vnd.hzn-3d-crossword", "x3d"],
+  ["application/vnd.ibm.minipay", "mpy"],
+  ["application/vnd.ibm.modcap", "afp"],
+  ["application/vnd.ibm.rights-management", "irm"],
+  ["application/vnd.ibm.secure-container", "sc"],
+  ["application/vnd.iccprofile", "icc"],
+  ["application/vnd.igloader", "igl"],
+  ["application/vnd.immervision-ivp", "ivp"],
+  ["application/vnd.immervision-ivu", "ivu"],
+  ["application/vnd.insors.igm", "igm"],
+  ["application/vnd.intercon.formnet", "xpw"],
+  ["application/vnd.intergeo", "i2g"],
+  ["application/vnd.intu.qbo", "qbo"],
+  ["application/vnd.intu.qfx", "qfx"],
+  ["application/vnd.ipunplugged.rcprofile", "rcprofile"],
+  ["application/vnd.irepository.package+xml", "irp"],
+  ["application/vnd.is-xpr", "xpr"],
+  ["application/vnd.isac.fcs", "fcs"],
+  ["application/vnd.jam", "jam"],
+  ["application/vnd.jcp.javame.midlet-rms", "rms"],
+  ["application/vnd.jisp", "jisp"],
+  ["application/vnd.joost.joda-archive", "joda"],
+  ["application/vnd.kahootz", "ktz"],
+  ["application/vnd.kde.karbon", "karbon"],
+  ["application/vnd.kde.kchart", "chrt"],
+  ["application/vnd.kde.kformula", "kfo"],
+  ["application/vnd.kde.kivio", "flw"],
+  ["application/vnd.kde.kontour", "kon"],
+  ["application/vnd.kde.kpresenter", "kpr"],
+  ["application/vnd.kde.kspread", "ksp"],
+  ["application/vnd.kde.kword", "kwd"],
+  ["application/vnd.kenameaapp", "htke"],
+  ["application/vnd.kidspiration", "kia"],
+  ["application/vnd.kinar", "kne"],
+  ["application/vnd.koan", "skp"],
+  ["application/vnd.kodak-descriptor", "sse"],
+  ["application/vnd.las.las+xml", "lasxml"],
+  ["application/vnd.llamagraphics.life-balance.desktop", "lbd"],
+  ["application/vnd.llamagraphics.life-balance.exchange+xml", "lbe"],
+  ["application/vnd.lotus-1-2-3", "123"],
+  ["application/vnd.lotus-approach", "apr"],
+  ["application/vnd.lotus-freelance", "pre"],
+  ["application/vnd.lotus-notes", "nsf"],
+  ["application/vnd.lotus-organizer", "org"],
+  ["application/vnd.lotus-screencam", "scm"],
+  ["application/vnd.lotus-wordpro", "lwp"],
+  ["application/vnd.macports.portpkg", "portpkg"],
+  ["application/vnd.mcd", "mcd"],
+  ["application/vnd.medcalcdata", "mc1"],
+  ["application/vnd.mediastation.cdkey", "cdkey"],
+  ["application/vnd.mfer", "mwf"],
+  ["application/vnd.mfmp", "mfm"],
+  ["application/vnd.micrografx.flo", "flo"],
+  ["application/vnd.micrografx.igx", "igx"],
+  ["application/vnd.mif", "mif"],
+  ["application/vnd.mobius.daf", "daf"],
+  ["application/vnd.mobius.dis", "dis"],
+  ["application/vnd.mobius.mbk", "mbk"],
+  ["application/vnd.mobius.mqy", "mqy"],
+  ["application/vnd.mobius.msl", "msl"],
+  ["application/vnd.mobius.plc", "plc"],
+  ["application/vnd.mobius.txf", "txf"],
+  ["application/vnd.mophun.application", "mpn"],
+  ["application/vnd.mophun.certificate", "mpc"],
+  ["application/vnd.mozilla.xul+xml", "xul"],
+  ["application/vnd.ms-artgalry", "cil"],
+  ["application/vnd.ms-cab-compressed", "cab"],
+  ["application/vnd.ms-excel", ["xls", "xla", "xlc", "xlm", "xlt", "xlw", "xlb", "xll"]],
+  ["application/vnd.ms-excel.addin.macroenabled.12", "xlam"],
+  ["application/vnd.ms-excel.sheet.binary.macroenabled.12", "xlsb"],
+  ["application/vnd.ms-excel.sheet.macroenabled.12", "xlsm"],
+  ["application/vnd.ms-excel.template.macroenabled.12", "xltm"],
+  ["application/vnd.ms-fontobject", "eot"],
+  ["application/vnd.ms-htmlhelp", "chm"],
+  ["application/vnd.ms-ims", "ims"],
+  ["application/vnd.ms-lrm", "lrm"],
+  ["application/vnd.ms-officetheme", "thmx"],
+  ["application/vnd.ms-outlook", "msg"],
+  ["application/vnd.ms-pki.certstore", "sst"],
+  ["application/vnd.ms-pki.pko", "pko"],
+  ["application/vnd.ms-pki.seccat", "cat"],
+  ["application/vnd.ms-pki.stl", "stl"],
+  ["application/vnd.ms-pkicertstore", "sst"],
+  ["application/vnd.ms-pkiseccat", "cat"],
+  ["application/vnd.ms-pkistl", "stl"],
+  ["application/vnd.ms-powerpoint", ["ppt", "pot", "pps", "ppa", "pwz"]],
+  ["application/vnd.ms-powerpoint.addin.macroenabled.12", "ppam"],
+  ["application/vnd.ms-powerpoint.presentation.macroenabled.12", "pptm"],
+  ["application/vnd.ms-powerpoint.slide.macroenabled.12", "sldm"],
+  ["application/vnd.ms-powerpoint.slideshow.macroenabled.12", "ppsm"],
+  ["application/vnd.ms-powerpoint.template.macroenabled.12", "potm"],
+  ["application/vnd.ms-project", "mpp"],
+  ["application/vnd.ms-word.document.macroenabled.12", "docm"],
+  ["application/vnd.ms-word.template.macroenabled.12", "dotm"],
+  ["application/vnd.ms-works", ["wks", "wcm", "wdb", "wps"]],
+  ["application/vnd.ms-wpl", "wpl"],
+  ["application/vnd.ms-xpsdocument", "xps"],
+  ["application/vnd.mseq", "mseq"],
+  ["application/vnd.musician", "mus"],
+  ["application/vnd.muvee.style", "msty"],
+  ["application/vnd.neurolanguage.nlu", "nlu"],
+  ["application/vnd.noblenet-directory", "nnd"],
+  ["application/vnd.noblenet-sealer", "nns"],
+  ["application/vnd.noblenet-web", "nnw"],
+  ["application/vnd.nokia.configuration-message", "ncm"],
+  ["application/vnd.nokia.n-gage.data", "ngdat"],
+  ["application/vnd.nokia.n-gage.symbian.install", "n-gage"],
+  ["application/vnd.nokia.radio-preset", "rpst"],
+  ["application/vnd.nokia.radio-presets", "rpss"],
+  ["application/vnd.nokia.ringing-tone", "rng"],
+  ["application/vnd.novadigm.edm", "edm"],
+  ["application/vnd.novadigm.edx", "edx"],
+  ["application/vnd.novadigm.ext", "ext"],
+  ["application/vnd.oasis.opendocument.chart", "odc"],
+  ["application/vnd.oasis.opendocument.chart-template", "otc"],
+  ["application/vnd.oasis.opendocument.database", "odb"],
+  ["application/vnd.oasis.opendocument.formula", "odf"],
+  ["application/vnd.oasis.opendocument.formula-template", "odft"],
+  ["application/vnd.oasis.opendocument.graphics", "odg"],
+  ["application/vnd.oasis.opendocument.graphics-template", "otg"],
+  ["application/vnd.oasis.opendocument.image", "odi"],
+  ["application/vnd.oasis.opendocument.image-template", "oti"],
+  ["application/vnd.oasis.opendocument.presentation", "odp"],
+  ["application/vnd.oasis.opendocument.presentation-template", "otp"],
+  ["application/vnd.oasis.opendocument.spreadsheet", "ods"],
+  ["application/vnd.oasis.opendocument.spreadsheet-template", "ots"],
+  ["application/vnd.oasis.opendocument.text", "odt"],
+  ["application/vnd.oasis.opendocument.text-master", "odm"],
+  ["application/vnd.oasis.opendocument.text-template", "ott"],
+  ["application/vnd.oasis.opendocument.text-web", "oth"],
+  ["application/vnd.olpc-sugar", "xo"],
+  ["application/vnd.oma.dd2+xml", "dd2"],
+  ["application/vnd.openofficeorg.extension", "oxt"],
+  ["application/vnd.openxmlformats-officedocument.presentationml.presentation", "pptx"],
+  ["application/vnd.openxmlformats-officedocument.presentationml.slide", "sldx"],
+  ["application/vnd.openxmlformats-officedocument.presentationml.slideshow", "ppsx"],
+  ["application/vnd.openxmlformats-officedocument.presentationml.template", "potx"],
+  ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "xlsx"],
+  ["application/vnd.openxmlformats-officedocument.spreadsheetml.template", "xltx"],
+  ["application/vnd.openxmlformats-officedocument.wordprocessingml.document", "docx"],
+  ["application/vnd.openxmlformats-officedocument.wordprocessingml.template", "dotx"],
+  ["application/vnd.osgeo.mapguide.package", "mgp"],
+  ["application/vnd.osgi.dp", "dp"],
+  ["application/vnd.palm", "pdb"],
+  ["application/vnd.pawaafile", "paw"],
+  ["application/vnd.pg.format", "str"],
+  ["application/vnd.pg.osasli", "ei6"],
+  ["application/vnd.picsel", "efif"],
+  ["application/vnd.pmi.widget", "wg"],
+  ["application/vnd.pocketlearn", "plf"],
+  ["application/vnd.powerbuilder6", "pbd"],
+  ["application/vnd.previewsystems.box", "box"],
+  ["application/vnd.proteus.magazine", "mgz"],
+  ["application/vnd.publishare-delta-tree", "qps"],
+  ["application/vnd.pvi.ptid1", "ptid"],
+  ["application/vnd.quark.quarkxpress", "qxd"],
+  ["application/vnd.realvnc.bed", "bed"],
+  ["application/vnd.recordare.musicxml", "mxl"],
+  ["application/vnd.recordare.musicxml+xml", "musicxml"],
+  ["application/vnd.rig.cryptonote", "cryptonote"],
+  ["application/vnd.rim.cod", "cod"],
+  ["application/vnd.rn-realmedia", "rm"],
+  ["application/vnd.rn-realplayer", "rnx"],
+  ["application/vnd.route66.link66+xml", "link66"],
+  ["application/vnd.sailingtracker.track", "st"],
+  ["application/vnd.seemail", "see"],
+  ["application/vnd.sema", "sema"],
+  ["application/vnd.semd", "semd"],
+  ["application/vnd.semf", "semf"],
+  ["application/vnd.shana.informed.formdata", "ifm"],
+  ["application/vnd.shana.informed.formtemplate", "itp"],
+  ["application/vnd.shana.informed.interchange", "iif"],
+  ["application/vnd.shana.informed.package", "ipk"],
+  ["application/vnd.simtech-mindmapper", "twd"],
+  ["application/vnd.smaf", "mmf"],
+  ["application/vnd.smart.teacher", "teacher"],
+  ["application/vnd.solent.sdkm+xml", "sdkm"],
+  ["application/vnd.spotfire.dxp", "dxp"],
+  ["application/vnd.spotfire.sfs", "sfs"],
+  ["application/vnd.stardivision.calc", "sdc"],
+  ["application/vnd.stardivision.draw", "sda"],
+  ["application/vnd.stardivision.impress", "sdd"],
+  ["application/vnd.stardivision.math", "smf"],
+  ["application/vnd.stardivision.writer", "sdw"],
+  ["application/vnd.stardivision.writer-global", "sgl"],
+  ["application/vnd.stepmania.stepchart", "sm"],
+  ["application/vnd.sun.xml.calc", "sxc"],
+  ["application/vnd.sun.xml.calc.template", "stc"],
+  ["application/vnd.sun.xml.draw", "sxd"],
+  ["application/vnd.sun.xml.draw.template", "std"],
+  ["application/vnd.sun.xml.impress", "sxi"],
+  ["application/vnd.sun.xml.impress.template", "sti"],
+  ["application/vnd.sun.xml.math", "sxm"],
+  ["application/vnd.sun.xml.writer", "sxw"],
+  ["application/vnd.sun.xml.writer.global", "sxg"],
+  ["application/vnd.sun.xml.writer.template", "stw"],
+  ["application/vnd.sus-calendar", "sus"],
+  ["application/vnd.svd", "svd"],
+  ["application/vnd.symbian.install", "sis"],
+  ["application/vnd.syncml+xml", "xsm"],
+  ["application/vnd.syncml.dm+wbxml", "bdm"],
+  ["application/vnd.syncml.dm+xml", "xdm"],
+  ["application/vnd.tao.intent-module-archive", "tao"],
+  ["application/vnd.tmobile-livetv", "tmo"],
+  ["application/vnd.trid.tpt", "tpt"],
+  ["application/vnd.triscape.mxs", "mxs"],
+  ["application/vnd.trueapp", "tra"],
+  ["application/vnd.ufdl", "ufd"],
+  ["application/vnd.uiq.theme", "utz"],
+  ["application/vnd.umajin", "umj"],
+  ["application/vnd.unity", "unityweb"],
+  ["application/vnd.uoml+xml", "uoml"],
+  ["application/vnd.vcx", "vcx"],
+  ["application/vnd.visio", "vsd"],
+  ["application/vnd.visionary", "vis"],
+  ["application/vnd.vsf", "vsf"],
+  ["application/vnd.wap.wbxml", "wbxml"],
+  ["application/vnd.wap.wmlc", "wmlc"],
+  ["application/vnd.wap.wmlscriptc", "wmlsc"],
+  ["application/vnd.webturbo", "wtb"],
+  ["application/vnd.wolfram.player", "nbp"],
+  ["application/vnd.wordperfect", "wpd"],
+  ["application/vnd.wqd", "wqd"],
+  ["application/vnd.wt.stf", "stf"],
+  ["application/vnd.xara", ["web", "xar"]],
+  ["application/vnd.xfdl", "xfdl"],
+  ["application/vnd.yamaha.hv-dic", "hvd"],
+  ["application/vnd.yamaha.hv-script", "hvs"],
+  ["application/vnd.yamaha.hv-voice", "hvp"],
+  ["application/vnd.yamaha.openscoreformat", "osf"],
+  ["application/vnd.yamaha.openscoreformat.osfpvg+xml", "osfpvg"],
+  ["application/vnd.yamaha.smaf-audio", "saf"],
+  ["application/vnd.yamaha.smaf-phrase", "spf"],
+  ["application/vnd.yellowriver-custom-menu", "cmp"],
+  ["application/vnd.zul", "zir"],
+  ["application/vnd.zzazz.deck+xml", "zaz"],
+  ["application/vocaltec-media-desc", "vmd"],
+  ["application/vocaltec-media-file", "vmf"],
+  ["application/voicexml+xml", "vxml"],
+  ["application/widget", "wgt"],
+  ["application/winhlp", "hlp"],
+  ["application/wordperfect", ["wp", "wp5", "wp6", "wpd"]],
+  ["application/wordperfect6.0", ["w60", "wp5"]],
+  ["application/wordperfect6.1", "w61"],
+  ["application/wsdl+xml", "wsdl"],
+  ["application/wspolicy+xml", "wspolicy"],
+  ["application/x-123", "wk1"],
+  ["application/x-7z-compressed", "7z"],
+  ["application/x-abiword", "abw"],
+  ["application/x-ace-compressed", "ace"],
+  ["application/x-aim", "aim"],
+  ["application/x-authorware-bin", "aab"],
+  ["application/x-authorware-map", "aam"],
+  ["application/x-authorware-seg", "aas"],
+  ["application/x-bcpio", "bcpio"],
+  ["application/x-binary", "bin"],
+  ["application/x-binhex40", "hqx"],
+  ["application/x-bittorrent", "torrent"],
+  ["application/x-bsh", ["bsh", "sh", "shar"]],
+  ["application/x-bytecode.elisp", "elc"],
+  ["application/x-bytecode.python", "pyc"],
+  ["application/x-bzip", "bz"],
+  ["application/x-bzip2", ["boz", "bz2"]],
+  ["application/x-cdf", "cdf"],
+  ["application/x-cdlink", "vcd"],
+  ["application/x-chat", ["cha", "chat"]],
+  ["application/x-chess-pgn", "pgn"],
+  ["application/x-cmu-raster", "ras"],
+  ["application/x-cocoa", "cco"],
+  ["application/x-compactpro", "cpt"],
+  ["application/x-compress", "z"],
+  ["application/x-compressed", ["tgz", "gz", "z", "zip"]],
+  ["application/x-conference", "nsc"],
+  ["application/x-cpio", "cpio"],
+  ["application/x-cpt", "cpt"],
+  ["application/x-csh", "csh"],
+  ["application/x-debian-package", "deb"],
+  ["application/x-deepv", "deepv"],
+  ["application/x-director", ["dir", "dcr", "dxr"]],
+  ["application/x-doom", "wad"],
+  ["application/x-dtbncx+xml", "ncx"],
+  ["application/x-dtbook+xml", "dtb"],
+  ["application/x-dtbresource+xml", "res"],
+  ["application/x-dvi", "dvi"],
+  ["application/x-elc", "elc"],
+  ["application/x-envoy", ["env", "evy"]],
+  ["application/x-esrehber", "es"],
+  ["application/x-excel", ["xls", "xla", "xlb", "xlc", "xld", "xlk", "xll", "xlm", "xlt", "xlv", "xlw"]],
+  ["application/x-font-bdf", "bdf"],
+  ["application/x-font-ghostscript", "gsf"],
+  ["application/x-font-linux-psf", "psf"],
+  ["application/x-font-otf", "otf"],
+  ["application/x-font-pcf", "pcf"],
+  ["application/x-font-snf", "snf"],
+  ["application/x-font-ttf", "ttf"],
+  ["application/x-font-type1", "pfa"],
+  ["application/x-font-woff", "woff"],
+  ["application/x-frame", "mif"],
+  ["application/x-freelance", "pre"],
+  ["application/x-futuresplash", "spl"],
+  ["application/x-gnumeric", "gnumeric"],
+  ["application/x-gsp", "gsp"],
+  ["application/x-gss", "gss"],
+  ["application/x-gtar", "gtar"],
+  ["application/x-gzip", ["gz", "gzip"]],
+  ["application/x-hdf", "hdf"],
+  ["application/x-helpfile", ["help", "hlp"]],
+  ["application/x-httpd-imap", "imap"],
+  ["application/x-ima", "ima"],
+  ["application/x-internet-signup", ["ins", "isp"]],
+  ["application/x-internett-signup", "ins"],
+  ["application/x-inventor", "iv"],
+  ["application/x-ip2", "ip"],
+  ["application/x-iphone", "iii"],
+  ["application/x-java-class", "class"],
+  ["application/x-java-commerce", "jcm"],
+  ["application/x-java-jnlp-file", "jnlp"],
+  ["application/x-javascript", "js"],
+  ["application/x-koan", ["skd", "skm", "skp", "skt"]],
+  ["application/x-ksh", "ksh"],
+  ["application/x-latex", ["latex", "ltx"]],
+  ["application/x-lha", "lha"],
+  ["application/x-lisp", "lsp"],
+  ["application/x-livescreen", "ivy"],
+  ["application/x-lotus", "wq1"],
+  ["application/x-lotusscreencam", "scm"],
+  ["application/x-lzh", "lzh"],
+  ["application/x-lzx", "lzx"],
+  ["application/x-mac-binhex40", "hqx"],
+  ["application/x-macbinary", "bin"],
+  ["application/x-magic-cap-package-1.0", "mc$"],
+  ["application/x-mathcad", "mcd"],
+  ["application/x-meme", "mm"],
+  ["application/x-midi", ["mid", "midi"]],
+  ["application/x-mif", "mif"],
+  ["application/x-mix-transfer", "nix"],
+  ["application/x-mobipocket-ebook", "prc"],
+  ["application/x-mplayer2", "asx"],
+  ["application/x-ms-application", "application"],
+  ["application/x-ms-wmd", "wmd"],
+  ["application/x-ms-wmz", "wmz"],
+  ["application/x-ms-xbap", "xbap"],
+  ["application/x-msaccess", "mdb"],
+  ["application/x-msbinder", "obd"],
+  ["application/x-mscardfile", "crd"],
+  ["application/x-msclip", "clp"],
+  ["application/x-msdownload", ["exe", "dll"]],
+  ["application/x-msexcel", ["xls", "xla", "xlw"]],
+  ["application/x-msmediaview", ["mvb", "m13", "m14"]],
+  ["application/x-msmetafile", "wmf"],
+  ["application/x-msmoney", "mny"],
+  ["application/x-mspowerpoint", "ppt"],
+  ["application/x-mspublisher", "pub"],
+  ["application/x-msschedule", "scd"],
+  ["application/x-msterminal", "trm"],
+  ["application/x-mswrite", "wri"],
+  ["application/x-navi-animation", "ani"],
+  ["application/x-navidoc", "nvd"],
+  ["application/x-navimap", "map"],
+  ["application/x-navistyle", "stl"],
+  ["application/x-netcdf", ["cdf", "nc"]],
+  ["application/x-newton-compatible-pkg", "pkg"],
+  ["application/x-nokia-9000-communicator-add-on-software", "aos"],
+  ["application/x-omc", "omc"],
+  ["application/x-omcdatamaker", "omcd"],
+  ["application/x-omcregerator", "omcr"],
+  ["application/x-pagemaker", ["pm4", "pm5"]],
+  ["application/x-pcl", "pcl"],
+  ["application/x-perfmon", ["pma", "pmc", "pml", "pmr", "pmw"]],
+  ["application/x-pixclscript", "plx"],
+  ["application/x-pkcs10", "p10"],
+  ["application/x-pkcs12", ["p12", "pfx"]],
+  ["application/x-pkcs7-certificates", ["p7b", "spc"]],
+  ["application/x-pkcs7-certreqresp", "p7r"],
+  ["application/x-pkcs7-mime", ["p7m", "p7c"]],
+  ["application/x-pkcs7-signature", ["p7s", "p7a"]],
+  ["application/x-pointplus", "css"],
+  ["application/x-portable-anymap", "pnm"],
+  ["application/x-project", ["mpc", "mpt", "mpv", "mpx"]],
+  ["application/x-qpro", "wb1"],
+  ["application/x-rar-compressed", "rar"],
+  ["application/x-rtf", "rtf"],
+  ["application/x-sdp", "sdp"],
+  ["application/x-sea", "sea"],
+  ["application/x-seelogo", "sl"],
+  ["application/x-sh", "sh"],
+  ["application/x-shar", ["shar", "sh"]],
+  ["application/x-shockwave-flash", "swf"],
+  ["application/x-silverlight-app", "xap"],
+  ["application/x-sit", "sit"],
+  ["application/x-sprite", ["spr", "sprite"]],
+  ["application/x-stuffit", "sit"],
+  ["application/x-stuffitx", "sitx"],
+  ["application/x-sv4cpio", "sv4cpio"],
+  ["application/x-sv4crc", "sv4crc"],
+  ["application/x-tar", "tar"],
+  ["application/x-tbook", ["sbk", "tbk"]],
+  ["application/x-tcl", "tcl"],
+  ["application/x-tex", "tex"],
+  ["application/x-tex-tfm", "tfm"],
+  ["application/x-texinfo", ["texi", "texinfo"]],
+  ["application/x-troff", ["roff", "t", "tr"]],
+  ["application/x-troff-man", "man"],
+  ["application/x-troff-me", "me"],
+  ["application/x-troff-ms", "ms"],
+  ["application/x-troff-msvideo", "avi"],
+  ["application/x-ustar", "ustar"],
+  ["application/x-visio", ["vsd", "vst", "vsw"]],
+  ["application/x-vnd.audioexplosion.mzz", "mzz"],
+  ["application/x-vnd.ls-xpix", "xpix"],
+  ["application/x-vrml", "vrml"],
+  ["application/x-wais-source", ["src", "wsrc"]],
+  ["application/x-winhelp", "hlp"],
+  ["application/x-wintalk", "wtk"],
+  ["application/x-world", ["wrl", "svr"]],
+  ["application/x-wpwin", "wpd"],
+  ["application/x-wri", "wri"],
+  ["application/x-x509-ca-cert", ["cer", "crt", "der"]],
+  ["application/x-x509-user-cert", "crt"],
+  ["application/x-xfig", "fig"],
+  ["application/x-xpinstall", "xpi"],
+  ["application/x-zip-compressed", "zip"],
+  ["application/xcap-diff+xml", "xdf"],
+  ["application/xenc+xml", "xenc"],
+  ["application/xhtml+xml", "xhtml"],
+  ["application/xml", "xml"],
+  ["application/xml-dtd", "dtd"],
+  ["application/xop+xml", "xop"],
+  ["application/xslt+xml", "xslt"],
+  ["application/xspf+xml", "xspf"],
+  ["application/xv+xml", "mxml"],
+  ["application/yang", "yang"],
+  ["application/yin+xml", "yin"],
+  ["application/ynd.ms-pkipko", "pko"],
+  ["application/zip", "zip"],
+  ["audio/adpcm", "adp"],
+  ["audio/aiff", ["aiff", "aif", "aifc"]],
+  ["audio/basic", ["snd", "au"]],
+  ["audio/it", "it"],
+  ["audio/make", ["funk", "my", "pfunk"]],
+  ["audio/make.my.funk", "pfunk"],
+  ["audio/mid", ["mid", "rmi"]],
+  ["audio/midi", ["midi", "kar", "mid"]],
+  ["audio/mod", "mod"],
+  ["audio/mp4", "mp4a"],
+  ["audio/mpeg", ["mpga", "mp3", "m2a", "mp2", "mpa", "mpg"]],
+  ["audio/mpeg3", "mp3"],
+  ["audio/nspaudio", ["la", "lma"]],
+  ["audio/ogg", "oga"],
+  ["audio/s3m", "s3m"],
+  ["audio/tsp-audio", "tsi"],
+  ["audio/tsplayer", "tsp"],
+  ["audio/vnd.dece.audio", "uva"],
+  ["audio/vnd.digital-winds", "eol"],
+  ["audio/vnd.dra", "dra"],
+  ["audio/vnd.dts", "dts"],
+  ["audio/vnd.dts.hd", "dtshd"],
+  ["audio/vnd.lucent.voice", "lvp"],
+  ["audio/vnd.ms-playready.media.pya", "pya"],
+  ["audio/vnd.nuera.ecelp4800", "ecelp4800"],
+  ["audio/vnd.nuera.ecelp7470", "ecelp7470"],
+  ["audio/vnd.nuera.ecelp9600", "ecelp9600"],
+  ["audio/vnd.qcelp", "qcp"],
+  ["audio/vnd.rip", "rip"],
+  ["audio/voc", "voc"],
+  ["audio/voxware", "vox"],
+  ["audio/wav", "wav"],
+  ["audio/webm", "weba"],
+  ["audio/x-aac", "aac"],
+  ["audio/x-adpcm", "snd"],
+  ["audio/x-aiff", ["aiff", "aif", "aifc"]],
+  ["audio/x-au", "au"],
+  ["audio/x-gsm", ["gsd", "gsm"]],
+  ["audio/x-jam", "jam"],
+  ["audio/x-liveaudio", "lam"],
+  ["audio/x-mid", ["mid", "midi"]],
+  ["audio/x-midi", ["midi", "mid"]],
+  ["audio/x-mod", "mod"],
+  ["audio/x-mpeg", "mp2"],
+  ["audio/x-mpeg-3", "mp3"],
+  ["audio/x-mpegurl", "m3u"],
+  ["audio/x-mpequrl", "m3u"],
+  ["audio/x-ms-wax", "wax"],
+  ["audio/x-ms-wma", "wma"],
+  ["audio/x-nspaudio", ["la", "lma"]],
+  ["audio/x-pn-realaudio", ["ra", "ram", "rm", "rmm", "rmp"]],
+  ["audio/x-pn-realaudio-plugin", ["ra", "rmp", "rpm"]],
+  ["audio/x-psid", "sid"],
+  ["audio/x-realaudio", "ra"],
+  ["audio/x-twinvq", "vqf"],
+  ["audio/x-twinvq-plugin", ["vqe", "vql"]],
+  ["audio/x-vnd.audioexplosion.mjuicemediafile", "mjf"],
+  ["audio/x-voc", "voc"],
+  ["audio/x-wav", "wav"],
+  ["audio/xm", "xm"],
+  ["chemical/x-cdx", "cdx"],
+  ["chemical/x-cif", "cif"],
+  ["chemical/x-cmdf", "cmdf"],
+  ["chemical/x-cml", "cml"],
+  ["chemical/x-csml", "csml"],
+  ["chemical/x-pdb", ["pdb", "xyz"]],
+  ["chemical/x-xyz", "xyz"],
+  ["drawing/x-dwf", "dwf"],
+  ["i-world/i-vrml", "ivr"],
+  ["image/bmp", ["bmp", "bm"]],
+  ["image/cgm", "cgm"],
+  ["image/cis-cod", "cod"],
+  ["image/cmu-raster", ["ras", "rast"]],
+  ["image/fif", "fif"],
+  ["image/florian", ["flo", "turbot"]],
+  ["image/g3fax", "g3"],
+  ["image/gif", "gif"],
+  ["image/ief", ["ief", "iefs"]],
+  ["image/jpeg", ["jpeg", "jpe", "jpg", "jfif", "jfif-tbnl"]],
+  ["image/jutvision", "jut"],
+  ["image/ktx", "ktx"],
+  ["image/naplps", ["nap", "naplps"]],
+  ["image/pict", ["pic", "pict"]],
+  ["image/pipeg", "jfif"],
+  ["image/pjpeg", ["jfif", "jpe", "jpeg", "jpg"]],
+  ["image/png", ["png", "x-png"]],
+  ["image/prs.btif", "btif"],
+  ["image/svg+xml", "svg"],
+  ["image/tiff", ["tif", "tiff"]],
+  ["image/vasa", "mcf"],
+  ["image/vnd.adobe.photoshop", "psd"],
+  ["image/vnd.dece.graphic", "uvi"],
+  ["image/vnd.djvu", "djvu"],
+  ["image/vnd.dvb.subtitle", "sub"],
+  ["image/vnd.dwg", ["dwg", "dxf", "svf"]],
+  ["image/vnd.dxf", "dxf"],
+  ["image/vnd.fastbidsheet", "fbs"],
+  ["image/vnd.fpx", "fpx"],
+  ["image/vnd.fst", "fst"],
+  ["image/vnd.fujixerox.edmics-mmr", "mmr"],
+  ["image/vnd.fujixerox.edmics-rlc", "rlc"],
+  ["image/vnd.ms-modi", "mdi"],
+  ["image/vnd.net-fpx", ["fpx", "npx"]],
+  ["image/vnd.rn-realflash", "rf"],
+  ["image/vnd.rn-realpix", "rp"],
+  ["image/vnd.wap.wbmp", "wbmp"],
+  ["image/vnd.xiff", "xif"],
+  ["image/webp", "webp"],
+  ["image/x-cmu-raster", "ras"],
+  ["image/x-cmx", "cmx"],
+  ["image/x-dwg", ["dwg", "dxf", "svf"]],
+  ["image/x-freehand", "fh"],
+  ["image/x-icon", "ico"],
+  ["image/x-jg", "art"],
+  ["image/x-jps", "jps"],
+  ["image/x-niff", ["niff", "nif"]],
+  ["image/x-pcx", "pcx"],
+  ["image/x-pict", ["pct", "pic"]],
+  ["image/x-portable-anymap", "pnm"],
+  ["image/x-portable-bitmap", "pbm"],
+  ["image/x-portable-graymap", "pgm"],
+  ["image/x-portable-greymap", "pgm"],
+  ["image/x-portable-pixmap", "ppm"],
+  ["image/x-quicktime", ["qif", "qti", "qtif"]],
+  ["image/x-rgb", "rgb"],
+  ["image/x-tiff", ["tif", "tiff"]],
+  ["image/x-windows-bmp", "bmp"],
+  ["image/x-xbitmap", "xbm"],
+  ["image/x-xbm", "xbm"],
+  ["image/x-xpixmap", ["xpm", "pm"]],
+  ["image/x-xwd", "xwd"],
+  ["image/x-xwindowdump", "xwd"],
+  ["image/xbm", "xbm"],
+  ["image/xpm", "xpm"],
+  ["message/rfc822", ["eml", "mht", "mhtml", "nws", "mime"]],
+  ["model/iges", ["iges", "igs"]],
+  ["model/mesh", "msh"],
+  ["model/vnd.collada+xml", "dae"],
+  ["model/vnd.dwf", "dwf"],
+  ["model/vnd.gdl", "gdl"],
+  ["model/vnd.gtw", "gtw"],
+  ["model/vnd.mts", "mts"],
+  ["model/vnd.vtu", "vtu"],
+  ["model/vrml", ["vrml", "wrl", "wrz"]],
+  ["model/x-pov", "pov"],
+  ["multipart/x-gzip", "gzip"],
+  ["multipart/x-ustar", "ustar"],
+  ["multipart/x-zip", "zip"],
+  ["music/crescendo", ["mid", "midi"]],
+  ["music/x-karaoke", "kar"],
+  ["paleovu/x-pv", "pvu"],
+  ["text/asp", "asp"],
+  ["text/calendar", "ics"],
+  ["text/css", "css"],
+  ["text/csv", "csv"],
+  ["text/ecmascript", "js"],
+  ["text/h323", "323"],
+  ["text/html", ["html", "htm", "stm", "acgi", "htmls", "htx", "shtml"]],
+  ["text/iuls", "uls"],
+  ["text/javascript", "js"],
+  ["text/mcf", "mcf"],
+  ["text/n3", "n3"],
+  ["text/pascal", "pas"],
+  [
+    "text/plain",
+    [
+      "txt",
+      "bas",
+      "c",
+      "h",
+      "c++",
+      "cc",
+      "com",
+      "conf",
+      "cxx",
+      "def",
+      "f",
+      "f90",
+      "for",
+      "g",
+      "hh",
+      "idc",
+      "jav",
+      "java",
+      "list",
+      "log",
+      "lst",
+      "m",
+      "mar",
+      "pl",
+      "sdml",
+      "text"
+    ]
+  ],
+  ["text/plain-bas", "par"],
+  ["text/prs.lines.tag", "dsc"],
+  ["text/richtext", ["rtx", "rt", "rtf"]],
+  ["text/scriplet", "wsc"],
+  ["text/scriptlet", "sct"],
+  ["text/sgml", ["sgm", "sgml"]],
+  ["text/tab-separated-values", "tsv"],
+  ["text/troff", "t"],
+  ["text/turtle", "ttl"],
+  ["text/uri-list", ["uni", "unis", "uri", "uris"]],
+  ["text/vnd.abc", "abc"],
+  ["text/vnd.curl", "curl"],
+  ["text/vnd.curl.dcurl", "dcurl"],
+  ["text/vnd.curl.mcurl", "mcurl"],
+  ["text/vnd.curl.scurl", "scurl"],
+  ["text/vnd.fly", "fly"],
+  ["text/vnd.fmi.flexstor", "flx"],
+  ["text/vnd.graphviz", "gv"],
+  ["text/vnd.in3d.3dml", "3dml"],
+  ["text/vnd.in3d.spot", "spot"],
+  ["text/vnd.rn-realtext", "rt"],
+  ["text/vnd.sun.j2me.app-descriptor", "jad"],
+  ["text/vnd.wap.wml", "wml"],
+  ["text/vnd.wap.wmlscript", "wmls"],
+  ["text/webviewhtml", "htt"],
+  ["text/x-asm", ["asm", "s"]],
+  ["text/x-audiosoft-intra", "aip"],
+  ["text/x-c", ["c", "cc", "cpp"]],
+  ["text/x-component", "htc"],
+  ["text/x-fortran", ["for", "f", "f77", "f90"]],
+  ["text/x-h", ["h", "hh"]],
+  ["text/x-java-source", ["java", "jav"]],
+  ["text/x-java-source,java", "java"],
+  ["text/x-la-asf", "lsx"],
+  ["text/x-m", "m"],
+  ["text/x-pascal", "p"],
+  ["text/x-script", "hlb"],
+  ["text/x-script.csh", "csh"],
+  ["text/x-script.elisp", "el"],
+  ["text/x-script.guile", "scm"],
+  ["text/x-script.ksh", "ksh"],
+  ["text/x-script.lisp", "lsp"],
+  ["text/x-script.perl", "pl"],
+  ["text/x-script.perl-module", "pm"],
+  ["text/x-script.phyton", "py"],
+  ["text/x-script.rexx", "rexx"],
+  ["text/x-script.scheme", "scm"],
+  ["text/x-script.sh", "sh"],
+  ["text/x-script.tcl", "tcl"],
+  ["text/x-script.tcsh", "tcsh"],
+  ["text/x-script.zsh", "zsh"],
+  ["text/x-server-parsed-html", ["shtml", "ssi"]],
+  ["text/x-setext", "etx"],
+  ["text/x-sgml", ["sgm", "sgml"]],
+  ["text/x-speech", ["spc", "talk"]],
+  ["text/x-uil", "uil"],
+  ["text/x-uuencode", ["uu", "uue"]],
+  ["text/x-vcalendar", "vcs"],
+  ["text/x-vcard", "vcf"],
+  ["text/xml", "xml"],
+  ["video/3gpp", "3gp"],
+  ["video/3gpp2", "3g2"],
+  ["video/animaflex", "afl"],
+  ["video/avi", "avi"],
+  ["video/avs-video", "avs"],
+  ["video/dl", "dl"],
+  ["video/fli", "fli"],
+  ["video/gl", "gl"],
+  ["video/h261", "h261"],
+  ["video/h263", "h263"],
+  ["video/h264", "h264"],
+  ["video/jpeg", "jpgv"],
+  ["video/jpm", "jpm"],
+  ["video/mj2", "mj2"],
+  ["video/mp4", "mp4"],
+  ["video/mpeg", ["mpeg", "mp2", "mpa", "mpe", "mpg", "mpv2", "m1v", "m2v", "mp3"]],
+  ["video/msvideo", "avi"],
+  ["video/ogg", "ogv"],
+  ["video/quicktime", ["mov", "qt", "moov"]],
+  ["video/vdo", "vdo"],
+  ["video/vivo", ["viv", "vivo"]],
+  ["video/vnd.dece.hd", "uvh"],
+  ["video/vnd.dece.mobile", "uvm"],
+  ["video/vnd.dece.pd", "uvp"],
+  ["video/vnd.dece.sd", "uvs"],
+  ["video/vnd.dece.video", "uvv"],
+  ["video/vnd.fvt", "fvt"],
+  ["video/vnd.mpegurl", "mxu"],
+  ["video/vnd.ms-playready.media.pyv", "pyv"],
+  ["video/vnd.rn-realvideo", "rv"],
+  ["video/vnd.uvvu.mp4", "uvu"],
+  ["video/vnd.vivo", ["viv", "vivo"]],
+  ["video/vosaic", "vos"],
+  ["video/webm", "webm"],
+  ["video/x-amt-demorun", "xdr"],
+  ["video/x-amt-showrun", "xsr"],
+  ["video/x-atomic3d-feature", "fmf"],
+  ["video/x-dl", "dl"],
+  ["video/x-dv", ["dif", "dv"]],
+  ["video/x-f4v", "f4v"],
+  ["video/x-fli", "fli"],
+  ["video/x-flv", "flv"],
+  ["video/x-gl", "gl"],
+  ["video/x-isvideo", "isu"],
+  ["video/x-la-asf", ["lsf", "lsx"]],
+  ["video/x-m4v", "m4v"],
+  ["video/x-motion-jpeg", "mjpg"],
+  ["video/x-mpeg", ["mp3", "mp2"]],
+  ["video/x-mpeq2a", "mp2"],
+  ["video/x-ms-asf", ["asf", "asr", "asx"]],
+  ["video/x-ms-asf-plugin", "asx"],
+  ["video/x-ms-wm", "wm"],
+  ["video/x-ms-wmv", "wmv"],
+  ["video/x-ms-wmx", "wmx"],
+  ["video/x-ms-wvx", "wvx"],
+  ["video/x-msvideo", "avi"],
+  ["video/x-qtc", "qtc"],
+  ["video/x-scm", "scm"],
+  ["video/x-sgi-movie", ["movie", "mv"]],
+  ["windows/metafile", "wmf"],
+  ["www/mime", "mime"],
+  ["x-conference/x-cooltalk", "ice"],
+  ["x-music/x-midi", ["mid", "midi"]],
+  ["x-world/x-3dmf", ["3dm", "3dmf", "qd3", "qd3d"]],
+  ["x-world/x-svr", "svr"],
+  ["x-world/x-vrml", ["flr", "vrml", "wrl", "wrz", "xaf", "xof"]],
+  ["x-world/x-vrt", "vrt"],
+  ["xgl/drawing", "xgz"],
+  ["xgl/movie", "xmz"]
+]);
+var extensions = /* @__PURE__ */ new Map([
+  ["123", "application/vnd.lotus-1-2-3"],
+  ["323", "text/h323"],
+  ["*", "application/octet-stream"],
+  ["3dm", "x-world/x-3dmf"],
+  ["3dmf", "x-world/x-3dmf"],
+  ["3dml", "text/vnd.in3d.3dml"],
+  ["3g2", "video/3gpp2"],
+  ["3gp", "video/3gpp"],
+  ["7z", "application/x-7z-compressed"],
+  ["a", "application/octet-stream"],
+  ["aab", "application/x-authorware-bin"],
+  ["aac", "audio/x-aac"],
+  ["aam", "application/x-authorware-map"],
+  ["aas", "application/x-authorware-seg"],
+  ["abc", "text/vnd.abc"],
+  ["abw", "application/x-abiword"],
+  ["ac", "application/pkix-attr-cert"],
+  ["acc", "application/vnd.americandynamics.acc"],
+  ["ace", "application/x-ace-compressed"],
+  ["acgi", "text/html"],
+  ["acu", "application/vnd.acucobol"],
+  ["acx", "application/internet-property-stream"],
+  ["adp", "audio/adpcm"],
+  ["aep", "application/vnd.audiograph"],
+  ["afl", "video/animaflex"],
+  ["afp", "application/vnd.ibm.modcap"],
+  ["ahead", "application/vnd.ahead.space"],
+  ["ai", "application/postscript"],
+  ["aif", ["audio/aiff", "audio/x-aiff"]],
+  ["aifc", ["audio/aiff", "audio/x-aiff"]],
+  ["aiff", ["audio/aiff", "audio/x-aiff"]],
+  ["aim", "application/x-aim"],
+  ["aip", "text/x-audiosoft-intra"],
+  ["air", "application/vnd.adobe.air-application-installer-package+zip"],
+  ["ait", "application/vnd.dvb.ait"],
+  ["ami", "application/vnd.amiga.ami"],
+  ["ani", "application/x-navi-animation"],
+  ["aos", "application/x-nokia-9000-communicator-add-on-software"],
+  ["apk", "application/vnd.android.package-archive"],
+  ["application", "application/x-ms-application"],
+  ["apr", "application/vnd.lotus-approach"],
+  ["aps", "application/mime"],
+  ["arc", "application/octet-stream"],
+  ["arj", ["application/arj", "application/octet-stream"]],
+  ["art", "image/x-jg"],
+  ["asf", "video/x-ms-asf"],
+  ["asm", "text/x-asm"],
+  ["aso", "application/vnd.accpac.simply.aso"],
+  ["asp", "text/asp"],
+  ["asr", "video/x-ms-asf"],
+  ["asx", ["video/x-ms-asf", "application/x-mplayer2", "video/x-ms-asf-plugin"]],
+  ["atc", "application/vnd.acucorp"],
+  ["atomcat", "application/atomcat+xml"],
+  ["atomsvc", "application/atomsvc+xml"],
+  ["atx", "application/vnd.antix.game-component"],
+  ["au", ["audio/basic", "audio/x-au"]],
+  ["avi", ["video/avi", "video/msvideo", "application/x-troff-msvideo", "video/x-msvideo"]],
+  ["avs", "video/avs-video"],
+  ["aw", "application/applixware"],
+  ["axs", "application/olescript"],
+  ["azf", "application/vnd.airzip.filesecure.azf"],
+  ["azs", "application/vnd.airzip.filesecure.azs"],
+  ["azw", "application/vnd.amazon.ebook"],
+  ["bas", "text/plain"],
+  ["bcpio", "application/x-bcpio"],
+  ["bdf", "application/x-font-bdf"],
+  ["bdm", "application/vnd.syncml.dm+wbxml"],
+  ["bed", "application/vnd.realvnc.bed"],
+  ["bh2", "application/vnd.fujitsu.oasysprs"],
+  ["bin", ["application/octet-stream", "application/mac-binary", "application/macbinary", "application/x-macbinary", "application/x-binary"]],
+  ["bm", "image/bmp"],
+  ["bmi", "application/vnd.bmi"],
+  ["bmp", ["image/bmp", "image/x-windows-bmp"]],
+  ["boo", "application/book"],
+  ["book", "application/book"],
+  ["box", "application/vnd.previewsystems.box"],
+  ["boz", "application/x-bzip2"],
+  ["bsh", "application/x-bsh"],
+  ["btif", "image/prs.btif"],
+  ["bz", "application/x-bzip"],
+  ["bz2", "application/x-bzip2"],
+  ["c", ["text/plain", "text/x-c"]],
+  ["c++", "text/plain"],
+  ["c11amc", "application/vnd.cluetrust.cartomobile-config"],
+  ["c11amz", "application/vnd.cluetrust.cartomobile-config-pkg"],
+  ["c4g", "application/vnd.clonk.c4group"],
+  ["cab", "application/vnd.ms-cab-compressed"],
+  ["car", "application/vnd.curl.car"],
+  ["cat", ["application/vnd.ms-pkiseccat", "application/vnd.ms-pki.seccat"]],
+  ["cc", ["text/plain", "text/x-c"]],
+  ["ccad", "application/clariscad"],
+  ["cco", "application/x-cocoa"],
+  ["ccxml", "application/ccxml+xml,"],
+  ["cdbcmsg", "application/vnd.contact.cmsg"],
+  ["cdf", ["application/cdf", "application/x-cdf", "application/x-netcdf"]],
+  ["cdkey", "application/vnd.mediastation.cdkey"],
+  ["cdmia", "application/cdmi-capability"],
+  ["cdmic", "application/cdmi-container"],
+  ["cdmid", "application/cdmi-domain"],
+  ["cdmio", "application/cdmi-object"],
+  ["cdmiq", "application/cdmi-queue"],
+  ["cdx", "chemical/x-cdx"],
+  ["cdxml", "application/vnd.chemdraw+xml"],
+  ["cdy", "application/vnd.cinderella"],
+  ["cer", ["application/pkix-cert", "application/x-x509-ca-cert"]],
+  ["cgm", "image/cgm"],
+  ["cha", "application/x-chat"],
+  ["chat", "application/x-chat"],
+  ["chm", "application/vnd.ms-htmlhelp"],
+  ["chrt", "application/vnd.kde.kchart"],
+  ["cif", "chemical/x-cif"],
+  ["cii", "application/vnd.anser-web-certificate-issue-initiation"],
+  ["cil", "application/vnd.ms-artgalry"],
+  ["cla", "application/vnd.claymore"],
+  ["class", ["application/octet-stream", "application/java", "application/java-byte-code", "application/java-vm", "application/x-java-class"]],
+  ["clkk", "application/vnd.crick.clicker.keyboard"],
+  ["clkp", "application/vnd.crick.clicker.palette"],
+  ["clkt", "application/vnd.crick.clicker.template"],
+  ["clkw", "application/vnd.crick.clicker.wordbank"],
+  ["clkx", "application/vnd.crick.clicker"],
+  ["clp", "application/x-msclip"],
+  ["cmc", "application/vnd.cosmocaller"],
+  ["cmdf", "chemical/x-cmdf"],
+  ["cml", "chemical/x-cml"],
+  ["cmp", "application/vnd.yellowriver-custom-menu"],
+  ["cmx", "image/x-cmx"],
+  ["cod", ["image/cis-cod", "application/vnd.rim.cod"]],
+  ["com", ["application/octet-stream", "text/plain"]],
+  ["conf", "text/plain"],
+  ["cpio", "application/x-cpio"],
+  ["cpp", "text/x-c"],
+  ["cpt", ["application/mac-compactpro", "application/x-compactpro", "application/x-cpt"]],
+  ["crd", "application/x-mscardfile"],
+  ["crl", ["application/pkix-crl", "application/pkcs-crl"]],
+  ["crt", ["application/pkix-cert", "application/x-x509-user-cert", "application/x-x509-ca-cert"]],
+  ["cryptonote", "application/vnd.rig.cryptonote"],
+  ["csh", ["text/x-script.csh", "application/x-csh"]],
+  ["csml", "chemical/x-csml"],
+  ["csp", "application/vnd.commonspace"],
+  ["css", ["text/css", "application/x-pointplus"]],
+  ["csv", "text/csv"],
+  ["cu", "application/cu-seeme"],
+  ["curl", "text/vnd.curl"],
+  ["cww", "application/prs.cww"],
+  ["cxx", "text/plain"],
+  ["dae", "model/vnd.collada+xml"],
+  ["daf", "application/vnd.mobius.daf"],
+  ["davmount", "application/davmount+xml"],
+  ["dcr", "application/x-director"],
+  ["dcurl", "text/vnd.curl.dcurl"],
+  ["dd2", "application/vnd.oma.dd2+xml"],
+  ["ddd", "application/vnd.fujixerox.ddd"],
+  ["deb", "application/x-debian-package"],
+  ["deepv", "application/x-deepv"],
+  ["def", "text/plain"],
+  ["der", "application/x-x509-ca-cert"],
+  ["dfac", "application/vnd.dreamfactory"],
+  ["dif", "video/x-dv"],
+  ["dir", "application/x-director"],
+  ["dis", "application/vnd.mobius.dis"],
+  ["djvu", "image/vnd.djvu"],
+  ["dl", ["video/dl", "video/x-dl"]],
+  ["dll", "application/x-msdownload"],
+  ["dms", "application/octet-stream"],
+  ["dna", "application/vnd.dna"],
+  ["doc", "application/msword"],
+  ["docm", "application/vnd.ms-word.document.macroenabled.12"],
+  ["docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
+  ["dot", "application/msword"],
+  ["dotm", "application/vnd.ms-word.template.macroenabled.12"],
+  ["dotx", "application/vnd.openxmlformats-officedocument.wordprocessingml.template"],
+  ["dp", ["application/commonground", "application/vnd.osgi.dp"]],
+  ["dpg", "application/vnd.dpgraph"],
+  ["dra", "audio/vnd.dra"],
+  ["drw", "application/drafting"],
+  ["dsc", "text/prs.lines.tag"],
+  ["dssc", "application/dssc+der"],
+  ["dtb", "application/x-dtbook+xml"],
+  ["dtd", "application/xml-dtd"],
+  ["dts", "audio/vnd.dts"],
+  ["dtshd", "audio/vnd.dts.hd"],
+  ["dump", "application/octet-stream"],
+  ["dv", "video/x-dv"],
+  ["dvi", "application/x-dvi"],
+  ["dwf", ["model/vnd.dwf", "drawing/x-dwf"]],
+  ["dwg", ["application/acad", "image/vnd.dwg", "image/x-dwg"]],
+  ["dxf", ["application/dxf", "image/vnd.dwg", "image/vnd.dxf", "image/x-dwg"]],
+  ["dxp", "application/vnd.spotfire.dxp"],
+  ["dxr", "application/x-director"],
+  ["ecelp4800", "audio/vnd.nuera.ecelp4800"],
+  ["ecelp7470", "audio/vnd.nuera.ecelp7470"],
+  ["ecelp9600", "audio/vnd.nuera.ecelp9600"],
+  ["edm", "application/vnd.novadigm.edm"],
+  ["edx", "application/vnd.novadigm.edx"],
+  ["efif", "application/vnd.picsel"],
+  ["ei6", "application/vnd.pg.osasli"],
+  ["el", "text/x-script.elisp"],
+  ["elc", ["application/x-elc", "application/x-bytecode.elisp"]],
+  ["eml", "message/rfc822"],
+  ["emma", "application/emma+xml"],
+  ["env", "application/x-envoy"],
+  ["eol", "audio/vnd.digital-winds"],
+  ["eot", "application/vnd.ms-fontobject"],
+  ["eps", "application/postscript"],
+  ["epub", "application/epub+zip"],
+  ["es", ["application/ecmascript", "application/x-esrehber"]],
+  ["es3", "application/vnd.eszigno3+xml"],
+  ["esf", "application/vnd.epson.esf"],
+  ["etx", "text/x-setext"],
+  ["evy", ["application/envoy", "application/x-envoy"]],
+  ["exe", ["application/octet-stream", "application/x-msdownload"]],
+  ["exi", "application/exi"],
+  ["ext", "application/vnd.novadigm.ext"],
+  ["ez2", "application/vnd.ezpix-album"],
+  ["ez3", "application/vnd.ezpix-package"],
+  ["f", ["text/plain", "text/x-fortran"]],
+  ["f4v", "video/x-f4v"],
+  ["f77", "text/x-fortran"],
+  ["f90", ["text/plain", "text/x-fortran"]],
+  ["fbs", "image/vnd.fastbidsheet"],
+  ["fcs", "application/vnd.isac.fcs"],
+  ["fdf", "application/vnd.fdf"],
+  ["fe_launch", "application/vnd.denovo.fcselayout-link"],
+  ["fg5", "application/vnd.fujitsu.oasysgp"],
+  ["fh", "image/x-freehand"],
+  ["fif", ["application/fractals", "image/fif"]],
+  ["fig", "application/x-xfig"],
+  ["fli", ["video/fli", "video/x-fli"]],
+  ["flo", ["image/florian", "application/vnd.micrografx.flo"]],
+  ["flr", "x-world/x-vrml"],
+  ["flv", "video/x-flv"],
+  ["flw", "application/vnd.kde.kivio"],
+  ["flx", "text/vnd.fmi.flexstor"],
+  ["fly", "text/vnd.fly"],
+  ["fm", "application/vnd.framemaker"],
+  ["fmf", "video/x-atomic3d-feature"],
+  ["fnc", "application/vnd.frogans.fnc"],
+  ["for", ["text/plain", "text/x-fortran"]],
+  ["fpx", ["image/vnd.fpx", "image/vnd.net-fpx"]],
+  ["frl", "application/freeloader"],
+  ["fsc", "application/vnd.fsc.weblaunch"],
+  ["fst", "image/vnd.fst"],
+  ["ftc", "application/vnd.fluxtime.clip"],
+  ["fti", "application/vnd.anser-web-funds-transfer-initiation"],
+  ["funk", "audio/make"],
+  ["fvt", "video/vnd.fvt"],
+  ["fxp", "application/vnd.adobe.fxp"],
+  ["fzs", "application/vnd.fuzzysheet"],
+  ["g", "text/plain"],
+  ["g2w", "application/vnd.geoplan"],
+  ["g3", "image/g3fax"],
+  ["g3w", "application/vnd.geospace"],
+  ["gac", "application/vnd.groove-account"],
+  ["gdl", "model/vnd.gdl"],
+  ["geo", "application/vnd.dynageo"],
+  ["geojson", "application/geo+json"],
+  ["gex", "application/vnd.geometry-explorer"],
+  ["ggb", "application/vnd.geogebra.file"],
+  ["ggt", "application/vnd.geogebra.tool"],
+  ["ghf", "application/vnd.groove-help"],
+  ["gif", "image/gif"],
+  ["gim", "application/vnd.groove-identity-message"],
+  ["gl", ["video/gl", "video/x-gl"]],
+  ["gmx", "application/vnd.gmx"],
+  ["gnumeric", "application/x-gnumeric"],
+  ["gph", "application/vnd.flographit"],
+  ["gqf", "application/vnd.grafeq"],
+  ["gram", "application/srgs"],
+  ["grv", "application/vnd.groove-injector"],
+  ["grxml", "application/srgs+xml"],
+  ["gsd", "audio/x-gsm"],
+  ["gsf", "application/x-font-ghostscript"],
+  ["gsm", "audio/x-gsm"],
+  ["gsp", "application/x-gsp"],
+  ["gss", "application/x-gss"],
+  ["gtar", "application/x-gtar"],
+  ["gtm", "application/vnd.groove-tool-message"],
+  ["gtw", "model/vnd.gtw"],
+  ["gv", "text/vnd.graphviz"],
+  ["gxt", "application/vnd.geonext"],
+  ["gz", ["application/x-gzip", "application/x-compressed"]],
+  ["gzip", ["multipart/x-gzip", "application/x-gzip"]],
+  ["h", ["text/plain", "text/x-h"]],
+  ["h261", "video/h261"],
+  ["h263", "video/h263"],
+  ["h264", "video/h264"],
+  ["hal", "application/vnd.hal+xml"],
+  ["hbci", "application/vnd.hbci"],
+  ["hdf", "application/x-hdf"],
+  ["help", "application/x-helpfile"],
+  ["hgl", "application/vnd.hp-hpgl"],
+  ["hh", ["text/plain", "text/x-h"]],
+  ["hlb", "text/x-script"],
+  ["hlp", ["application/winhlp", "application/hlp", "application/x-helpfile", "application/x-winhelp"]],
+  ["hpg", "application/vnd.hp-hpgl"],
+  ["hpgl", "application/vnd.hp-hpgl"],
+  ["hpid", "application/vnd.hp-hpid"],
+  ["hps", "application/vnd.hp-hps"],
+  [
+    "hqx",
+    [
+      "application/mac-binhex40",
+      "application/binhex",
+      "application/binhex4",
+      "application/mac-binhex",
+      "application/x-binhex40",
+      "application/x-mac-binhex40"
+    ]
+  ],
+  ["hta", "application/hta"],
+  ["htc", "text/x-component"],
+  ["htke", "application/vnd.kenameaapp"],
+  ["htm", "text/html"],
+  ["html", "text/html"],
+  ["htmls", "text/html"],
+  ["htt", "text/webviewhtml"],
+  ["htx", "text/html"],
+  ["hvd", "application/vnd.yamaha.hv-dic"],
+  ["hvp", "application/vnd.yamaha.hv-voice"],
+  ["hvs", "application/vnd.yamaha.hv-script"],
+  ["i2g", "application/vnd.intergeo"],
+  ["icc", "application/vnd.iccprofile"],
+  ["ice", "x-conference/x-cooltalk"],
+  ["ico", "image/x-icon"],
+  ["ics", "text/calendar"],
+  ["idc", "text/plain"],
+  ["ief", "image/ief"],
+  ["iefs", "image/ief"],
+  ["ifm", "application/vnd.shana.informed.formdata"],
+  ["iges", ["application/iges", "model/iges"]],
+  ["igl", "application/vnd.igloader"],
+  ["igm", "application/vnd.insors.igm"],
+  ["igs", ["application/iges", "model/iges"]],
+  ["igx", "application/vnd.micrografx.igx"],
+  ["iif", "application/vnd.shana.informed.interchange"],
+  ["iii", "application/x-iphone"],
+  ["ima", "application/x-ima"],
+  ["imap", "application/x-httpd-imap"],
+  ["imp", "application/vnd.accpac.simply.imp"],
+  ["ims", "application/vnd.ms-ims"],
+  ["inf", "application/inf"],
+  ["ins", ["application/x-internet-signup", "application/x-internett-signup"]],
+  ["ip", "application/x-ip2"],
+  ["ipfix", "application/ipfix"],
+  ["ipk", "application/vnd.shana.informed.package"],
+  ["irm", "application/vnd.ibm.rights-management"],
+  ["irp", "application/vnd.irepository.package+xml"],
+  ["isp", "application/x-internet-signup"],
+  ["isu", "video/x-isvideo"],
+  ["it", "audio/it"],
+  ["itp", "application/vnd.shana.informed.formtemplate"],
+  ["iv", "application/x-inventor"],
+  ["ivp", "application/vnd.immervision-ivp"],
+  ["ivr", "i-world/i-vrml"],
+  ["ivu", "application/vnd.immervision-ivu"],
+  ["ivy", "application/x-livescreen"],
+  ["jad", "text/vnd.sun.j2me.app-descriptor"],
+  ["jam", ["application/vnd.jam", "audio/x-jam"]],
+  ["jar", "application/java-archive"],
+  ["jav", ["text/plain", "text/x-java-source"]],
+  ["java", ["text/plain", "text/x-java-source,java", "text/x-java-source"]],
+  ["jcm", "application/x-java-commerce"],
+  ["jfif", ["image/pipeg", "image/jpeg", "image/pjpeg"]],
+  ["jfif-tbnl", "image/jpeg"],
+  ["jisp", "application/vnd.jisp"],
+  ["jlt", "application/vnd.hp-jlyt"],
+  ["jnlp", "application/x-java-jnlp-file"],
+  ["joda", "application/vnd.joost.joda-archive"],
+  ["jpe", ["image/jpeg", "image/pjpeg"]],
+  ["jpeg", ["image/jpeg", "image/pjpeg"]],
+  ["jpg", ["image/jpeg", "image/pjpeg"]],
+  ["jpgv", "video/jpeg"],
+  ["jpm", "video/jpm"],
+  ["jps", "image/x-jps"],
+  ["js", ["application/javascript", "application/ecmascript", "text/javascript", "text/ecmascript", "application/x-javascript"]],
+  ["json", "application/json"],
+  ["jut", "image/jutvision"],
+  ["kar", ["audio/midi", "music/x-karaoke"]],
+  ["karbon", "application/vnd.kde.karbon"],
+  ["kfo", "application/vnd.kde.kformula"],
+  ["kia", "application/vnd.kidspiration"],
+  ["kml", "application/vnd.google-earth.kml+xml"],
+  ["kmz", "application/vnd.google-earth.kmz"],
+  ["kne", "application/vnd.kinar"],
+  ["kon", "application/vnd.kde.kontour"],
+  ["kpr", "application/vnd.kde.kpresenter"],
+  ["ksh", ["application/x-ksh", "text/x-script.ksh"]],
+  ["ksp", "application/vnd.kde.kspread"],
+  ["ktx", "image/ktx"],
+  ["ktz", "application/vnd.kahootz"],
+  ["kwd", "application/vnd.kde.kword"],
+  ["la", ["audio/nspaudio", "audio/x-nspaudio"]],
+  ["lam", "audio/x-liveaudio"],
+  ["lasxml", "application/vnd.las.las+xml"],
+  ["latex", "application/x-latex"],
+  ["lbd", "application/vnd.llamagraphics.life-balance.desktop"],
+  ["lbe", "application/vnd.llamagraphics.life-balance.exchange+xml"],
+  ["les", "application/vnd.hhe.lesson-player"],
+  ["lha", ["application/octet-stream", "application/lha", "application/x-lha"]],
+  ["lhx", "application/octet-stream"],
+  ["link66", "application/vnd.route66.link66+xml"],
+  ["list", "text/plain"],
+  ["lma", ["audio/nspaudio", "audio/x-nspaudio"]],
+  ["log", "text/plain"],
+  ["lrm", "application/vnd.ms-lrm"],
+  ["lsf", "video/x-la-asf"],
+  ["lsp", ["application/x-lisp", "text/x-script.lisp"]],
+  ["lst", "text/plain"],
+  ["lsx", ["video/x-la-asf", "text/x-la-asf"]],
+  ["ltf", "application/vnd.frogans.ltf"],
+  ["ltx", "application/x-latex"],
+  ["lvp", "audio/vnd.lucent.voice"],
+  ["lwp", "application/vnd.lotus-wordpro"],
+  ["lzh", ["application/octet-stream", "application/x-lzh"]],
+  ["lzx", ["application/lzx", "application/octet-stream", "application/x-lzx"]],
+  ["m", ["text/plain", "text/x-m"]],
+  ["m13", "application/x-msmediaview"],
+  ["m14", "application/x-msmediaview"],
+  ["m1v", "video/mpeg"],
+  ["m21", "application/mp21"],
+  ["m2a", "audio/mpeg"],
+  ["m2v", "video/mpeg"],
+  ["m3u", ["audio/x-mpegurl", "audio/x-mpequrl"]],
+  ["m3u8", "application/vnd.apple.mpegurl"],
+  ["m4v", "video/x-m4v"],
+  ["ma", "application/mathematica"],
+  ["mads", "application/mads+xml"],
+  ["mag", "application/vnd.ecowin.chart"],
+  ["man", "application/x-troff-man"],
+  ["map", "application/x-navimap"],
+  ["mar", "text/plain"],
+  ["mathml", "application/mathml+xml"],
+  ["mbd", "application/mbedlet"],
+  ["mbk", "application/vnd.mobius.mbk"],
+  ["mbox", "application/mbox"],
+  ["mc$", "application/x-magic-cap-package-1.0"],
+  ["mc1", "application/vnd.medcalcdata"],
+  ["mcd", ["application/mcad", "application/vnd.mcd", "application/x-mathcad"]],
+  ["mcf", ["image/vasa", "text/mcf"]],
+  ["mcp", "application/netmc"],
+  ["mcurl", "text/vnd.curl.mcurl"],
+  ["mdb", "application/x-msaccess"],
+  ["mdi", "image/vnd.ms-modi"],
+  ["me", "application/x-troff-me"],
+  ["meta4", "application/metalink4+xml"],
+  ["mets", "application/mets+xml"],
+  ["mfm", "application/vnd.mfmp"],
+  ["mgp", "application/vnd.osgeo.mapguide.package"],
+  ["mgz", "application/vnd.proteus.magazine"],
+  ["mht", "message/rfc822"],
+  ["mhtml", "message/rfc822"],
+  ["mid", ["audio/mid", "audio/midi", "music/crescendo", "x-music/x-midi", "audio/x-midi", "application/x-midi", "audio/x-mid"]],
+  ["midi", ["audio/midi", "music/crescendo", "x-music/x-midi", "audio/x-midi", "application/x-midi", "audio/x-mid"]],
+  ["mif", ["application/vnd.mif", "application/x-mif", "application/x-frame"]],
+  ["mime", ["message/rfc822", "www/mime"]],
+  ["mj2", "video/mj2"],
+  ["mjf", "audio/x-vnd.audioexplosion.mjuicemediafile"],
+  ["mjpg", "video/x-motion-jpeg"],
+  ["mlp", "application/vnd.dolby.mlp"],
+  ["mm", ["application/base64", "application/x-meme"]],
+  ["mmd", "application/vnd.chipnuts.karaoke-mmd"],
+  ["mme", "application/base64"],
+  ["mmf", "application/vnd.smaf"],
+  ["mmr", "image/vnd.fujixerox.edmics-mmr"],
+  ["mny", "application/x-msmoney"],
+  ["mod", ["audio/mod", "audio/x-mod"]],
+  ["mods", "application/mods+xml"],
+  ["moov", "video/quicktime"],
+  ["mov", "video/quicktime"],
+  ["movie", "video/x-sgi-movie"],
+  ["mp2", ["video/mpeg", "audio/mpeg", "video/x-mpeg", "audio/x-mpeg", "video/x-mpeq2a"]],
+  ["mp3", ["audio/mpeg", "audio/mpeg3", "video/mpeg", "audio/x-mpeg-3", "video/x-mpeg"]],
+  ["mp4", ["video/mp4", "application/mp4"]],
+  ["mp4a", "audio/mp4"],
+  ["mpa", ["video/mpeg", "audio/mpeg"]],
+  ["mpc", ["application/vnd.mophun.certificate", "application/x-project"]],
+  ["mpe", "video/mpeg"],
+  ["mpeg", "video/mpeg"],
+  ["mpg", ["video/mpeg", "audio/mpeg"]],
+  ["mpga", "audio/mpeg"],
+  ["mpkg", "application/vnd.apple.installer+xml"],
+  ["mpm", "application/vnd.blueice.multipass"],
+  ["mpn", "application/vnd.mophun.application"],
+  ["mpp", "application/vnd.ms-project"],
+  ["mpt", "application/x-project"],
+  ["mpv", "application/x-project"],
+  ["mpv2", "video/mpeg"],
+  ["mpx", "application/x-project"],
+  ["mpy", "application/vnd.ibm.minipay"],
+  ["mqy", "application/vnd.mobius.mqy"],
+  ["mrc", "application/marc"],
+  ["mrcx", "application/marcxml+xml"],
+  ["ms", "application/x-troff-ms"],
+  ["mscml", "application/mediaservercontrol+xml"],
+  ["mseq", "application/vnd.mseq"],
+  ["msf", "application/vnd.epson.msf"],
+  ["msg", "application/vnd.ms-outlook"],
+  ["msh", "model/mesh"],
+  ["msl", "application/vnd.mobius.msl"],
+  ["msty", "application/vnd.muvee.style"],
+  ["mts", "model/vnd.mts"],
+  ["mus", "application/vnd.musician"],
+  ["musicxml", "application/vnd.recordare.musicxml+xml"],
+  ["mv", "video/x-sgi-movie"],
+  ["mvb", "application/x-msmediaview"],
+  ["mwf", "application/vnd.mfer"],
+  ["mxf", "application/mxf"],
+  ["mxl", "application/vnd.recordare.musicxml"],
+  ["mxml", "application/xv+xml"],
+  ["mxs", "application/vnd.triscape.mxs"],
+  ["mxu", "video/vnd.mpegurl"],
+  ["my", "audio/make"],
+  ["mzz", "application/x-vnd.audioexplosion.mzz"],
+  ["n-gage", "application/vnd.nokia.n-gage.symbian.install"],
+  ["n3", "text/n3"],
+  ["nap", "image/naplps"],
+  ["naplps", "image/naplps"],
+  ["nbp", "application/vnd.wolfram.player"],
+  ["nc", "application/x-netcdf"],
+  ["ncm", "application/vnd.nokia.configuration-message"],
+  ["ncx", "application/x-dtbncx+xml"],
+  ["ngdat", "application/vnd.nokia.n-gage.data"],
+  ["nif", "image/x-niff"],
+  ["niff", "image/x-niff"],
+  ["nix", "application/x-mix-transfer"],
+  ["nlu", "application/vnd.neurolanguage.nlu"],
+  ["nml", "application/vnd.enliven"],
+  ["nnd", "application/vnd.noblenet-directory"],
+  ["nns", "application/vnd.noblenet-sealer"],
+  ["nnw", "application/vnd.noblenet-web"],
+  ["npx", "image/vnd.net-fpx"],
+  ["nsc", "application/x-conference"],
+  ["nsf", "application/vnd.lotus-notes"],
+  ["nvd", "application/x-navidoc"],
+  ["nws", "message/rfc822"],
+  ["o", "application/octet-stream"],
+  ["oa2", "application/vnd.fujitsu.oasys2"],
+  ["oa3", "application/vnd.fujitsu.oasys3"],
+  ["oas", "application/vnd.fujitsu.oasys"],
+  ["obd", "application/x-msbinder"],
+  ["oda", "application/oda"],
+  ["odb", "application/vnd.oasis.opendocument.database"],
+  ["odc", "application/vnd.oasis.opendocument.chart"],
+  ["odf", "application/vnd.oasis.opendocument.formula"],
+  ["odft", "application/vnd.oasis.opendocument.formula-template"],
+  ["odg", "application/vnd.oasis.opendocument.graphics"],
+  ["odi", "application/vnd.oasis.opendocument.image"],
+  ["odm", "application/vnd.oasis.opendocument.text-master"],
+  ["odp", "application/vnd.oasis.opendocument.presentation"],
+  ["ods", "application/vnd.oasis.opendocument.spreadsheet"],
+  ["odt", "application/vnd.oasis.opendocument.text"],
+  ["oga", "audio/ogg"],
+  ["ogv", "video/ogg"],
+  ["ogx", "application/ogg"],
+  ["omc", "application/x-omc"],
+  ["omcd", "application/x-omcdatamaker"],
+  ["omcr", "application/x-omcregerator"],
+  ["onetoc", "application/onenote"],
+  ["opf", "application/oebps-package+xml"],
+  ["org", "application/vnd.lotus-organizer"],
+  ["osf", "application/vnd.yamaha.openscoreformat"],
+  ["osfpvg", "application/vnd.yamaha.openscoreformat.osfpvg+xml"],
+  ["otc", "application/vnd.oasis.opendocument.chart-template"],
+  ["otf", "application/x-font-otf"],
+  ["otg", "application/vnd.oasis.opendocument.graphics-template"],
+  ["oth", "application/vnd.oasis.opendocument.text-web"],
+  ["oti", "application/vnd.oasis.opendocument.image-template"],
+  ["otp", "application/vnd.oasis.opendocument.presentation-template"],
+  ["ots", "application/vnd.oasis.opendocument.spreadsheet-template"],
+  ["ott", "application/vnd.oasis.opendocument.text-template"],
+  ["oxt", "application/vnd.openofficeorg.extension"],
+  ["p", "text/x-pascal"],
+  ["p10", ["application/pkcs10", "application/x-pkcs10"]],
+  ["p12", ["application/pkcs-12", "application/x-pkcs12"]],
+  ["p7a", "application/x-pkcs7-signature"],
+  ["p7b", "application/x-pkcs7-certificates"],
+  ["p7c", ["application/pkcs7-mime", "application/x-pkcs7-mime"]],
+  ["p7m", ["application/pkcs7-mime", "application/x-pkcs7-mime"]],
+  ["p7r", "application/x-pkcs7-certreqresp"],
+  ["p7s", ["application/pkcs7-signature", "application/x-pkcs7-signature"]],
+  ["p8", "application/pkcs8"],
+  ["par", "text/plain-bas"],
+  ["part", "application/pro_eng"],
+  ["pas", "text/pascal"],
+  ["paw", "application/vnd.pawaafile"],
+  ["pbd", "application/vnd.powerbuilder6"],
+  ["pbm", "image/x-portable-bitmap"],
+  ["pcf", "application/x-font-pcf"],
+  ["pcl", ["application/vnd.hp-pcl", "application/x-pcl"]],
+  ["pclxl", "application/vnd.hp-pclxl"],
+  ["pct", "image/x-pict"],
+  ["pcurl", "application/vnd.curl.pcurl"],
+  ["pcx", "image/x-pcx"],
+  ["pdb", ["application/vnd.palm", "chemical/x-pdb"]],
+  ["pdf", "application/pdf"],
+  ["pfa", "application/x-font-type1"],
+  ["pfr", "application/font-tdpfr"],
+  ["pfunk", ["audio/make", "audio/make.my.funk"]],
+  ["pfx", "application/x-pkcs12"],
+  ["pgm", ["image/x-portable-graymap", "image/x-portable-greymap"]],
+  ["pgn", "application/x-chess-pgn"],
+  ["pgp", "application/pgp-signature"],
+  ["pic", ["image/pict", "image/x-pict"]],
+  ["pict", "image/pict"],
+  ["pkg", "application/x-newton-compatible-pkg"],
+  ["pki", "application/pkixcmp"],
+  ["pkipath", "application/pkix-pkipath"],
+  ["pko", ["application/ynd.ms-pkipko", "application/vnd.ms-pki.pko"]],
+  ["pl", ["text/plain", "text/x-script.perl"]],
+  ["plb", "application/vnd.3gpp.pic-bw-large"],
+  ["plc", "application/vnd.mobius.plc"],
+  ["plf", "application/vnd.pocketlearn"],
+  ["pls", "application/pls+xml"],
+  ["plx", "application/x-pixclscript"],
+  ["pm", ["text/x-script.perl-module", "image/x-xpixmap"]],
+  ["pm4", "application/x-pagemaker"],
+  ["pm5", "application/x-pagemaker"],
+  ["pma", "application/x-perfmon"],
+  ["pmc", "application/x-perfmon"],
+  ["pml", ["application/vnd.ctc-posml", "application/x-perfmon"]],
+  ["pmr", "application/x-perfmon"],
+  ["pmw", "application/x-perfmon"],
+  ["png", "image/png"],
+  ["pnm", ["application/x-portable-anymap", "image/x-portable-anymap"]],
+  ["portpkg", "application/vnd.macports.portpkg"],
+  ["pot", ["application/vnd.ms-powerpoint", "application/mspowerpoint"]],
+  ["potm", "application/vnd.ms-powerpoint.template.macroenabled.12"],
+  ["potx", "application/vnd.openxmlformats-officedocument.presentationml.template"],
+  ["pov", "model/x-pov"],
+  ["ppa", "application/vnd.ms-powerpoint"],
+  ["ppam", "application/vnd.ms-powerpoint.addin.macroenabled.12"],
+  ["ppd", "application/vnd.cups-ppd"],
+  ["ppm", "image/x-portable-pixmap"],
+  ["pps", ["application/vnd.ms-powerpoint", "application/mspowerpoint"]],
+  ["ppsm", "application/vnd.ms-powerpoint.slideshow.macroenabled.12"],
+  ["ppsx", "application/vnd.openxmlformats-officedocument.presentationml.slideshow"],
+  ["ppt", ["application/vnd.ms-powerpoint", "application/mspowerpoint", "application/powerpoint", "application/x-mspowerpoint"]],
+  ["pptm", "application/vnd.ms-powerpoint.presentation.macroenabled.12"],
+  ["pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation"],
+  ["ppz", "application/mspowerpoint"],
+  ["prc", "application/x-mobipocket-ebook"],
+  ["pre", ["application/vnd.lotus-freelance", "application/x-freelance"]],
+  ["prf", "application/pics-rules"],
+  ["prt", "application/pro_eng"],
+  ["ps", "application/postscript"],
+  ["psb", "application/vnd.3gpp.pic-bw-small"],
+  ["psd", ["application/octet-stream", "image/vnd.adobe.photoshop"]],
+  ["psf", "application/x-font-linux-psf"],
+  ["pskcxml", "application/pskc+xml"],
+  ["ptid", "application/vnd.pvi.ptid1"],
+  ["pub", "application/x-mspublisher"],
+  ["pvb", "application/vnd.3gpp.pic-bw-var"],
+  ["pvu", "paleovu/x-pv"],
+  ["pwn", "application/vnd.3m.post-it-notes"],
+  ["pwz", "application/vnd.ms-powerpoint"],
+  ["py", "text/x-script.phyton"],
+  ["pya", "audio/vnd.ms-playready.media.pya"],
+  ["pyc", "application/x-bytecode.python"],
+  ["pyv", "video/vnd.ms-playready.media.pyv"],
+  ["qam", "application/vnd.epson.quickanime"],
+  ["qbo", "application/vnd.intu.qbo"],
+  ["qcp", "audio/vnd.qcelp"],
+  ["qd3", "x-world/x-3dmf"],
+  ["qd3d", "x-world/x-3dmf"],
+  ["qfx", "application/vnd.intu.qfx"],
+  ["qif", "image/x-quicktime"],
+  ["qps", "application/vnd.publishare-delta-tree"],
+  ["qt", "video/quicktime"],
+  ["qtc", "video/x-qtc"],
+  ["qti", "image/x-quicktime"],
+  ["qtif", "image/x-quicktime"],
+  ["qxd", "application/vnd.quark.quarkxpress"],
+  ["ra", ["audio/x-realaudio", "audio/x-pn-realaudio", "audio/x-pn-realaudio-plugin"]],
+  ["ram", "audio/x-pn-realaudio"],
+  ["rar", "application/x-rar-compressed"],
+  ["ras", ["image/cmu-raster", "application/x-cmu-raster", "image/x-cmu-raster"]],
+  ["rast", "image/cmu-raster"],
+  ["rcprofile", "application/vnd.ipunplugged.rcprofile"],
+  ["rdf", "application/rdf+xml"],
+  ["rdz", "application/vnd.data-vision.rdz"],
+  ["rep", "application/vnd.businessobjects"],
+  ["res", "application/x-dtbresource+xml"],
+  ["rexx", "text/x-script.rexx"],
+  ["rf", "image/vnd.rn-realflash"],
+  ["rgb", "image/x-rgb"],
+  ["rif", "application/reginfo+xml"],
+  ["rip", "audio/vnd.rip"],
+  ["rl", "application/resource-lists+xml"],
+  ["rlc", "image/vnd.fujixerox.edmics-rlc"],
+  ["rld", "application/resource-lists-diff+xml"],
+  ["rm", ["application/vnd.rn-realmedia", "audio/x-pn-realaudio"]],
+  ["rmi", "audio/mid"],
+  ["rmm", "audio/x-pn-realaudio"],
+  ["rmp", ["audio/x-pn-realaudio-plugin", "audio/x-pn-realaudio"]],
+  ["rms", "application/vnd.jcp.javame.midlet-rms"],
+  ["rnc", "application/relax-ng-compact-syntax"],
+  ["rng", ["application/ringing-tones", "application/vnd.nokia.ringing-tone"]],
+  ["rnx", "application/vnd.rn-realplayer"],
+  ["roff", "application/x-troff"],
+  ["rp", "image/vnd.rn-realpix"],
+  ["rp9", "application/vnd.cloanto.rp9"],
+  ["rpm", "audio/x-pn-realaudio-plugin"],
+  ["rpss", "application/vnd.nokia.radio-presets"],
+  ["rpst", "application/vnd.nokia.radio-preset"],
+  ["rq", "application/sparql-query"],
+  ["rs", "application/rls-services+xml"],
+  ["rsd", "application/rsd+xml"],
+  ["rt", ["text/richtext", "text/vnd.rn-realtext"]],
+  ["rtf", ["application/rtf", "text/richtext", "application/x-rtf"]],
+  ["rtx", ["text/richtext", "application/rtf"]],
+  ["rv", "video/vnd.rn-realvideo"],
+  ["s", "text/x-asm"],
+  ["s3m", "audio/s3m"],
+  ["saf", "application/vnd.yamaha.smaf-audio"],
+  ["saveme", "application/octet-stream"],
+  ["sbk", "application/x-tbook"],
+  ["sbml", "application/sbml+xml"],
+  ["sc", "application/vnd.ibm.secure-container"],
+  ["scd", "application/x-msschedule"],
+  ["scm", ["application/vnd.lotus-screencam", "video/x-scm", "text/x-script.guile", "application/x-lotusscreencam", "text/x-script.scheme"]],
+  ["scq", "application/scvp-cv-request"],
+  ["scs", "application/scvp-cv-response"],
+  ["sct", "text/scriptlet"],
+  ["scurl", "text/vnd.curl.scurl"],
+  ["sda", "application/vnd.stardivision.draw"],
+  ["sdc", "application/vnd.stardivision.calc"],
+  ["sdd", "application/vnd.stardivision.impress"],
+  ["sdkm", "application/vnd.solent.sdkm+xml"],
+  ["sdml", "text/plain"],
+  ["sdp", ["application/sdp", "application/x-sdp"]],
+  ["sdr", "application/sounder"],
+  ["sdw", "application/vnd.stardivision.writer"],
+  ["sea", ["application/sea", "application/x-sea"]],
+  ["see", "application/vnd.seemail"],
+  ["seed", "application/vnd.fdsn.seed"],
+  ["sema", "application/vnd.sema"],
+  ["semd", "application/vnd.semd"],
+  ["semf", "application/vnd.semf"],
+  ["ser", "application/java-serialized-object"],
+  ["set", "application/set"],
+  ["setpay", "application/set-payment-initiation"],
+  ["setreg", "application/set-registration-initiation"],
+  ["sfd-hdstx", "application/vnd.hydrostatix.sof-data"],
+  ["sfs", "application/vnd.spotfire.sfs"],
+  ["sgl", "application/vnd.stardivision.writer-global"],
+  ["sgm", ["text/sgml", "text/x-sgml"]],
+  ["sgml", ["text/sgml", "text/x-sgml"]],
+  ["sh", ["application/x-shar", "application/x-bsh", "application/x-sh", "text/x-script.sh"]],
+  ["shar", ["application/x-bsh", "application/x-shar"]],
+  ["shf", "application/shf+xml"],
+  ["shtml", ["text/html", "text/x-server-parsed-html"]],
+  ["sid", "audio/x-psid"],
+  ["sis", "application/vnd.symbian.install"],
+  ["sit", ["application/x-stuffit", "application/x-sit"]],
+  ["sitx", "application/x-stuffitx"],
+  ["skd", "application/x-koan"],
+  ["skm", "application/x-koan"],
+  ["skp", ["application/vnd.koan", "application/x-koan"]],
+  ["skt", "application/x-koan"],
+  ["sl", "application/x-seelogo"],
+  ["sldm", "application/vnd.ms-powerpoint.slide.macroenabled.12"],
+  ["sldx", "application/vnd.openxmlformats-officedocument.presentationml.slide"],
+  ["slt", "application/vnd.epson.salt"],
+  ["sm", "application/vnd.stepmania.stepchart"],
+  ["smf", "application/vnd.stardivision.math"],
+  ["smi", ["application/smil", "application/smil+xml"]],
+  ["smil", "application/smil"],
+  ["snd", ["audio/basic", "audio/x-adpcm"]],
+  ["snf", "application/x-font-snf"],
+  ["sol", "application/solids"],
+  ["spc", ["text/x-speech", "application/x-pkcs7-certificates"]],
+  ["spf", "application/vnd.yamaha.smaf-phrase"],
+  ["spl", ["application/futuresplash", "application/x-futuresplash"]],
+  ["spot", "text/vnd.in3d.spot"],
+  ["spp", "application/scvp-vp-response"],
+  ["spq", "application/scvp-vp-request"],
+  ["spr", "application/x-sprite"],
+  ["sprite", "application/x-sprite"],
+  ["src", "application/x-wais-source"],
+  ["sru", "application/sru+xml"],
+  ["srx", "application/sparql-results+xml"],
+  ["sse", "application/vnd.kodak-descriptor"],
+  ["ssf", "application/vnd.epson.ssf"],
+  ["ssi", "text/x-server-parsed-html"],
+  ["ssm", "application/streamingmedia"],
+  ["ssml", "application/ssml+xml"],
+  ["sst", ["application/vnd.ms-pkicertstore", "application/vnd.ms-pki.certstore"]],
+  ["st", "application/vnd.sailingtracker.track"],
+  ["stc", "application/vnd.sun.xml.calc.template"],
+  ["std", "application/vnd.sun.xml.draw.template"],
+  ["step", "application/step"],
+  ["stf", "application/vnd.wt.stf"],
+  ["sti", "application/vnd.sun.xml.impress.template"],
+  ["stk", "application/hyperstudio"],
+  ["stl", ["application/vnd.ms-pkistl", "application/sla", "application/vnd.ms-pki.stl", "application/x-navistyle"]],
+  ["stm", "text/html"],
+  ["stp", "application/step"],
+  ["str", "application/vnd.pg.format"],
+  ["stw", "application/vnd.sun.xml.writer.template"],
+  ["sub", "image/vnd.dvb.subtitle"],
+  ["sus", "application/vnd.sus-calendar"],
+  ["sv4cpio", "application/x-sv4cpio"],
+  ["sv4crc", "application/x-sv4crc"],
+  ["svc", "application/vnd.dvb.service"],
+  ["svd", "application/vnd.svd"],
+  ["svf", ["image/vnd.dwg", "image/x-dwg"]],
+  ["svg", "image/svg+xml"],
+  ["svr", ["x-world/x-svr", "application/x-world"]],
+  ["swf", "application/x-shockwave-flash"],
+  ["swi", "application/vnd.aristanetworks.swi"],
+  ["sxc", "application/vnd.sun.xml.calc"],
+  ["sxd", "application/vnd.sun.xml.draw"],
+  ["sxg", "application/vnd.sun.xml.writer.global"],
+  ["sxi", "application/vnd.sun.xml.impress"],
+  ["sxm", "application/vnd.sun.xml.math"],
+  ["sxw", "application/vnd.sun.xml.writer"],
+  ["t", ["text/troff", "application/x-troff"]],
+  ["talk", "text/x-speech"],
+  ["tao", "application/vnd.tao.intent-module-archive"],
+  ["tar", "application/x-tar"],
+  ["tbk", ["application/toolbook", "application/x-tbook"]],
+  ["tcap", "application/vnd.3gpp2.tcap"],
+  ["tcl", ["text/x-script.tcl", "application/x-tcl"]],
+  ["tcsh", "text/x-script.tcsh"],
+  ["teacher", "application/vnd.smart.teacher"],
+  ["tei", "application/tei+xml"],
+  ["tex", "application/x-tex"],
+  ["texi", "application/x-texinfo"],
+  ["texinfo", "application/x-texinfo"],
+  ["text", ["application/plain", "text/plain"]],
+  ["tfi", "application/thraud+xml"],
+  ["tfm", "application/x-tex-tfm"],
+  ["tgz", ["application/gnutar", "application/x-compressed"]],
+  ["thmx", "application/vnd.ms-officetheme"],
+  ["tif", ["image/tiff", "image/x-tiff"]],
+  ["tiff", ["image/tiff", "image/x-tiff"]],
+  ["tmo", "application/vnd.tmobile-livetv"],
+  ["torrent", "application/x-bittorrent"],
+  ["tpl", "application/vnd.groove-tool-template"],
+  ["tpt", "application/vnd.trid.tpt"],
+  ["tr", "application/x-troff"],
+  ["tra", "application/vnd.trueapp"],
+  ["trm", "application/x-msterminal"],
+  ["tsd", "application/timestamped-data"],
+  ["tsi", "audio/tsp-audio"],
+  ["tsp", ["application/dsptype", "audio/tsplayer"]],
+  ["tsv", "text/tab-separated-values"],
+  ["ttf", "application/x-font-ttf"],
+  ["ttl", "text/turtle"],
+  ["turbot", "image/florian"],
+  ["twd", "application/vnd.simtech-mindmapper"],
+  ["txd", "application/vnd.genomatix.tuxedo"],
+  ["txf", "application/vnd.mobius.txf"],
+  ["txt", "text/plain"],
+  ["ufd", "application/vnd.ufdl"],
+  ["uil", "text/x-uil"],
+  ["uls", "text/iuls"],
+  ["umj", "application/vnd.umajin"],
+  ["uni", "text/uri-list"],
+  ["unis", "text/uri-list"],
+  ["unityweb", "application/vnd.unity"],
+  ["unv", "application/i-deas"],
+  ["uoml", "application/vnd.uoml+xml"],
+  ["uri", "text/uri-list"],
+  ["uris", "text/uri-list"],
+  ["ustar", ["application/x-ustar", "multipart/x-ustar"]],
+  ["utz", "application/vnd.uiq.theme"],
+  ["uu", ["application/octet-stream", "text/x-uuencode"]],
+  ["uue", "text/x-uuencode"],
+  ["uva", "audio/vnd.dece.audio"],
+  ["uvh", "video/vnd.dece.hd"],
+  ["uvi", "image/vnd.dece.graphic"],
+  ["uvm", "video/vnd.dece.mobile"],
+  ["uvp", "video/vnd.dece.pd"],
+  ["uvs", "video/vnd.dece.sd"],
+  ["uvu", "video/vnd.uvvu.mp4"],
+  ["uvv", "video/vnd.dece.video"],
+  ["vcd", "application/x-cdlink"],
+  ["vcf", "text/x-vcard"],
+  ["vcg", "application/vnd.groove-vcard"],
+  ["vcs", "text/x-vcalendar"],
+  ["vcx", "application/vnd.vcx"],
+  ["vda", "application/vda"],
+  ["vdo", "video/vdo"],
+  ["vew", "application/groupwise"],
+  ["vis", "application/vnd.visionary"],
+  ["viv", ["video/vivo", "video/vnd.vivo"]],
+  ["vivo", ["video/vivo", "video/vnd.vivo"]],
+  ["vmd", "application/vocaltec-media-desc"],
+  ["vmf", "application/vocaltec-media-file"],
+  ["voc", ["audio/voc", "audio/x-voc"]],
+  ["vos", "video/vosaic"],
+  ["vox", "audio/voxware"],
+  ["vqe", "audio/x-twinvq-plugin"],
+  ["vqf", "audio/x-twinvq"],
+  ["vql", "audio/x-twinvq-plugin"],
+  ["vrml", ["model/vrml", "x-world/x-vrml", "application/x-vrml"]],
+  ["vrt", "x-world/x-vrt"],
+  ["vsd", ["application/vnd.visio", "application/x-visio"]],
+  ["vsf", "application/vnd.vsf"],
+  ["vst", "application/x-visio"],
+  ["vsw", "application/x-visio"],
+  ["vtu", "model/vnd.vtu"],
+  ["vxml", "application/voicexml+xml"],
+  ["w60", "application/wordperfect6.0"],
+  ["w61", "application/wordperfect6.1"],
+  ["w6w", "application/msword"],
+  ["wad", "application/x-doom"],
+  ["wav", ["audio/wav", "audio/x-wav"]],
+  ["wax", "audio/x-ms-wax"],
+  ["wb1", "application/x-qpro"],
+  ["wbmp", "image/vnd.wap.wbmp"],
+  ["wbs", "application/vnd.criticaltools.wbs+xml"],
+  ["wbxml", "application/vnd.wap.wbxml"],
+  ["wcm", "application/vnd.ms-works"],
+  ["wdb", "application/vnd.ms-works"],
+  ["web", "application/vnd.xara"],
+  ["weba", "audio/webm"],
+  ["webm", "video/webm"],
+  ["webp", "image/webp"],
+  ["wg", "application/vnd.pmi.widget"],
+  ["wgt", "application/widget"],
+  ["wiz", "application/msword"],
+  ["wk1", "application/x-123"],
+  ["wks", "application/vnd.ms-works"],
+  ["wm", "video/x-ms-wm"],
+  ["wma", "audio/x-ms-wma"],
+  ["wmd", "application/x-ms-wmd"],
+  ["wmf", ["windows/metafile", "application/x-msmetafile"]],
+  ["wml", "text/vnd.wap.wml"],
+  ["wmlc", "application/vnd.wap.wmlc"],
+  ["wmls", "text/vnd.wap.wmlscript"],
+  ["wmlsc", "application/vnd.wap.wmlscriptc"],
+  ["wmv", "video/x-ms-wmv"],
+  ["wmx", "video/x-ms-wmx"],
+  ["wmz", "application/x-ms-wmz"],
+  ["woff", "application/x-font-woff"],
+  ["word", "application/msword"],
+  ["wp", "application/wordperfect"],
+  ["wp5", ["application/wordperfect", "application/wordperfect6.0"]],
+  ["wp6", "application/wordperfect"],
+  ["wpd", ["application/wordperfect", "application/vnd.wordperfect", "application/x-wpwin"]],
+  ["wpl", "application/vnd.ms-wpl"],
+  ["wps", "application/vnd.ms-works"],
+  ["wq1", "application/x-lotus"],
+  ["wqd", "application/vnd.wqd"],
+  ["wri", ["application/mswrite", "application/x-wri", "application/x-mswrite"]],
+  ["wrl", ["model/vrml", "x-world/x-vrml", "application/x-world"]],
+  ["wrz", ["model/vrml", "x-world/x-vrml"]],
+  ["wsc", "text/scriplet"],
+  ["wsdl", "application/wsdl+xml"],
+  ["wspolicy", "application/wspolicy+xml"],
+  ["wsrc", "application/x-wais-source"],
+  ["wtb", "application/vnd.webturbo"],
+  ["wtk", "application/x-wintalk"],
+  ["wvx", "video/x-ms-wvx"],
+  ["x-png", "image/png"],
+  ["x3d", "application/vnd.hzn-3d-crossword"],
+  ["xaf", "x-world/x-vrml"],
+  ["xap", "application/x-silverlight-app"],
+  ["xar", "application/vnd.xara"],
+  ["xbap", "application/x-ms-xbap"],
+  ["xbd", "application/vnd.fujixerox.docuworks.binder"],
+  ["xbm", ["image/xbm", "image/x-xbm", "image/x-xbitmap"]],
+  ["xdf", "application/xcap-diff+xml"],
+  ["xdm", "application/vnd.syncml.dm+xml"],
+  ["xdp", "application/vnd.adobe.xdp+xml"],
+  ["xdr", "video/x-amt-demorun"],
+  ["xdssc", "application/dssc+xml"],
+  ["xdw", "application/vnd.fujixerox.docuworks"],
+  ["xenc", "application/xenc+xml"],
+  ["xer", "application/patch-ops-error+xml"],
+  ["xfdf", "application/vnd.adobe.xfdf"],
+  ["xfdl", "application/vnd.xfdl"],
+  ["xgz", "xgl/drawing"],
+  ["xhtml", "application/xhtml+xml"],
+  ["xif", "image/vnd.xiff"],
+  ["xl", "application/excel"],
+  ["xla", ["application/vnd.ms-excel", "application/excel", "application/x-msexcel", "application/x-excel"]],
+  ["xlam", "application/vnd.ms-excel.addin.macroenabled.12"],
+  ["xlb", ["application/excel", "application/vnd.ms-excel", "application/x-excel"]],
+  ["xlc", ["application/vnd.ms-excel", "application/excel", "application/x-excel"]],
+  ["xld", ["application/excel", "application/x-excel"]],
+  ["xlk", ["application/excel", "application/x-excel"]],
+  ["xll", ["application/excel", "application/vnd.ms-excel", "application/x-excel"]],
+  ["xlm", ["application/vnd.ms-excel", "application/excel", "application/x-excel"]],
+  ["xls", ["application/vnd.ms-excel", "application/excel", "application/x-msexcel", "application/x-excel"]],
+  ["xlsb", "application/vnd.ms-excel.sheet.binary.macroenabled.12"],
+  ["xlsm", "application/vnd.ms-excel.sheet.macroenabled.12"],
+  ["xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+  ["xlt", ["application/vnd.ms-excel", "application/excel", "application/x-excel"]],
+  ["xltm", "application/vnd.ms-excel.template.macroenabled.12"],
+  ["xltx", "application/vnd.openxmlformats-officedocument.spreadsheetml.template"],
+  ["xlv", ["application/excel", "application/x-excel"]],
+  ["xlw", ["application/vnd.ms-excel", "application/excel", "application/x-msexcel", "application/x-excel"]],
+  ["xm", "audio/xm"],
+  ["xml", ["application/xml", "text/xml", "application/atom+xml", "application/rss+xml"]],
+  ["xmz", "xgl/movie"],
+  ["xo", "application/vnd.olpc-sugar"],
+  ["xof", "x-world/x-vrml"],
+  ["xop", "application/xop+xml"],
+  ["xpi", "application/x-xpinstall"],
+  ["xpix", "application/x-vnd.ls-xpix"],
+  ["xpm", ["image/xpm", "image/x-xpixmap"]],
+  ["xpr", "application/vnd.is-xpr"],
+  ["xps", "application/vnd.ms-xpsdocument"],
+  ["xpw", "application/vnd.intercon.formnet"],
+  ["xslt", "application/xslt+xml"],
+  ["xsm", "application/vnd.syncml+xml"],
+  ["xspf", "application/xspf+xml"],
+  ["xsr", "video/x-amt-showrun"],
+  ["xul", "application/vnd.mozilla.xul+xml"],
+  ["xwd", ["image/x-xwd", "image/x-xwindowdump"]],
+  ["xyz", ["chemical/x-xyz", "chemical/x-pdb"]],
+  ["yang", "application/yang"],
+  ["yin", "application/yin+xml"],
+  ["z", ["application/x-compressed", "application/x-compress"]],
+  ["zaz", "application/vnd.zzazz.deck+xml"],
+  ["zip", ["application/zip", "multipart/x-zip", "application/x-zip-compressed", "application/x-compressed"]],
+  ["zir", "application/vnd.zul"],
+  ["zmm", "application/vnd.handheld-entertainment+xml"],
+  ["zoo", "application/octet-stream"],
+  ["zsh", "text/x-script.zsh"]
+]);
+function detectMimeType(filename) {
+  if (!filename) {
+    return defaultMimeType;
+  }
+  const parsed = import_node_path.default.parse(filename);
+  const extension = (parsed.ext.substr(1) || parsed.name || "").split("?").shift().trim().toLowerCase();
+  const value = extensions.has(extension) ? extensions.get(extension) : defaultMimeType;
+  if (Array.isArray(value)) {
+    return value[0];
+  }
+  return value;
+}
+function detectExtension(mimeType) {
+  if (!mimeType) {
+    return defaultExtension;
+  }
+  const parts = mimeType.toLowerCase().trim().split("/");
+  const rootType = parts.shift().trim();
+  const subType = parts.join("/").trim();
+  if (mimeTypes.has(rootType + "/" + subType)) {
+    const value = mimeTypes.get(rootType + "/" + subType);
+    if (Array.isArray(value)) {
+      return value[0];
+    }
+    return value;
+  }
+  switch (rootType) {
+    case "text":
+      return "txt";
+    default:
+      return "bin";
+  }
+}
+
+// node_modules/nodemailer/dist/esm/mime-node/index.js
+var import_node_crypto = __toESM(require("node:crypto"), 1);
+var import_node_fs2 = __toESM(require("node:fs"), 1);
+var import_node_stream8 = require("node:stream");
+
+// node_modules/nodemailer/dist/esm/base64/index.js
+var import_node_stream3 = require("node:stream");
+function encode2(buffer) {
+  if (typeof buffer === "string") {
+    buffer = Buffer.from(buffer, "utf-8");
+  }
+  return buffer.toString("base64");
+}
+function normalizeLineLength(lineLength) {
+  const length = Math.floor(Number(lineLength));
+  return Number.isFinite(length) && length >= 1 ? length : 76;
+}
+function wrapBuffer(src, lineLength, final) {
+  const lines = Math.ceil(src.length / lineLength);
+  const complete = Math.max(lines - 1, 0);
+  let rest = src.length - complete * lineLength;
+  const output = Buffer.allocUnsafe(complete * (lineLength + 2) + (final ? rest : 0));
+  let to = 0;
+  for (let from = 0; from < complete * lineLength; from += lineLength) {
+    src.copy(output, to, from, from + lineLength);
+    to += lineLength;
+    output[to++] = 13;
+    output[to++] = 10;
+  }
+  if (final) {
+    to += src.copy(output, to, complete * lineLength);
+    rest = 0;
+  }
+  if (to !== output.length) {
+    throw new Error("Unexpected wrapped length");
+  }
+  return { output, rest };
+}
+var Encoder = class extends import_node_stream3.Transform {
+  constructor(options) {
+    super();
+    this.options = options || {};
+    if (this.options.lineLength !== false) {
+      this.options.lineLength = normalizeLineLength(this.options.lineLength);
+    }
+    this._curLine = "";
+    this._remainingBytes = false;
+    this.inputBytes = 0;
+    this.outputBytes = 0;
+  }
+  /**
+   * Emits the encoded characters `b64` that follow the current line, keeping what can not be
+   * emitted yet as the new current line
+   *
+   * @internal
+   */
+  _emit(b64, final) {
+    const src = Buffer.from(this._curLine + b64, "latin1");
+    if (!src.length) {
+      return;
+    }
+    let output = src;
+    if (this.options.lineLength) {
+      const wrapped = wrapBuffer(src, this.options.lineLength, final);
+      output = wrapped.output;
+      this._curLine = wrapped.rest ? src.toString("latin1", src.length - wrapped.rest) : "";
+    } else {
+      this._curLine = "";
+    }
+    if (output.length) {
+      this.outputBytes += output.length;
+      this.push(output);
+    }
+  }
+  /** @internal */
+  _transform(chunk, encoding, done) {
+    let buf = encoding !== "buffer" ? Buffer.from(chunk, encoding) : chunk;
+    if (!buf || !buf.length) {
+      return done();
+    }
+    this.inputBytes += buf.length;
+    if (this._remainingBytes) {
+      buf = Buffer.concat([this._remainingBytes, buf], this._remainingBytes.length + buf.length);
+      this._remainingBytes = false;
+    }
+    const extra = buf.length % 3;
+    if (extra) {
+      this._remainingBytes = buf.subarray(buf.length - extra);
+      buf = buf.subarray(0, buf.length - extra);
+    }
+    this._emit(encode2(buf), false);
+    done();
+  }
+  /** @internal */
+  _flush(done) {
+    this._emit(this._remainingBytes ? encode2(this._remainingBytes) : "", true);
+    this._remainingBytes = false;
+    done();
+  }
+};
+
+// node_modules/nodemailer/dist/esm/qp/index.js
+var import_node_stream4 = require("node:stream");
+var MIN_LINE_LENGTH = 4;
+var QP_RANGES = [
+  [9],
+  // <TAB>
+  [10],
+  // <LF>
+  [13],
+  // <CR>
+  [32, 60],
+  // <SP>!"#$%&'()*+,-./0123456789:;
+  [62, 126]
+  // >?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}
+];
+var QP_LITERAL = new Uint8Array(256);
+for (let i = 0; i < 256; i++) {
+  QP_LITERAL[i] = checkRanges(i, QP_RANGES) ? 1 : 0;
+}
+var HEX_DIGITS = Buffer.from("0123456789ABCDEF", "latin1");
+var isWhitespace = (c) => c === 32 || c === 9;
+function encode3(buffer) {
+  return encodeBytes(typeof buffer === "string" ? Buffer.from(buffer, "utf-8") : buffer);
+}
+function encodeBytes(buffer, next, binary, previous) {
+  const len = buffer.length;
+  const output = Buffer.allocUnsafe(len * 3);
+  let pos = 0;
+  for (let i = 0; i < len; i++) {
+    const ord = buffer[i];
+    const following = i + 1 < len ? buffer[i + 1] : next;
+    const lineBreakByte = binary && (ord === 13 || ord === 10) ? ord === 13 ? following === 10 : (i > 0 ? buffer[i - 1] : previous) === 13 : true;
+    if (QP_LITERAL[ord] && lineBreakByte && !(isWhitespace(ord) && (following === void 0 || following === 10 || following === 13))) {
+      output[pos++] = ord;
+      continue;
+    }
+    output[pos++] = 61;
+    output[pos++] = HEX_DIGITS[Math.floor(ord / 16)];
+    output[pos++] = HEX_DIGITS[ord % 16];
+  }
+  return output.toString("latin1", 0, pos);
+}
+function wrap(str, lineLength) {
+  str = (str || "").toString();
+  lineLength = Math.max(Number(lineLength) || 76, MIN_LINE_LENGTH);
+  if (str.length <= lineLength) {
+    return str;
+  }
+  let pos = 0;
+  const len = str.length;
+  let match, code, line;
+  const lineMargin = Math.floor(lineLength / 3);
+  let result = "";
+  while (pos < len) {
+    line = str.substr(pos, lineLength);
+    if (match = line.match(/\r\n/)) {
+      line = line.substr(0, match.index + match[0].length);
+      result += line;
+      pos += line.length;
+      continue;
+    }
+    if (line.substr(-1) === "\n") {
+      result += line;
+      pos += line.length;
+      continue;
+    }
+    if (match = line.substr(-lineMargin).match(/\n.*?$/)) {
+      line = line.substr(0, line.length - (match[0].length - 1));
+      result += line;
+      pos += line.length;
+      continue;
+    }
+    if (line.length > lineLength - lineMargin && (match = line.substr(-lineMargin).match(/[ \t.,!?][^ \t.,!?]*$/))) {
+      line = line.substr(0, line.length - (match[0].length - 1));
+    } else if (line.match(/[=][\da-f]{0,2}$/i)) {
+      if (match = line.match(/[=][\da-f]{0,1}$/i)) {
+        line = line.substr(0, line.length - match[0].length);
+      }
+      while (line.length > 3 && line.length < len - pos && !line.match(/^(?:=[\da-f]{2}){1,4}$/i) && (match = line.match(/[=][\da-f]{2}$/gi))) {
+        code = parseInt(match[0].substr(1, 2), 16);
+        if (code < 128) {
+          break;
+        }
+        line = line.substr(0, line.length - 3);
+        if (code >= 192) {
+          break;
+        }
+      }
+    }
+    if (!line.length) {
+      line = str.substr(pos, lineLength);
+    }
+    if (pos + line.length < len && line.substr(-1) !== "\n") {
+      if (line.length === lineLength && line.match(/[=][\da-f]{2}$/i)) {
+        line = line.substr(0, line.length - 3);
+      } else if (line.length === lineLength) {
+        line = line.substr(0, line.length - 1);
+      }
+      pos += line.length;
+      line += "=\r\n";
+    } else {
+      pos += line.length;
+    }
+    result += line;
+  }
+  return result;
+}
+function checkRanges(nr, ranges) {
+  for (let i = ranges.length - 1; i >= 0; i--) {
+    const range = ranges[i];
+    if (!range.length) {
+      continue;
+    }
+    if (range.length === 1 && nr === range[0]) {
+      return true;
+    }
+    if (range.length === 2 && nr >= range[0] && nr <= range[1]) {
+      return true;
+    }
+  }
+  return false;
+}
+var ENCODE_SLICE_SIZE = 64 * 1024;
+var Encoder2 = class extends import_node_stream4.Transform {
+  constructor(options) {
+    super();
+    this.options = options || {};
+    if (this.options.lineLength !== false) {
+      this.options.lineLength = this.options.lineLength || 76;
+    }
+    this._curLine = "";
+    this._remainingBytes = false;
+    this._lastByte = void 0;
+    this.inputBytes = 0;
+    this.outputBytes = 0;
+  }
+  /** @internal */
+  _transform(chunk, encoding, done) {
+    let buf = encoding !== "buffer" ? Buffer.from(chunk, encoding) : chunk;
+    if (!buf || !buf.length) {
+      return done();
+    }
+    this.inputBytes += buf.length;
+    if (this._remainingBytes) {
+      buf = Buffer.concat([this._remainingBytes, buf], this._remainingBytes.length + buf.length);
+      this._remainingBytes = false;
+    }
+    let end = buf.length;
+    while (end > 0 && (isWhitespace(buf[end - 1]) || this.options.binary && buf[end - 1] === 13)) {
+      end--;
+    }
+    if (buf.length - end <= ENCODE_SLICE_SIZE) {
+      this._remainingBytes = end < buf.length ? Buffer.from(buf.subarray(end)) : false;
+      buf = buf.subarray(0, end);
+    }
+    this._encodeSlices(buf);
+    done();
+  }
+  /** @internal */
+  _flush(done) {
+    if (this._remainingBytes) {
+      this._encodeSlices(this._remainingBytes);
+      this._remainingBytes = false;
+    }
+    if (this._curLine) {
+      this.outputBytes += this._curLine.length;
+      this.push(this._curLine, "ascii");
+      this._curLine = "";
+    }
+    done();
+  }
+  /**
+   * Encodes the input in slices of ENCODE_SLICE_SIZE bytes. Each slice is told the byte that
+   * follows it, so a slice that ends in whitespace is encoded as if it was not split
+   *
+   * @internal
+   */
+  _encodeSlices(buf) {
+    for (let start = 0; start < buf.length; start += ENCODE_SLICE_SIZE) {
+      const end = Math.min(start + ENCODE_SLICE_SIZE, buf.length);
+      this._encodeSlice(buf.subarray(start, end), end < buf.length ? buf[end] : void 0);
+      this._lastByte = buf[end - 1];
+    }
+  }
+  /** @internal */
+  _encodeSlice(buf, next) {
+    let qp;
+    if (this.options.lineLength) {
+      qp = wrap(this._curLine + encodeBytes(buf, next, this.options.binary, this._lastByte), this.options.lineLength);
+      const lastLF = qp.lastIndexOf("\n");
+      this._curLine = qp.substring(lastLF + 1);
+      qp = qp.substring(0, lastLF + 1);
+      if (qp) {
+        this.outputBytes += qp.length;
+        this.push(qp, "ascii");
+      }
+    } else {
+      qp = encodeBytes(buf, next, this.options.binary, this._lastByte);
+      this.outputBytes += qp.length;
+      this.push(qp, "ascii");
+    }
+  }
+};
+
+// node_modules/nodemailer/dist/esm/mime-funcs/index.js
+function isPlainText(value, isParam) {
+  const re = isParam ? /[\x00-\x1f\x7f"\u0080-\uFFFF]/ : /[\x00-\x08\x0b\x0c\x0e-\x1f\u0080-\uFFFF]/;
+  return typeof value === "string" && !re.test(value);
+}
+function isPlainParamValue(value) {
+  return isPlainText(value, true) && !value.includes("=?");
+}
+function quoteString(value) {
+  return '"' + (value || "").toString().replace(/["\\]/g, "\\$&") + '"';
+}
+function hasLongerLines(str, lineLength) {
+  if (str.length > 128 * 1024) {
+    return true;
+  }
+  return new RegExp("^.{" + (lineLength + 1) + ",}", "m").test(str);
+}
+function encodeWord(data, mimeWordEncoding, maxLength) {
+  mimeWordEncoding = (mimeWordEncoding || "Q").toString().toUpperCase().trim().charAt(0);
+  maxLength = maxLength || 0;
+  let encodedStr;
+  const toCharset = "UTF-8";
+  if (maxLength && maxLength > 7 + toCharset.length) {
+    maxLength -= 7 + toCharset.length;
+  }
+  if (mimeWordEncoding === "Q") {
+    encodedStr = encode3(data).replace(/[^a-z0-9!*+\-/=]/gi, (chr) => {
+      const ord = chr.charCodeAt(0).toString(16).toUpperCase();
+      if (chr === " ") {
+        return "_";
+      }
+      return "=" + (ord.length === 1 ? "0" + ord : ord);
+    });
+  } else if (mimeWordEncoding === "B") {
+    encodedStr = typeof data === "string" ? data : data.toString("utf-8");
+    maxLength = maxLength ? Math.max(3, (maxLength - maxLength % 4) / 4 * 3) : 0;
+  }
+  if (maxLength && (mimeWordEncoding !== "B" ? encodedStr : encode2(data)).length > maxLength) {
+    if (mimeWordEncoding === "Q") {
+      encodedStr = splitMimeEncodedString(encodedStr, maxLength).join("?= =?" + toCharset + "?" + mimeWordEncoding + "?");
+    } else {
+      const parts = [];
+      let lpart = "";
+      for (let i = 0, len = encodedStr.length; i < len; i++) {
+        let chr = encodedStr.charAt(i);
+        if (/[\ud800-\udbff]/.test(chr) && /[\udc00-\udfff]/.test(encodedStr.charAt(i + 1))) {
+          chr += encodedStr.charAt(++i);
+        }
+        if (Buffer.byteLength(lpart + chr) <= maxLength || i === 0) {
+          lpart += chr;
+        } else {
+          parts.push(encode2(lpart));
+          lpart = chr;
+        }
+      }
+      if (lpart) {
+        parts.push(encode2(lpart));
+      }
+      if (parts.length > 1) {
+        encodedStr = parts.join("?= =?" + toCharset + "?" + mimeWordEncoding + "?");
+      } else {
+        encodedStr = parts.join("");
+      }
+    }
+  } else if (mimeWordEncoding === "B") {
+    encodedStr = encode2(data);
+  }
+  return "=?" + toCharset + "?" + mimeWordEncoding + "?" + encodedStr + (encodedStr.substr(-2) === "?=" ? "" : "?=");
+}
+var VALID_ENCODED_WORD = /^=\?[^\s()<>@,;:"/[\]?.=]+\?[BbQq]\?[^?\s]+\?=$/;
+var LENIENT_ENCODED_WORD = /[=]\?[^?]*\?[BbQq]\?[^?]*\?=/y;
+function _markInvalidEncodedWords(value, range) {
+  const len = value.length;
+  const isSpace = (pos2) => /\s/.test(value.charAt(pos2));
+  let wordStart = 0;
+  let wordEnd = -1;
+  const wordAt = (pos2) => {
+    if (pos2 < wordEnd) {
+      return;
+    }
+    wordStart = pos2;
+    while (wordStart > 0 && !isSpace(wordStart - 1)) {
+      wordStart--;
+    }
+    wordEnd = pos2;
+    while (wordEnd < len && !isSpace(wordEnd)) {
+      wordEnd++;
+    }
+  };
+  let pos = value.indexOf("=?");
+  while (pos >= 0) {
+    wordAt(pos);
+    const start = wordStart;
+    LENIENT_ENCODED_WORD.lastIndex = pos;
+    const match = LENIENT_ENCODED_WORD.exec(value);
+    const end = match ? pos + match[0].length : wordEnd;
+    if (match && end > wordEnd) {
+      wordAt(end - 1);
+    }
+    const word = value.substring(start, wordEnd);
+    const looksLike = match ? true : start === pos && word.length >= 4 && word.endsWith("?=");
+    const valid = start === pos && wordEnd === end && word.length <= 75 && VALID_ENCODED_WORD.test(word);
+    if (looksLike && !valid) {
+      range[0] = range[0] < 0 ? start : Math.min(range[0], start);
+      range[1] = Math.max(range[1], wordEnd - 1);
+    }
+    pos = value.indexOf("=?", match ? end : pos + 2);
+  }
+  return range;
+}
+function encodeWords(value, mimeWordEncoding, maxLength, encodeAll) {
+  maxLength = maxLength || 0;
+  let firstSpecial = -1;
+  let lastSpecial = -1;
+  for (let i = 0; i < value.length; i++) {
+    const code = value.charCodeAt(i);
+    if (code === 34 || code >= 128) {
+      if (firstSpecial < 0) {
+        firstSpecial = i;
+      }
+      lastSpecial = i;
+    }
+  }
+  if (value.indexOf("=?") >= 0) {
+    [firstSpecial, lastSpecial] = _markInvalidEncodedWords(value, [firstSpecial, lastSpecial]);
+  }
+  if (firstSpecial < 0) {
+    return value;
+  }
+  if (encodeAll) {
+    return encodeWord(value, mimeWordEncoding, maxLength);
+  }
+  let startIndex = firstSpecial;
+  while (startIndex > 0 && !/\s/.test(value.charAt(startIndex - 1))) {
+    startIndex--;
+  }
+  let endIndex = lastSpecial + 1;
+  while (endIndex < value.length && !/\s/.test(value.charAt(endIndex))) {
+    endIndex++;
+  }
+  return (startIndex ? value.substr(0, startIndex) : "") + encodeWord(value.substring(startIndex, endIndex), mimeWordEncoding || "Q", maxLength) + (endIndex < value.length ? value.substr(endIndex) : "");
+}
+function buildHeaderValue(structured) {
+  const paramsArray = [];
+  Object.keys(structured.params || {}).forEach((key) => {
+    const value2 = structured.params[key];
+    const param = key.replace(/[\x00-\x1f\x7f]/g, "");
+    if (!isPlainParamValue(value2) || value2.length >= 75) {
+      buildHeaderParam(param, value2, 50).forEach((encodedParam) => {
+        if (!/[\s"\\;:/=(),<>@[\]?]|^[-']|'$/.test(encodedParam.value) || encodedParam.key.substr(-1) === "*") {
+          paramsArray.push(encodedParam.key + "=" + encodedParam.value);
+        } else {
+          paramsArray.push(encodedParam.key + "=" + JSON.stringify(encodedParam.value));
+        }
+      });
+    } else if (!value2.length || /[\s'"\\;:/=(),<>@[\]?]|^-/.test(value2)) {
+      paramsArray.push(param + "=" + JSON.stringify(value2));
+    } else {
+      paramsArray.push(param + "=" + value2);
+    }
+  });
+  const value = typeof structured.value === "string" ? structured.value.replace(/[\x00-\x1f\x7f]/g, "") : structured.value;
+  return value + (paramsArray.length ? "; " + paramsArray.join("; ") : "");
+}
+function buildHeaderParam(key, data, maxLength) {
+  const list = [];
+  let encodedStr = typeof data === "string" ? data : (data || "").toString();
+  let chr;
+  let line;
+  let startPos = 0;
+  let i, len;
+  maxLength = maxLength || 50;
+  if (isPlainParamValue(data)) {
+    if (encodedStr.length <= maxLength) {
+      return [
+        {
+          key,
+          value: encodedStr
+        }
+      ];
+    }
+    encodedStr = encodedStr.replace(new RegExp(".{" + maxLength + "}", "g"), (str) => {
+      list.push({
+        line: str
+      });
+      return "";
+    });
+    if (encodedStr) {
+      list.push({
+        line: encodedStr
+      });
+    }
+  } else {
+    if (/[\uD800-\uDBFF]/.test(encodedStr)) {
+      const encodedStrArr = [];
+      for (i = 0, len = encodedStr.length; i < len; i++) {
+        chr = encodedStr.charAt(i);
+        if (/[\ud800-\udbff]/.test(chr) && /[\udc00-\udfff]/.test(encodedStr.charAt(i + 1))) {
+          chr += encodedStr.charAt(i + 1);
+          encodedStrArr.push(chr);
+          i++;
+        } else {
+          encodedStrArr.push(chr);
+        }
+      }
+      encodedStr = encodedStrArr;
+    }
+    line = "utf-8''";
+    let encoded = true;
+    startPos = 0;
+    for (i = 0, len = encodedStr.length; i < len; i++) {
+      chr = encodedStr[i];
+      if (encoded) {
+        chr = safeEncodeURIComponent(chr);
+      } else {
+        chr = chr === " " ? chr : safeEncodeURIComponent(chr);
+        if (chr !== encodedStr[i]) {
+          if ((safeEncodeURIComponent(line) + chr).length >= maxLength) {
+            list.push({
+              line,
+              encoded
+            });
+            line = "";
+            encoded = true;
+          } else {
+            encoded = true;
+            i = startPos;
+            line = "";
+            continue;
+          }
+        }
+      }
+      if ((line + chr).length >= maxLength) {
+        list.push({
+          line,
+          encoded
+        });
+        line = chr = encodedStr[i] === " " ? " " : safeEncodeURIComponent(encodedStr[i]);
+        if (chr === encodedStr[i]) {
+          encoded = false;
+          startPos = i - 1;
+        } else {
+          encoded = true;
+        }
+      } else {
+        line += chr;
+      }
+    }
+    if (line) {
+      list.push({
+        line,
+        encoded
+      });
+    }
+  }
+  return list.map((item, i2) => ({
+    // encoded lines: {name}*{part}*
+    // unencoded lines: {name}*{part}
+    // if any line needs to be encoded then the first line (part==0) is always encoded
+    key: key + "*" + i2 + (item.encoded ? "*" : ""),
+    value: item.line
+  }));
+}
+var TOKEN = /^[^\x00-\x20\x7f()<>@,;:\\"/[\]?=]+$/;
+function _findCommentEnd(str, start) {
+  let depth = 0;
+  for (let i = start, len = str.length; i < len; i++) {
+    const c = str.charAt(i);
+    if (c === "\\") {
+      i++;
+    } else if (c === "(") {
+      depth++;
+    } else if (c === ")" && --depth === 0) {
+      return i;
+    }
+  }
+  return -1;
+}
+function _isParamName(name2) {
+  return !!name2 && !isProtoKey(name2);
+}
+function parseHeaderValue(str, options) {
+  const response = {
+    value: "",
+    params: {}
+  };
+  let stripComments = !!options?.stripComments;
+  const setParam = (name2, value2) => {
+    name2 = name2.toLowerCase();
+    if (_isParamName(name2) && !Object.prototype.hasOwnProperty.call(response.params, name2)) {
+      response.params[name2] = value2;
+    }
+  };
+  let key = false;
+  let value = "";
+  let stage = "value";
+  let quote = false;
+  let escaped = false;
+  let chr;
+  let pendingSpace = "";
+  let quoteClosed = false;
+  const flushSpace = () => {
+    if (value.length) {
+      value += pendingSpace;
+    }
+    pendingSpace = "";
+  };
+  const addChr = (c) => {
+    flushSpace();
+    value += c;
+  };
+  const takeValue = () => {
+    const taken = value;
+    value = "";
+    pendingSpace = "";
+    quoteClosed = false;
+    return taken;
+  };
+  const storeValue = () => {
+    const taken = takeValue();
+    if (key === false) {
+      response.value = taken;
+    } else {
+      setParam(key, taken);
+    }
+  };
+  const storeEmptyKey = () => {
+    setParam(takeValue().trim(), "");
+  };
+  for (let i = 0, len = str.length; i < len; i++) {
+    chr = str.charAt(i);
+    if (stripComments && chr === "(" && !quote && !quoteClosed && !(stage === "value" && key !== false && !pendingSpace)) {
+      let end = _findCommentEnd(str, i);
+      if (end < 0 && str.indexOf(";", i) < 0) {
+        end = len - 1;
+      }
+      if (end >= 0) {
+        i = end;
+        continue;
+      }
+      stripComments = false;
+    }
+    if (stage === "key") {
+      if (chr === "=") {
+        key = takeValue().trim();
+        stage = "value";
+        continue;
+      }
+      if (chr === ";") {
+        storeEmptyKey();
+        continue;
+      }
+      value += chr;
+    } else {
+      if (quoteClosed && chr !== ";") {
+        escaped = false;
+        continue;
+      }
+      if (escaped) {
+        addChr(chr);
+      } else if (quote && chr === "\\") {
+        escaped = true;
+        continue;
+      } else if (quote && chr === quote) {
+        quote = false;
+        quoteClosed = true;
+      } else if (!quote && chr === '"') {
+        quote = chr;
+        flushSpace();
+      } else if (!quote && chr === ";") {
+        storeValue();
+        stage = "key";
+      } else if (!quote && (chr === " " || chr === "	")) {
+        pendingSpace += chr;
+      } else {
+        addChr(chr);
+      }
+      escaped = false;
+    }
+  }
+  if (stage === "value") {
+    storeValue();
+  } else {
+    storeEmptyKey();
+  }
+  const continuations = /* @__PURE__ */ new Map();
+  Object.keys(response.params).forEach((key2) => {
+    const match = key2.match(/(\*(\d+)|\*(\d+)\*|\*)$/);
+    if (!match) {
+      return;
+    }
+    const actualKey = key2.substr(0, match.index);
+    const nr = Number(match[2] || match[3]) || 0;
+    const encoded = match[0].substr(-1) === "*";
+    let value2 = response.params[key2];
+    delete response.params[key2];
+    if (!_isParamName(actualKey)) {
+      return;
+    }
+    let continuation = continuations.get(actualKey);
+    if (!continuation) {
+      continuation = { charset: false, sections: [] };
+      continuations.set(actualKey, continuation);
+    }
+    const charsetMatch = nr === 0 && encoded ? value2.match(/^([^']*)'[^']*'(.*)$/) : null;
+    if (charsetMatch) {
+      continuation.charset = TOKEN.test(charsetMatch[1]) ? charsetMatch[1] : "iso-8859-1";
+      value2 = charsetMatch[2];
+    }
+    continuation.sections.push({ nr, value: value2, encoded });
+  });
+  continuations.forEach((continuation, key2) => {
+    if (Object.prototype.hasOwnProperty.call(response.params, key2)) {
+      return;
+    }
+    continuation.sections.sort((a, b) => a.nr - b.nr);
+    if (!continuation.charset) {
+      response.params[key2] = continuation.sections.map((section) => section.value).join("");
+      return;
+    }
+    response.params[key2] = "=?" + continuation.charset + "?Q?" + continuation.sections.map(_encodeContinuationSection).join("") + "?=";
+  });
+  return response;
+}
+function _encodeContinuationSection(section) {
+  const specials = section.encoded ? /[=?_\s]/g : /[=?_\s%]/g;
+  return section.value.replace(specials, (s) => {
+    const c = s.charCodeAt(0).toString(16);
+    if (s === " ") {
+      return "_";
+    }
+    return "%" + (c.length < 2 ? "0" : "") + c;
+  }).replace(/%/g, "=");
+}
+function detectExtension2(mimeType) {
+  return detectExtension(mimeType);
+}
+function detectMimeType2(extension) {
+  return detectMimeType(extension);
+}
+function foldLines(str, lineLength, afterSpace) {
+  str = (str || "").toString();
+  lineLength = lineLength || 76;
+  let pos = 0;
+  const len = str.length;
+  let result = "";
+  let line, match;
+  while (pos < len) {
+    line = str.substr(pos, lineLength);
+    if (line.length < lineLength) {
+      result += line;
+      break;
+    }
+    if (match = line.match(/^[^\n\r]*(\r?\n|\r)/)) {
+      line = match[0];
+      result += line;
+      pos += line.length;
+      continue;
+    } else if ((match = line.match(/(\s+)[^\s]*$/)) && match[0].length - (afterSpace ? (match[1] || "").length : 0) < line.length) {
+      line = line.substr(0, line.length - (match[0].length - (afterSpace ? (match[1] || "").length : 0)));
+    } else if (match = str.substr(pos + line.length).match(/^[^\s]+(\s*)/)) {
+      line = line + match[0].substr(0, match[0].length - (!afterSpace ? (match[1] || "").length : 0));
+    }
+    result += line;
+    pos += line.length;
+    if (pos < len) {
+      result += "\r\n";
+    }
+  }
+  return result;
+}
+function splitMimeEncodedString(str, maxlen) {
+  const lines = [];
+  let curLine, fallbackLine, match, chr, done;
+  maxlen = Math.max(maxlen || 0, 12);
+  while (str.length) {
+    curLine = str.substr(0, maxlen);
+    if (match = curLine.match(/[=][0-9A-F]?$/i)) {
+      curLine = curLine.substr(0, match.index);
+    }
+    fallbackLine = curLine.length ? curLine : str.substr(0, maxlen);
+    done = false;
+    while (!done && curLine.length) {
+      done = true;
+      if (match = str.substr(curLine.length).match(/^[=]([0-9A-F]{2})/i)) {
+        chr = parseInt(match[1], 16);
+        if (chr < 194 && chr > 127) {
+          curLine = curLine.substr(0, curLine.length - 3);
+          done = false;
+        }
+      }
+    }
+    if (!curLine.length) {
+      curLine = fallbackLine;
+    }
+    lines.push(curLine);
+    str = str.substr(curLine.length);
+  }
+  return lines;
+}
+function encodeURICharComponent(chr) {
+  let res = "";
+  let ord = chr.charCodeAt(0).toString(16).toUpperCase();
+  if (ord.length % 2) {
+    ord = "0" + ord;
+  }
+  if (ord.length > 2) {
+    for (let i = 0, len = ord.length / 2; i < len; i++) {
+      res += "%" + ord.substr(i, 2);
+    }
+  } else {
+    res += "%" + ord;
+  }
+  return res;
+}
+function safeEncodeURIComponent(str) {
+  str = (str || "").toString();
+  try {
+    str = encodeURIComponent(str);
+  } catch (_E) {
+    str = encodeURIComponent(Buffer.from(str, "utf-8").toString("utf-8"));
+  }
+  return str.replace(/[\x00-\x1F *'()<>@,;:\\"[\]?=\u007F-\uFFFF]/g, (chr) => encodeURICharComponent(chr));
+}
+
+// node_modules/nodemailer/dist/esm/addressparser/index.js
+var TOKEN_OPERATOR = 1;
+var TOKEN_NO_BREAK = 2;
+var TOKEN_DIRTY = 4;
+var TOKEN_ESCAPES = 8;
+var TOKEN_STARTS_ESCAPED = 16;
+var TokenList = class {
+  constructor(str) {
+    this.str = str;
+    this.slots = new Int32Array(48);
+    this.length = 0;
+    this.cleaned = /* @__PURE__ */ new Map();
+  }
+  /**
+   * Appends a token
+   *
+   * @param kind Kind and flags of the token
+   * @param start Offset of its first character
+   * @param end Offset just past its last character
+   * @return Index of the token
+   */
+  push(kind, start, end) {
+    if ((this.length + 1) * 3 > this.slots.length) {
+      const grown = new Int32Array(this.slots.length * 2);
+      grown.set(this.slots);
+      this.slots = grown;
+    }
+    const at = this.length * 3;
+    this.slots[at] = kind;
+    this.slots[at + 1] = start;
+    this.slots[at + 2] = end;
+    return this.length++;
+  }
+  /**
+   * Offset of the first character of a token that is part of its value. A text run that is
+   * no plain slice of the field still spans the whitespace and control characters its value
+   * is trimmed of.
+   */
+  contentStart(index) {
+    let start = this.slots[index * 3 + 1];
+    const end = this.slots[index * 3 + 2];
+    while (start < end && _isDroppedCode(this.str.charCodeAt(start))) {
+      start++;
+    }
+    return start;
+  }
+  /**
+   * Offset just past the last character of a token that is part of its value
+   */
+  contentEnd(index) {
+    const start = this.slots[index * 3 + 1];
+    let end = this.slots[index * 3 + 2];
+    while (end > start && _isDroppedCode(this.str.charCodeAt(end - 1))) {
+      end--;
+    }
+    return end;
+  }
+  /**
+   * The character of an operator token, an empty string for a text run
+   */
+  operatorAt(index) {
+    const at = index * 3;
+    return this.slots[at] & TOKEN_OPERATOR ? this.str.charAt(this.slots[at + 1]) : "";
+  }
+  /**
+   * Whether a token is an operator
+   */
+  isOperator(index) {
+    return (this.slots[index * 3] & TOKEN_OPERATOR) !== 0;
+  }
+  /**
+   * Whether the next character continues the run of a token without whitespace in between
+   */
+  noBreak(index) {
+    return (this.slots[index * 3] & TOKEN_NO_BREAK) !== 0;
+  }
+  /**
+   * Value of a token
+   */
+  value(index) {
+    const cleaned = this.cleaned.get(index);
+    if (cleaned !== void 0) {
+      return cleaned;
+    }
+    return this.str.slice(this.slots[index * 3 + 1], this.slots[index * 3 + 2]);
+  }
+};
+var DOMAIN_LITERAL_TAIL = /@(\[[^[\]\\]*\])$/;
+function _domainAt(address) {
+  const literal = address.charAt(address.length - 1) === "]" ? DOMAIN_LITERAL_TAIL.exec(address) : null;
+  return literal ? address.length - literal[1].length - 1 : address.lastIndexOf("@");
+}
+function _quoteLocalPart(address) {
+  const lastAt = _domainAt(address);
+  if (lastAt < 0) {
+    return address;
+  }
+  const user = address.substr(0, lastAt);
+  if (/^[^\s"(),:;<>@[\\\]]+$/.test(user) || /^"(?:[^"\\]|\\[\s\S])*"$/.test(user)) {
+    return address;
+  }
+  return '"' + user.replace(/["\\]/g, "\\$&") + '"@' + address.substr(lastAt + 1);
+}
+var HAS_WHITESPACE = /\s/;
+var QUOTED_LOCAL_ADDR = /^("(?:[^"\\]|\\[\s\S])*"@\S+)(?:\s+([\s\S]+))?$/;
+var ADDR_SPEC = /^[^@\s]+@[^@\s]+$/;
+var LITERAL_ADDR_SPEC = /^[^@\s]+@\[[^[\]\\\s]*\]$/;
+var QUOTED_LOCAL_DOMAIN = /^@(?:[^@\s"]+|\[[^[\]\\\s]*\])$/;
+function _isAddrSpec(value) {
+  return ADDR_SPEC.test(value) || LITERAL_ADDR_SPEC.test(value);
+}
+var LOOSE_ADDR_SPEC = /^[^@\s]+@\S+$/;
+var LOOSE_TEXT_ADDR = /\s*\b[^@\s]+@[^\s]+\b\s*/y;
+function _isSpaceCode(code) {
+  return code === 32 || code >= 9 && code <= 13 || code === 160 || code === 5760 || code >= 8192 && code <= 8202 || code === 8232 || code === 8233 || code === 8239 || code === 8287 || code === 12288 || code === 65279;
+}
+function _isFoldingSpaceCode(code) {
+  return code === 32 || code === 9 || code === 13 || code === 10;
+}
+function _isFoldingGap(str, from, to) {
+  for (let i = from; i < to; i++) {
+    if (!_isFoldingSpaceCode(str.charCodeAt(i))) {
+      return false;
+    }
+  }
+  return true;
+}
+function _isDroppedCode(code) {
+  return code < 32 || code === 127 || _isSpaceCode(code);
+}
+function _isWordCode(code) {
+  return code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code === 95;
+}
+function _isBoundary(text, at) {
+  return _isWordCode(text.charCodeAt(at - 1)) !== _isWordCode(text.charCodeAt(at));
+}
+function _indexOfAt(text, from, to) {
+  for (let i = from; i < to; i++) {
+    if (text.charCodeAt(i) === 64) {
+      return i;
+    }
+  }
+  return -1;
+}
+var LEADING_QUOTED_STRING = /^"(?:[^"\\]|\\[\s\S])*"/;
+function _joinAtSpacing(value, at) {
+  if (at < 0) {
+    return value;
+  }
+  let start = at;
+  while (start > 0 && _isSpaceCode(value.charCodeAt(start - 1))) {
+    start--;
+  }
+  let end = at + 1;
+  while (end < value.length && _isSpaceCode(value.charCodeAt(end))) {
+    end++;
+  }
+  const joined = start === at && end === at + 1 ? value : value.slice(0, start) + "@" + value.slice(end);
+  return _joinDomainDotSpacing(joined, start);
+}
+var ASCII_ATEXT = new Uint8Array(128);
+for (let code = 33; code < 127; code++) {
+  ASCII_ATEXT[code] = '()<>[]:;@\\,."'.indexOf(String.fromCharCode(code)) < 0 ? 1 : 0;
+}
+function _isAtextCode(code) {
+  return code < 128 ? ASCII_ATEXT[code] === 1 : !_isSpaceCode(code);
+}
+function _joinDomainDotSpacing(value, at) {
+  const len = value.length;
+  let pos = at + 1;
+  let spaced = false;
+  for (; ; ) {
+    const labelStart = pos;
+    while (pos < len && _isAtextCode(value.charCodeAt(pos))) {
+      pos++;
+    }
+    if (pos === labelStart) {
+      break;
+    }
+    let next = pos;
+    while (next < len && _isFoldingSpaceCode(value.charCodeAt(next))) {
+      next++;
+    }
+    if (value.charCodeAt(next) !== 46) {
+      break;
+    }
+    next++;
+    while (next < len && _isFoldingSpaceCode(value.charCodeAt(next))) {
+      next++;
+    }
+    if (next >= len || !_isAtextCode(value.charCodeAt(next))) {
+      break;
+    }
+    spaced = spaced || next !== pos + 1;
+    pos = next;
+  }
+  if (!spaced) {
+    return value;
+  }
+  let domain = "";
+  for (let k = at + 1; k < pos; k++) {
+    if (!_isFoldingSpaceCode(value.charCodeAt(k))) {
+      domain += value.charAt(k);
+    }
+  }
+  return value.slice(0, at + 1) + domain + value.slice(pos);
+}
+function _collapseAtSpacing(value) {
+  const quoted = LEADING_QUOTED_STRING.exec(value);
+  if (quoted) {
+    let at2 = quoted[0].length;
+    while (at2 < value.length && _isSpaceCode(value.charCodeAt(at2))) {
+      at2++;
+    }
+    if (value.charAt(at2) === "@" && value.indexOf("@", at2 + 1) < 0) {
+      return _joinAtSpacing(value, at2);
+    }
+  }
+  const at = value.indexOf("@");
+  if (at < 0 || value.indexOf("@", at + 1) >= 0 || value.lastIndexOf('"') > at) {
+    return value;
+  }
+  return _joinAtSpacing(value, at);
+}
+function _looseAddressStart(text) {
+  const len = text.length;
+  let pos = 0;
+  while (pos < len) {
+    while (pos < len && _isSpaceCode(text.charCodeAt(pos))) {
+      pos++;
+    }
+    if (pos >= len) {
+      break;
+    }
+    const runStart = pos;
+    let runEnd = pos;
+    while (runEnd < len && !_isSpaceCode(text.charCodeAt(runEnd))) {
+      runEnd++;
+    }
+    let at = _indexOfAt(text, runStart, runEnd);
+    if (at >= 0) {
+      let lastBoundary = -1;
+      for (let k = runEnd; k > runStart; k--) {
+        if (_isBoundary(text, k)) {
+          lastBoundary = k;
+          break;
+        }
+      }
+      let atomStart = runStart;
+      while (lastBoundary >= 0 && at >= 0) {
+        if (at > atomStart && runEnd > at + 1 && lastBoundary > at + 1) {
+          for (let start = atomStart; start < at; start++) {
+            if (_isBoundary(text, start)) {
+              if (start > runStart) {
+                return start;
+              }
+              let padded = runStart;
+              while (padded > 0 && _isSpaceCode(text.charCodeAt(padded - 1))) {
+                padded--;
+              }
+              return padded;
+            }
+          }
+        }
+        atomStart = at + 1;
+        at = _indexOfAt(text, atomStart, runEnd);
+      }
+    }
+    pos = runEnd;
+  }
+  return -1;
+}
+function _recoverAddrSpec(data) {
+  data.address = _collapseAtSpacing(data.address);
+  if (!HAS_WHITESPACE.test(data.address)) {
+    return;
+  }
+  let address;
+  let rest;
+  const quoted = data.address.match(QUOTED_LOCAL_ADDR);
+  if (quoted) {
+    if (!quoted[2]) {
+      return;
+    }
+    address = quoted[1];
+    rest = [quoted[2]];
+  } else {
+    if (data.address.indexOf('"') >= 0) {
+      return;
+    }
+    const parts = data.address.split(/\s+/);
+    let addrIndex = parts.findIndex(_isAddrSpec);
+    if (addrIndex < 0) {
+      addrIndex = parts.findIndex((part) => LOOSE_ADDR_SPEC.test(part));
+    }
+    if (addrIndex < 0) {
+      return;
+    }
+    address = parts.splice(addrIndex, 1)[0];
+    rest = parts;
+  }
+  data.address = address;
+  data.text = [data.text].concat(rest).filter((part) => part).join(" ");
+}
+function _stripAddressComments(address) {
+  const comments = [];
+  let result = "";
+  let comment = "";
+  let depth = 0;
+  let closer = "";
+  let lastChar = "";
+  let pendingSpace = false;
+  let firstChar = "";
+  let quoteSeen = false;
+  let routeEnd = -1;
+  for (let i = 0, len = address.length; i < len; i++) {
+    const chr = address.charAt(i);
+    if (depth) {
+      if (chr === "\\" && i < len - 1) {
+        comment += address.charAt(++i);
+      } else if (chr === "(") {
+        depth++;
+        comment += chr;
+      } else if (chr === ")" && !--depth) {
+        comments.push(comment.trim());
+        comment = "";
+        pendingSpace = lastChar !== "@";
+      } else {
+        comment += chr;
+      }
+      continue;
+    }
+    if (pendingSpace && chr !== "(") {
+      pendingSpace = false;
+      if (chr !== "@" && chr !== "<" && !_isSpaceCode(address.charCodeAt(i))) {
+        result += " ";
+        lastChar = " ";
+      }
+    }
+    if (closer) {
+      if (chr === "\\" && closer === '"' && i < len - 1) {
+        result += chr + address.charAt(++i);
+        lastChar = address.charAt(i);
+        continue;
+      }
+      if (chr === closer) {
+        closer = "";
+      }
+    } else if (chr === '"') {
+      closer = '"';
+      quoteSeen = true;
+    } else if (chr === ":" && routeEnd < 0 && firstChar === "@" && !quoteSeen) {
+      routeEnd = result.length + 1;
+    } else if (chr === "[") {
+      closer = "]";
+    } else if (chr === "(") {
+      depth = 1;
+      continue;
+    } else if (chr === "<") {
+      result = "";
+      lastChar = "";
+      comments.length = 0;
+      firstChar = "";
+      quoteSeen = false;
+      routeEnd = -1;
+      continue;
+    }
+    result += chr;
+    lastChar = chr;
+    if (!firstChar && !_isSpaceCode(address.charCodeAt(i))) {
+      firstChar = chr;
+    }
+  }
+  if (routeEnd >= 0 && result.indexOf("@", routeEnd) >= 0) {
+    result = result.slice(routeEnd);
+  }
+  if (depth) {
+    comments.push(comment.trim());
+  }
+  return { address: result.trim(), comments: comments.filter((text) => text) };
+}
+function _collectAddressParts(tokens, from, to) {
+  let state = "text";
+  const data = {
+    address: [],
+    comment: [],
+    text: [],
+    textWasQuoted: [],
+    quotedLocalAt: []
+  };
+  let insideQuotes = false;
+  let lastTextPureQuoted = false;
+  let lastTextHasAt = false;
+  let lastTextOpen = false;
+  let gapFrom = 0;
+  let gapsFolding = true;
+  const lastChars = { address: "", comment: "", text: "" };
+  for (let i = from; i < to; i++) {
+    const value = tokens.value(i);
+    const prevOperator = i > from ? tokens.operatorAt(i - 1) : "";
+    const prevNoBreak = i > from && tokens.noBreak(i - 1);
+    if (tokens.isOperator(i)) {
+      switch (value) {
+        case "<":
+          state = "address";
+          insideQuotes = false;
+          lastTextOpen = false;
+          break;
+        case "(":
+          state = "comment";
+          insideQuotes = false;
+          gapsFolding = gapsFolding && _isFoldingGap(tokens.str, gapFrom, tokens.contentStart(i));
+          break;
+        case '"':
+          insideQuotes = !insideQuotes;
+          state = "text";
+          lastTextOpen = false;
+          break;
+        default:
+          state = "text";
+          insideQuotes = false;
+          if (value !== ")") {
+            lastTextOpen = false;
+          } else {
+            gapFrom = tokens.contentEnd(i);
+          }
+          break;
+      }
+    } else {
+      const opensAfterEmptyQuotedString = prevOperator === '"' && prevNoBreak && i > from + 1 && tokens.operatorAt(i - 2) === '"';
+      const parts = data[state];
+      const secondAt = lastTextHasAt && prevOperator === ")" && value.indexOf("@") >= 0;
+      const joinsDomain = !secondAt && lastTextOpen && lastTextHasAt && prevOperator === ")" && (lastChars.text === "." || value.charAt(0) === ".") && gapsFolding && _isFoldingGap(tokens.str, gapFrom, tokens.contentStart(i));
+      const joins = joinsDomain || !secondAt && prevNoBreak && parts.length > 0 && (prevOperator !== ")" || lastChars[state] === "@" || value.charAt(0) === "@");
+      if (joins) {
+        const last = data[state].length - 1;
+        if (state === "text" && !insideQuotes) {
+          if (lastTextPureQuoted && value.charAt(0) === "@") {
+            data.quotedLocalAt[last] = data.text[last].length;
+          }
+          lastTextPureQuoted = false;
+        }
+        data[state][last] += value;
+        lastChars[state] = value.charAt(value.length - 1);
+        if (state === "text" && insideQuotes) {
+          data.textWasQuoted[last] = true;
+        }
+      } else {
+        data[state].push(value);
+        lastChars[state] = value.charAt(value.length - 1);
+        if (state === "text") {
+          data.textWasQuoted.push(insideQuotes || opensAfterEmptyQuotedString);
+          data.quotedLocalAt.push(opensAfterEmptyQuotedString && value.charAt(0) === "@" ? 0 : -1);
+          lastTextPureQuoted = insideQuotes;
+        }
+      }
+      if (state === "text") {
+        lastTextHasAt = joins && lastTextHasAt || !insideQuotes && value.indexOf("@") >= 0;
+        lastTextOpen = true;
+        gapFrom = tokens.contentEnd(i);
+        gapsFolding = true;
+      }
+    }
+  }
+  let textFromComment = false;
+  if (!data.text.length && data.comment.length) {
+    data.text = data.comment;
+    data.comment = [];
+    textFromComment = true;
+  }
+  return { data, textFromComment };
+}
+function _groupName(tokens, from, to) {
+  return _collectAddressParts(tokens, from, to).data.text.join(" ");
+}
+function _handleAddress(tokens, from, to) {
+  const collected = _collectAddressParts(tokens, from, to);
+  const data = collected.data;
+  let textFromComment = collected.textFromComment;
+  const addressComments = [];
+  const addressParts = [];
+  for (const part of data.address) {
+    const stripped = _stripAddressComments(part);
+    for (const comment of stripped.comments) {
+      addressComments.push(comment);
+    }
+    if (stripped.address) {
+      addressParts.push(stripped.address);
+    }
+  }
+  data.address = addressParts;
+  if (!data.address.length && data.text.length && !textFromComment) {
+    const candidates = data.text.map((part) => _collapseAtSpacing(part));
+    for (let i = 0; i < data.text.length; i++) {
+      const local = data.quotedLocalAt[i];
+      const quotedLocal = data.textWasQuoted[i] && local >= 0 && QUOTED_LOCAL_DOMAIN.test(data.text[i].slice(local)) ? _quoteLocalPart(data.text[i]) : "";
+      if (quotedLocal || !data.textWasQuoted[i] && _isAddrSpec(candidates[i])) {
+        data.address = [quotedLocal || candidates[i]];
+        data.text.splice(i, 1);
+        data.textWasQuoted.splice(i, 1);
+        data.quotedLocalAt.splice(i, 1);
+        break;
+      }
+    }
+    if (!data.address.length) {
+      let extracted = false;
+      for (let i = 0; i < data.text.length; i++) {
+        if (!data.textWasQuoted[i]) {
+          const part = candidates[i];
+          let remainder = data.text[i];
+          const at = _looseAddressStart(part);
+          if (at >= 0) {
+            LOOSE_TEXT_ADDR.lastIndex = at;
+            const match = LOOSE_TEXT_ADDR.exec(part);
+            if (match) {
+              data.address = [match[0].trim()];
+              extracted = true;
+              remainder = part.slice(0, at) + " " + part.slice(at + match[0].length);
+            }
+          }
+          data.text[i] = remainder.trim();
+          if (extracted) {
+            break;
+          }
+        }
+      }
+    }
+  }
+  if (!data.text.length && data.comment.length) {
+    data.text = data.comment;
+    data.comment = [];
+  }
+  if (data.address.length > 1) {
+    data.text = data.text.concat(data.address.splice(1));
+  }
+  const addressFromQuotedText = !data.address.length && data.textWasQuoted.some((wasQuoted) => wasQuoted);
+  data.text = data.text.join(" ");
+  data.address = data.address.join(" ");
+  if (addressFromQuotedText && data.text.indexOf("@") >= 0) {
+    data.address = _quoteLocalPart(_joinAtSpacing(data.text, _domainAt(data.text)));
+    data.text = "";
+  }
+  _recoverAddrSpec(data);
+  if (!data.text && addressComments.length) {
+    data.text = addressComments.join(" ");
+    textFromComment = true;
+  }
+  const address = {
+    address: data.address || (textFromComment ? "" : data.text) || "",
+    name: data.text || data.address || ""
+  };
+  if (address.address === address.name) {
+    if (/@/.test(address.address || "")) {
+      address.name = "";
+    } else {
+      address.address = "";
+    }
+  }
+  return address;
+}
+var Tokenizer = class {
+  constructor(str) {
+    this.str = (str || "").toString();
+    this.operatorCurrent = "";
+    this.operatorExpecting = "";
+    this.node = -1;
+    this.escaped = false;
+    this.inDomainLiteral = false;
+    this.afterAt = false;
+    this.inGroup = false;
+    this.innerQuoted = false;
+    this.innerComment = 0;
+    this.innerLiteral = false;
+    this.innerEscaped = false;
+    this.list = new TokenList(this.str);
+    this.operators = {
+      '"': '"',
+      "(": ")",
+      "<": ">",
+      ",": "",
+      // A group is read in the same pass as the rest of the list, so its ':' only marks
+      // where the name ends and its members are tokenized like any other address
+      ":": "",
+      // Semicolons are not a legal delimiter per the RFC2822 grammar other
+      // than for terminating a group, but they are also not valid for any
+      // other use in this context.  Given that some mail clients have
+      // historically allowed the semicolon as a delimiter equivalent to the
+      // comma in their UI, it makes sense to treat them the same as a comma
+      // when used outside of a group.
+      ";": ""
+    };
+  }
+  /**
+   * Tokenizes the original input string
+   *
+   * @return An array of operator|text tokens
+   */
+  tokenize() {
+    const str = this.str;
+    const len = str.length;
+    for (let i = 0; i < len; i++) {
+      this.checkChar(str.charAt(i), i);
+    }
+    this._closeText(len);
+    const list = this.list;
+    const slots = list.slots;
+    let kept = 0;
+    for (let i = 0, count = list.length; i < count; i++) {
+      const kind = slots[i * 3];
+      let start = slots[i * 3 + 1];
+      let end = slots[i * 3 + 2];
+      if (kind & TOKEN_DIRTY) {
+        const value = this._cleanValue(start, end, kind).trim();
+        if (!value) {
+          continue;
+        }
+        list.cleaned.set(kept, value);
+      } else if (!(kind & TOKEN_OPERATOR)) {
+        while (start < end && _isSpaceCode(str.charCodeAt(start))) {
+          start++;
+        }
+        while (end > start && _isSpaceCode(str.charCodeAt(end - 1))) {
+          end--;
+        }
+        if (start === end) {
+          continue;
+        }
+      }
+      slots[kept * 3] = kind;
+      slots[kept * 3 + 1] = start;
+      slots[kept * 3 + 2] = end;
+      kept++;
+    }
+    list.length = kept;
+    return list;
+  }
+  /**
+   * Ends the text run being collected, if there is one
+   *
+   * @param end Offset just past its last character
+   */
+  _closeText(end) {
+    if (this.node >= 0) {
+      this.list.slots[this.node * 3 + 2] = end;
+      this.node = -1;
+    }
+  }
+  /**
+   * Rebuilds the value of a text run that is no plain slice of the field, applying the
+   * rules checkChar collects characters by: an escaping backslash is dropped, a line break
+   * reads as a space and any other control character is left out
+   *
+   * @param start Offset of the first character of the run
+   * @param end Offset just past its last character
+   * @param kind Kind and flags of the run
+   * @return Value of the run
+   */
+  _cleanValue(start, end, kind) {
+    const str = this.str;
+    const escapes = (kind & TOKEN_ESCAPES) !== 0;
+    let escaped = (kind & TOKEN_STARTS_ESCAPED) !== 0;
+    let value = "";
+    for (let i = start; i < end; i++) {
+      const chr = str.charAt(i);
+      if (escapes && !escaped && chr === "\\") {
+        escaped = true;
+        continue;
+      }
+      escaped = false;
+      if (chr === "\n") {
+        value += " ";
+      } else if (chr.charCodeAt(0) >= 33 || chr === " " || chr === "	") {
+        value += chr;
+      }
+    }
+    return value;
+  }
+  /**
+   * Checks if a character is an operator or text and acts accordingly
+   *
+   * @param chr Character from the address field
+   * @param i Offset of the character in the field
+   */
+  checkChar(chr, i) {
+    if (!this.escaped && !this.operatorExpecting) {
+      if (!this.inDomainLiteral && chr === "[" && this.afterAt) {
+        this.inDomainLiteral = true;
+      } else if (this.inDomainLiteral && (chr === "]" || chr === "," || chr === ";")) {
+        this.inDomainLiteral = false;
+      }
+    }
+    let nested = false;
+    if (this.operatorExpecting === ">") {
+      nested = this._trackInner(chr);
+      if (!nested && chr === ";" && this.inGroup) {
+        this._closeText(i);
+        this.operatorExpecting = "";
+        this._resetInner();
+      }
+    } else if (this.operatorExpecting === ")" && !this.escaped) {
+      if (chr === "(") {
+        this.innerComment++;
+      } else if (chr === ")" && this.innerComment) {
+        this.innerComment--;
+        nested = true;
+      }
+    }
+    if (this.escaped) {
+    } else if (chr === this.operatorExpecting && !nested) {
+      const nextChr = this.str.charAt(i + 1);
+      this._closeText(i);
+      this.list.push(nextChr && ![" ", "	", "\r", "\n", ",", ";"].includes(nextChr) ? TOKEN_OPERATOR | TOKEN_NO_BREAK : TOKEN_OPERATOR, i, i + 1);
+      if (chr !== ")") {
+        this.afterAt = false;
+      }
+      this.operatorExpecting = "";
+      this.escaped = false;
+      this._resetInner();
+      return;
+    } else if (!this.operatorExpecting && !(this.inDomainLiteral && chr === ":") && chr in this.operators) {
+      this._closeText(i);
+      this.list.push(TOKEN_OPERATOR, i, i + 1);
+      if (chr === ":") {
+        this.inGroup = true;
+      } else if (chr === ";") {
+        this.inGroup = false;
+      }
+      if (chr !== "(") {
+        this.afterAt = false;
+      }
+      this.operatorExpecting = this.operators[chr];
+      this.escaped = false;
+      this._resetInner();
+      return;
+    } else if (['"', "'", ")"].includes(this.operatorExpecting) && chr === "\\") {
+      this.escaped = true;
+      if (this.node >= 0) {
+        this.list.slots[this.node * 3] |= TOKEN_DIRTY;
+      }
+      return;
+    }
+    if (this.node < 0) {
+      this.node = this.list.push((this.operatorExpecting === '"' || this.operatorExpecting === ")" ? TOKEN_ESCAPES : 0) | (this.escaped ? TOKEN_STARTS_ESCAPED : 0), i, i);
+    }
+    if (chr === "\n") {
+      chr = " ";
+      this.list.slots[this.node * 3] |= TOKEN_DIRTY;
+    }
+    if (chr.charCodeAt(0) >= 33 || chr === " " || chr === "	") {
+      if (!this.operatorExpecting && chr !== " " && chr !== "	") {
+        this.afterAt = chr === "@";
+      }
+    } else {
+      this.list.slots[this.node * 3] |= TOKEN_DIRTY;
+    }
+    this.escaped = false;
+  }
+  /**
+   * Tracks the quoted strings, comments and domain literals inside an angle-addr, which its
+   * closer must not be read from. A backslash escapes the next character inside a quoted
+   * string and a comment. A domain literal opens right after an "@" and ends at the "]".
+   * dtext holds the list separators as well, and inside the brackets they never split the
+   * list anyway.
+   *
+   * @param chr Character from the address field
+   * @return true while the character sits inside one of them, the one that closes it included
+   */
+  _trackInner(chr) {
+    if (this.innerEscaped) {
+      this.innerEscaped = false;
+      return true;
+    }
+    if (this.innerQuoted) {
+      if (chr === "\\") {
+        this.innerEscaped = true;
+      } else if (chr === '"') {
+        this.innerQuoted = false;
+      }
+      return true;
+    }
+    if (this.innerComment) {
+      if (chr === "\\") {
+        this.innerEscaped = true;
+      } else if (chr === "(") {
+        this.innerComment++;
+      } else if (chr === ")") {
+        this.innerComment--;
+      }
+      return true;
+    }
+    if (this.innerLiteral) {
+      if (chr === "]") {
+        this.innerLiteral = false;
+      }
+      return true;
+    }
+    if (chr === '"') {
+      this.innerQuoted = true;
+      return true;
+    }
+    if (chr === "(") {
+      this.innerComment = 1;
+      return true;
+    }
+    if (chr === "[" && this.afterAt) {
+      this.innerLiteral = true;
+      return true;
+    }
+    if (!_isSpaceCode(chr.charCodeAt(0))) {
+      this.afterAt = chr === "@";
+    }
+    return false;
+  }
+  /**
+   * Forgets the nesting collected for the operator that just opened or ended
+   */
+  _resetInner() {
+    this.innerQuoted = false;
+    this.innerComment = 0;
+    this.innerLiteral = false;
+    this.innerEscaped = false;
+  }
+};
+function _mergeNameFragments(list) {
+  const merged = [];
+  for (let i = list.length - 1; i >= 0; i--) {
+    const current = list[i];
+    const next = merged.length ? merged[merged.length - 1] : null;
+    if (next && current.address === "" && current.name && !current.group && next.address && next.name) {
+      next.name = current.name + ", " + next.name;
+    } else {
+      merged.push(current);
+    }
+  }
+  return merged.reverse();
+}
+function _parseAddressList(str) {
+  const tokens = new Tokenizer(str).tokenize();
+  const parsedAddresses = [];
+  let group = null;
+  let members = [];
+  let from = 0;
+  for (let i = 0, len = tokens.length; i <= len; i++) {
+    const operator = i < len ? tokens.operatorAt(i) : "";
+    if (i < len && operator !== "," && operator !== ";" && operator !== ":") {
+      continue;
+    }
+    if (operator === ":") {
+      if (!group) {
+        group = { name: _groupName(tokens, from, i), group: [] };
+        members = [];
+      }
+      from = i + 1;
+      continue;
+    }
+    if (i > from) {
+      const address = _handleAddress(tokens, from, i);
+      if (group) {
+        members.push(address);
+      } else {
+        parsedAddresses.push(address);
+      }
+    }
+    from = i + 1;
+    if (group && (operator === ";" || i === len)) {
+      group.group = _mergeNameFragments(members);
+      parsedAddresses.push(group);
+      group = null;
+    }
+  }
+  return _mergeNameFragments(parsedAddresses);
+}
+function addressparser(str, options) {
+  const parsedAddresses = _parseAddressList(str);
+  if (options?.flatten) {
+    const flatAddresses = [];
+    const walkAddressList = (list) => {
+      list.forEach((entry) => {
+        if (entry.group) {
+          return walkAddressList(entry.group);
+        }
+        flatAddresses.push(entry);
+      });
+    };
+    walkAddressList(parsedAddresses);
+    return flatAddresses;
+  }
+  return parsedAddresses;
+}
+var addressparser_default = addressparser;
+
+// node_modules/nodemailer/dist/esm/mime-node/last-newline.js
+var import_node_stream5 = require("node:stream");
+var LastNewline = class extends import_node_stream5.Transform {
+  constructor() {
+    super();
+    this.lastByte = false;
+  }
+  /** @internal */
+  _transform(chunk, encoding, done) {
+    if (chunk.length) {
+      this.lastByte = chunk[chunk.length - 1];
+    }
+    this.push(chunk);
+    done();
+  }
+  /** @internal */
+  _flush(done) {
+    if (this.lastByte === 10) {
+      return done();
+    }
+    if (this.lastByte === 13) {
+      this.push(Buffer.from("\n"));
+      return done();
+    }
+    this.push(Buffer.from("\r\n"));
+    return done();
+  }
+};
+
+// node_modules/nodemailer/dist/esm/mime-node/le-windows.js
+var import_node_stream6 = require("node:stream");
+var LeWindows = class extends import_node_stream6.Transform {
+  constructor(options) {
+    super(options);
+    this.lastByte = false;
+  }
+  /**
+   * Escapes dots
+   * @internal
+   */
+  _transform(chunk, encoding, done) {
+    let buf;
+    let lastPos = 0;
+    for (let i = 0, len = chunk.length; i < len; i++) {
+      if (chunk[i] === 10) {
+        if (i && chunk[i - 1] !== 13 || !i && this.lastByte !== 13) {
+          if (i > lastPos) {
+            buf = chunk.slice(lastPos, i);
+            this.push(buf);
+          }
+          this.push(Buffer.from("\r\n"));
+          lastPos = i + 1;
+        }
+      }
+    }
+    if (lastPos && lastPos < chunk.length) {
+      buf = chunk.slice(lastPos);
+      this.push(buf);
+    } else if (!lastPos) {
+      this.push(chunk);
+    }
+    this.lastByte = chunk[chunk.length - 1];
+    done();
+  }
+};
+
+// node_modules/nodemailer/dist/esm/mime-node/le-unix.js
+var import_node_stream7 = require("node:stream");
+var LeUnix = class extends import_node_stream7.Transform {
+  constructor(options) {
+    super(options);
+  }
+  /**
+   * Escapes dots
+   * @internal
+   */
+  _transform(chunk, encoding, done) {
+    let buf;
+    let lastPos = 0;
+    for (let i = 0, len = chunk.length; i < len; i++) {
+      if (chunk[i] === 13) {
+        buf = chunk.slice(lastPos, i);
+        lastPos = i + 1;
+        this.push(buf);
+      }
+    }
+    if (lastPos && lastPos < chunk.length) {
+      buf = chunk.slice(lastPos);
+      this.push(buf);
+    } else if (!lastPos) {
+      this.push(chunk);
+    }
+    done();
+  }
+};
+
+// node_modules/nodemailer/dist/esm/mime-node/index.js
+var FORMATTED_HEADERS = ["From", "Sender", "To", "Cc", "Bcc", "Reply-To", "Date", "References"];
+var ATEXT = "[A-Za-z0-9!#$%&'*+\\-/=?^_`{|}~\\x80-\\uFFFF]";
+var DOT_ATOM = new RegExp("^" + ATEXT + "+(?:\\." + ATEXT + "+)*$");
+var QUOTED_STRING = /^"(?:[^"\\]|\\[\s\S])*"$/;
+var PLAIN_ADDRESS = /^[^\s"(),:;<>@[\\\]]+@[^\s"(),:;<>@[\\\]]+$/;
+var DOMAIN_LITERAL_TAIL2 = /@(\[[^[\]\\]*\])$/;
+function stripWhitespaceInAngleBrackets(value) {
+  let result = "";
+  let pos = 0;
+  for (; ; ) {
+    const open = value.indexOf("<", pos);
+    if (open < 0) {
+      break;
+    }
+    const close = value.indexOf(">", open + 1);
+    if (close < 0) {
+      break;
+    }
+    result += value.slice(pos, open) + value.slice(open, close + 1).replace(/\s/g, "");
+    pos = close + 1;
+  }
+  return result + value.slice(pos);
+}
+var PIPELINE_NOOP = () => false;
+function abortedError() {
+  const err = new Error("Message stream was closed before the message was generated");
+  err.code = ESTREAM;
+  return err;
+}
+function _stripBoundaryControls(value) {
+  return value.replace(/[\x00-\x1f\x7f]+/g, "");
+}
+var MimeNode = class _MimeNode {
+  constructor(contentType, options) {
+    this.nodeCounter = 0;
+    options = options || {};
+    this.baseBoundary = _stripBoundaryControls(options.baseBoundary || import_node_crypto.default.randomBytes(8).toString("hex"));
+    this.boundaryPrefix = _stripBoundaryControls(options.boundaryPrefix || "--_NmP");
+    this.disableFileAccess = !!options.disableFileAccess;
+    this.disableUrlAccess = !!options.disableUrlAccess;
+    this.normalizeHeaderKey = options.normalizeHeaderKey;
+    this.date = options.parentNode ? null : /* @__PURE__ */ new Date();
+    this.rootNode = options.rootNode || this;
+    this.keepBcc = !!options.keepBcc;
+    if (options.filename) {
+      this.filename = options.filename;
+      if (!contentType) {
+        contentType = detectMimeType2(this.filename.split(".").pop());
+      }
+    }
+    this.textEncoding = (options.textEncoding || "").toString().trim().charAt(0).toUpperCase();
+    this.parentNode = options.parentNode;
+    this.hostname = options.hostname;
+    this.newline = options.newline;
+    this.childNodes = [];
+    this._nodeId = ++this.rootNode.nodeCounter;
+    this._headers = [];
+    this._isPlainText = false;
+    this._hasLongLines = false;
+    this._envelope = false;
+    this._raw = false;
+    this._transforms = [];
+    this._processFuncs = [];
+    if (contentType) {
+      this.setHeader("Content-Type", contentType);
+    }
+  }
+  /////// PUBLIC METHODS
+  /**
+   * Creates and appends a child node.Arguments provided are passed to MimeNode constructor
+   *
+   * @param [contentType] Optional content type
+   * @param [options] Optional options object
+   * @return Created node object
+   */
+  createChild(contentType, options) {
+    if (!options && typeof contentType === "object") {
+      options = contentType;
+      contentType = void 0;
+    }
+    const node = new _MimeNode(contentType, options);
+    this.appendChild(node);
+    return node;
+  }
+  /**
+   * Appends an existing node to the mime tree. Removes the node from an existing
+   * tree if needed
+   *
+   * @param childNode node to be appended
+   * @return Appended node object
+   */
+  appendChild(childNode) {
+    if (childNode.parentNode && childNode.parentNode !== this) {
+      childNode.remove();
+    }
+    if (childNode.rootNode !== this.rootNode) {
+      childNode.rootNode = this.rootNode;
+      childNode._nodeId = ++this.rootNode.nodeCounter;
+    }
+    childNode.parentNode = this;
+    this.childNodes.push(childNode);
+    return childNode;
+  }
+  /**
+   * Replaces current node with another node
+   *
+   * @param node Replacement node
+   * @return Replacement node
+   */
+  replace(node) {
+    if (node === this) {
+      return this;
+    }
+    this.parentNode.childNodes.forEach((childNode, i) => {
+      if (childNode === this) {
+        node.rootNode = this.rootNode;
+        node.parentNode = this.parentNode;
+        node._nodeId = this._nodeId;
+        this.rootNode = this;
+        this.parentNode = void 0;
+        node.parentNode.childNodes[i] = node;
+      }
+    });
+    return node;
+  }
+  /**
+   * Removes current node from the mime tree
+   *
+   * @return removed node
+   */
+  remove() {
+    if (!this.parentNode) {
+      return this;
+    }
+    for (let i = this.parentNode.childNodes.length - 1; i >= 0; i--) {
+      if (this.parentNode.childNodes[i] === this) {
+        this.parentNode.childNodes.splice(i, 1);
+        this.parentNode = void 0;
+        this.rootNode = this;
+        return this;
+      }
+    }
+  }
+  /**
+   * Sets a header value. If the value for selected key exists, it is overwritten.
+   * You can set multiple values as well by using [{key:'', value:''}] or
+   * {key: 'value'} as the first argument.
+   *
+   * @param key Header key or a list of key value pairs
+   * @param value Header value
+   * @return current node
+   */
+  setHeader(key, value) {
+    let added = false;
+    if (!value && key && typeof key === "object") {
+      if (key.key && "value" in key) {
+        this.setHeader(key.key, key.value);
+      } else if (Array.isArray(key)) {
+        key.forEach((i) => {
+          this.setHeader(i.key, i.value);
+        });
+      } else {
+        Object.keys(key).forEach((i) => {
+          this.setHeader(i, key[i]);
+        });
+      }
+      return this;
+    }
+    key = this._normalizeHeaderKey(key);
+    const headerValue = {
+      key,
+      value
+    };
+    for (let i = 0, len = this._headers.length; i < len; i++) {
+      if (this._headers[i].key === key) {
+        if (!added) {
+          this._headers[i] = headerValue;
+          added = true;
+        } else {
+          this._headers.splice(i, 1);
+          i--;
+          len--;
+        }
+      }
+    }
+    if (!added) {
+      this._headers.push(headerValue);
+    }
+    return this;
+  }
+  /**
+   * Adds a header value. If the value for selected key exists, the value is appended
+   * as a new field and old one is not touched.
+   * You can set multiple values as well by using [{key:'', value:''}] or
+   * {key: 'value'} as the first argument.
+   *
+   * @param key Header key or a list of key value pairs
+   * @param value Header value
+   * @return current node
+   */
+  addHeader(key, value) {
+    if (!value && key && typeof key === "object") {
+      if (key.key && key.value) {
+        this.addHeader(key.key, key.value);
+      } else if (Array.isArray(key)) {
+        key.forEach((i) => {
+          this.addHeader(i.key, i.value);
+        });
+      } else {
+        Object.keys(key).forEach((i) => {
+          this.addHeader(i, key[i]);
+        });
+      }
+      return this;
+    } else if (Array.isArray(value)) {
+      value.forEach((val) => {
+        this.addHeader(key, val);
+      });
+      return this;
+    }
+    this._headers.push({
+      key: this._normalizeHeaderKey(key),
+      value
+    });
+    return this;
+  }
+  /**
+   * Retrieves the first mathcing value of a selected key
+   *
+   * @param key Key to search for
+   * @retun Value for the key
+   */
+  getHeader(key) {
+    key = this._normalizeHeaderKey(key);
+    for (let i = 0, len = this._headers.length; i < len; i++) {
+      if (this._headers[i].key === key) {
+        return this._headers[i].value;
+      }
+    }
+  }
+  /**
+   * Sets body content for current node. If the value is a string, charset is added automatically
+   * to Content-Type (if it is text/*). If the value is a Buffer, you need to specify
+   * the charset yourself
+   *
+   * @param content Body content
+   * @return current node
+   */
+  setContent(content) {
+    this.content = content;
+    if (typeof this.content.pipe === "function") {
+      recordStreamErrors(this.content);
+    } else if (typeof this.content === "string") {
+      this._isPlainText = isPlainText(this.content);
+      if (this._isPlainText && hasLongerLines(this.content, 76)) {
+        this._hasLongLines = true;
+      }
+    }
+    return this;
+  }
+  build(callback) {
+    let promise;
+    if (!callback) {
+      promise = new Promise((resolve3, reject) => {
+        callback = callbackPromise(resolve3, reject);
+      });
+    }
+    const done = callback;
+    const stream = this.createReadStream();
+    const buf = [];
+    let buflen = 0;
+    let returned = false;
+    stream.on("readable", () => {
+      let chunk;
+      while ((chunk = stream.read()) !== null) {
+        buf.push(chunk);
+        buflen += chunk.length;
+      }
+    });
+    stream.once("error", (err) => {
+      if (returned) {
+        return;
+      }
+      returned = true;
+      return done(err);
+    });
+    stream.once("end", (chunk) => {
+      if (returned) {
+        return;
+      }
+      returned = true;
+      if (chunk && chunk.length) {
+        buf.push(chunk);
+        buflen += chunk.length;
+      }
+      return done(null, Buffer.concat(buf, buflen));
+    });
+    return promise;
+  }
+  getTransferEncoding() {
+    let transferEncoding = false;
+    const contentType = (this.getHeader("Content-Type") || "").toString().toLowerCase().trim();
+    if (this.content) {
+      transferEncoding = (this.getHeader("Content-Transfer-Encoding") || "").toString().toLowerCase().trim();
+      if (!transferEncoding || !["base64", "quoted-printable"].includes(transferEncoding)) {
+        if (/^text\//i.test(contentType)) {
+          if (this._isPlainText && !this._hasLongLines) {
+            transferEncoding = "7bit";
+          } else if (typeof this.content === "string" || this.content instanceof Buffer) {
+            transferEncoding = this._getTextEncoding(this.content) === "Q" ? "quoted-printable" : "base64";
+          } else {
+            transferEncoding = this.textEncoding === "B" ? "base64" : "quoted-printable";
+          }
+        } else if (!/^(multipart|message)\//i.test(contentType)) {
+          transferEncoding = transferEncoding || "base64";
+        }
+      }
+    }
+    return transferEncoding;
+  }
+  /**
+   * Builds the header block for the mime node. Append \r\n\r\n before writing the content
+   *
+   * @returns Headers
+   */
+  buildHeaders() {
+    const transferEncoding = this.getTransferEncoding();
+    const headers = [];
+    if (transferEncoding) {
+      this.setHeader("Content-Transfer-Encoding", transferEncoding);
+    }
+    if (this.filename && !this.getHeader("Content-Disposition")) {
+      this.setHeader("Content-Disposition", "attachment");
+    }
+    if (this.rootNode === this) {
+      if (!this.getHeader("Date")) {
+        this.setHeader("Date", this.date.toUTCString().replace(/GMT/, "+0000"));
+      }
+      this.messageId();
+      if (!this.getHeader("MIME-Version")) {
+        this.setHeader("MIME-Version", "1.0");
+      }
+      for (let i = this._headers.length - 2; i >= 0; i--) {
+        const header = this._headers[i];
+        if (header.key === "Content-Type") {
+          this._headers.splice(i, 1);
+          this._headers.push(header);
+        }
+      }
+    }
+    this._headers.forEach((header) => {
+      let key = header.key;
+      let value = header.value;
+      let structured;
+      let param;
+      const options = {};
+      const formattedHeaders = FORMATTED_HEADERS;
+      if (value && typeof value === "object" && !formattedHeaders.includes(key)) {
+        copyOwnKeys(options, value, (optionKey) => optionKey === "value");
+        value = (value.value || "").toString();
+        if (!value.trim()) {
+          return;
+        }
+      }
+      if (options.prepared) {
+        if (options.foldLines) {
+          headers.push(foldLines(key + ": " + value));
+        } else {
+          headers.push(key + ": " + value);
+        }
+        return;
+      }
+      switch (header.key) {
+        // The comments of a MIME header are not part of its value and are dropped, so a
+        // caller supplied 'boundary=b (comment)' is the boundary b it names, and the
+        // header goes out without the comment
+        case "Content-Disposition":
+          structured = parseHeaderValue(value, { stripComments: true });
+          if (this.filename) {
+            structured.params.filename = this.filename;
+          }
+          value = buildHeaderValue(structured);
+          break;
+        case "Content-Type":
+          structured = parseHeaderValue(value, { stripComments: true });
+          structured.value = (structured.value || "").toString().replace(/[\x00-\x1f\x7f]/g, "");
+          this._handleContentType(structured);
+          if (structured.value.match(/^text\/plain\b/) && typeof this.content === "string" && /[\u0080-\uFFFF]/.test(this.content)) {
+            structured.params.charset = "utf-8";
+          }
+          if (this.filename) {
+            for (const paramKey of Object.keys(structured.params)) {
+              if (/^name(\*|$)/i.test(paramKey)) {
+                delete structured.params[paramKey];
+              }
+            }
+          }
+          value = buildHeaderValue(structured);
+          if (this.filename) {
+            param = /[\x00-\x1f\x7f]/.test(this.filename) ? encodeWord(this.filename, this._getTextEncoding(this.filename), 52) : this._encodeWords(this.filename);
+            if (param !== this.filename || /[\s'"\\;:/=(),<>@[\]?]|^-/.test(param)) {
+              param = JSON.stringify(param);
+            }
+            value += "; name=" + param;
+          }
+          break;
+        case "Bcc":
+          if (!this.keepBcc) {
+            return;
+          }
+          break;
+      }
+      value = this.encodeHeaderValue(key, value);
+      if (!(value || "").toString().trim()) {
+        return;
+      }
+      if (typeof this.normalizeHeaderKey === "function") {
+        const normalized2 = this.normalizeHeaderKey(key, value);
+        const cleaned = typeof normalized2 === "string" ? normalized2.replace(/[\x00-\x1f\x7f]/g, "") : "";
+        if (cleaned) {
+          key = cleaned;
+        }
+      }
+      headers.push(foldLines(key + ": " + value, 76));
+    });
+    return headers.join("\r\n");
+  }
+  /**
+   * Streams the rfc2822 message from the current node. If this is a root node,
+   * mandatory header fields are set if missing (Date, Message-Id, MIME-Version)
+   *
+   * @return Compiled message
+   */
+  createReadStream(options) {
+    options = options || {};
+    const stream = new import_node_stream8.PassThrough(options);
+    this.stream(stream, options, (err) => {
+      if (err) {
+        stream.destroy(err);
+        return;
+      }
+      stream.end();
+    });
+    stream.once("close", () => {
+      if (!stream.writableFinished) {
+        this._destroyContentStreams();
+      }
+    });
+    const stages = [stream];
+    for (const transform of this._transforms) {
+      stages.push(typeof transform === "function" ? transform() : transform);
+    }
+    stages.push(new LastNewline());
+    let outputStream = (0, import_node_stream8.pipeline)(stages, PIPELINE_NOOP);
+    for (const processFunc of this._processFuncs) {
+      const input = outputStream;
+      outputStream = processFunc(input);
+      if (outputStream !== input) {
+        (0, import_node_stream8.finished)(outputStream, (err) => {
+          if (err) {
+            input.destroy();
+          }
+        });
+      }
+    }
+    if (this.newline) {
+      const winbreak = ["win", "windows", "dos", "\r\n"].includes(this.newline.toString().toLowerCase());
+      outputStream = (0, import_node_stream8.pipeline)(outputStream, winbreak ? new LeWindows() : new LeUnix(), PIPELINE_NOOP);
+    }
+    return outputStream;
+  }
+  /**
+   * Appends a transform stream object to the transforms list. Final output
+   * is passed through this stream before exposing
+   *
+   * @param transform Read-Write stream
+   */
+  transform(transform) {
+    this._transforms.push(transform);
+  }
+  /**
+   * Appends a post process function. The functon is run after transforms and
+   * uses the following syntax
+   *
+   *   processFunc(input) -> outputStream
+   *
+   * @param processFunc Read-Write stream
+   */
+  processFunc(processFunc) {
+    this._processFuncs.push(processFunc);
+  }
+  stream(outputStream, options, done) {
+    const transferEncoding = this.getTransferEncoding();
+    let activeStreams = [];
+    let returned = false;
+    const callback = (err) => {
+      if (returned) {
+        return;
+      }
+      returned = true;
+      outputStream.removeListener("close", onOutputClose);
+      done(err);
+    };
+    function onOutputClose() {
+      for (const stream of activeStreams) {
+        stream.destroy();
+      }
+      return callback(abortedError());
+    }
+    const readInto = (...streams) => {
+      if (!activeStreams.length) {
+        outputStream.once("close", onOutputClose);
+      }
+      activeStreams = streams;
+    };
+    const aborted = () => {
+      if (outputStream.destroyed) {
+        callback(abortedError());
+        return true;
+      }
+      return false;
+    };
+    const finalize = () => {
+      let childId = 0;
+      const processChildNode = () => {
+        if (aborted()) {
+          return;
+        }
+        if (childId >= this.childNodes.length) {
+          outputStream.write("\r\n--" + this.boundary + "--\r\n");
+          return callback();
+        }
+        const child = this.childNodes[childId++];
+        outputStream.write((childId > 1 ? "\r\n" : "") + "--" + this.boundary + "\r\n");
+        child.stream(outputStream, options, (err) => {
+          if (err) {
+            return callback(err);
+          }
+          setImmediate(processChildNode);
+        });
+      };
+      if (this.multipart) {
+        setImmediate(processChildNode);
+      } else {
+        return callback();
+      }
+    };
+    const sendContent = () => {
+      if (aborted()) {
+        return;
+      }
+      if (!this.content) {
+        return setImmediate(finalize);
+      }
+      const createStream = () => {
+        if (aborted()) {
+          return;
+        }
+        const contentError = this._takeStreamContent(this.content);
+        if (contentError) {
+          return callback(contentError);
+        }
+        const localStream = this._getStream(this.content);
+        if (["quoted-printable", "base64"].includes(transferEncoding)) {
+          const contentStream = transferEncoding === "base64" ? new Encoder(options) : (
+            // outside of text a lone CR or LF is data, encoding it keeps it from being
+            // turned into a line break by a newline transform or the receiving side
+            new Encoder2(Object.assign({}, options, { binary: !/^text\//i.test(this.contentType || "") }))
+          );
+          readInto(localStream, contentStream);
+          contentStream.pipe(outputStream, {
+            end: false
+          });
+          (0, import_node_stream8.pipeline)(localStream, contentStream, (err) => err && callback(err));
+          (0, import_node_stream8.finished)(contentStream, { writable: false }, (err) => err ? callback(err) : finalize());
+        } else {
+          readInto(localStream);
+          localStream.pipe(outputStream, {
+            end: false
+          });
+          (0, import_node_stream8.finished)(localStream, { writable: false }, (err) => err ? callback(err) : finalize());
+        }
+      };
+      if (this.content._resolve) {
+        const sourceStream = this._getStream(this.content);
+        readInto(sourceStream);
+        resolveStream(sourceStream, (err, value) => {
+          if (err) {
+            return callback(err);
+          }
+          if (returned) {
+            return;
+          }
+          this.content._resolve = false;
+          this.content._resolvedValue = value;
+          setImmediate(createStream);
+        });
+      } else {
+        setImmediate(createStream);
+      }
+    };
+    if (this._raw) {
+      setImmediate(() => {
+        if (aborted()) {
+          return;
+        }
+        const rawError = this._takeStreamContent(this._raw);
+        if (rawError) {
+          return callback(rawError);
+        }
+        const raw = this._getStream(this._raw);
+        readInto(raw);
+        raw.pipe(outputStream, {
+          end: false
+        });
+        (0, import_node_stream8.finished)(raw, { writable: false }, (err) => err ? callback(err) : finalize());
+      });
+    } else {
+      outputStream.write(this.buildHeaders() + "\r\n\r\n");
+      setImmediate(sendContent);
+    }
+  }
+  /**
+   * Sets envelope to be used instead of the generated one
+   *
+   * @return SMTP envelope in the form of {from: 'from@example.com', to: ['to@example.com']}
+   */
+  setEnvelope(envelope) {
+    let list;
+    this._envelope = {
+      from: false,
+      to: []
+    };
+    if (envelope.from) {
+      list = [];
+      this._convertAddresses(this._parseEnvelopeAddresses(envelope.from), list);
+      list = list.filter((address) => address && address.address);
+      if (list.length && list[0]) {
+        this._envelope.from = list[0].address;
+      }
+    }
+    const seenRecipients = /* @__PURE__ */ new Set();
+    const recipients = [];
+    ["to", "cc", "bcc"].forEach((key) => {
+      if (envelope[key]) {
+        this._convertAddresses(this._parseEnvelopeAddresses(envelope[key]), recipients, seenRecipients);
+      }
+    });
+    this._envelope.to = recipients.map((to) => to.address).filter((address) => address);
+    const standardFields = ["to", "cc", "bcc", "from"];
+    copyOwnKeys(this._envelope, envelope, (key) => standardFields.includes(key));
+    return this;
+  }
+  /**
+   * Generates and returns an object with parsed address fields
+   *
+   * @return Address object
+   */
+  getAddresses() {
+    const addresses = {};
+    const seenByKey = /* @__PURE__ */ new Map();
+    this._headers.forEach((header) => {
+      const key = header.key.toLowerCase();
+      if (["from", "sender", "reply-to", "to", "cc", "bcc"].includes(key)) {
+        if (!Array.isArray(addresses[key])) {
+          addresses[key] = [];
+          seenByKey.set(key, /* @__PURE__ */ new Set());
+        }
+        this._convertAddresses(this._parseAddresses(header.value), addresses[key], seenByKey.get(key));
+      }
+    });
+    return addresses;
+  }
+  /**
+   * Generates and returns SMTP envelope with the sender address and a list of recipients addresses
+   *
+   * @return SMTP envelope in the form of {from: 'from@example.com', to: ['to@example.com']}
+   */
+  getEnvelope() {
+    if (this._envelope) {
+      return this._envelope;
+    }
+    const envelope = {
+      from: false,
+      to: []
+    };
+    const seenRecipients = /* @__PURE__ */ new Set();
+    const recipients = [];
+    this._headers.forEach((header) => {
+      const list = [];
+      if (header.key === "From" || !envelope.from && ["Reply-To", "Sender"].includes(header.key)) {
+        this._convertAddresses(this._parseAddresses(header.value), list);
+        if (list.length && list[0]) {
+          envelope.from = list[0].address;
+        }
+      } else if (["To", "Cc", "Bcc"].includes(header.key)) {
+        this._convertAddresses(this._parseAddresses(header.value), recipients, seenRecipients);
+      }
+    });
+    envelope.to = recipients.map((to) => to.address);
+    return envelope;
+  }
+  /**
+   * Returns Message-Id value. If it does not exist, then creates one
+   *
+   * @return Message-Id value
+   */
+  messageId() {
+    let messageId = this.getHeader("Message-ID");
+    if (!messageId) {
+      messageId = this._generateMessageId();
+      this.setHeader("Message-ID", messageId);
+    }
+    return messageId;
+  }
+  /**
+   * Sets pregenerated content that will be used as the output of this node
+   *
+   * @param raw Raw MIME contents
+   */
+  setRaw(raw) {
+    this._raw = raw;
+    if (this._raw && typeof this._raw.pipe === "function") {
+      recordStreamErrors(this._raw);
+    }
+    return this;
+  }
+  /////// PRIVATE METHODS
+  /**
+   * Checks an access policy flag for this node and every node above it. The flags are set
+   * from the options the node was built with, and createChild only ever sees the options
+   * the caller passed, so a child of a closed tree starts out open. Reading the answer off
+   * the parent chain keeps it right whatever order the tree was assembled in.
+   *
+   * @param flag Either 'disableFileAccess' or 'disableUrlAccess'
+   * @return true if this node or an ancestor closed that access
+   * @internal
+   */
+  _accessDisabled(flag) {
+    let node = this;
+    while (node) {
+      if (node[flag]) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  }
+  /**
+   * Destroys the content streams of this node and of every node below it
+   *
+   * @internal
+   */
+  _destroyContentStreams() {
+    destroyStream(this.content);
+    destroyStream(this._raw);
+    for (const child of this.childNodes) {
+      child._destroyContentStreams();
+    }
+  }
+  /**
+   * Checks that a content value can still be read before the node streams it. A stream is
+   * refused once it errored, ended or was destroyed: piping it would either never finish or
+   * produce an empty body without any error
+   *
+   * @param content Node content or raw value
+   * @returns The error to stop with, or null when the content can be read
+   * @internal
+   */
+  _takeStreamContent(content) {
+    if (Object.prototype.toString.call(content) === "[object Error]") {
+      return content;
+    }
+    if (!content || typeof content.pipe !== "function" || content._resolvedValue) {
+      return null;
+    }
+    return unreadableStreamError(content);
+  }
+  /**
+   * Detects and returns handle to a stream related with the content.
+   *
+   * @param content Node content
+   * @returns Stream object
+   * @internal
+   */
+  _getStream(content) {
+    let contentStream;
+    if (content._resolvedValue) {
+      contentStream = new import_node_stream8.PassThrough();
+      setImmediate(() => {
+        try {
+          contentStream.end(content._resolvedValue);
+        } catch (_err) {
+          contentStream.emit("error", _err);
+        }
+      });
+      return contentStream;
+    }
+    if (typeof content.pipe === "function") {
+      return content;
+    }
+    if (content && typeof content.path === "string" && !content.href) {
+      if (this._accessDisabled("disableFileAccess")) {
+        contentStream = new import_node_stream8.PassThrough();
+        setImmediate(() => {
+          const err = new Error("File access rejected for " + content.path);
+          err.code = EFILEACCESS;
+          contentStream.emit("error", err);
+        });
+        return contentStream;
+      }
+      return import_node_fs2.default.createReadStream(content.path);
+    }
+    if (content && typeof content.href === "string") {
+      if (this._accessDisabled("disableUrlAccess")) {
+        contentStream = new import_node_stream8.PassThrough();
+        setImmediate(() => {
+          const err = new Error("Url access rejected for " + content.href);
+          err.code = EURLACCESS;
+          contentStream.emit("error", err);
+        });
+        return contentStream;
+      }
+      return fetch_default(content.href, { headers: content.httpHeaders, tls: content.tls });
+    }
+    contentStream = new import_node_stream8.PassThrough();
+    setImmediate(() => {
+      try {
+        contentStream.end(content || "");
+      } catch (_err) {
+        contentStream.emit("error", _err);
+      }
+    });
+    return contentStream;
+  }
+  /**
+   * Parses addresses. Takes in a single address or an array or an
+   * array of address arrays (eg. To: [[first group], [second group],...])
+   *
+   * @param addresses Addresses to be parsed
+   * @return An array of address objects
+   * @internal
+   */
+  _parseAddresses(addresses) {
+    const flattened = [];
+    const seen = /* @__PURE__ */ new WeakSet();
+    const stack = [];
+    const enter = (list) => {
+      if (!seen.has(list)) {
+        seen.add(list);
+        stack.push({ list, pos: 0 });
+      }
+    };
+    enter(Array.isArray(addresses) ? addresses : [addresses]);
+    while (stack.length) {
+      const frame = stack[stack.length - 1];
+      if (frame.pos >= frame.list.length) {
+        stack.pop();
+        continue;
+      }
+      const address = frame.list[frame.pos++];
+      if (Array.isArray(address)) {
+        enter(address);
+        continue;
+      }
+      if (address && address.address) {
+        const normalized2 = this._normalizeAddress(address.address);
+        if (normalized2 === address.address && typeof address.name === "string") {
+          flattened.push(address);
+          continue;
+        }
+        const copy = copyOwnKeys({}, address);
+        copy.address = normalized2;
+        copy.name = address.name || "";
+        flattened.push(copy);
+        continue;
+      }
+      const parsed = this._normalizeParsedAddresses(addressparser_default(address));
+      for (let i = 0; i < parsed.length; i++) {
+        flattened.push(parsed[i]);
+      }
+    }
+    return flattened;
+  }
+  /**
+   * Normalizes the addresses of a freshly parsed address list, groups included.
+   *
+   * Everything this method returns carries a normalized address, whether it arrived as an
+   * object or was parsed out of a header value. Without this the two shapes disagree, and
+   * a consumer reading the parsed form back is handed the ambiguous
+   * 'user@evil.com@good.com' that the header and the envelope no longer carry.
+   *
+   * @param parsed An array of address objects, as returned by addressparser
+   * @return The same array, with every address normalized
+   * @internal
+   */
+  _normalizeParsedAddresses(parsed) {
+    parsed.forEach((entry) => {
+      if (entry.address) {
+        entry.address = this._normalizeAddress(entry.address);
+      } else if (entry.group) {
+        this._normalizeParsedAddresses(entry.group);
+      }
+    });
+    return parsed;
+  }
+  /**
+   * Parses the addresses of an explicitly set envelope.
+   *
+   * An envelope value is an addr-spec and never a display name, so a bare local username
+   * such as 'root' is the address here. Header parsing has to read the same value as a
+   * display name, as a value with no '@' in it can not be an addr-spec in a header.
+   *
+   * @param addresses Addresses to be parsed
+   * @return An array of address objects
+   * @internal
+   */
+  _parseEnvelopeAddresses(addresses) {
+    return this._parseAddresses(addresses).map((entry) => {
+      if (entry.address || entry.group || !entry.name || /[\s@]/.test(entry.name)) {
+        return entry;
+      }
+      return { address: this._normalizeAddress(entry.name), name: "" };
+    });
+  }
+  /**
+   * Normalizes a header key, uses Camel-Case form, except for uppercase MIME-
+   *
+   * @param key Key to be normalized
+   * @return key in Camel-Case form
+   * @internal
+   */
+  _normalizeHeaderKey(key) {
+    key = (key || "").toString().replace(/[\s\x00-\x20\x7f:]/g, "").toLowerCase().replace(/^X-SMTPAPI$|^(MIME|DKIM|ARC|BIMI)\b|^OTP(?=-Token$)|^[a-z]|-(SPF|FBL|ID|MD5)$|-[a-z]/gi, (c) => c.toUpperCase()).replace(/^Content-Features$/i, "Content-features");
+    return key;
+  }
+  /**
+   * Checks if the content type is multipart and defines boundary if needed.
+   * Doesn't return anything, modifies object argument instead.
+   *
+   * @param structured Parsed header value for 'Content-Type' key
+   * @internal
+   */
+  _handleContentType(structured) {
+    this.contentType = structured.value.trim().toLowerCase();
+    this.multipart = /^multipart\//i.test(this.contentType) ? this.contentType.substr(this.contentType.indexOf("/") + 1) : false;
+    if (this.multipart) {
+      const declared = _stripBoundaryControls(structured.params.boundary || this.boundary || "");
+      this.boundary = structured.params.boundary = declared || _stripBoundaryControls(this._generateBoundary());
+    } else {
+      this.boundary = false;
+    }
+  }
+  /**
+   * Generates a multipart boundary value
+   *
+   * @return boundary value
+   * @internal
+   */
+  _generateBoundary() {
+    return _stripBoundaryControls(this.rootNode.boundaryPrefix + "-" + this.rootNode.baseBoundary) + "-Part_" + this._nodeId;
+  }
+  /**
+   * Encodes a header value the way this node encodes it in the generated message:
+   * address headers are punycoded and mime encoded, message id headers get their
+   * angle brackets, a Date object is formatted and any other value is mime encoded
+   * when it holds non-ascii or control characters (using the node's `textEncoding`).
+   *
+   * The result is a single unfolded line without the key. Fold it before writing it
+   * into a message, `key + ': ' + value` folded at 76 characters is what the node does.
+   *
+   * @param key Header key, case insensitive
+   * @param value Header value
+   * @returns Encoded header value
+   */
+  encodeHeaderValue(key, value) {
+    key = this._normalizeHeaderKey(key);
+    switch (key) {
+      // Structured headers
+      case "From":
+      case "Sender":
+      case "To":
+      case "Cc":
+      case "Bcc":
+      case "Reply-To":
+        return this._convertAddresses(this._parseAddresses(value));
+      // values enclosed in <>
+      case "Message-ID":
+      case "In-Reply-To":
+      case "Content-ID":
+        value = (value || "").toString().replace(/\r?\n|\r/g, " ").replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, "");
+        if (value.charAt(0) !== "<") {
+          value = "<" + value;
+        }
+        if (value.charAt(value.length - 1) !== ">") {
+          value = value + ">";
+        }
+        return value;
+      // a structured field (RFC 9651) that can not be mime encoded, an encoded word would
+      // turn its quoted strings into text that no structured field parser reads. Only
+      // the characters that can not appear in a header at all are removed
+      case "OTP-Token":
+        return (value || "").toString().replace(/\r?\n|\r/g, " ").replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, "");
+      // space separated list of values enclosed in <>
+      case "References": {
+        const ids = [];
+        for (const entry of [].concat(value || "")) {
+          const elm = (entry || "").toString().replace(/\r?\n|\r/g, " ").replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, "").trim();
+          for (let id of stripWhitespaceInAngleBrackets(elm).split(/\s+/)) {
+            if (id.charAt(0) !== "<") {
+              id = "<" + id;
+            }
+            if (id.charAt(id.length - 1) !== ">") {
+              id = id + ">";
+            }
+            ids.push(id);
+          }
+        }
+        return ids.join(" ").trim();
+      }
+      case "Date":
+        if (Object.prototype.toString.call(value) === "[object Date]") {
+          return value.toUTCString().replace(/GMT/, "+0000");
+        }
+        value = (value || "").toString().replace(/\r?\n|\r/g, " ");
+        return this._encodeHeaderText(value);
+      case "Content-Type":
+      case "Content-Disposition":
+        return (value || "").toString().replace(/\r?\n|\r/g, " ");
+      default:
+        value = (value || "").toString().replace(/\r?\n|\r/g, " ");
+        return this._encodeHeaderText(value);
+    }
+  }
+  /**
+   * Encodes a header value without a node at hand. Same as the instance method of a
+   * node created with the given options.
+   *
+   * @param key Header key, case insensitive
+   * @param value Header value
+   * @param [options] Encoding options
+   * @param [options.textEncoding] either 'Q' (the default) or 'B'
+   * @returns Encoded header value
+   */
+  static encodeHeaderValue(key, value, options) {
+    return new _MimeNode(false, { textEncoding: options?.textEncoding }).encodeHeaderValue(key, value);
+  }
+  /**
+   * Alias of encodeHeaderValue, kept for callers that used the method before it was public
+   *
+   * @internal
+   */
+  _encodeHeaderValue(key, value) {
+    return this.encodeHeaderValue(key, value);
+  }
+  /**
+   * Rebuilds address object using punycode and other adjustments
+   *
+   * @param addresses An array of address objects
+   * @param [uniqueList] An array to be populated with addresses
+   * @param [seenAddresses] Addresses already added to uniqueList, shared with recursive calls to keep deduplication linear
+   * @return address string
+   * @internal
+   */
+  _convertAddresses(addresses, uniqueList, seenAddresses) {
+    const values = [];
+    uniqueList = uniqueList || [];
+    if (!seenAddresses) {
+      seenAddresses = /* @__PURE__ */ new Set();
+      for (let i = 0; i < uniqueList.length; i++) {
+        seenAddresses.add(uniqueList[i].address);
+      }
+    }
+    [].concat(addresses || []).forEach((address) => {
+      if (address.address) {
+        address.address = this._normalizeAddress(address.address);
+        if (!address.name) {
+          values.push(PLAIN_ADDRESS.test(address.address) ? address.address : `<${address.address}>`);
+        } else {
+          values.push(`${this._encodeAddressName(address.name)} <${address.address}>`);
+        }
+        if (!seenAddresses.has(address.address)) {
+          seenAddresses.add(address.address);
+          uniqueList.push(address);
+        }
+      } else if (address.group) {
+        const groupListAddresses = (address.group.length ? this._convertAddresses(address.group, uniqueList, seenAddresses) : "").trim();
+        values.push(`${this._encodeAddressName(address.name)}:${groupListAddresses};`);
+      }
+    });
+    return values.join(", ");
+  }
+  /**
+   * Normalizes an email address
+   *
+   * @param address An array of address objects
+   * @return address string
+   * @internal
+   */
+  _normalizeAddress(address) {
+    address = (address || "").toString().replace(/[\x00-\x1F\x7F<>]+/g, " ").trim();
+    if (!address) {
+      return address;
+    }
+    const literal = address.charAt(address.length - 1) === "]" ? DOMAIN_LITERAL_TAIL2.exec(address) : null;
+    const lastAt = literal ? address.length - literal[1].length - 1 : address.lastIndexOf("@");
+    if (lastAt < 0) {
+      return this._normalizeLocalPart(address);
+    }
+    const user = address.substr(0, lastAt);
+    const domain = address.substr(lastAt + 1);
+    let encodedDomain = domain;
+    const smtputf8 = /[\x80-\uFFFF]/.test(user);
+    try {
+      encodedDomain = normalizeDomain(domain, smtputf8);
+    } catch (_err) {
+    }
+    return `${this._normalizeLocalPart(user)}@${encodedDomain}`;
+  }
+  /**
+   * Normalizes the local part of an address into a form that can be emitted as is.
+   *
+   * A local part is either a dot-atom or a quoted-string, anything else is not a valid
+   * addr-spec. The quotes of a quoted local part get lost along the way, and a bare
+   * 'user@evil.com@good.com' leaves it to the receiver which '@' splits the domain off,
+   * while the split here is always at the last one. So whatever is not already one of
+   * the two valid forms goes back out as a quoted-string.
+   *
+   * @param user Local part of an address
+   * @return Local part as a dot-atom or as a quoted-string
+   * @internal
+   */
+  _normalizeLocalPart(user) {
+    if (DOT_ATOM.test(user) || QUOTED_STRING.test(user)) {
+      return user;
+    }
+    return quoteString(user);
+  }
+  /**
+   * If needed, mime encodes the name part
+   *
+   * @param name Name part of an address
+   * @returns Mime word encoded string if needed
+   * @internal
+   */
+  _encodeAddressName(name2) {
+    if (!/^[\w ]*$/.test(name2)) {
+      if (/^[\x20-\x7e]*$/.test(name2)) {
+        return quoteString(name2);
+      } else {
+        return encodeWord(name2, this._getTextEncoding(name2), 52);
+      }
+    }
+    return name2;
+  }
+  /**
+   * Encodes an unstructured header value. Such a value can only carry VCHAR and WSP, so a
+   * control char or DEL has to be forced into the mime encoded word that a non-ascii value
+   * would get anyway. HT stays as it is, it is valid folding whitespace here.
+   *
+   * @param value Header value to encode
+   * @returns Mime word encoded string if needed
+   * @internal
+   */
+  _encodeHeaderText(value) {
+    return /[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(value) ? encodeWord(value, this._getTextEncoding(value), 52) : (
+      // encodeWords only encodes if needed, otherwise the original string is returned
+      this._encodeWords(value)
+    );
+  }
+  /**
+   * If needed, mime encodes the name part
+   *
+   * @param value Name part of an address
+   * @returns Mime word encoded string if needed
+   * @internal
+   */
+  _encodeWords(value) {
+    return encodeWords(value, this._getTextEncoding(value), 52, true);
+  }
+  /**
+   * Detects best mime encoding for a text value
+   *
+   * @param value Value to check for
+   * @return either 'Q' or 'B'
+   * @internal
+   */
+  _getTextEncoding(value) {
+    value = (value || "").toString();
+    if (this.textEncoding) {
+      return this.textEncoding;
+    }
+    let nonLatinLen = 0;
+    let latinLen = 0;
+    for (let i = 0, len = value.length; i < len; i++) {
+      const code = value.charCodeAt(i);
+      if (code >= 0 && code <= 8 || code === 11 || code === 12 || code >= 14 && code <= 31 || code >= 128) {
+        nonLatinLen++;
+      } else if (code >= 65 && code <= 90 || code >= 97 && code <= 122) {
+        latinLen++;
+      }
+    }
+    return nonLatinLen < latinLen ? "Q" : "B";
+  }
+  /**
+   * Generates a message id
+   *
+   * @return Random Message-ID value
+   * @internal
+   */
+  _generateMessageId() {
+    return "<" + [2, 2, 2, 6].reduce(
+      // crux to generate UUID-like random strings
+      (prev, len) => prev + "-" + import_node_crypto.default.randomBytes(len).toString("hex"),
+      import_node_crypto.default.randomBytes(4).toString("hex")
+    ) + "@" + // try to use the domain of the FROM address or fallback to server hostname
+    (this.getEnvelope().from || this.hostname || "localhost").split("@").pop() + ">";
+  }
+};
+var mime_node_default = MimeNode;
+
+// node_modules/nodemailer/dist/esm/mail-composer/index.js
+function isContentObject(value) {
+  const content = value;
+  return typeof value === "object" && !!(content.content || content.path || content.href || content.raw);
+}
+function fitsSevenBit(content) {
+  let at;
+  let length;
+  if (typeof content === "string") {
+    at = (i) => content.charCodeAt(i);
+    length = content.length;
+  } else if (Buffer.isBuffer(content)) {
+    at = (i) => content[i];
+    length = content.length;
+  } else {
+    return false;
+  }
+  let lineLength = 0;
+  for (let i = 0; i < length; i++) {
+    const c = at(i);
+    if (c === 0 || c > 127) {
+      return false;
+    }
+    if (c === 10 || c === 13) {
+      lineLength = 0;
+    } else if (++lineLength > 998) {
+      return false;
+    }
+  }
+  return true;
+}
+var MailComposer = class {
+  constructor(mail) {
+    this.mail = mail || {};
+    this.message = false;
+  }
+  /**
+   * Builds MimeNode instance
+   */
+  compile() {
+    this._alternatives = this.getAlternatives();
+    this._htmlNode = this._alternatives.filter((alternative) => /^text\/html\b/i.test(alternative.contentType)).pop();
+    this._attachments = this.getAttachments(!!this._htmlNode);
+    this._useRelated = !!(this._htmlNode && this._attachments.related.length);
+    this._useAlternative = this._alternatives.length > 1;
+    this._useMixed = this._attachments.attached.length > 1 || this._alternatives.length && this._attachments.attached.length === 1;
+    if (this.mail.raw) {
+      this.message = new mime_node_default("message/rfc822", {
+        newline: this.mail.newline,
+        disableUrlAccess: this.mail.disableUrlAccess,
+        disableFileAccess: this.mail.disableFileAccess
+      }).setRaw(this.mail.raw);
+    } else if (this._useMixed) {
+      this.message = this._createMixed();
+    } else if (this._useAlternative) {
+      this.message = this._createAlternative();
+    } else if (this._useRelated) {
+      this.message = this._createRelated();
+    } else {
+      this.message = this._createContentNode(false, [].concat(this._alternatives || []).concat(this._attachments.attached || []).shift() || {
+        contentType: "text/plain",
+        content: ""
+      });
+    }
+    if (this.mail.headers) {
+      this.message.addHeader(this.mail.headers);
+    }
+    if (this.mail.otp) {
+      this.message.setHeader("OTP-Token", formatOtpToken(this.mail.otp));
+    }
+    ["from", "sender", "to", "cc", "bcc", "reply-to", "in-reply-to", "references", "subject", "message-id", "date"].forEach((header) => {
+      const key = header.replace(/-(\w)/g, (o, c) => c.toUpperCase());
+      if (this.mail[key]) {
+        this.message.setHeader(header, this.mail[key]);
+      }
+    });
+    if (this.mail.envelope) {
+      this.message.setEnvelope(this.mail.envelope);
+    }
+    this.message.messageId();
+    return this.message;
+  }
+  /**
+   * List all attachments. Resulting attachment objects can be used as input for MimeNode nodes
+   *
+   * @param findRelated If true separate related attachments from attached ones
+   * @returns An object of arrays (`related` and `attached`)
+   */
+  getAttachments(findRelated) {
+    let eventObject;
+    const attachments = [].concat(this.mail.attachments || []).map((attachment, i) => {
+      if (/^data:/i.test(attachment.path || attachment.href)) {
+        attachment = this._processDataUrl(attachment);
+      }
+      const contentType = attachment.contentType || detectMimeType2(attachment.filename || attachment.path || attachment.href || "bin");
+      const isImage = /^image\//i.test(contentType);
+      const isMessageNode = /^message\//i.test(contentType);
+      const contentDisposition = attachment.contentDisposition || (isMessageNode || isImage && attachment.cid ? "inline" : "attachment");
+      let contentTransferEncoding;
+      if ("contentTransferEncoding" in attachment) {
+        contentTransferEncoding = attachment.contentTransferEncoding;
+      } else if (isMessageNode) {
+        contentTransferEncoding = !attachment.encoding && fitsSevenBit(attachment.content) ? "7bit" : "8bit";
+      } else {
+        contentTransferEncoding = "base64";
+      }
+      const data = {
+        contentType,
+        contentDisposition,
+        contentTransferEncoding
+      };
+      if (attachment.filename) {
+        data.filename = attachment.filename;
+      } else if (!isMessageNode && attachment.filename !== false) {
+        data.filename = (attachment.path || attachment.href || "").split(/[/\\]/).pop().split("?").shift() || "attachment-" + (i + 1);
+        if (data.filename.indexOf(".") < 0) {
+          data.filename += "." + detectExtension2(data.contentType);
+        }
+      }
+      if (/^https?:\/\//i.test(attachment.path)) {
+        attachment.href = attachment.path;
+        attachment.path = void 0;
+      }
+      if (attachment.cid) {
+        data.cid = attachment.cid;
+      }
+      if (attachment.raw) {
+        data.raw = attachment.raw;
+      } else if (attachment.path) {
+        data.content = {
+          path: attachment.path
+        };
+      } else if (attachment.href) {
+        data.content = {
+          href: attachment.href,
+          httpHeaders: attachment.httpHeaders,
+          tls: attachment.tls
+        };
+      } else {
+        data.content = attachment.content || "";
+      }
+      if (attachment.encoding) {
+        data.encoding = attachment.encoding;
+      }
+      if (attachment.headers) {
+        data.headers = attachment.headers;
+      }
+      return data;
+    });
+    if (this.mail.icalEvent) {
+      eventObject = Object.assign({}, this._getIcalEvent());
+      eventObject.contentType = "application/ics";
+      if (!eventObject.headers) {
+        eventObject.headers = {};
+      }
+      eventObject.filename = eventObject.filename || "invite.ics";
+      eventObject.headers["Content-Disposition"] = "attachment";
+      eventObject.headers["Content-Transfer-Encoding"] = "base64";
+    }
+    if (!findRelated) {
+      return {
+        attached: attachments.concat(eventObject || []),
+        related: []
+      };
+    }
+    return {
+      attached: attachments.filter((attachment) => !attachment.cid).concat(eventObject || []),
+      related: attachments.filter((attachment) => !!attachment.cid)
+    };
+  }
+  /**
+   * Returns the icalEvent value with `path`/`href`/data uri input normalized into
+   * a `content` entry, the same way as for regular attachments. The same event is
+   * included twice (as a text/calendar alternative and as an application/ics
+   * attachment), so the shared content object is marked to be resolved just once
+   * and the buffered result is reused by the second node.
+   *
+   * @returns Normalized icalEvent data
+   * @internal
+   */
+  _getIcalEvent() {
+    if (!this._icalEvent) {
+      let icalEvent;
+      if (isContentObject(this.mail.icalEvent)) {
+        icalEvent = copyOwnKeys({}, this.mail.icalEvent);
+      } else {
+        icalEvent = {
+          content: this.mail.icalEvent
+        };
+      }
+      if (/^data:/i.test(icalEvent.path || icalEvent.href)) {
+        icalEvent = this._processDataUrl(icalEvent);
+      }
+      if (/^https?:\/\//i.test(icalEvent.path)) {
+        icalEvent.href = icalEvent.path;
+        icalEvent.path = void 0;
+      }
+      if (!icalEvent.raw) {
+        if (icalEvent.path) {
+          icalEvent.content = {
+            path: icalEvent.path
+          };
+          icalEvent.path = void 0;
+        } else if (icalEvent.href) {
+          icalEvent.content = {
+            href: icalEvent.href,
+            httpHeaders: icalEvent.httpHeaders,
+            tls: icalEvent.tls
+          };
+          icalEvent.href = void 0;
+        }
+      }
+      if (icalEvent.content && typeof icalEvent.content === "object") {
+        icalEvent.content._resolve = true;
+      }
+      this._icalEvent = icalEvent;
+    }
+    return this._icalEvent;
+  }
+  /**
+   * List alternatives. Resulting objects can be used as input for MimeNode nodes
+   *
+   * @returns An array of alternative elements. Includes the `text` and `html` values as well
+   */
+  getAlternatives() {
+    const alternatives = [];
+    let text, html, watchHtml, amp, eventObject;
+    if (this.mail.text) {
+      if (isContentObject(this.mail.text)) {
+        text = this.mail.text;
+      } else {
+        text = {
+          content: this.mail.text
+        };
+      }
+      text.contentType = "text/plain; charset=utf-8";
+    }
+    if (this.mail.watchHtml) {
+      if (isContentObject(this.mail.watchHtml)) {
+        watchHtml = this.mail.watchHtml;
+      } else {
+        watchHtml = {
+          content: this.mail.watchHtml
+        };
+      }
+      watchHtml.contentType = "text/watch-html; charset=utf-8";
+    }
+    if (this.mail.amp) {
+      if (isContentObject(this.mail.amp)) {
+        amp = this.mail.amp;
+      } else {
+        amp = {
+          content: this.mail.amp
+        };
+      }
+      amp.contentType = "text/x-amp-html; charset=utf-8";
+    }
+    if (this.mail.icalEvent) {
+      eventObject = Object.assign({}, this._getIcalEvent());
+      eventObject.filename = false;
+      eventObject.contentType = "text/calendar; charset=utf-8; method=" + (eventObject.method || "PUBLISH").toString().trim().toUpperCase();
+      if (!eventObject.headers) {
+        eventObject.headers = {};
+      }
+    }
+    if (this.mail.html) {
+      if (isContentObject(this.mail.html)) {
+        html = this.mail.html;
+      } else {
+        html = {
+          content: this.mail.html
+        };
+      }
+      html.contentType = "text/html; charset=utf-8";
+    }
+    [].concat(text || []).concat(watchHtml || []).concat(amp || []).concat(html || []).concat(eventObject || []).concat(this.mail.alternatives || []).forEach((alternative) => {
+      if (/^data:/i.test(alternative.path || alternative.href)) {
+        alternative = this._processDataUrl(alternative);
+      }
+      const data = {
+        contentType: alternative.contentType || detectMimeType2(alternative.filename || alternative.path || alternative.href || "txt"),
+        contentTransferEncoding: alternative.contentTransferEncoding
+      };
+      if (alternative.filename) {
+        data.filename = alternative.filename;
+      }
+      if (/^https?:\/\//i.test(alternative.path)) {
+        alternative.href = alternative.path;
+        alternative.path = void 0;
+      }
+      if (alternative.raw) {
+        data.raw = alternative.raw;
+      } else if (alternative.path) {
+        data.content = {
+          path: alternative.path
+        };
+      } else if (alternative.href) {
+        data.content = {
+          href: alternative.href,
+          httpHeaders: alternative.httpHeaders,
+          tls: alternative.tls
+        };
+      } else {
+        data.content = alternative.content || "";
+      }
+      if (alternative.encoding) {
+        data.encoding = alternative.encoding;
+      }
+      if (alternative.headers) {
+        data.headers = alternative.headers;
+      }
+      alternatives.push(data);
+    });
+    return alternatives;
+  }
+  /**
+   * Builds multipart/mixed node. It should always contain different type of elements on the same level
+   * eg. text + attachments
+   *
+   * @param parentNode Parent for this note. If it does not exist, a root node is created
+   * @returns MimeNode node element
+   * @internal
+   */
+  _createMixed(parentNode) {
+    const node = parentNode ? parentNode.createChild("multipart/mixed", {
+      disableUrlAccess: this.mail.disableUrlAccess,
+      disableFileAccess: this.mail.disableFileAccess,
+      normalizeHeaderKey: this.mail.normalizeHeaderKey,
+      newline: this.mail.newline
+    }) : new mime_node_default("multipart/mixed", {
+      baseBoundary: this.mail.baseBoundary,
+      textEncoding: this.mail.textEncoding,
+      boundaryPrefix: this.mail.boundaryPrefix,
+      disableUrlAccess: this.mail.disableUrlAccess,
+      disableFileAccess: this.mail.disableFileAccess,
+      normalizeHeaderKey: this.mail.normalizeHeaderKey,
+      newline: this.mail.newline
+    });
+    if (this._useAlternative) {
+      this._createAlternative(node);
+    } else if (this._useRelated) {
+      this._createRelated(node);
+    }
+    [].concat(!this._useAlternative && this._alternatives || []).concat(this._attachments.attached || []).forEach((element) => {
+      if (!this._useRelated || element !== this._htmlNode) {
+        this._createContentNode(node, element);
+      }
+    });
+    return node;
+  }
+  /**
+   * Builds multipart/alternative node. It should always contain same type of elements on the same level
+   * eg. text + html view of the same data
+   *
+   * @param parentNode Parent for this note. If it does not exist, a root node is created
+   * @returns MimeNode node element
+   * @internal
+   */
+  _createAlternative(parentNode) {
+    const node = parentNode ? parentNode.createChild("multipart/alternative", {
+      disableUrlAccess: this.mail.disableUrlAccess,
+      disableFileAccess: this.mail.disableFileAccess,
+      normalizeHeaderKey: this.mail.normalizeHeaderKey,
+      newline: this.mail.newline
+    }) : new mime_node_default("multipart/alternative", {
+      baseBoundary: this.mail.baseBoundary,
+      textEncoding: this.mail.textEncoding,
+      boundaryPrefix: this.mail.boundaryPrefix,
+      disableUrlAccess: this.mail.disableUrlAccess,
+      disableFileAccess: this.mail.disableFileAccess,
+      normalizeHeaderKey: this.mail.normalizeHeaderKey,
+      newline: this.mail.newline
+    });
+    this._alternatives.forEach((alternative) => {
+      if (this._useRelated && this._htmlNode === alternative) {
+        this._createRelated(node);
+      } else {
+        this._createContentNode(node, alternative);
+      }
+    });
+    return node;
+  }
+  /**
+   * Builds multipart/related node. It should always contain html node with related attachments
+   *
+   * @param parentNode Parent for this note. If it does not exist, a root node is created
+   * @returns MimeNode node element
+   * @internal
+   */
+  _createRelated(parentNode) {
+    const node = parentNode ? parentNode.createChild('multipart/related; type="text/html"', {
+      disableUrlAccess: this.mail.disableUrlAccess,
+      disableFileAccess: this.mail.disableFileAccess,
+      normalizeHeaderKey: this.mail.normalizeHeaderKey,
+      newline: this.mail.newline
+    }) : new mime_node_default('multipart/related; type="text/html"', {
+      baseBoundary: this.mail.baseBoundary,
+      textEncoding: this.mail.textEncoding,
+      boundaryPrefix: this.mail.boundaryPrefix,
+      disableUrlAccess: this.mail.disableUrlAccess,
+      disableFileAccess: this.mail.disableFileAccess,
+      normalizeHeaderKey: this.mail.normalizeHeaderKey,
+      newline: this.mail.newline
+    });
+    this._createContentNode(node, this._htmlNode);
+    this._attachments.related.forEach((alternative) => this._createContentNode(node, alternative));
+    return node;
+  }
+  /**
+   * Creates a regular node with contents
+   *
+   * @param parentNode Parent for this note. If it does not exist, a root node is created
+   * @param element Node data
+   * @returns MimeNode node element
+   * @internal
+   */
+  _createContentNode(parentNode, element) {
+    element = element || {};
+    element.content = element.content || "";
+    const encoding = (element.encoding || "utf8").toString().toLowerCase().replace(/[-_\s]/g, "");
+    const node = parentNode ? parentNode.createChild(element.contentType, {
+      filename: element.filename,
+      textEncoding: this.mail.textEncoding,
+      disableUrlAccess: this.mail.disableUrlAccess,
+      disableFileAccess: this.mail.disableFileAccess,
+      normalizeHeaderKey: this.mail.normalizeHeaderKey,
+      newline: this.mail.newline
+    }) : new mime_node_default(element.contentType, {
+      filename: element.filename,
+      baseBoundary: this.mail.baseBoundary,
+      textEncoding: this.mail.textEncoding,
+      boundaryPrefix: this.mail.boundaryPrefix,
+      disableUrlAccess: this.mail.disableUrlAccess,
+      disableFileAccess: this.mail.disableFileAccess,
+      normalizeHeaderKey: this.mail.normalizeHeaderKey,
+      newline: this.mail.newline
+    });
+    if (element.headers) {
+      node.addHeader(element.headers);
+    }
+    if (element.cid) {
+      node.setHeader("Content-Id", "<" + element.cid.replace(/[<>]/g, "") + ">");
+    }
+    if (element.contentTransferEncoding) {
+      node.setHeader("Content-Transfer-Encoding", element.contentTransferEncoding);
+    } else if (this.mail.encoding && /^text\//i.test(element.contentType)) {
+      node.setHeader("Content-Transfer-Encoding", this.mail.encoding);
+    }
+    if (!/^text\//i.test(element.contentType) || element.contentDisposition) {
+      node.setHeader("Content-Disposition", element.contentDisposition || (element.cid && /^image\//i.test(element.contentType) ? "inline" : "attachment"));
+    }
+    if (typeof element.content === "string" && !["utf8", "usascii", "ascii"].includes(encoding)) {
+      element.content = Buffer.from(element.content, encoding);
+    }
+    if (element.raw) {
+      node.setRaw(element.raw);
+    } else {
+      node.setContent(element.content);
+    }
+    return node;
+  }
+  /**
+   * Parses data uri and converts it to a Buffer
+   *
+   * @param element Content element
+   * @return Parsed element
+   * @internal
+   */
+  _processDataUrl(element) {
+    const dataUrl = element.path || element.href;
+    if (!dataUrl || typeof dataUrl !== "string") {
+      return element;
+    }
+    if (!dataUrl.startsWith("data:")) {
+      return element;
+    }
+    if (dataUrl.length > 52428800) {
+      let detectedType = "application/octet-stream";
+      const commaPos = dataUrl.indexOf(",");
+      if (commaPos > 0 && commaPos < 200) {
+        const header = dataUrl.substring(5, commaPos);
+        const parts = header.split(";");
+        if (parts[0] && parts[0].includes("/")) {
+          detectedType = parts[0].trim();
+        }
+      }
+      return Object.assign(copyOwnKeys({}, element), {
+        path: false,
+        href: false,
+        content: Buffer.alloc(0),
+        contentType: element.contentType || detectedType
+      });
+    }
+    let parsedDataUri;
+    try {
+      parsedDataUri = parseDataURI(dataUrl);
+    } catch (_err) {
+      return element;
+    }
+    if (!parsedDataUri) {
+      return element;
+    }
+    element.content = parsedDataUri.data;
+    element.contentType = element.contentType || parsedDataUri.contentType;
+    if ("path" in element) {
+      element.path = false;
+    }
+    if ("href" in element) {
+      element.href = false;
+    }
+    return element;
+  }
+};
+function formatOtpToken(otp) {
+  if (typeof otp.code !== "string" || !/^[\x20-\x7e]+$/.test(otp.code)) {
+    throw otpError("The otp code must be a non-empty string of printable ASCII characters");
+  }
+  return quoteString(otp.code) + "; origin=" + quoteString(getOtpOrigin(otp.origin));
+}
+function getOtpOrigin(origin) {
+  let url;
+  try {
+    url = new URL(String(origin));
+  } catch {
+  }
+  if (!url || url.username || url.password || !/^([a-z0-9_-]+\.)*[a-z0-9_-]+$|^\[[0-9a-f:.]+\]$/.test(url.hostname)) {
+    throw otpError("The otp origin must be an absolute https URL");
+  }
+  const isLoopback = /^(localhost|.+\.localhost|127(\.\d+){3}|\[::1\])$/.test(url.hostname);
+  if (url.protocol !== "https:" && !(url.protocol === "http:" && isLoopback)) {
+    throw otpError("The otp origin must be an https URL, or an http URL on a loopback host");
+  }
+  return url.origin;
+}
+function otpError(message) {
+  const err = new Error(message);
+  err.code = EOTP;
+  return err;
+}
+var mail_composer_default = MailComposer;
+
+// node_modules/nodemailer/dist/esm/dkim/message-parser.js
+var import_node_stream9 = require("node:stream");
+function _trimFieldName(str) {
+  let start = 0;
+  let end = str.length;
+  while (start < end && (str.charCodeAt(start) === 32 || str.charCodeAt(start) === 9)) {
+    start++;
+  }
+  while (end > start && (str.charCodeAt(end - 1) === 32 || str.charCodeAt(end - 1) === 9)) {
+    end--;
+  }
+  return str.slice(start, end);
+}
+var MessageParser = class extends import_node_stream9.Transform {
+  constructor(options) {
+    super(options);
+    this.lastBytes = Buffer.alloc(4);
+    this.headersParsed = false;
+    this.headerBytes = 0;
+    this.headerChunks = [];
+    this.rawHeaders = false;
+    this.bodySize = 0;
+  }
+  /**
+   * Keeps count of the last 4 bytes in order to detect line breaks on chunk boundaries
+   *
+   * @param data Next data chunk from the stream
+   */
+  updateLastBytes(data) {
+    const lblen = this.lastBytes.length;
+    const nblen = Math.min(data.length, lblen);
+    for (let i = 0, len = lblen - nblen; i < len; i++) {
+      this.lastBytes[i] = this.lastBytes[i + nblen];
+    }
+    for (let i = 1; i <= nblen; i++) {
+      this.lastBytes[lblen - i] = data[data.length - i];
+    }
+  }
+  /**
+   * Finds and removes message headers from the remaining body. We want to keep
+   * headers separated until final delivery to be able to modify these
+   *
+   * @param data Next chunk of data
+   * @return Returns true if headers are already found or false otherwise
+   */
+  checkHeaders(data) {
+    if (this.headersParsed) {
+      return true;
+    }
+    const lblen = this.lastBytes.length;
+    let headerPos = 0;
+    for (let i = 0, len = this.lastBytes.length + data.length; i < len; i++) {
+      let chr;
+      if (i < lblen) {
+        chr = this.lastBytes[i];
+      } else {
+        chr = data[i - lblen];
+      }
+      if (chr === 10 && i) {
+        const pr1 = i - 1 < lblen ? this.lastBytes[i - 1] : data[i - 1 - lblen];
+        const pr2 = i > 1 ? i - 2 < lblen ? this.lastBytes[i - 2] : data[i - 2 - lblen] : false;
+        if (pr1 === 10) {
+          this.headersParsed = true;
+          headerPos = i - lblen + 1;
+          this.headerBytes += headerPos;
+          break;
+        } else if (pr1 === 13 && pr2 === 10) {
+          this.headersParsed = true;
+          headerPos = i - lblen + 1;
+          this.headerBytes += headerPos;
+          break;
+        }
+      }
+    }
+    if (this.headersParsed) {
+      this.headerChunks.push(data.slice(0, headerPos));
+      this.rawHeaders = Buffer.concat(this.headerChunks, this.headerBytes);
+      this.headerChunks = null;
+      this.emit("headers", this.parseHeaders());
+      if (data.length > headerPos) {
+        const chunk = data.slice(headerPos);
+        this.bodySize += chunk.length;
+        this.push(chunk);
+      }
+      return false;
+    }
+    this.headerBytes += data.length;
+    this.headerChunks.push(data);
+    this.updateLastBytes(data);
+    return false;
+  }
+  /** @internal */
+  _transform(chunk, encoding, callback) {
+    if (!chunk || !chunk.length) {
+      return callback();
+    }
+    if (typeof chunk === "string") {
+      chunk = Buffer.from(chunk, encoding);
+    }
+    let headersFound;
+    try {
+      headersFound = this.checkHeaders(chunk);
+    } catch (E) {
+      return callback(E);
+    }
+    if (headersFound) {
+      this.bodySize += chunk.length;
+      this.push(chunk);
+    }
+    callback();
+  }
+  /** @internal */
+  _flush(callback) {
+    if (this.headerChunks) {
+      this.rawHeaders = Buffer.concat(this.headerChunks, this.headerBytes);
+      this.headerChunks = null;
+      this.emit("headers", this.parseHeaders());
+    }
+    callback();
+  }
+  parseHeaders() {
+    const rawLines = (this.rawHeaders || Buffer.alloc(0)).toString("binary").split(/\r?\n/);
+    const lines = [];
+    for (const rawLine of rawLines) {
+      if (lines.length && /^[ \t]/.test(rawLine)) {
+        lines[lines.length - 1] += "\n" + rawLine;
+      } else {
+        lines.push(rawLine);
+      }
+    }
+    return lines.filter((line) => /[^ \t\r]/.test(line)).map((line) => ({
+      key: _trimFieldName(line.substr(0, line.indexOf(":"))).toLowerCase(),
+      line
+    }));
+  }
+};
+var message_parser_default = MessageParser;
+
+// node_modules/nodemailer/dist/esm/dkim/relaxed-body.js
+var import_node_stream10 = require("node:stream");
+var import_node_crypto2 = __toESM(require("node:crypto"), 1);
+var CHAR_CR = 13;
+var CHAR_LF = 10;
+var CHAR_SPACE = 32;
+var CHAR_TAB = 9;
+var CRLF = Buffer.from("\r\n");
+var EMPTY_LINES = Buffer.alloc(4096, CRLF);
+var RelaxedBody = class extends import_node_stream10.Transform {
+  constructor(options) {
+    super();
+    options = options || {};
+    this.bodyHash = import_node_crypto2.default.createHash(options.hashAlgo || "sha256");
+    this.byteLength = 0;
+    this.debug = options.debug;
+    this._debugBody = options.debug ? [] : false;
+    this._lineHasContent = false;
+    this._pendingWsp = false;
+    this._pendingCr = false;
+    this._pendingEmptyLines = 0;
+  }
+  /** @internal */
+  _hashCanonical(data) {
+    if (!data.length) {
+      return;
+    }
+    this.bodyHash.update(data);
+    if (this._debugBody) {
+      this._debugBody.push(Buffer.from(data));
+    }
+  }
+  /** @internal */
+  _hashEmptyLines() {
+    while (this._pendingEmptyLines > 0) {
+      const count = Math.min(this._pendingEmptyLines, EMPTY_LINES.length / 2);
+      this._hashCanonical(EMPTY_LINES.subarray(0, count * 2));
+      this._pendingEmptyLines -= count;
+    }
+  }
+  /**
+   * Writes a content byte, with the space a pending run of whitespace collapses to,
+   * into the output buffer and returns the new write position. Kept a method rather
+   * than a closure so the write position stays a plain local in the byte loop
+   * @internal
+   */
+  _emitContent(out, outPos, c) {
+    if (!this._lineHasContent) {
+      if (this._pendingEmptyLines) {
+        this._hashCanonical(out.subarray(0, outPos));
+        outPos = 0;
+        this._hashEmptyLines();
+      }
+      this._lineHasContent = true;
+    }
+    if (this._pendingWsp) {
+      out[outPos++] = CHAR_SPACE;
+      this._pendingWsp = false;
+    }
+    out[outPos++] = c;
+    return outPos;
+  }
+  updateHash(chunk, final) {
+    const out = Buffer.allocUnsafe(chunk.length * 2 + 2);
+    let outPos = 0;
+    for (let i = 0; i < chunk.length; i++) {
+      const c = chunk[i];
+      if (c === CHAR_LF) {
+        if (this._lineHasContent) {
+          out[outPos++] = CHAR_CR;
+          out[outPos++] = CHAR_LF;
+          this._lineHasContent = false;
+        } else {
+          this._pendingEmptyLines++;
+        }
+        this._pendingWsp = false;
+        this._pendingCr = false;
+        continue;
+      }
+      if (this._pendingCr) {
+        outPos = this._emitContent(out, outPos, CHAR_CR);
+        this._pendingCr = false;
+      }
+      if (c === CHAR_CR) {
+        this._pendingCr = true;
+      } else if (c === CHAR_SPACE || c === CHAR_TAB) {
+        this._pendingWsp = true;
+      } else {
+        outPos = this._emitContent(out, outPos, c);
+      }
+    }
+    if (final && this._pendingCr) {
+      outPos = this._emitContent(out, outPos, CHAR_CR);
+      this._pendingCr = false;
+    }
+    this._hashCanonical(out.subarray(0, outPos));
+  }
+  /** @internal */
+  _transform(chunk, encoding, callback) {
+    if (!chunk || !chunk.length) {
+      return callback();
+    }
+    if (typeof chunk === "string") {
+      chunk = Buffer.from(chunk, encoding);
+    }
+    this.updateHash(chunk);
+    this.byteLength += chunk.length;
+    this.push(chunk);
+    callback();
+  }
+  /** @internal */
+  _flush(callback) {
+    this.updateHash(Buffer.alloc(0), true);
+    if (this._lineHasContent) {
+      this._hashCanonical(CRLF);
+    }
+    this.emit("hash", this.bodyHash.digest("base64"), this.debug ? Buffer.concat(this._debugBody) : false);
+    callback();
+  }
+};
+var relaxed_body_default = RelaxedBody;
+
+// node_modules/nodemailer/dist/esm/dkim/sign.js
+var import_node_crypto3 = __toESM(require("node:crypto"), 1);
+function unsupportedHashAlgoError(hashAlgo) {
+  const err = new Error('Unsupported DKIM hash algorithm "' + hashAlgo + '"');
+  err.code = ECONFIG;
+  return err;
+}
+function sign(headers, hashAlgo, bodyHash, options) {
+  options = options || {};
+  const defaultFieldNames = "From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:List-Archive:OTP-Token";
+  const fieldNames = options.headerFieldNames || defaultFieldNames;
+  const canonicalizedHeaderData = relaxedHeaders(headers, fieldNames, options.skipFields);
+  const dkimHeader = generateDKIMHeader(options.domainName, options.keySelector, canonicalizedHeaderData.fieldNames, hashAlgo, bodyHash);
+  canonicalizedHeaderData.headers += "dkim-signature:" + relaxedHeaderLine(dkimHeader);
+  let signer;
+  try {
+    signer = import_node_crypto3.default.createSign(("rsa-" + hashAlgo).toUpperCase());
+  } catch (_E) {
+    throw unsupportedHashAlgoError(hashAlgo);
+  }
+  signer.update(canonicalizedHeaderData.headers, "latin1");
+  let signature;
+  try {
+    signature = signer.sign(options.privateKey, "base64");
+  } catch (_E) {
+    return false;
+  }
+  return dkimHeader + signature.replace(/(^.{73}|.{75}(?!\r?\n|\r))/g, "$&\r\n ").trim();
+}
+sign.relaxedHeaders = relaxedHeaders;
+sign.unsupportedHashAlgoError = unsupportedHashAlgoError;
+var sign_default = sign;
+function generateDKIMHeader(domainName, keySelector, fieldNames, hashAlgo, bodyHash) {
+  const cleanTagValue = (value) => (value || "").toString().replace(/[\x00-\x1f\x7f;=]/g, "");
+  const dkim = [
+    "v=1",
+    "a=rsa-" + hashAlgo,
+    "c=relaxed/relaxed",
+    "d=" + normalizeDomain(cleanTagValue(domainName), false),
+    "q=dns/txt",
+    "s=" + cleanTagValue(keySelector),
+    "bh=" + bodyHash,
+    "h=" + cleanTagValue(fieldNames)
+  ].join("; ");
+  return foldLines("DKIM-Signature: " + dkim, 76) + ";\r\n b=";
+}
+function relaxedHeaders(headers, fieldNames, skipFields) {
+  const includedFields = /* @__PURE__ */ new Set();
+  const skip = /* @__PURE__ */ new Set();
+  const headerFields = /* @__PURE__ */ new Map();
+  (skipFields || "").toLowerCase().split(":").forEach((field) => {
+    skip.add(field.trim());
+  });
+  (fieldNames || "").toLowerCase().split(":").filter((field) => !skip.has(field.trim())).forEach((field) => {
+    includedFields.add(field.trim());
+  });
+  for (let i = headers.length - 1; i >= 0; i--) {
+    const line = headers[i];
+    if (includedFields.has(line.key) && !headerFields.has(line.key)) {
+      headerFields.set(line.key, relaxedHeaderLine(line.line));
+    }
+  }
+  const headersList = [];
+  const fields = [];
+  includedFields.forEach((field) => {
+    if (headerFields.has(field)) {
+      fields.push(field);
+      headersList.push(field + ":" + headerFields.get(field));
+    }
+  });
+  return {
+    headers: headersList.join("\r\n") + "\r\n",
+    fieldNames: fields.join(":")
+  };
+}
+function relaxedHeaderLine(line) {
+  return line.substr(line.indexOf(":") + 1).replace(/\r?\n/g, "").replace(/[ \t]+/g, " ").replace(/^ | $/g, "");
+}
+
+// node_modules/nodemailer/dist/esm/dkim/index.js
+var import_node_stream11 = require("node:stream");
+var import_node_fs3 = __toESM(require("node:fs"), 1);
+var import_node_path2 = __toESM(require("node:path"), 1);
+var import_node_crypto4 = __toESM(require("node:crypto"), 1);
+var DKIM_ALGO = "sha256";
+var MAX_MESSAGE_SIZE = 10 * 1024 * 1024;
+var DKIMSigner = class {
+  constructor(options, keys, input, output) {
+    this.options = options || {};
+    this.keys = keys;
+    this.cacheTreshold = Number(this.options.cacheTreshold) || MAX_MESSAGE_SIZE;
+    this.hashAlgo = this.options.hashAlgo || DKIM_ALGO;
+    this.cacheDir = this.options.cacheDir || false;
+    this.chunks = [];
+    this.chunklen = 0;
+    this.readPos = 0;
+    this.cachePath = this.cacheDir ? import_node_path2.default.join(this.cacheDir, "message." + Date.now() + "-" + import_node_crypto4.default.randomBytes(14).toString("hex")) : false;
+    this.cache = false;
+    this.headers = false;
+    this.bodyHash = false;
+    this.parser = false;
+    this.relaxedBody = false;
+    this.input = input;
+    this.output = output;
+    this.output.usingCache = false;
+    this.hasErrored = false;
+    this.input.on("error", (err) => this.fail(err));
+    this.output.once("close", () => {
+      if (this.output.writableFinished) {
+        return;
+      }
+      this.hasErrored = true;
+      this.input.unpipe();
+      this.input.destroy();
+      this.cleanup();
+    });
+  }
+  /**
+   * Ends the output with an error and releases the cache file
+   */
+  fail(err) {
+    this.hasErrored = true;
+    this.cleanup();
+    this.output.destroy(err);
+  }
+  cleanup() {
+    if (!this.cache || !this.cachePath) {
+      return;
+    }
+    const cache = this.cache;
+    this.cache = false;
+    cache.destroy();
+    import_node_fs3.default.unlink(this.cachePath, () => false);
+  }
+  createReadCache() {
+    this.cache = import_node_fs3.default.createReadStream(this.cachePath);
+    this.cache.once("error", (err) => this.fail(err));
+    this.cache.once("close", () => {
+      this.cleanup();
+    });
+    this.cache.pipe(this.output);
+  }
+  sendNextChunk() {
+    while (!this.hasErrored) {
+      if (this.readPos >= this.chunks.length) {
+        if (!this.cache) {
+          this.output.end();
+          return;
+        }
+        return this.createReadCache();
+      }
+      const chunk = this.chunks[this.readPos++];
+      if (this.output.write(chunk) === false) {
+        this.output.once("drain", () => {
+          this.sendNextChunk();
+        });
+        return;
+      }
+    }
+  }
+  sendSignedOutput() {
+    if (this.hasErrored) {
+      return;
+    }
+    let keyPos = 0;
+    const signNextKey = () => {
+      if (keyPos >= this.keys.length) {
+        this.output.write(this.parser.rawHeaders);
+        setImmediate(() => this.sendNextChunk());
+        return;
+      }
+      const key = this.keys[keyPos++];
+      let dkimField;
+      try {
+        dkimField = sign_default(this.headers, this.hashAlgo, this.bodyHash, {
+          domainName: key.domainName,
+          keySelector: key.keySelector,
+          privateKey: key.privateKey,
+          headerFieldNames: this.options.headerFieldNames,
+          skipFields: this.options.skipFields
+        });
+      } catch (err) {
+        this.fail(err);
+        return;
+      }
+      if (dkimField) {
+        this.output.write(Buffer.from(dkimField + "\r\n"));
+      }
+      setImmediate(signNextKey);
+    };
+    if (this.bodyHash && this.headers) {
+      return signNextKey();
+    }
+    this.output.write(this.parser.rawHeaders);
+    this.sendNextChunk();
+  }
+  createWriteCache() {
+    this.output.usingCache = true;
+    this.cache = import_node_fs3.default.createWriteStream(this.cachePath, { mode: 384 });
+    this.cache.once("error", (err) => {
+      this.relaxedBody.unpipe(this.cache);
+      this.relaxedBody.on("readable", () => {
+        while (this.relaxedBody.read() !== null) {
+        }
+      });
+      this.fail(err);
+    });
+    this.cache.once("close", () => {
+      if (this.hasErrored) {
+        return;
+      }
+      this.sendSignedOutput();
+    });
+    this.relaxedBody.removeAllListeners("readable");
+    this.relaxedBody.pipe(this.cache);
+  }
+  signStream() {
+    this.parser = new message_parser_default();
+    this.relaxedBody = new relaxed_body_default({
+      hashAlgo: this.hashAlgo
+    });
+    this.parser.on("headers", (value) => {
+      this.headers = value;
+    });
+    this.relaxedBody.on("hash", (value) => {
+      this.bodyHash = value;
+    });
+    this.relaxedBody.on("readable", () => {
+      let chunk;
+      if (this.cache) {
+        return;
+      }
+      while ((chunk = this.relaxedBody.read()) !== null) {
+        this.chunks.push(chunk);
+        this.chunklen += chunk.length;
+        if (this.chunklen >= this.cacheTreshold && this.cachePath) {
+          return this.createWriteCache();
+        }
+      }
+    });
+    this.relaxedBody.on("end", () => {
+      if (this.cache) {
+        return;
+      }
+      this.sendSignedOutput();
+    });
+    this.parser.pipe(this.relaxedBody);
+    setImmediate(() => this.input.pipe(this.parser));
+  }
+};
+var DKIM = class {
+  constructor(options) {
+    this.options = options || {};
+    this.keys = [].concat(this.options.keys || {
+      domainName: options.domainName,
+      keySelector: options.keySelector,
+      privateKey: options.privateKey
+    });
+  }
+  sign(input, extraOptions) {
+    const output = new import_node_stream11.PassThrough();
+    let inputStream = input;
+    let writeValue = false;
+    if (Buffer.isBuffer(input)) {
+      writeValue = input;
+      inputStream = new import_node_stream11.PassThrough();
+    } else if (typeof input === "string") {
+      writeValue = Buffer.from(input);
+      inputStream = new import_node_stream11.PassThrough();
+    }
+    let options = this.options;
+    if (extraOptions && Object.keys(extraOptions).length) {
+      options = copyOwnKeys({}, extraOptions);
+      copyOwnKeys(options, this.options);
+    }
+    const signer = new DKIMSigner(options, this.keys, inputStream, output);
+    setImmediate(() => {
+      try {
+        signer.signStream();
+      } catch (_E) {
+        signer.fail(sign_default.unsupportedHashAlgoError(signer.hashAlgo));
+        return;
+      }
+      if (writeValue) {
+        setImmediate(() => {
+          inputStream.end(writeValue);
+        });
+      }
+    });
+    return output;
+  }
+};
+var dkim_default = DKIM;
+
+// node_modules/nodemailer/dist/esm/smtp-connection/http-proxy-client.js
+var import_node_net5 = __toESM(require("node:net"), 1);
+var import_node_tls = __toESM(require("node:tls"), 1);
+var MAX_RESPONSE_HEADER_BYTES = 64 * 1024;
+var unbracket = (host) => typeof host === "string" && host.startsWith("[") && host.endsWith("]") ? host.slice(1, -1) : host;
+function httpProxyClient(proxyUrl, destinationPort, destinationHost, tlsOptions, callback) {
+  if (typeof tlsOptions === "function") {
+    callback = tlsOptions;
+    tlsOptions = {};
+  }
+  tlsOptions = tlsOptions || {};
+  const done = callback;
+  destinationPort = Number(destinationPort) || 0;
+  if (!destinationPort || /[\r\n]/.test(destinationHost)) {
+    const err = new Error("Invalid proxy destination");
+    err.code = EPROXY;
+    setImmediate(() => done(err));
+    return;
+  }
+  const proxy = parse(proxyUrl);
+  const authority = (import_node_net5.default.isIPv6(unbracket(destinationHost)) ? "[" + unbracket(destinationHost) + "]" : destinationHost) + ":" + destinationPort;
+  const connectOptions = {
+    host: proxy.hostname,
+    port: Number(proxy.port) ? Number(proxy.port) : proxy.protocol === "https:" ? 443 : 80
+  };
+  let connect;
+  if (proxy.protocol === "https:") {
+    connectOptions.rejectUnauthorized = tlsOptions.rejectUnauthorized !== false;
+    connect = import_node_tls.default.connect.bind(import_node_tls.default);
+  } else {
+    connect = import_node_net5.default.connect.bind(import_node_net5.default);
+  }
+  const timeout = Number(tlsOptions.timeout) || httpProxyClient.timeout || 30 * 1e3;
+  let socket;
+  let finished3 = false;
+  let timer;
+  const cleanup = () => {
+    clearTimeout(timer);
+    socket.removeListener("data", onSocketData);
+    socket.removeListener("error", fail);
+    socket.removeListener("close", onEarlyClose);
+  };
+  function fail(err) {
+    if (finished3) {
+      return;
+    }
+    finished3 = true;
+    cleanup();
+    try {
+      socket.destroy();
+    } catch (_E) {
+    }
+    done(err);
+  }
+  function onEarlyClose() {
+    const err = new Error("Proxy closed the connection before the tunnel was established");
+    err.code = EPROXY;
+    fail(err);
+  }
+  const chunks = [];
+  let received = 0;
+  let tail = "";
+  function onSocketData(chunk) {
+    if (finished3) {
+      return;
+    }
+    const window2 = tail + chunk.toString("binary");
+    const windowEnd = window2.indexOf("\r\n\r\n");
+    chunks.push(chunk);
+    received += chunk.length;
+    tail = window2.slice(-3);
+    if (windowEnd < 0) {
+      if (received > MAX_RESPONSE_HEADER_BYTES) {
+        const err = new Error("Proxy response headers too large");
+        err.code = EPROXY;
+        fail(err);
+      }
+      return;
+    }
+    socket.removeListener("data", onSocketData);
+    socket.pause();
+    const headerEnd = received - window2.length + windowEnd;
+    const response = Buffer.concat(chunks, received);
+    if (response.length > headerEnd + 4) {
+      socket.unshift(response.subarray(headerEnd + 4));
+    }
+    const match = response.toString("binary", 0, headerEnd).match(/^HTTP\/\d+\.\d+ (\d+)/i);
+    if (!match || (match[1] || "").charAt(0) !== "2") {
+      const err = new Error("Invalid response from proxy" + (match && ": " + match[1] || ""));
+      err.code = EPROXY;
+      return fail(err);
+    }
+    finished3 = true;
+    cleanup();
+    const resumeOnData = (event) => {
+      if (event === "data") {
+        socket.removeListener("newListener", resumeOnData);
+        socket.resume();
+      }
+    };
+    socket.on("newListener", resumeOnData);
+    return done(null, socket);
+  }
+  socket = connect(connectOptions, () => {
+    if (finished3) {
+      return;
+    }
+    const reqHeaders = {
+      Host: authority,
+      Connection: "close"
+    };
+    if (proxy.auth) {
+      reqHeaders["Proxy-Authorization"] = "Basic " + Buffer.from(proxy.auth).toString("base64");
+    }
+    socket.write(
+      // HTTP method
+      "CONNECT " + authority + " HTTP/1.1\r\n" + // HTTP request headers
+      Object.keys(reqHeaders).map((key) => key + ": " + reqHeaders[key]).join("\r\n") + // End request
+      "\r\n\r\n"
+    );
+    socket.on("data", onSocketData);
+  });
+  timer = setTimeout(() => {
+    const err = new Error("Proxy socket timed out");
+    err.code = ETIMEDOUT;
+    fail(err);
+  }, timeout);
+  socket.once("error", fail);
+  socket.once("close", onEarlyClose);
+}
+var http_proxy_client_default = httpProxyClient;
+
+// node_modules/nodemailer/dist/esm/mailer/index.js
+var import_node_util2 = __toESM(require("node:util"), 1);
+
+// node_modules/nodemailer/dist/esm/mailer/mail-message.js
+var hasOwn = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
+var MailMessage = class {
+  constructor(mailer, data) {
+    this.mailer = mailer;
+    this.data = {};
+    this.message = null;
+    data = data || {};
+    const options = mailer.options || {};
+    const defaults2 = mailer._defaults || {};
+    copyOwnKeys(this.data, data);
+    this.data.headers = this.data.headers || {};
+    copyOwnKeys(this.data, defaults2, (key) => hasOwn(this.data, key));
+    copyOwnKeys(this.data.headers, defaults2.headers, (key) => hasOwn(this.data.headers, key));
+    ["disableFileAccess", "disableUrlAccess", "normalizeHeaderKey", "maxRecipients"].forEach((key) => {
+      if (key in options) {
+        this.data[key] = options[key];
+      }
+    });
+    ["disableFileAccess", "disableUrlAccess"].forEach((key) => {
+      if (!(key in options) && hasOwn(defaults2, key)) {
+        this.data[key] = this.data[key] || defaults2[key];
+      }
+    });
+  }
+  resolveContent(data, key, options, callback) {
+    if (!callback && typeof options === "function") {
+      callback = options;
+      options = false;
+    }
+    options = options || {};
+    const policy = {
+      disableFileAccess: this.data.disableFileAccess || options.disableFileAccess,
+      disableUrlAccess: this.data.disableUrlAccess || options.disableUrlAccess
+    };
+    return resolveContent(data, key, policy, callback);
+  }
+  resolveAll(callback) {
+    const keys = [
+      [this.data, "html"],
+      [this.data, "text"],
+      [this.data, "watchHtml"],
+      [this.data, "amp"],
+      [this.data, "icalEvent"]
+    ];
+    if (this.data.alternatives && this.data.alternatives.length) {
+      this.data.alternatives.forEach((alternative, i) => {
+        keys.push([this.data.alternatives, i]);
+      });
+    }
+    if (this.data.attachments && this.data.attachments.length) {
+      this.data.attachments.forEach((attachment, i) => {
+        if (!attachment.filename) {
+          attachment.filename = (attachment.path || attachment.href || "").split(/[/\\]/).pop().split("?").shift() || "attachment-" + (i + 1);
+          if (attachment.filename.indexOf(".") < 0) {
+            attachment.filename += "." + detectExtension2(attachment.contentType);
+          }
+        }
+        if (!attachment.contentType) {
+          attachment.contentType = detectMimeType2(attachment.filename || attachment.path || attachment.href || "bin");
+        }
+        keys.push([this.data.attachments, i]);
+      });
+    }
+    const mimeNode = new mime_node_default();
+    const addressKeys = ["from", "to", "cc", "bcc", "sender", "replyTo"];
+    addressKeys.forEach((address) => {
+      let value;
+      if (this.message) {
+        value = [].concat(mimeNode._parseAddresses(this.message.getHeader(address === "replyTo" ? "reply-to" : address)) || []);
+      } else if (this.data[address]) {
+        value = [].concat(mimeNode._parseAddresses(this.data[address]) || []);
+      }
+      if (value && value.length) {
+        this.data[address] = value;
+      } else if (address in this.data) {
+        this.data[address] = null;
+      }
+    });
+    const singleKeys = ["from", "sender"];
+    singleKeys.forEach((address) => {
+      if (this.data[address]) {
+        this.data[address] = this.data[address].shift();
+      }
+    });
+    let pos = 0;
+    const resolveNext = () => {
+      if (pos >= keys.length) {
+        return callback(null, this.data);
+      }
+      const args = keys[pos++];
+      if (!args[0] || !args[0][args[1]]) {
+        return resolveNext();
+      }
+      resolveContent(...args, { disableFileAccess: this.data.disableFileAccess, disableUrlAccess: this.data.disableUrlAccess }, (err, value) => {
+        if (err) {
+          return callback(err);
+        }
+        const node = {
+          content: value
+        };
+        if (args[0][args[1]] && typeof args[0][args[1]] === "object" && !Buffer.isBuffer(args[0][args[1]])) {
+          copyOwnKeys(node, args[0][args[1]], (key) => key in node || ["content", "path", "href", "raw"].includes(key));
+        }
+        args[0][args[1]] = node;
+        resolveNext();
+      });
+    };
+    setImmediate(() => resolveNext());
+  }
+  /**
+   * Destroys the content streams of the message once sending failed. A stream that was not
+   * read to the end would otherwise keep the file or the socket behind it open
+   */
+  releaseStreams() {
+    const data = this.data;
+    const values = [data.html, data.text, data.watchHtml, data.amp, data.raw, data.icalEvent];
+    for (const key of ["attachments", "alternatives"]) {
+      if (Array.isArray(data[key])) {
+        for (const entry of data[key]) {
+          values.push(entry);
+        }
+      }
+    }
+    for (const value of values) {
+      if (value && typeof value === "object") {
+        destroyStream(value);
+        destroyStream(value.content);
+        destroyStream(value.raw);
+      }
+    }
+  }
+  normalize(callback) {
+    const envelope = this.message.getEnvelope();
+    const messageId = this.message.messageId();
+    this.resolveAll((err, data) => {
+      if (err) {
+        return callback(err);
+      }
+      data.envelope = envelope;
+      data.messageId = messageId;
+      ["html", "text", "watchHtml", "amp"].forEach((key) => {
+        if (data[key] && data[key].content) {
+          if (typeof data[key].content === "string") {
+            data[key] = data[key].content;
+          } else if (Buffer.isBuffer(data[key].content)) {
+            data[key] = data[key].content.toString();
+          }
+        }
+      });
+      if (data.icalEvent && Buffer.isBuffer(data.icalEvent.content)) {
+        data.icalEvent.content = data.icalEvent.content.toString("base64");
+        data.icalEvent.encoding = "base64";
+      }
+      if (data.alternatives && data.alternatives.length) {
+        data.alternatives.forEach((alternative) => {
+          if (alternative && alternative.content && Buffer.isBuffer(alternative.content)) {
+            alternative.content = alternative.content.toString("base64");
+            alternative.encoding = "base64";
+          }
+        });
+      }
+      if (data.attachments && data.attachments.length) {
+        data.attachments.forEach((attachment) => {
+          if (attachment && attachment.content && Buffer.isBuffer(attachment.content)) {
+            attachment.content = attachment.content.toString("base64");
+            attachment.encoding = "base64";
+          }
+        });
+      }
+      data.normalizedHeaders = {};
+      Object.keys(data.headers || {}).forEach((key) => {
+        if (isProtoKey(key)) {
+          return;
+        }
+        let value = [].concat(data.headers[key] || []).shift();
+        value = value && value.value || value;
+        if (value) {
+          if (["references", "in-reply-to", "message-id", "content-id"].includes(key)) {
+            value = this.message.encodeHeaderValue(key, value);
+          }
+          data.normalizedHeaders[key] = value;
+        }
+      });
+      if (data.list && typeof data.list === "object") {
+        const listHeaders = this._getListHeaders(data.list);
+        listHeaders.forEach((entry) => {
+          data.normalizedHeaders[entry.key] = entry.value.map((val) => val && val.value || val).join(", ");
+        });
+      }
+      if (data.references) {
+        data.normalizedHeaders.references = this.message.encodeHeaderValue("references", data.references);
+      }
+      if (data.inReplyTo) {
+        data.normalizedHeaders["in-reply-to"] = this.message.encodeHeaderValue("in-reply-to", data.inReplyTo);
+      }
+      return callback(null, data);
+    });
+  }
+  setMailerHeader() {
+    if (!this.message || !this.data.xMailer) {
+      return;
+    }
+    this.message.setHeader("X-Mailer", this.data.xMailer);
+  }
+  setPriorityHeaders() {
+    if (!this.message || !this.data.priority) {
+      return;
+    }
+    switch ((this.data.priority || "").toString().toLowerCase()) {
+      case "high":
+        this.message.setHeader("X-Priority", "1 (Highest)");
+        this.message.setHeader("X-MSMail-Priority", "High");
+        this.message.setHeader("Importance", "High");
+        break;
+      case "low":
+        this.message.setHeader("X-Priority", "5 (Lowest)");
+        this.message.setHeader("X-MSMail-Priority", "Low");
+        this.message.setHeader("Importance", "Low");
+        break;
+      default:
+    }
+  }
+  setListHeaders() {
+    if (!this.message || !this.data.list || typeof this.data.list !== "object") {
+      return;
+    }
+    this._getListHeaders(this.data.list).forEach((listHeader) => {
+      listHeader.value.forEach((value) => {
+        this.message.addHeader(listHeader.key, value);
+      });
+    });
+  }
+  /** @internal */
+  _getListHeaders(listData) {
+    return Object.keys(listData).map((key) => ({
+      key: "list-" + key.toLowerCase().trim(),
+      value: [].concat(listData[key] || []).map((value) => ({
+        prepared: true,
+        foldLines: true,
+        value: [].concat(value || []).map((value2) => {
+          if (typeof value2 === "string") {
+            value2 = {
+              url: value2
+            };
+          }
+          if (value2 && value2.url) {
+            let comment = (value2.comment || "").toString().replace(/\r?\n|\r/g, " ");
+            const needsEncoding = !isPlainText(comment) || /\x7f/.test(comment);
+            if (key.toLowerCase().trim() === "id") {
+              comment = needsEncoding ? encodeWord(comment) : quoteString(comment);
+              return (value2.comment ? comment + " " : "") + this._formatListUrl(value2.url).replace(/^<[^:]+:\/{0,2}/, "<");
+            }
+            comment = needsEncoding ? encodeWord(comment) : comment.replace(/[()\\]/g, "\\$&");
+            return this._formatListUrl(value2.url) + (value2.comment ? " (" + comment + ")" : "");
+          }
+          return "";
+        }).filter((value2) => value2).join(", ")
+      }))
+    }));
+  }
+  /** @internal */
+  _formatListUrl(url) {
+    url = url.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, "").replace(/[\s<]+|[\s>]+/g, "");
+    if (/^(https?|mailto|ftp):/.test(url)) {
+      return "<" + url + ">";
+    }
+    if (/^[^@]+@[^@]+$/.test(url)) {
+      return "<mailto:" + url + ">";
+    }
+    return "<http://" + url + ">";
+  }
+};
+
+// node_modules/nodemailer/dist/esm/mailer/index.js
+var import_node_net6 = __toESM(require("node:net"), 1);
+var import_node_dns2 = __toESM(require("node:dns"), 1);
+var import_node_crypto5 = __toESM(require("node:crypto"), 1);
+var DEFAULT_MAX_RECIPIENTS = 1e5;
+function isAbortSignal(value) {
+  return typeof value === "object" && value !== null && "aborted" in value && typeof value.addEventListener === "function" && typeof value.removeEventListener === "function";
+}
+var Mail = class extends import_node_events.EventEmitter {
+  constructor(transporter, options, defaults2) {
+    super();
+    this.options = options || {};
+    this._defaults = defaults2 || {};
+    this._defaultPlugins = {
+      compile: [(...args) => this._convertDataImages(...args)],
+      stream: []
+    };
+    this._userPlugins = {
+      compile: [],
+      stream: []
+    };
+    this.meta = /* @__PURE__ */ new Map();
+    this.dkim = this.options.dkim ? new dkim_default(this.options.dkim) : false;
+    this.transporter = transporter;
+    this.transporter.mailer = this;
+    this.logger = getLogger(this.options, {
+      component: this.options.component || "mail"
+    });
+    this.logger.debug({
+      tnx: "create"
+    }, "Creating transport: %s", this.getVersionString());
+    if (typeof this.transporter.on === "function") {
+      this.transporter.on("log", (log) => {
+        this.logger.debug({
+          tnx: "transport"
+        }, "%s: %s", log.type, log.message);
+      });
+      this.transporter.on("error", (err) => {
+        this.logger.error({
+          err,
+          tnx: "transport"
+        }, "Transport Error: %s", err.message);
+        this.emit("error", err);
+      });
+      this.transporter.on("idle", (...args) => {
+        this.emit("idle", ...args);
+      });
+      this.transporter.on("clear", (...args) => {
+        this.emit("clear", ...args);
+      });
+    }
+    ["close", "isIdle", "verify"].forEach((method) => {
+      this[method] = (...args) => {
+        if (typeof this.transporter[method] === "function") {
+          if (method === "verify" && typeof this.getSocket === "function") {
+            this.transporter.getSocket = this.getSocket;
+            this.getSocket = false;
+          }
+          return this.transporter[method](...args);
+        }
+        this.logger.warn({
+          tnx: "transport",
+          methodName: method
+        }, "Non existing method %s called for transport", method);
+        return false;
+      };
+    });
+    if (this.options.proxy && typeof this.options.proxy === "string") {
+      this.setupProxy(this.options.proxy);
+    }
+  }
+  use(step, plugin) {
+    step = (step || "").toString();
+    if (!this._userPlugins.hasOwnProperty(step)) {
+      this._userPlugins[step] = [plugin];
+    } else {
+      this._userPlugins[step].push(plugin);
+    }
+    return this;
+  }
+  sendMail(data, callback = null) {
+    let promise;
+    if (!callback) {
+      promise = new Promise((resolve3, reject) => {
+        callback = callbackPromise(resolve3, reject);
+      });
+    }
+    const done = callback;
+    if (typeof this.getSocket === "function") {
+      this.transporter.getSocket = this.getSocket;
+      this.getSocket = false;
+    }
+    const mail = new MailMessage(this, data);
+    const signalOption = mail.data.signal;
+    const signal = isAbortSignal(signalOption) ? signalOption : void 0;
+    let settled = false;
+    const removeAbortListener = () => signal?.removeEventListener("abort", onAbort);
+    const finish = (err, info) => {
+      if (settled) {
+        return;
+      }
+      settled = true;
+      removeAbortListener();
+      if (err) {
+        mail.releaseStreams();
+      }
+      done(err, info);
+    };
+    const fail = (err) => {
+      finish(err);
+    };
+    function onAbort() {
+      fail(createAbortError(signal));
+    }
+    if (signalOption !== void 0 && signalOption !== null && !signal) {
+      const err = new Error("The signal option must be an AbortSignal");
+      err.code = ECONFIG;
+      setImmediate(() => fail(err));
+      return promise;
+    }
+    if (signal) {
+      signal.addEventListener("abort", onAbort, { once: true });
+      if (signal.aborted) {
+        setImmediate(onAbort);
+        return promise;
+      }
+    }
+    this.logger.debug({
+      tnx: "transport",
+      name: this.transporter.name,
+      version: this.transporter.version,
+      action: "send"
+    }, "Sending mail using %s/%s", this.transporter.name, this.transporter.version);
+    this._processPlugins("compile", mail, (err) => {
+      if (settled) {
+        return;
+      }
+      if (err) {
+        this.logger.error({
+          err,
+          tnx: "plugin",
+          action: "compile"
+        }, "PluginCompile Error: %s", err.message);
+        return fail(err);
+      }
+      let recipientCount;
+      try {
+        mail.message = new mail_composer_default(mail.data).compile();
+        mail.setMailerHeader();
+        mail.setPriorityHeaders();
+        mail.setListHeaders();
+        recipientCount = mail.message.getEnvelope().to.length;
+      } catch (err2) {
+        this.logger.error({
+          err: err2,
+          tnx: "transport",
+          action: "send"
+        }, "Compile Error: %s", err2.message);
+        return fail(err2);
+      }
+      const maxRecipients = mail.data.maxRecipients === void 0 ? DEFAULT_MAX_RECIPIENTS : mail.data.maxRecipients;
+      if (maxRecipients && recipientCount > maxRecipients) {
+        const err2 = new Error(`Message has ${recipientCount} recipients, which is over the ${maxRecipients} allowed by maxRecipients`);
+        err2.code = EMAXRECIPIENTS;
+        this.logger.error({
+          err: err2,
+          tnx: "transport",
+          action: "send"
+        }, "Send Error: %s", err2.message);
+        return fail(err2);
+      }
+      this._processPlugins("stream", mail, (err2) => {
+        if (settled) {
+          return;
+        }
+        if (err2) {
+          this.logger.error({
+            err: err2,
+            tnx: "plugin",
+            action: "stream"
+          }, "PluginStream Error: %s", err2.message);
+          return fail(err2);
+        }
+        if (mail.data.dkim || this.dkim) {
+          mail.message.processFunc((input) => {
+            const dkim = mail.data.dkim ? new dkim_default(mail.data.dkim) : this.dkim;
+            this.logger.debug({
+              tnx: "DKIM",
+              messageId: mail.message.messageId(),
+              dkimDomains: dkim.keys.map((key) => key.keySelector + "." + key.domainName).join(", ")
+            }, "Signing outgoing message with %s keys", dkim.keys.length);
+            return dkim.sign(input, mail.data._dkim);
+          });
+        }
+        removeAbortListener();
+        this.transporter.send(mail, (...args) => {
+          if (args[0]) {
+            this.logger.error({
+              err: args[0],
+              tnx: "transport",
+              action: "send"
+            }, "Send Error: %s", args[0].message);
+          }
+          finish(...args);
+        });
+      });
+    });
+    return promise;
+  }
+  getVersionString() {
+    return import_node_util2.default.format("%s (%s; +%s; %s/%s)", name, version, homepage, this.transporter.name, this.transporter.version);
+  }
+  /** @internal */
+  _processPlugins(step, mail, callback) {
+    step = (step || "").toString();
+    if (!this._userPlugins.hasOwnProperty(step)) {
+      return callback();
+    }
+    const userPlugins = this._userPlugins[step] || [];
+    const defaultPlugins = this._defaultPlugins[step] || [];
+    if (userPlugins.length) {
+      this.logger.debug({
+        tnx: "transaction",
+        pluginCount: userPlugins.length,
+        step
+      }, "Using %s plugins for %s", userPlugins.length, step);
+    }
+    if (userPlugins.length + defaultPlugins.length === 0) {
+      return callback();
+    }
+    let pos = 0;
+    let block = "default";
+    const processPlugins = () => {
+      if (mail.data.signal?.aborted) {
+        return callback(createAbortError(mail.data.signal));
+      }
+      let curplugins = block === "default" ? defaultPlugins : userPlugins;
+      if (pos >= curplugins.length) {
+        if (block === "default" && userPlugins.length) {
+          block = "user";
+          pos = 0;
+          curplugins = userPlugins;
+        } else {
+          return callback();
+        }
+      }
+      const plugin = curplugins[pos++];
+      plugin(mail, (err) => {
+        if (err) {
+          return callback(err);
+        }
+        processPlugins();
+      });
+    };
+    processPlugins();
+  }
+  /**
+   * Sets up proxy handler for a Nodemailer object
+   *
+   * @param proxyUrl Proxy configuration url
+   */
+  setupProxy(proxyUrl) {
+    const proxy = parse(proxyUrl);
+    this.getSocket = (options, callback) => {
+      const protocol = proxy.protocol.replace(/:$/, "").toLowerCase();
+      const configuredTimeout = Number(this.options.connectionTimeout) || 0;
+      const connectStartedAt = Number(options.connectStartedAt) || Date.now();
+      const connectionTimeout = configuredTimeout ? Math.max(connectStartedAt + configuredTimeout - Date.now(), 1) : void 0;
+      if (this.meta.has("proxy_handler_" + protocol)) {
+        return this.meta.get("proxy_handler_" + protocol)(proxy, options, callback);
+      }
+      switch (protocol) {
+        // Connect using a HTTP CONNECT method
+        case "http":
+        case "https":
+          http_proxy_client_default(proxy.href, options.port, options.host, connectionTimeout ? Object.assign({}, this.options.tls, { timeout: connectionTimeout }) : this.options.tls || {}, (err2, socket) => {
+            if (err2) {
+              return callback(err2);
+            }
+            return callback(null, {
+              connection: socket
+            });
+          });
+          return;
+        case "socks":
+        case "socks5":
+        case "socks4":
+        case "socks4a": {
+          if (!this.meta.has("proxy_socks_module")) {
+            let err2 = new Error("Socks module not loaded");
+            err2.code = EPROXY;
+            return callback(err2);
+          }
+          const connect = (ipaddress) => {
+            const proxyV2 = !!this.meta.get("proxy_socks_module").SocksClient;
+            const socksClient = proxyV2 ? this.meta.get("proxy_socks_module").SocksClient : this.meta.get("proxy_socks_module");
+            const proxyType = Number(proxy.protocol.replace(/\D/g, "")) || 5;
+            const connectionOpts = {
+              proxy: {
+                ipaddress,
+                port: Number(proxy.port),
+                type: proxyType
+              },
+              [proxyV2 ? "destination" : "target"]: {
+                host: options.host,
+                port: options.port
+              },
+              command: "connect"
+            };
+            if (connectionTimeout) {
+              connectionOpts.timeout = connectionTimeout;
+            }
+            if (proxy.username || proxy.password) {
+              const username = proxy.username || "";
+              const password = proxy.password || "";
+              if (proxyV2) {
+                connectionOpts.proxy.userId = username;
+                connectionOpts.proxy.password = password;
+              } else if (proxyType === 4) {
+                connectionOpts.userid = username;
+              } else {
+                connectionOpts.authentication = {
+                  username,
+                  password
+                };
+              }
+            }
+            socksClient.createConnection(connectionOpts, (err2, info) => {
+              if (err2) {
+                return callback(err2);
+              }
+              return callback(null, {
+                connection: info.socket || info
+              });
+            });
+          };
+          if (import_node_net6.default.isIP(proxy.hostname)) {
+            return connect(proxy.hostname);
+          }
+          return import_node_dns2.default.lookup(proxy.hostname, (err2, address) => {
+            if (err2) {
+              return callback(err2);
+            }
+            connect(address);
+          });
+        }
+      }
+      let err = new Error("Unknown proxy configuration");
+      err.code = EPROXY;
+      callback(err);
+    };
+  }
+  /** @internal */
+  _convertDataImages(mail, callback) {
+    if (!this.options.attachDataUrls && !mail.data.attachDataUrls || !mail.data.html) {
+      return callback();
+    }
+    mail.resolveContent(mail.data, "html", { disableFileAccess: mail.data.disableFileAccess, disableUrlAccess: mail.data.disableUrlAccess }, (err, html) => {
+      if (err) {
+        return callback(err);
+      }
+      let cidCounter = 0;
+      html = (html || "").toString().replace(/(<img\b[^<>]{0,1024} src\s{0,20}=[\s"']{0,20})(data:([^;"'<>\s]{1,255});[^"'>\s]+)/gi, (match, prefix, dataUri, mimeType) => {
+        const cid = import_node_crypto5.default.randomBytes(10).toString("hex") + "@localhost";
+        if (!mail.data.attachments) {
+          mail.data.attachments = [];
+        }
+        if (!Array.isArray(mail.data.attachments)) {
+          mail.data.attachments = [].concat(mail.data.attachments || []);
+        }
+        mail.data.attachments.push({
+          path: dataUri,
+          cid,
+          filename: "image-" + ++cidCounter + "." + detectExtension(mimeType)
+        });
+        return prefix + "cid:" + cid;
+      });
+      mail.data.html = html;
+      callback();
+    });
+  }
+  set(key, value) {
+    return this.meta.set(key, value);
+  }
+  get(key) {
+    return this.meta.get(key);
+  }
+};
+var mailer_default = Mail;
+
+// node_modules/nodemailer/dist/esm/smtp-pool/index.js
+var import_node_events4 = require("node:events");
+
+// node_modules/nodemailer/dist/esm/smtp-connection/index.js
+var import_node_events2 = require("node:events");
+var import_node_net7 = __toESM(require("node:net"), 1);
+var import_node_tls2 = __toESM(require("node:tls"), 1);
+var import_node_os2 = __toESM(require("node:os"), 1);
+var import_node_crypto6 = __toESM(require("node:crypto"), 1);
+
+// node_modules/nodemailer/dist/esm/smtp-connection/data-stream.js
+var import_node_stream12 = require("node:stream");
+var INSERT_LF = Buffer.from("\n");
+var INSERT_LF_DOT = Buffer.from("\n.");
+var INSERT_CR = Buffer.from("\r");
+var INSERT_DOT = Buffer.from(".");
+var DataStream = class extends import_node_stream12.Transform {
+  constructor(options) {
+    super(options);
+    this.options = options || {};
+    this.inByteCount = 0;
+    this.outByteCount = 0;
+    this.lastByte = false;
+  }
+  /**
+   * Escapes dots
+   * @internal
+   */
+  _transform(chunk, encoding, done) {
+    const chunks = [];
+    let chunklen = 0;
+    let i, len, lastPos = 0;
+    let buf;
+    if (!chunk || !chunk.length) {
+      return done();
+    }
+    if (typeof chunk === "string") {
+      chunk = Buffer.from(chunk);
+    }
+    this.inByteCount += chunk.length;
+    for (i = 0, len = chunk.length; i < len; i++) {
+      const byte = chunk[i];
+      const prev = i ? chunk[i - 1] : this.lastByte;
+      let insert = false;
+      if (prev === 13 && byte !== 10) {
+        insert = byte === 46 ? INSERT_LF_DOT : INSERT_LF;
+      } else if (byte === 10 && prev !== 13) {
+        insert = INSERT_CR;
+      } else if (byte === 46 && (prev === 10 || prev === false)) {
+        insert = INSERT_DOT;
+      }
+      if (insert) {
+        if (i > lastPos) {
+          buf = chunk.slice(lastPos, i);
+          chunks.push(buf);
+          chunklen += buf.length;
+        }
+        chunks.push(insert);
+        chunklen += insert.length;
+        lastPos = i;
+      }
+    }
+    if (chunks.length) {
+      if (lastPos < chunk.length) {
+        buf = chunk.slice(lastPos);
+        chunks.push(buf);
+        chunklen += buf.length;
+      }
+      this.outByteCount += chunklen;
+      this.push(Buffer.concat(chunks, chunklen));
+    } else {
+      this.outByteCount += chunk.length;
+      this.push(chunk);
+    }
+    this.lastByte = chunk[chunk.length - 1];
+    done();
+  }
+  /**
+   * Finalizes the stream with a dot on a single line
+   * @internal
+   */
+  _flush(done) {
+    let buf;
+    if (this.lastByte === 10) {
+      buf = Buffer.from(".\r\n");
+    } else if (this.lastByte === 13) {
+      buf = Buffer.from("\n.\r\n");
+    } else {
+      buf = Buffer.from("\r\n.\r\n");
+    }
+    this.outByteCount += buf.length;
+    this.push(buf);
+    done();
+  }
+};
+
+// node_modules/nodemailer/dist/esm/smtp-connection/index.js
+var import_node_stream13 = require("node:stream");
+
+// node_modules/nodemailer/dist/esm/smtp-connection/server-message-id.js
+var OUTLOOK_REPLY = /^250 2\.0\.0 OK (<[^<>\s]+\.prod\.outlook\.com>)/i;
+var SES_REPLY = /^250 Ok ([0-9a-f]+(?:-[0-9a-f]+)+)$/i;
+var AWS_REGION = /^[a-z]{2}(?:-[a-z]+)+-\d+$/;
+function sesRegion(host) {
+  const labels = host.toLowerCase().replace(/\.$/, "").split(".");
+  const domain = labels.slice(-2).join(".");
+  if (domain !== "amazonaws.com" && domain !== "awsapps.com") {
+    return void 0;
+  }
+  return labels.slice(0, -2).find((label) => AWS_REGION.test(label));
+}
+function parseServerMessageId(response, host) {
+  const reply = (response || "").toString().trim();
+  const outlook = reply.match(OUTLOOK_REPLY);
+  if (outlook) {
+    return outlook[1];
+  }
+  const ses = reply.match(SES_REPLY);
+  if (ses && host) {
+    const region = sesRegion(host);
+    if (region) {
+      return "<" + ses[1].toLowerCase() + "@" + (region === "us-east-1" ? "email" : region) + ".amazonses.com>";
+    }
+  }
+  return void 0;
+}
+
+// node_modules/nodemailer/dist/esm/smtp-connection/index.js
+var CONNECTION_TIMEOUT = 2 * 60 * 1e3;
+var SOCKET_TIMEOUT = 10 * 60 * 1e3;
+var GREETING_TIMEOUT = 30 * 1e3;
+var DNS_TIMEOUT = 30 * 1e3;
+var CLOSE_TIMEOUT = 5 * 1e3;
+var KEEPALIVE_DELAY = 30 * 1e3;
+var TEARDOWN_NOOP = () => {
+};
+function shuffle(list) {
+  const result = list.slice();
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+function timeoutError(message, timeoutType) {
+  const err = new Error(message);
+  err.timeoutType = timeoutType;
+  return err;
+}
+var MAX_RESPONSE_SIZE = 1024 * 1024;
+function decodeServerResponse(str) {
+  if (!str) {
+    return str;
+  }
+  const utf8 = Buffer.from(str, "binary").toString("utf8");
+  return utf8.includes("\uFFFD") ? str : utf8;
+}
+function isPartialResponse(str) {
+  return isPartialLine(str.slice(str.lastIndexOf("\n") + 1));
+}
+function isPartialLine(line) {
+  return /^\d+-/.test(line);
+}
+function maskAuthCommand(cmd) {
+  const match = (cmd || "").toString().match(/^AUTH\s+[^\s]+/i);
+  if (!match) {
+    return "/* secret */";
+  }
+  return match[0].length === cmd.length ? cmd : match[0] + " /* secret */";
+}
+var SMTPConnection = class extends import_node_events2.EventEmitter {
+  constructor(options) {
+    super(options);
+    this.id = import_node_crypto6.default.randomBytes(8).toString("base64").replace(/\W/g, "");
+    this.stage = "init";
+    this.options = options || {};
+    if (this.options.requireTLS && (this.options.ignoreTLS || this.options.opportunisticTLS)) {
+      this.options = Object.assign({}, this.options, { ignoreTLS: false, opportunisticTLS: false });
+    }
+    this.secureConnection = !!this.options.secure;
+    this.alreadySecured = !!this.options.secured;
+    this.port = Number(this.options.port) || (this.secureConnection ? 465 : 587);
+    this.host = this.options.host || "localhost";
+    this.servername = this.options.servername ? this.options.servername : !import_node_net7.default.isIP(this.host) ? this.host : false;
+    this.allowInternalNetworkInterfaces = this.options.allowInternalNetworkInterfaces || false;
+    if (typeof this.options.secure === "undefined" && this.port === 465) {
+      this.secureConnection = true;
+    }
+    this.name = (this.options.name || this._getHostname()).toString().replace(/[\r\n]+/g, "");
+    this.logger = getLogger(this.options, {
+      component: this.options.component || "smtp-connection",
+      sid: this.id
+    });
+    this.customAuth = /* @__PURE__ */ new Map();
+    for (const key of Object.keys(this.options.customAuth || {})) {
+      const mapKey = (key || "").toString().trim().toUpperCase();
+      if (mapKey) {
+        this.customAuth.set(mapKey, this.options.customAuth[key]);
+      }
+    }
+    this.version = version;
+    this.authenticated = false;
+    this.destroyed = false;
+    this.secure = !!this.secureConnection;
+    this._remainder = "";
+    this._responseQueue = [];
+    this._responsePartial = false;
+    this.lastServerResponse = false;
+    this._socket = false;
+    this._supportedAuth = [];
+    this.allowsAuth = false;
+    this._envelope = false;
+    this._supportedExtensions = [];
+    this._maxAllowedSize = 0;
+    this._responseActions = [];
+    this._recipientQueue = [];
+    this._phaseTimer = false;
+    this._plaintextEhlo = false;
+    this._destroyed = false;
+    this._closing = false;
+    this._currentDataStream = false;
+    this._pendingSend = false;
+    this._connectCallback = false;
+    this._onSocketData = (chunk) => this._onData(chunk);
+    this._onSocketError = (error2) => this._onError(error2, "ESOCKET", false, "CONN");
+    this._onSocketClose = () => this._onClose();
+    this._onSocketEnd = () => this._onEnd();
+    this._onSocketTimeout = () => this._onTimeout();
+    this._onConnectionSocketError = (err) => this._onError(err, "ESOCKET", false, "CONN");
+  }
+  /**
+   * Creates a connection to a SMTP server and sets up connection
+   * listener
+   */
+  connect(connectCallback) {
+    if (this._connectCalled && !this._destroyed) {
+      const err = this._formatError("Cannot connect - connect() was already called for this connection", "ECONNECTION", false, "API");
+      if (typeof connectCallback === "function") {
+        setImmediate(() => connectCallback(err));
+        return;
+      }
+      this.logger.warn({ tnx: "smtp" }, "%s", err.message);
+      return;
+    }
+    this._connectCalled = true;
+    if (typeof connectCallback === "function") {
+      this._connectCallback = connectCallback;
+      this.once("connect", () => {
+        this._connectCallback = false;
+        this.logger.debug({
+          tnx: "smtp"
+        }, "SMTP handshake finished");
+        connectCallback();
+      });
+      const isDestroyedMessage = this._isDestroyedMessage("connect");
+      if (isDestroyedMessage) {
+        return connectCallback(this._formatError(isDestroyedMessage, "ECONNECTION", false, "CONN"));
+      }
+    }
+    const connectionTimeout = this.options.connectionTimeout || CONNECTION_TIMEOUT;
+    this._connectionDeadline = (this._connectStartedAt || Date.now()) + connectionTimeout;
+    let opts = {
+      port: this.port,
+      host: this.host,
+      allowInternalNetworkInterfaces: this.allowInternalNetworkInterfaces,
+      timeout: Math.min(this.options.dnsTimeout || DNS_TIMEOUT, connectionTimeout)
+    };
+    if (this.options.localAddress) {
+      opts.localAddress = this.options.localAddress;
+    }
+    if (this.options.connection) {
+      this._socket = this.options.connection;
+      this._setupConnectionHandlers();
+      if (this.secureConnection && !this.alreadySecured) {
+        setImmediate(() => this._upgradeConnection((err) => {
+          if (err) {
+            this._onError(new Error("Error initiating TLS - " + (err.message || err)), "ETLS", false, "CONN");
+            return;
+          }
+          this._onConnect();
+        }));
+      } else {
+        setImmediate(() => this._onConnect());
+      }
+      return;
+    } else if (this.options.socket) {
+      this._socket = this.options.socket;
+      return this._resolveAndConnect(opts, (_resolved) => {
+        if (this._destroyed || this._closing) {
+          return;
+        }
+        try {
+          this._socket.connect(this.port, this.host, () => {
+            if (this.secureConnection && !this.alreadySecured) {
+              return this._upgradeConnection((err) => {
+                if (err) {
+                  this._onError(new Error("Error initiating TLS - " + (err.message || err)), "ETLS", false, "CONN");
+                  return;
+                }
+                this._onConnect();
+              });
+            }
+            this._onConnect();
+          });
+          this._setupConnectionHandlers();
+        } catch (E) {
+          setImmediate(() => this._onError(E, "ECONNECTION", false, "CONN"));
+          return;
+        }
+      });
+    } else {
+      if (this.secureConnection) {
+        Object.assign(opts, this.options.tls || {});
+        if (this.servername && !opts.servername) {
+          opts.servername = this.servername;
+        }
+      }
+      return this._resolveAndConnect(opts, (resolved) => {
+        let addresses = resolved._addresses || [];
+        if (opts.localAddress) {
+          const localFamily = import_node_net7.default.isIPv6(opts.localAddress) ? 6 : 4;
+          const sameFamily = addresses.filter((addr) => import_node_net7.default.isIP(addr) === localFamily);
+          addresses = sameFamily.length ? sameFamily : addresses;
+        }
+        if (addresses.length > 1) {
+          const ipv6 = addresses.filter((addr) => import_node_net7.default.isIPv6(addr));
+          const ipv4 = addresses.filter((addr) => !import_node_net7.default.isIPv6(addr));
+          const ordered = shuffle(ipv6).concat(shuffle(ipv4));
+          opts.host = this.host;
+          opts.autoSelectFamily = true;
+          if (!ipv6.length || !ipv4.length) {
+            const remaining = this._connectionDeadline - Date.now();
+            opts.autoSelectFamilyAttemptTimeout = Math.max(Math.floor(remaining / ordered.length), 10);
+          }
+          opts.lookup = ((hostname, lookupOptions, callback) => {
+            if (lookupOptions && lookupOptions.all) {
+              const all = ordered.map((address) => ({ address, family: import_node_net7.default.isIPv6(address) ? 6 : 4 }));
+              return setImmediate(() => callback(null, all));
+            }
+            setImmediate(() => callback(null, ordered[0], import_node_net7.default.isIPv6(ordered[0]) ? 6 : 4));
+          });
+        } else if (addresses.length) {
+          opts.host = addresses[0];
+        }
+        this._connectToHost(opts, this.secureConnection);
+      });
+    }
+  }
+  /**
+   * Resolves the hostname and applies resolved values to opts,
+   * then calls the provided callback with the resolved data
+   *
+   * @param opts Connection options (modified in place)
+   * @param callback Called with resolved data on success
+   * @internal
+   */
+  _resolveAndConnect(opts, callback) {
+    return resolveHostname(opts, (err, resolved) => {
+      if (err) {
+        return setImmediate(() => this._onError(err, "EDNS", false, "CONN"));
+      }
+      this.logger.debug({
+        tnx: "dns",
+        source: opts.host,
+        resolved: resolved.host,
+        cached: !!resolved.cached
+      }, "Resolved %s as %s [cache %s]", opts.host, resolved.host, resolved.cached ? "hit" : "miss");
+      for (const key of Object.keys(resolved)) {
+        if (key.charAt(0) !== "_" && resolved[key]) {
+          opts[key] = resolved[key];
+        }
+      }
+      callback(resolved);
+    });
+  }
+  /**
+   * Attempts to connect to the specified host address
+   *
+   * @param opts Connection options
+   * @param secure Whether to use TLS
+   * @internal
+   */
+  _connectToHost(opts, secure) {
+    if (this._destroyed || this._closing) {
+      return;
+    }
+    const connectFn = secure ? import_node_tls2.default.connect : import_node_net7.default.connect;
+    try {
+      this._socket = connectFn(opts, () => this._onConnect());
+      this._setupConnectionHandlers();
+    } catch (E) {
+      setImmediate(() => this._onError(E, "ECONNECTION", false, "CONN"));
+      return;
+    }
+  }
+  /**
+   * Sets up connection timeout and error handlers
+   * @internal
+   */
+  _setupConnectionHandlers() {
+    this._startPhase(Math.max((this._connectionDeadline || Date.now()) - Date.now(), 0), timeoutError("Connection timeout", "CONNECT_TIMEOUT"));
+    this._socket.on("error", this._onConnectionSocketError);
+  }
+  /**
+   * Starts the timer of a connection phase: connecting, waiting for the greeting or a TLS
+   * upgrade. The phases follow one another, so starting one ends the one before
+   *
+   * @param timeout Time the phase may take
+   * @param err Error to fail with when it takes longer
+   * @internal
+   */
+  _startPhase(timeout, err) {
+    this._clearPhase();
+    this._phaseTimer = setTimeout(() => {
+      this._phaseTimer = false;
+      this._onError(err, "ETIMEDOUT", false, "CONN");
+    }, timeout);
+  }
+  /**
+   * Time the greeting or a STARTTLS upgrade may take: greetingTimeout, cut short by what is left
+   * of connectionTimeout
+   *
+   * @internal
+   */
+  _remainingSetupTime() {
+    return Math.min(this.options.greetingTimeout || GREETING_TIMEOUT, Math.max((this._connectionDeadline || Infinity) - Date.now(), 1));
+  }
+  /** @internal */
+  _clearPhase() {
+    clearTimeout(this._phaseTimer);
+    this._phaseTimer = false;
+  }
+  /**
+   * Sends QUIT
+   */
+  quit() {
+    this._sendCommand("QUIT");
+    this._responseActions.push(this.close);
+  }
+  /**
+   * Closes the connection to the server
+   */
+  close() {
+    this._clearPhase();
+    this._responseActions = [];
+    if (this._closing) {
+      return;
+    }
+    this._closing = true;
+    const configuredCloseTimeout = this.options.socketCloseTimeout;
+    const socketCloseTimeout = typeof configuredCloseTimeout === "number" && Number.isFinite(configuredCloseTimeout) && configuredCloseTimeout >= 0 ? configuredCloseTimeout : CLOSE_TIMEOUT;
+    const closeMethod = this.stage === "init" || socketCloseTimeout === 0 ? "destroy" : "end";
+    this.logger.debug({
+      tnx: "smtp"
+    }, 'Closing connection to the server using "%s"', closeMethod);
+    const socket = this._socket;
+    if (this._currentDataStream) {
+      try {
+        this._currentDataStream.unpipe(this._socket);
+      } catch (_E) {
+      }
+      this._currentDataStream = false;
+    }
+    if (this._pendingSend) {
+      const { stream, onStreamError } = this._pendingSend;
+      if (stream) {
+        stream.removeListener("error", onStreamError);
+        stream.on("error", TEARDOWN_NOOP);
+        stream.destroy();
+      }
+      this._pendingSend = false;
+    }
+    if (socket && !socket.destroyed) {
+      try {
+        socket.setTimeout(0);
+        socket.removeListener("data", this._onSocketData);
+        socket.removeListener("timeout", this._onSocketTimeout);
+        socket.removeListener("close", this._onSocketClose);
+        socket.removeListener("end", this._onSocketEnd);
+        socket.removeListener("error", this._onSocketError);
+        socket.removeListener("error", this._onConnectionSocketError);
+        socket.on("error", TEARDOWN_NOOP);
+        socket[closeMethod]();
+        if (closeMethod === "end") {
+          const closeTimer = setTimeout(() => socket.destroy(), socketCloseTimeout);
+          if (typeof closeTimer.unref === "function") {
+            closeTimer.unref();
+          }
+          socket.once("close", () => clearTimeout(closeTimer));
+        }
+      } catch (_E) {
+      }
+    }
+    this._destroy();
+  }
+  /**
+   * Authenticate user
+   */
+  login(authData, callback) {
+    const isDestroyedMessage = this._isDestroyedMessage("login");
+    if (isDestroyedMessage) {
+      return callback(this._formatError(isDestroyedMessage, "ECONNECTION", false, "API"));
+    }
+    this._auth = authData || {};
+    this._authMethod = (this._auth.method || "").toString().trim().toUpperCase() || false;
+    const canUseXOAuth2 = !!this._auth.oauth2 || this.customAuth.has("XOAUTH2");
+    if (!this._authMethod && this._auth.oauth2 && !this._auth.credentials) {
+      this._authMethod = "XOAUTH2";
+    } else if (!this._authMethod || this._authMethod === "XOAUTH2" && !this._auth.oauth2) {
+      const supported = this._supportedAuth.find((method) => method !== "XOAUTH2" || canUseXOAuth2);
+      this._authMethod = (supported || "PLAIN").toUpperCase().trim();
+    }
+    if ((this._authMethod !== "XOAUTH2" || this.customAuth.has("XOAUTH2")) && (!this._auth.credentials || !this._auth.credentials.user || !this._auth.credentials.pass)) {
+      if (this._auth.user && this._auth.pass || this.customAuth.has(this._authMethod)) {
+        this._auth.credentials = {
+          user: this._auth.user,
+          pass: this._auth.pass,
+          options: this._auth.options
+        };
+      } else {
+        return callback(this._formatError('Missing credentials for "' + this._authMethod + '"', "EAUTH", false, "API"));
+      }
+    }
+    if (this.customAuth.has(this._authMethod)) {
+      const handler2 = this.customAuth.get(this._authMethod);
+      let lastResponse;
+      let returned = false;
+      const resolve3 = () => {
+        if (returned) {
+          return;
+        }
+        returned = true;
+        this.logger.info({
+          tnx: "smtp",
+          username: this._auth.user,
+          action: "authenticated",
+          method: this._authMethod
+        }, "User %s authenticated", JSON.stringify(this._auth.user));
+        this.authenticated = true;
+        callback(null, true);
+      };
+      const reject = (err) => {
+        if (returned) {
+          return;
+        }
+        returned = true;
+        callback(this._formatError(err, "EAUTH", lastResponse, "AUTH " + this._authMethod));
+      };
+      const sendCommand = (cmd, done) => {
+        let promise;
+        if (!done) {
+          promise = new Promise((resolve4, reject2) => {
+            done = callbackPromise(resolve4, reject2);
+          });
+        }
+        this._responseActions.push((str) => {
+          lastResponse = str;
+          let codes = str.match(/^(\d+)(?:\s(\d+\.\d+\.\d+))?\s/);
+          let data = {
+            command: cmd,
+            response: str
+          };
+          if (codes) {
+            data.status = Number(codes[1]) || 0;
+            if (codes[2]) {
+              data.code = codes[2];
+            }
+            data.text = str.substr(codes[0].length);
+          } else {
+            data.text = str;
+            data.status = 0;
+          }
+          done(null, data);
+        });
+        setImmediate(() => this._sendCommand(cmd, maskAuthCommand(cmd)));
+        return promise;
+      };
+      const handlerResponse = handler2({
+        auth: this._auth,
+        method: this._authMethod,
+        extensions: [].concat(this._supportedExtensions),
+        authMethods: [].concat(this._supportedAuth),
+        maxAllowedSize: this._maxAllowedSize || false,
+        sendCommand,
+        resolve: resolve3,
+        reject
+      });
+      if (handlerResponse && typeof handlerResponse.catch === "function") {
+        handlerResponse.then(resolve3).catch(reject);
+      }
+      return;
+    }
+    switch (this._authMethod) {
+      case "XOAUTH2":
+        this._handleXOauth2Token(false, callback);
+        return;
+      case "LOGIN":
+        this._responseActions.push((str) => {
+          this._actionAUTH_LOGIN_USER(str, callback);
+        });
+        this._sendCommand("AUTH LOGIN");
+        return;
+      case "PLAIN":
+        this._responseActions.push((str) => {
+          this._actionAUTHComplete(str, callback);
+        });
+        this._sendCommand(
+          "AUTH PLAIN " + Buffer.from(
+            //this._auth.user+'\u0000'+
+            "\0" + // skip authorization identity as it causes problems with some servers
+            this._auth.credentials.user + "\0" + this._auth.credentials.pass,
+            "utf-8"
+          ).toString("base64"),
+          // log entry without passwords
+          "AUTH PLAIN " + Buffer.from(
+            //this._auth.user+'\u0000'+
+            "\0" + // skip authorization identity as it causes problems with some servers
+            this._auth.credentials.user + "\0/* secret */",
+            "utf-8"
+          ).toString("base64")
+        );
+        return;
+      case "CRAM-MD5":
+        this._responseActions.push((str) => {
+          this._actionAUTH_CRAM_MD5(str, callback);
+        });
+        this._sendCommand("AUTH CRAM-MD5");
+        return;
+    }
+    return callback(this._formatError('Unknown authentication method "' + this._authMethod + '"', "EAUTH", false, "API"));
+  }
+  /**
+   * Sends a message
+   *
+   * @param envelope Envelope object, {from: addr, to: [addr]}
+   * @param message String, Buffer or a Stream
+   * @param done Callback to return once sending is completed
+   */
+  send(envelope, message, done) {
+    let returned = false;
+    const callback = (err, info) => {
+      if (returned) {
+        return;
+      }
+      returned = true;
+      if (this._pendingSend && this._pendingSend.callback === callback) {
+        this._pendingSend = false;
+      }
+      done(err, info);
+    };
+    if (!message) {
+      return callback(this._formatError("Empty message", "EMESSAGE", false, "API"));
+    }
+    const isDestroyedMessage = this._isDestroyedMessage("send message");
+    if (isDestroyedMessage) {
+      return callback(this._formatError(isDestroyedMessage, "ECONNECTION", false, "API"));
+    }
+    if (this._maxAllowedSize && envelope.size > this._maxAllowedSize) {
+      setImmediate(() => {
+        callback(this._formatError("Message size larger than allowed " + this._maxAllowedSize, "EMESSAGE", false, "MAIL FROM"));
+      });
+      return;
+    }
+    const pendingSend = {
+      callback,
+      stream: false,
+      onStreamError: (err) => callback(this._formatError(err, "ESTREAM", false, "API"))
+    };
+    if (typeof message.on === "function") {
+      pendingSend.stream = message;
+      pendingSend.stream.on("error", pendingSend.onStreamError);
+    }
+    this._pendingSend = pendingSend;
+    const startTime = Date.now();
+    this._setEnvelope(envelope, (err, info) => {
+      if (err) {
+        if (typeof message.destroy === "function") {
+          message.destroy();
+        }
+        return callback(err);
+      }
+      const envelopeTime = Date.now();
+      const stream = this._createSendStream((err2, str) => {
+        if (err2) {
+          return callback(err2);
+        }
+        const result = info;
+        result.envelopeTime = envelopeTime - startTime;
+        result.messageTime = Date.now() - envelopeTime;
+        result.messageSize = stream.outByteCount;
+        result.response = str;
+        const serverMessageId = parseServerMessageId(result.response, this.options.host);
+        if (serverMessageId) {
+          result.serverMessageId = serverMessageId;
+        }
+        const rejectedErrors = this._envelope?.rejectedErrors;
+        if (!result.rejectedErrors && rejectedErrors && rejectedErrors.length) {
+          result.rejectedErrors = rejectedErrors;
+        }
+        return callback(null, result);
+      });
+      if (typeof message.pipe === "function") {
+        message.pipe(stream);
+      } else {
+        stream.write(message);
+        stream.end();
+      }
+    });
+  }
+  /**
+   * Resets connection state
+   *
+   * @param callback Callback to return once connection is reset
+   */
+  reset(callback) {
+    const isDestroyedMessage = this._isDestroyedMessage("reset");
+    if (isDestroyedMessage) {
+      return callback(this._formatError(isDestroyedMessage, "ECONNECTION", false, "API"));
+    }
+    this._sendCommand("RSET");
+    this._responseActions.push((str) => {
+      if (str.charAt(0) !== "2") {
+        return callback(this._formatError("Could not reset session state. response=" + str, "EPROTOCOL", str, "RSET"));
+      }
+      this._envelope = false;
+      return callback(null, true);
+    });
+  }
+  /**
+   * Connection listener that is run when the connection to
+   * the server is opened
+   *
+   * @event
+   * @internal
+   */
+  _onConnect() {
+    const socket = this._socket;
+    this._clearPhase();
+    this.logger.info({
+      tnx: "network",
+      localAddress: socket.localAddress,
+      localPort: socket.localPort,
+      remoteAddress: socket.remoteAddress,
+      remotePort: socket.remotePort
+    }, "%s established to %s:%s", this.secure ? "Secure connection" : "Connection", socket.remoteAddress, socket.remotePort);
+    if (this._destroyed) {
+      this.close();
+      return;
+    }
+    this.stage = "connected";
+    socket.removeListener("data", this._onSocketData);
+    socket.removeListener("timeout", this._onSocketTimeout);
+    socket.removeListener("close", this._onSocketClose);
+    socket.removeListener("end", this._onSocketEnd);
+    socket.removeListener("error", this._onConnectionSocketError);
+    socket.removeListener("error", this._onSocketError);
+    socket.on("error", this._onSocketError);
+    socket.on("data", this._onSocketData);
+    socket.once("close", this._onSocketClose);
+    socket.once("end", this._onSocketEnd);
+    socket.setTimeout(this.options.socketTimeout || SOCKET_TIMEOUT);
+    socket.on("timeout", this._onSocketTimeout);
+    if (typeof socket.setKeepAlive === "function") {
+      socket.setKeepAlive(true, KEEPALIVE_DELAY);
+    }
+    if (typeof socket.setNoDelay === "function") {
+      socket.setNoDelay(true);
+    }
+    this._startPhase(this._remainingSetupTime(), timeoutError("Greeting never received", "GREETING_TIMEOUT"));
+    this._responseActions.push(this._actionGreeting);
+    socket.resume();
+  }
+  /**
+   * Ends the session after a 421 reply. The replies queued for commands sent along with the
+   * answered one are not going to come, so the message in flight is failed here
+   *
+   * @param str The 421 reply
+   * @internal
+   */
+  _onServerClosing(str) {
+    if (this._destroyed) {
+      return;
+    }
+    const pendingSend = this._pendingSend;
+    const envelope = this._envelope;
+    this._responseActions = [];
+    this.close();
+    if (pendingSend) {
+      pendingSend.callback(envelope && envelope.mailError || this._formatError("Server closed the connection", "ECONNECTION", str, "CONN"));
+    }
+  }
+  /**
+   * 'data' listener for data coming from the server
+   *
+   * @event
+   * @param chunk Data chunk coming from the server
+   * @internal
+   */
+  _onData(chunk) {
+    if (this._destroyed || !chunk || !chunk.length) {
+      return;
+    }
+    const maxResponseSize = this.options.maxResponseSize || MAX_RESPONSE_SIZE;
+    const data = chunk.toString("binary");
+    if (!data.includes("\n")) {
+      this._remainder += data;
+      if (this._remainder.length > maxResponseSize) {
+        return this._onResponseTooLarge();
+      }
+      return;
+    }
+    const lines = (this._remainder + data).split(/\r?\n/);
+    this._remainder = lines.pop();
+    for (let i = 0, len = lines.length; i < len; i++) {
+      if (this._responsePartial) {
+        this._responseQueue[this._responseQueue.length - 1] += "\n" + lines[i];
+      } else {
+        this._responseQueue.push(lines[i]);
+      }
+      this._responsePartial = isPartialLine(lines[i]);
+      if (this._responsePartial && this._responseQueue[this._responseQueue.length - 1].length > maxResponseSize) {
+        return this._onResponseTooLarge();
+      }
+    }
+    if (this._remainder.length > maxResponseSize) {
+      return this._onResponseTooLarge();
+    }
+    if (this._responsePartial) {
+      return;
+    }
+    this._processResponse();
+  }
+  /**
+   * Drops a connection whose peer keeps extending a reply it never completes, releasing
+   * whatever was buffered for that reply
+   * @internal
+   */
+  _onResponseTooLarge() {
+    this._remainder = "";
+    this._responseQueue = [];
+    this._responsePartial = false;
+    this._onError(new Error("Server response exceeds maximum allowed size"), "EPROTOCOL", false, "CONN");
+  }
+  /**
+   * 'error' listener for the socket
+   *
+   * @event
+   * @param err Error object
+   * @param type Error name
+   * @param data Server response that triggered the error, false if there is none
+   * @param command SMTP command that was in flight
+   * @internal
+   */
+  _onError(err, type, data, command) {
+    this._clearPhase();
+    if (this._destroyed) {
+      return;
+    }
+    err = this._formatError(err, type, data, command);
+    if (isTransientError(err)) {
+      this.logger.warn({ tnx: "smtp", err }, "%s", err.message);
+    } else {
+      this.logger.error({ tnx: "smtp", err }, "%s", err.message);
+    }
+    const pendingSend = this._pendingSend;
+    this.emit("error", err);
+    this.close();
+    if (pendingSend) {
+      pendingSend.callback(err);
+    }
+  }
+  /** @internal */
+  _formatError(message, type, response, command) {
+    let err;
+    if (/Error\]$/i.test(Object.prototype.toString.call(message))) {
+      err = message;
+    } else {
+      err = new Error(message);
+    }
+    if (type && type !== "Error" && err.code !== ERR_ACCESS_DENIED) {
+      if (err.code && err.code !== type && !err.originalCode) {
+        err.originalCode = err.code;
+      }
+      err.code = type;
+    }
+    if (response) {
+      err.response = response;
+      err.message += ": " + response;
+    }
+    const responseCode = typeof response === "string" && Number((response.match(/^\d+/) || [])[0]) || false;
+    if (responseCode) {
+      err.responseCode = responseCode;
+      err.permanent = isPermanentResponseCode(responseCode);
+    }
+    if (command) {
+      err.command = command;
+    }
+    return err;
+  }
+  /**
+   * 'close' listener for the socket
+   *
+   * @event
+   * @internal
+   */
+  _onClose() {
+    let serverResponse = false;
+    if (this._remainder && this._remainder.trim()) {
+      this.lastServerResponse = serverResponse = decodeServerResponse(this._remainder.trim());
+      if (this.options.debug || this.options.transactionLog) {
+        this.logger.debug({
+          tnx: "server"
+        }, serverResponse);
+      }
+    }
+    this.logger.info({
+      tnx: "network"
+    }, "Connection closed");
+    const failureResponse = typeof serverResponse === "string" && /^[45]\d{2}[ -]/.test(serverResponse) ? serverResponse : false;
+    if (this.upgrading && !this._destroyed) {
+      return this._onError(new Error("Connection closed unexpectedly"), "ETLS", failureResponse, "CONN");
+    }
+    if (!failureResponse && this._responseActions[0] === this._actionGreeting && this._connectCallback && !this._destroyed) {
+      const connectCallback = this._connectCallback;
+      this._connectCallback = false;
+      const err = this._formatError(new Error("Connection closed unexpectedly"), "ECONNECTION", false, "CONN");
+      this.logger.warn({ tnx: "network" }, err.message);
+      connectCallback(err);
+      this.close();
+      return;
+    }
+    if (!failureResponse && this.stage === "connected" && !this._responseActions.length && !this._pendingSend && !this._destroyed && !this._closing) {
+      this.logger.info({
+        tnx: "network"
+      }, "Server closed the idle connection");
+      return this._destroy();
+    }
+    if (failureResponse || this._responseActions[0] !== this.close && !this._destroyed) {
+      return this._onError(new Error("Connection closed unexpectedly"), "ECONNECTION", failureResponse, "CONN");
+    }
+    this._destroy();
+  }
+  /**
+   * 'end' listener for the socket
+   *
+   * @event
+   * @internal
+   */
+  _onEnd() {
+    if (this._socket && !this._socket.destroyed) {
+      this._socket.end();
+    }
+  }
+  /**
+   * 'timeout' listener for the socket
+   *
+   * @event
+   * @internal
+   */
+  _onTimeout() {
+    return this._onError(timeoutError("Timeout", "SOCKET_TIMEOUT"), "ETIMEDOUT", false, "CONN");
+  }
+  /**
+   * Destroys the client, emits 'end'
+   * @internal
+   */
+  _destroy() {
+    if (this._destroyed) {
+      return;
+    }
+    this._destroyed = true;
+    this.destroyed = true;
+    this._clearPhase();
+    this.emit("end");
+  }
+  /**
+   * Upgrades the connection to TLS
+   *
+   * @param callback Callback function to run when the connection
+   *        has been secured
+   * @internal
+   */
+  _upgradeConnection(callback) {
+    if (this._destroyed || this._closing) {
+      return;
+    }
+    const discarded = this._remainder.length + this._responseQueue.reduce((total, response) => total + response.length, 0);
+    if (discarded) {
+      this.logger.warn({
+        tnx: "smtp",
+        discarded
+      }, "Discarded %s bytes received in plaintext after the STARTTLS response", discarded);
+    }
+    this._plaintextEhlo = false;
+    this._remainder = "";
+    this._responseQueue = [];
+    this._responsePartial = false;
+    const socketPlain = this._socket;
+    socketPlain.removeListener("data", this._onSocketData);
+    socketPlain.removeListener("timeout", this._onSocketTimeout);
+    socketPlain.setTimeout(0);
+    const opts = Object.assign({
+      socket: socketPlain,
+      host: this.host
+    }, this.options.tls || {});
+    if (this.servername && !opts.servername) {
+      opts.servername = this.servername;
+    }
+    const removePlainSocketListeners = () => {
+      socketPlain.removeListener("close", this._onSocketClose);
+      socketPlain.removeListener("end", this._onSocketEnd);
+      socketPlain.removeListener("error", this._onSocketError);
+      socketPlain.removeListener("error", this._onConnectionSocketError);
+    };
+    this.upgrading = true;
+    this._startPhase(this._remainingSetupTime(), timeoutError("TLS handshake timed out", "UPGRADE_TIMEOUT"));
+    try {
+      this._socket = import_node_tls2.default.connect(opts, () => {
+        this._clearPhase();
+        this.secure = true;
+        this.upgrading = false;
+        this._socket.on("data", this._onSocketData);
+        removePlainSocketListeners();
+        return callback(null, true);
+      });
+    } catch (err) {
+      this._clearPhase();
+      removePlainSocketListeners();
+      return callback(err);
+    }
+    this._socket.on("error", this._onSocketError);
+    this._socket.once("close", this._onSocketClose);
+    this._socket.once("end", this._onSocketEnd);
+    this._socket.setTimeout(this.options.socketTimeout || SOCKET_TIMEOUT);
+    this._socket.on("timeout", this._onSocketTimeout);
+    socketPlain.resume();
+  }
+  /**
+   * Processes queued responses from the server
+   * @internal
+   */
+  _processResponse() {
+    if (!this._responseQueue.length) {
+      return false;
+    }
+    const raw = (this._responseQueue.shift() || "").toString();
+    if (!raw.trim()) {
+      setImmediate(() => this._processResponse());
+      return;
+    }
+    if (isPartialResponse(raw)) {
+      this._responseQueue.unshift(raw);
+      return;
+    }
+    const str = this.lastServerResponse = decodeServerResponse(raw);
+    if (this.options.debug || this.options.transactionLog) {
+      this.logger.debug({
+        tnx: "server"
+      }, str.replace(/\r?\n$/, ""));
+    }
+    const action = this._responseActions.shift();
+    const closing = /^421[ -]/.test(str);
+    if (typeof action === "function") {
+      action.call(this, str);
+      if (closing) {
+        return this._onServerClosing(str);
+      }
+      setImmediate(() => this._processResponse());
+    } else if (closing && !this._pendingSend && this.stage === "connected") {
+      this.logger.info({
+        tnx: "smtp"
+      }, "Server closed the idle connection: %s", str);
+      this.close();
+    } else {
+      return this._onError(new Error("Unexpected Response"), "EPROTOCOL", str, "CONN");
+    }
+  }
+  /**
+   * Send a command to the server, append \r\n
+   *
+   * @param str String to be sent to the server
+   * @param logStr Optional string to be used for logging instead of the actual string
+   * @internal
+   */
+  _sendCommand(str, logStr) {
+    if (this._destroyed) {
+      return;
+    }
+    const socket = this._socket;
+    if (socket.destroyed) {
+      return this.close();
+    }
+    if (this.options.debug || this.options.transactionLog) {
+      this.logger.debug({
+        tnx: "client"
+      }, (logStr || str || "").toString().replace(/\r?\n$/, ""));
+    }
+    socket.write(Buffer.from(str + "\r\n", "utf-8"));
+  }
+  /**
+   * Initiates a new message by submitting envelope data, starting with
+   * MAIL FROM: command
+   *
+   * @param envelope Envelope object in the form of
+   *        {from:'...', to:['...']}
+   *        or
+   *        {from:{address:'...',name:'...'}, to:[address:'...',name:'...']}
+   * @param callback Callback to run once the envelope is processed
+   * @internal
+   */
+  _setEnvelope(envelope, callback) {
+    const args = [];
+    let useSmtpUtf8 = false;
+    this._envelope = envelope || {};
+    this._envelope.from = (this._envelope.from && this._envelope.from.address || this._envelope.from || "").toString().trim();
+    this._envelope.to = [].concat(this._envelope.to || []).map((to) => (to && to.address || to || "").toString().trim());
+    if (!this._envelope.to.length) {
+      return callback(this._formatError("No recipients defined", "EENVELOPE", false, "API"));
+    }
+    if (this._envelope.from && /[\r\n<>]/.test(this._envelope.from)) {
+      return callback(this._formatError("Invalid sender " + JSON.stringify(this._envelope.from), "EENVELOPE", false, "API"));
+    }
+    if (/[\x80-\uFFFF]/.test(this._envelope.from)) {
+      useSmtpUtf8 = true;
+    }
+    for (let i = 0, len = this._envelope.to.length; i < len; i++) {
+      if (!this._envelope.to[i] || /[\r\n<>]/.test(this._envelope.to[i])) {
+        return callback(this._formatError("Invalid recipient " + JSON.stringify(this._envelope.to[i]), "EENVELOPE", false, "API"));
+      }
+      if (/[\x80-\uFFFF]/.test(this._envelope.to[i])) {
+        useSmtpUtf8 = true;
+      }
+    }
+    this._envelope.rcptQueue = [].concat(this._envelope.to || []);
+    this._envelope.rejected = [];
+    this._envelope.rejectedErrors = [];
+    this._envelope.accepted = [];
+    if (this._envelope.dsn) {
+      try {
+        this._envelope.dsn = this._setDsnEnvelope(this._envelope.dsn);
+      } catch (err) {
+        return callback(this._formatError("Invalid DSN " + err.message, "EENVELOPE", false, "API"));
+      }
+    }
+    if (this._envelope.requireTLSExtensionEnabled) {
+      if (!this.secure) {
+        return callback(this._formatError("REQUIRETLS can only be used over TLS connections (RFC 8689)", "EREQUIRETLS", false, "MAIL FROM"));
+      }
+      if (!this._supportedExtensions.includes("REQUIRETLS")) {
+        return callback(this._formatError("Server does not support REQUIRETLS extension (RFC 8689)", "EREQUIRETLS", false, "MAIL FROM"));
+      }
+    }
+    this._envelope.pipelined = this._supportedExtensions.includes("PIPELINING");
+    this._responseActions.push((str) => {
+      this._actionMAIL(str, callback);
+    });
+    if (useSmtpUtf8 && this._supportedExtensions.includes("SMTPUTF8")) {
+      args.push("SMTPUTF8");
+      this._usingSmtpUtf8 = true;
+    }
+    if (this._envelope.use8BitMime && this._supportedExtensions.includes("8BITMIME")) {
+      args.push("BODY=8BITMIME");
+      this._using8BitMime = true;
+    }
+    if (this._envelope.size && this._supportedExtensions.includes("SIZE")) {
+      const sizeValue = Number(this._envelope.size) || 0;
+      if (sizeValue > 0) {
+        args.push("SIZE=" + sizeValue);
+      }
+    }
+    if (this._envelope.dsn && this._supportedExtensions.includes("DSN")) {
+      if (this._envelope.dsn.ret) {
+        args.push("RET=" + encodeXText(this._envelope.dsn.ret));
+      }
+      if (this._envelope.dsn.envid) {
+        args.push("ENVID=" + encodeXText(this._envelope.dsn.envid));
+      }
+    }
+    if (this._envelope.requireTLSExtensionEnabled) {
+      args.push("REQUIRETLS");
+    }
+    const mailFrom = "MAIL FROM:<" + this._envelope.from + ">" + (args.length ? " " + args.join(" ") : "");
+    this._recipientQueue = [];
+    if (!this._envelope.pipelined) {
+      this._sendCommand(mailFrom);
+      return;
+    }
+    const socket = this._socket;
+    socket.cork();
+    this._sendCommand(mailFrom);
+    while (this._envelope.rcptQueue.length) {
+      this._sendRcpt(this._envelope.rcptQueue.shift(), callback);
+    }
+    this._responseActions.push((str) => {
+      this._actionDATA(str, callback);
+    });
+    this._sendCommand("DATA");
+    socket.uncork();
+  }
+  /**
+   * Sends RCPT TO for a recipient and queues the handler for the reply
+   *
+   * @param recipient Recipient address
+   * @param callback Callback to run once the envelope is processed
+   * @internal
+   */
+  _sendRcpt(recipient, callback) {
+    this._recipientQueue.push(recipient);
+    this._responseActions.push((str) => {
+      this._actionRCPT(str, callback);
+    });
+    this._sendCommand("RCPT TO:<" + recipient + ">" + this._getDsnRcptToArgs());
+  }
+  /** @internal */
+  _setDsnEnvelope(params) {
+    let ret = (params.ret || params.return || "").toString().toUpperCase() || null;
+    if (ret) {
+      switch (ret) {
+        case "HDRS":
+        case "HEADERS":
+          ret = "HDRS";
+          break;
+        case "FULL":
+        case "BODY":
+          ret = "FULL";
+          break;
+      }
+    }
+    if (ret && !["FULL", "HDRS"].includes(ret)) {
+      throw new Error("ret: " + JSON.stringify(ret));
+    }
+    const envid = (params.envid || params.id || "").toString() || null;
+    let notify = params.notify || null;
+    if (notify) {
+      if (typeof notify === "string") {
+        notify = notify.split(",");
+      }
+      notify = notify.map((n) => n.trim().toUpperCase());
+      const validNotify = ["NEVER", "SUCCESS", "FAILURE", "DELAY"];
+      const invalidNotify = notify.filter((n) => !validNotify.includes(n));
+      if (invalidNotify.length || notify.length > 1 && notify.includes("NEVER")) {
+        throw new Error("notify: " + JSON.stringify(notify.join(",")));
+      }
+      notify = notify.join(",");
+    }
+    let orcpt = (params.recipient || params.orcpt || "").toString() || null;
+    if (orcpt && orcpt.indexOf(";") < 0) {
+      orcpt = "rfc822;" + orcpt;
+    }
+    return {
+      ret,
+      envid,
+      notify,
+      orcpt
+    };
+  }
+  /** @internal */
+  _getDsnRcptToArgs() {
+    const envelope = this._envelope;
+    const args = [];
+    if (envelope.dsn && this._supportedExtensions.includes("DSN")) {
+      if (envelope.dsn.notify) {
+        args.push("NOTIFY=" + encodeXText(envelope.dsn.notify));
+      }
+      if (envelope.dsn.orcpt) {
+        args.push("ORCPT=" + encodeXText(envelope.dsn.orcpt));
+      }
+    }
+    return args.length ? " " + args.join(" ") : "";
+  }
+  /** @internal */
+  _createSendStream(callback) {
+    const envelope = this._envelope;
+    const dataStream = new DataStream();
+    if (this.options.lmtp) {
+      envelope.accepted.forEach((recipient, i) => {
+        const final = i === envelope.accepted.length - 1;
+        this._responseActions.push((str) => {
+          this._actionLMTPStream(recipient, final, str, callback);
+        });
+      });
+    } else {
+      this._responseActions.push((str) => {
+        this._actionSMTPStream(str, callback);
+      });
+    }
+    this._currentDataStream = dataStream;
+    dataStream.pipe(this._socket, {
+      end: false
+    });
+    if (this.options.debug) {
+      const logStream = new import_node_stream13.PassThrough();
+      logStream.on("readable", () => {
+        let chunk;
+        while (chunk = logStream.read()) {
+          this.logger.debug({
+            tnx: "message"
+          }, chunk.toString("binary").replace(/\r?\n$/, ""));
+        }
+      });
+      dataStream.pipe(logStream);
+    }
+    dataStream.once("end", () => {
+      if (this._currentDataStream === dataStream) {
+        this._currentDataStream = false;
+      }
+      this.logger.info({
+        tnx: "message",
+        inByteCount: dataStream.inByteCount,
+        outByteCount: dataStream.outByteCount
+      }, "<%s bytes encoded mime message (source size %s bytes)>", dataStream.outByteCount, dataStream.inByteCount);
+    });
+    return dataStream;
+  }
+  /** ACTIONS **/
+  /**
+   * Will be run after the connection is created and the server sends
+   * a greeting. If the incoming message starts with 220 initiate
+   * SMTP session by sending EHLO command
+   *
+   * @param str Message from the server
+   * @internal
+   */
+  _actionGreeting(str) {
+    this._clearPhase();
+    if (str.substr(0, 3) !== "220") {
+      this._onError(new Error("Invalid greeting. response=" + str), "EPROTOCOL", str, "CONN");
+      return;
+    }
+    if (this.options.lmtp) {
+      this._responseActions.push(this._actionLHLO);
+      this._sendCommand("LHLO " + this.name);
+    } else {
+      this._responseActions.push(this._actionEHLO);
+      this._sendCommand("EHLO " + this.name);
+    }
+  }
+  /**
+   * Handles server response for LHLO command. If it yielded in
+   * error, emit 'error', otherwise treat this as an EHLO response
+   *
+   * @param str Message from the server
+   * @internal
+   */
+  _actionLHLO(str) {
+    if (str.charAt(0) !== "2") {
+      this._onError(new Error("Invalid LHLO. response=" + str), "EPROTOCOL", str, "LHLO");
+      return;
+    }
+    this._actionEHLO(str);
+  }
+  /**
+   * Handles server response for EHLO command. If it yielded in
+   * error, try HELO instead, otherwise initiate TLS negotiation
+   * if STARTTLS is supported by the server or move into the
+   * authentication phase.
+   *
+   * @param str Message from the server
+   * @internal
+   */
+  _actionEHLO(str) {
+    if (str.substr(0, 3) === "421") {
+      this._onError(new Error("Server terminates connection. response=" + str), "ECONNECTION", str, "EHLO");
+      return;
+    }
+    if (str.charAt(0) !== "2") {
+      if (this.options.requireTLS) {
+        this._onError(new Error("EHLO failed but HELO does not support required STARTTLS. response=" + str), "ECONNECTION", str, "EHLO");
+        return;
+      }
+      this._responseActions.push(this._actionHELO);
+      this._sendCommand("HELO " + this.name);
+      return;
+    }
+    if (!this.secure && !this.options.ignoreTLS && (/[ -]STARTTLS\b/im.test(str) || this.options.requireTLS)) {
+      this._plaintextEhlo = str;
+      this._sendCommand("STARTTLS");
+      this._responseActions.push(this._actionSTARTTLS);
+      return;
+    }
+    this._parseEhloExtensions(str);
+    this.emit("connect");
+  }
+  /**
+   * Reads the extensions and the authentication mechanisms out of an EHLO response
+   *
+   * @param str EHLO response from the server
+   * @internal
+   */
+  _parseEhloExtensions(str) {
+    let match;
+    this._ehloLines = str.split(/\r?\n/).map((line) => line.replace(/^\d+[ -]/, "").trim()).filter((line) => line).slice(1);
+    if (/[ -]SMTPUTF8\b/im.test(str)) {
+      this._supportedExtensions.push("SMTPUTF8");
+    }
+    if (/[ -]DSN\b/im.test(str)) {
+      this._supportedExtensions.push("DSN");
+    }
+    if (/[ -]8BITMIME\b/im.test(str)) {
+      this._supportedExtensions.push("8BITMIME");
+    }
+    if (/[ -]REQUIRETLS\b/im.test(str)) {
+      this._supportedExtensions.push("REQUIRETLS");
+    }
+    if (/[ -]PIPELINING\b/im.test(str)) {
+      this._supportedExtensions.push("PIPELINING");
+    }
+    if (/[ -]AUTH\b/i.test(str)) {
+      this.allowsAuth = true;
+    }
+    const authMechanisms = /* @__PURE__ */ new Set();
+    for (const line of this._ehloLines) {
+      const authMatch = /^AUTH[\s=](.*)/i.exec(line);
+      if (authMatch) {
+        for (const mechanism of authMatch[1].split(/[\s=]+/)) {
+          authMechanisms.add(mechanism.toUpperCase());
+        }
+      }
+    }
+    for (const mechanism of ["PLAIN", "LOGIN", "CRAM-MD5", "XOAUTH2"]) {
+      if (authMechanisms.has(mechanism)) {
+        this._supportedAuth.push(mechanism);
+      }
+    }
+    if (match = str.match(/[ -]SIZE(?:[ \t]+(\d+))?/im)) {
+      this._supportedExtensions.push("SIZE");
+      this._maxAllowedSize = Number(match[1]) || 0;
+    }
+  }
+  /**
+   * Handles server response for HELO command. If it yielded in
+   * error, emit 'error', otherwise move into the authentication phase.
+   *
+   * @param str Message from the server
+   * @internal
+   */
+  _actionHELO(str) {
+    if (str.charAt(0) !== "2") {
+      this._onError(new Error("Invalid HELO. response=" + str), "EPROTOCOL", str, "HELO");
+      return;
+    }
+    this.allowsAuth = true;
+    this.emit("connect");
+  }
+  /**
+   * Handles server response for STARTTLS command. If there's an error
+   * try HELO instead, otherwise initiate TLS upgrade. If the upgrade
+   * succeedes restart the EHLO
+   *
+   * @param str Message from the server
+   * @internal
+   */
+  _actionSTARTTLS(str) {
+    if (str.charAt(0) !== "2") {
+      if (this.options.opportunisticTLS) {
+        this.logger.info({
+          tnx: "smtp"
+        }, "Failed STARTTLS upgrade, continuing unencrypted");
+        if (this._plaintextEhlo) {
+          this._parseEhloExtensions(this._plaintextEhlo);
+          this._plaintextEhlo = false;
+          this.allowsAuth = false;
+          this._supportedAuth = [];
+        }
+        this.emit("connect");
+        return;
+      }
+      this._onError(new Error("Error upgrading connection with STARTTLS"), "ETLS", str, "STARTTLS");
+      return;
+    }
+    this._upgradeConnection((err, secured) => {
+      if (err) {
+        this._onError(new Error("Error initiating TLS - " + (err.message || err)), "ETLS", false, "STARTTLS");
+        return;
+      }
+      this.logger.info({
+        tnx: "smtp"
+      }, "Connection upgraded with STARTTLS");
+      if (secured) {
+        if (this.options.lmtp) {
+          this._responseActions.push(this._actionLHLO);
+          this._sendCommand("LHLO " + this.name);
+        } else {
+          this._responseActions.push(this._actionEHLO);
+          this._sendCommand("EHLO " + this.name);
+        }
+      } else {
+        this.emit("connect");
+      }
+    });
+  }
+  /**
+   * Handle the response for AUTH LOGIN command. We are expecting
+   * '334 VXNlcm5hbWU6' (base64 for 'Username:'). Data to be sent as
+   * response needs to be base64 encoded username. We do not need
+   * exact match but settle with 334 response in general as some
+   * hosts invalidly use a longer message than VXNlcm5hbWU6
+   *
+   * @param str Message from the server
+   * @param callback Callback to run once the authentication sequence completes
+   * @internal
+   */
+  _actionAUTH_LOGIN_USER(str, callback) {
+    if (!/^334[ -]/.test(str)) {
+      callback(this._formatError('Invalid login sequence while waiting for "334 VXNlcm5hbWU6"', "EAUTH", str, "AUTH LOGIN"));
+      return;
+    }
+    this._responseActions.push((str2) => {
+      this._actionAUTH_LOGIN_PASS(str2, callback);
+    });
+    this._sendCommand(Buffer.from(this._auth.credentials.user + "", "utf-8").toString("base64"));
+  }
+  /**
+   * Handle the response for AUTH CRAM-MD5 command. We are expecting
+   * '334 <challenge string>'. Data to be sent as response needs to be
+   * base64 decoded challenge string, MD5 hashed using the password as
+   * a HMAC key, prefixed by the username and a space, and finally all
+   * base64 encoded again.
+   *
+   * @param str Message from the server
+   * @param callback Callback to run once the authentication sequence completes
+   * @internal
+   */
+  _actionAUTH_CRAM_MD5(str, callback) {
+    const challengeMatch = str.match(/^334\s+(.+)$/);
+    if (!challengeMatch) {
+      return callback(this._formatError("Invalid login sequence while waiting for server challenge string", "EAUTH", str, "AUTH CRAM-MD5"));
+    }
+    const base64decoded = Buffer.from(challengeMatch[1], "base64").toString("ascii");
+    const hmacMD5 = import_node_crypto6.default.createHmac("md5", this._auth.credentials.pass);
+    hmacMD5.update(base64decoded);
+    const prepended = this._auth.credentials.user + " " + hmacMD5.digest("hex");
+    this._responseActions.push((str2) => {
+      this._actionAUTH_CRAM_MD5_PASS(str2, callback);
+    });
+    this._sendCommand(
+      Buffer.from(prepended).toString("base64"),
+      // hidden hash for logs
+      Buffer.from(this._auth.credentials.user + " /* secret */").toString("base64")
+    );
+  }
+  /**
+   * Handles the response to CRAM-MD5 authentication, if there's no error,
+   * the user can be considered logged in. Start waiting for a message to send
+   *
+   * @param str Message from the server
+   * @param callback Callback to run once the authentication sequence completes
+   * @internal
+   */
+  _actionAUTH_CRAM_MD5_PASS(str, callback) {
+    if (!str.match(/^235\s+/)) {
+      return callback(this._formatError('Invalid login sequence while waiting for "235"', "EAUTH", str, "AUTH CRAM-MD5"));
+    }
+    this.logger.info({
+      tnx: "smtp",
+      username: this._auth.user,
+      action: "authenticated",
+      method: this._authMethod
+    }, "User %s authenticated", JSON.stringify(this._auth.user));
+    this.authenticated = true;
+    callback(null, true);
+  }
+  /**
+   * Handle the response for AUTH LOGIN command. We are expecting
+   * '334 UGFzc3dvcmQ6' (base64 for 'Password:'). Data to be sent as
+   * response needs to be base64 encoded password.
+   *
+   * @param str Message from the server
+   * @param callback Callback to run once the authentication sequence completes
+   * @internal
+   */
+  _actionAUTH_LOGIN_PASS(str, callback) {
+    if (!/^334[ -]/.test(str)) {
+      return callback(this._formatError('Invalid login sequence while waiting for "334 UGFzc3dvcmQ6"', "EAUTH", str, "AUTH LOGIN"));
+    }
+    this._responseActions.push((str2) => {
+      this._actionAUTHComplete(str2, callback);
+    });
+    this._sendCommand(
+      Buffer.from((this._auth.credentials.pass || "").toString(), "utf-8").toString("base64"),
+      // Hidden pass for logs
+      Buffer.from("/* secret */", "utf-8").toString("base64")
+    );
+  }
+  /**
+   * Handles the response for authentication, if there's no error,
+   * the user can be considered logged in. Start waiting for a message to send
+   *
+   * @param str Message from the server
+   * @param isRetry True if this is a retry after a failed login, or the callback itself
+   * @param [callback] Callback to run once the authentication sequence completes
+   * @internal
+   */
+  _actionAUTHComplete(str, isRetry, callback) {
+    if (!callback && typeof isRetry === "function") {
+      callback = isRetry;
+      isRetry = false;
+    }
+    if (str.substr(0, 3) === "334") {
+      this._responseActions.push((str2) => {
+        if (isRetry || this._authMethod !== "XOAUTH2") {
+          this._actionAUTHComplete(str2, true, callback);
+        } else {
+          setImmediate(() => this._handleXOauth2Token(true, callback));
+        }
+      });
+      this._sendCommand("");
+      return;
+    }
+    if (str.charAt(0) !== "2") {
+      this.logger.info({
+        tnx: "smtp",
+        username: this._auth.user,
+        action: "authfail",
+        method: this._authMethod
+      }, "User %s failed to authenticate", JSON.stringify(this._auth.user));
+      return callback(this._formatError("Invalid login", "EAUTH", str, "AUTH " + this._authMethod));
+    }
+    this.logger.info({
+      tnx: "smtp",
+      username: this._auth.user,
+      action: "authenticated",
+      method: this._authMethod
+    }, "User %s authenticated", JSON.stringify(this._auth.user));
+    this.authenticated = true;
+    callback(null, true);
+  }
+  /**
+   * Handle response for a MAIL FROM: command
+   *
+   * @param str Message from the server
+   * @param callback Callback to run once the envelope is processed
+   * @internal
+   */
+  _actionMAIL(str, callback) {
+    const envelope = this._envelope;
+    if (Number(str.charAt(0)) !== 2) {
+      const message = this._usingSmtpUtf8 && /^550 /.test(str) && /[\x80-\uFFFF]/.test(envelope.from) ? "Internationalized mailbox name not allowed" : "Mail command failed";
+      envelope.mailError = this._formatError(message, "EENVELOPE", str, "MAIL FROM");
+    }
+    this._advanceEnvelope(str, callback);
+  }
+  /**
+   * Handle response for a RCPT TO: command
+   *
+   * @param str Message from the server
+   * @param callback Callback to run once the envelope is processed
+   * @internal
+   */
+  _actionRCPT(str, callback) {
+    const envelope = this._envelope;
+    let err;
+    const curRecipient = this._recipientQueue.shift();
+    if (Number(str.charAt(0)) !== 2) {
+      const message = this._usingSmtpUtf8 && /^553 /.test(str) && /[\x80-\uFFFF]/.test(curRecipient) ? "Internationalized mailbox name not allowed" : "Recipient command failed";
+      envelope.rejected.push(curRecipient);
+      err = this._formatError(message, "EENVELOPE", str, "RCPT TO");
+      err.recipient = curRecipient;
+      envelope.rejectedErrors.push(err);
+    } else {
+      envelope.accepted.push(curRecipient);
+    }
+    this._advanceEnvelope(str, callback);
+  }
+  /**
+   * Moves the envelope on after a reply to MAIL FROM or RCPT TO. A pipelined envelope sent every
+   * command at once and is decided by the reply to DATA. Otherwise the commands go one at a
+   * time: the next recipient, or once every reply is in, DATA or the error that ends the message
+   *
+   * @param str The reply that was handled
+   * @param callback Callback to run once the envelope is processed
+   * @internal
+   */
+  _advanceEnvelope(str, callback) {
+    const envelope = this._envelope;
+    if (envelope.pipelined) {
+      return;
+    }
+    if (envelope.mailError) {
+      return callback(envelope.mailError);
+    }
+    if (envelope.rcptQueue.length) {
+      return this._sendRcpt(envelope.rcptQueue.shift(), callback);
+    }
+    if (this._recipientQueue.length) {
+      return;
+    }
+    const err = this._envelopeError(str);
+    if (err) {
+      return callback(err);
+    }
+    this._responseActions.push((str2) => {
+      this._actionDATA(str2, callback);
+    });
+    this._sendCommand("DATA");
+  }
+  /**
+   * Decides how the envelope went once every reply to MAIL FROM and RCPT TO is in. Called after
+   * the last RCPT TO reply, or with PIPELINING on the reply to the DATA command sent along
+   *
+   * @param str The reply being handled
+   * @returns The error to fail the message with, or null when DATA can go ahead
+   * @internal
+   */
+  _envelopeError(str) {
+    const envelope = this._envelope;
+    if (envelope.mailError) {
+      return envelope.mailError;
+    }
+    if (envelope.accepted.length) {
+      return null;
+    }
+    const deferred = envelope.rejectedErrors.find((rejectedErr) => rejectedErr.responseCode && rejectedErr.responseCode < 500);
+    const lastRejected = envelope.rejectedErrors[envelope.rejectedErrors.length - 1];
+    const reply = deferred?.response ?? (envelope.pipelined && lastRejected ? lastRejected.response : str);
+    const err = this._formatError("Can't send mail - all recipients were rejected", "EENVELOPE", reply, "RCPT TO");
+    err.rejected = envelope.rejected;
+    err.rejectedErrors = envelope.rejectedErrors;
+    return err;
+  }
+  /**
+   * Handle response for a DATA command
+   *
+   * @param str Message from the server
+   * @param callback Callback to run once the envelope is processed
+   * @internal
+   */
+  _actionDATA(str, callback) {
+    const envelope = this._envelope;
+    if (envelope.pipelined) {
+      const err = this._envelopeError(str);
+      if (err) {
+        if (/^3/.test(str)) {
+          if (envelope.mailError) {
+            this.close();
+            return callback(err);
+          }
+          this._responseActions.push(() => callback(err));
+          this._sendCommand(".");
+          return;
+        }
+        return callback(err);
+      }
+    }
+    if (!/^[23]/.test(str)) {
+      return callback(this._formatError("Data command failed", "EENVELOPE", str, "DATA"));
+    }
+    const response = {
+      accepted: envelope.accepted,
+      rejected: envelope.rejected
+    };
+    if (this._ehloLines && this._ehloLines.length) {
+      response.ehlo = this._ehloLines;
+    }
+    if (envelope.rejectedErrors.length) {
+      response.rejectedErrors = envelope.rejectedErrors;
+    }
+    callback(null, response);
+  }
+  /**
+   * Handle response for a DATA stream when using SMTP
+   * We expect a single response that defines if the sending succeeded or failed
+   *
+   * @param str Message from the server
+   * @param callback Callback to run with the final send result
+   * @internal
+   */
+  _actionSMTPStream(str, callback) {
+    if (Number(str.charAt(0)) !== 2) {
+      return callback(this._formatError("Message failed", "EMESSAGE", str, "DATA"));
+    }
+    return callback(null, str);
+  }
+  /**
+   * Handle response for a DATA stream
+   * We expect a separate response for every recipient. All recipients can either
+   * succeed or fail separately
+   *
+   * @param recipient The recipient this response applies to
+   * @param final Is this the final recipient?
+   * @param str Message from the server
+   * @param callback Callback to run with the final send result
+   * @internal
+   */
+  _actionLMTPStream(recipient, final, str, callback) {
+    const envelope = this._envelope;
+    let err;
+    if (Number(str.charAt(0)) !== 2) {
+      err = this._formatError("Message failed for recipient " + recipient, "EMESSAGE", str, "DATA");
+      err.recipient = recipient;
+      envelope.rejected.push(recipient);
+      envelope.rejectedErrors.push(err);
+      for (let i = 0, len = envelope.accepted.length; i < len; i++) {
+        if (envelope.accepted[i] === recipient) {
+          envelope.accepted.splice(i, 1);
+        }
+      }
+    }
+    if (final) {
+      return callback(null, str);
+    }
+  }
+  /** @internal */
+  _handleXOauth2Token(isRetry, callback) {
+    this._auth.oauth2.getToken(isRetry, (err, accessToken) => {
+      if (err) {
+        this.logger.info({
+          tnx: "smtp",
+          username: this._auth.user,
+          action: "authfail",
+          method: this._authMethod
+        }, "User %s failed to authenticate", JSON.stringify(this._auth.user));
+        return callback(this._formatError(err, "EAUTH", false, "AUTH XOAUTH2"));
+      }
+      this._responseActions.push((str) => {
+        this._actionAUTHComplete(str, isRetry, callback);
+      });
+      this._sendCommand(
+        "AUTH XOAUTH2 " + this._auth.oauth2.buildXOAuth2Token(accessToken),
+        //  Hidden for logs
+        "AUTH XOAUTH2 " + this._auth.oauth2.buildXOAuth2Token("/* secret */")
+      );
+    });
+  }
+  /**
+   *
+   * @param command
+   * @internal
+   */
+  _isDestroyedMessage(command) {
+    if (this._destroyed) {
+      return "Cannot " + command + " - smtp connection is already destroyed.";
+    }
+    if (this._socket) {
+      if (this._socket.destroyed) {
+        return "Cannot " + command + " - smtp connection socket is already destroyed.";
+      }
+      if (!this._socket.writable) {
+        return "Cannot " + command + " - smtp connection socket is already half-closed.";
+      }
+    }
+  }
+  /** @internal */
+  _getHostname() {
+    let defaultHostname;
+    try {
+      defaultHostname = import_node_os2.default.hostname() || "";
+    } catch (_err) {
+      defaultHostname = "localhost";
+    }
+    if (!defaultHostname || defaultHostname.indexOf(".") < 0) {
+      defaultHostname = "[127.0.0.1]";
+    }
+    if (defaultHostname.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/)) {
+      defaultHostname = "[" + defaultHostname + "]";
+    }
+    return defaultHostname;
+  }
+};
+var smtp_connection_default = SMTPConnection;
+
+// node_modules/nodemailer/dist/esm/xoauth2/index.js
+var import_node_stream14 = require("node:stream");
+var import_node_crypto7 = __toESM(require("node:crypto"), 1);
+var XOAuth2 = class extends import_node_stream14.Stream {
+  constructor(options, logger) {
+    super();
+    this.options = options || {};
+    this.configError = false;
+    if (options && options.serviceClient) {
+      if (!options.privateKey || !options.user) {
+        const err = new Error('Options "privateKey" and "user" are required for service account!');
+        err.code = EOAUTH2;
+        this.configError = err;
+      }
+      const serviceRequestTimeout = Math.min(Math.max(Number(this.options.serviceRequestTimeout) || 0, 0), 3600);
+      this.options.serviceRequestTimeout = serviceRequestTimeout || 5 * 60;
+    }
+    this.logger = getLogger({
+      logger
+    }, {
+      component: this.options.component || "OAuth2"
+    });
+    this.provisionCallback = typeof this.options.provisionCallback === "function" ? this.options.provisionCallback : false;
+    this.options.accessUrl = this.options.accessUrl || "https://accounts.google.com/o/oauth2/token";
+    this.options.customHeaders = this.options.customHeaders || {};
+    this.options.customParams = this.options.customParams || {};
+    this.accessToken = this.options.accessToken || false;
+    if (this.options.expires && Number(this.options.expires)) {
+      this.expires = this.options.expires;
+    } else {
+      const timeout = Math.max(Number(this.options.timeout) || 0, 0);
+      this.expires = timeout && Date.now() + timeout * 1e3 || 0;
+    }
+    this.renewing = false;
+    this.renewalQueue = [];
+  }
+  /**
+   * Returns or generates (if previous has expired) a XOAuth2 token
+   *
+   * @param renew If false then use cached access token (if available)
+   * @param callback Callback function with error object and token string
+   */
+  getToken(renew, callback) {
+    const done = callback;
+    if (this.configError) {
+      return done(this.configError);
+    }
+    if (!renew && this.accessToken && (!this.expires || this.expires > Date.now())) {
+      this.logger.debug({
+        tnx: "OAUTH2",
+        user: this.options.user,
+        action: "reuse"
+      }, "Reusing existing access token for %s", this.options.user);
+      return callback(null, this.accessToken);
+    }
+    if (!this.provisionCallback && !this.options.refreshToken && !this.options.serviceClient) {
+      if (this.accessToken) {
+        this.logger.debug({
+          tnx: "OAUTH2",
+          user: this.options.user,
+          action: "reuse"
+        }, "Reusing existing access token (no refresh capability) for %s", this.options.user);
+        return callback(null, this.accessToken);
+      }
+      this.logger.error({
+        tnx: "OAUTH2",
+        user: this.options.user,
+        action: "renew"
+      }, "Cannot renew access token for %s: No refresh mechanism available", this.options.user);
+      const err = new Error("Can't create new access token for user");
+      err.code = EOAUTH2;
+      return done(err);
+    }
+    if (this.renewing) {
+      this.renewalQueue.push({ renew, callback: done });
+      return;
+    }
+    this.renewing = true;
+    const generateCallback = (err, accessToken) => {
+      this.renewalQueue.forEach((item) => item.callback(err, accessToken));
+      this.renewalQueue = [];
+      this.renewing = false;
+      if (err) {
+        this.logger.error({
+          err,
+          tnx: "OAUTH2",
+          user: this.options.user,
+          action: "renew"
+        }, "Failed generating new Access Token for %s", this.options.user);
+      } else {
+        this.logger.info({
+          tnx: "OAUTH2",
+          user: this.options.user,
+          action: "renew"
+        }, "Generated new Access Token for %s", this.options.user);
+      }
+      done(err, accessToken);
+    };
+    if (this.provisionCallback) {
+      this.provisionCallback(this.options.user, !!renew, (err, accessToken, expires) => {
+        if (!err && accessToken) {
+          this.accessToken = accessToken;
+          this.expires = expires || 0;
+        }
+        generateCallback(err, accessToken);
+      });
+    } else {
+      this.generateToken(generateCallback);
+    }
+  }
+  /**
+   * Updates token values
+   *
+   * @param accessToken New access token
+   * @param timeout Access token lifetime in seconds
+   *
+   * Emits 'token': { user: User email-address, accessToken: the new accessToken, timeout: TTL in seconds}
+   */
+  updateToken(accessToken, timeout) {
+    this.accessToken = accessToken;
+    timeout = Math.max(Number(timeout) || 0, 0);
+    this.expires = timeout && Date.now() + timeout * 1e3 || 0;
+    this.emit("token", {
+      user: this.options.user,
+      accessToken: accessToken || "",
+      expires: this.expires
+    });
+  }
+  /**
+   * Generates a new XOAuth2 token with the credentials provided at initialization
+   *
+   * @param callback Callback function with error object and token string
+   */
+  generateToken(callback) {
+    const done = callback;
+    let urlOptions;
+    let loggedUrlOptions;
+    if (this.options.serviceClient) {
+      const iat = Math.floor(Date.now() / 1e3);
+      const tokenData = {
+        iss: this.options.serviceClient,
+        scope: this.options.scope || "https://mail.google.com/",
+        sub: this.options.user,
+        aud: this.options.accessUrl,
+        iat,
+        exp: iat + this.options.serviceRequestTimeout
+      };
+      let token;
+      try {
+        token = this.jwtSignRS256(tokenData);
+      } catch (_err) {
+        const err = new Error("Can't generate token. Check your auth options");
+        err.code = EOAUTH2;
+        return done(err);
+      }
+      urlOptions = {
+        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+        assertion: token
+      };
+      loggedUrlOptions = {
+        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+        assertion: tokenData
+      };
+    } else {
+      if (!this.options.refreshToken) {
+        const err = new Error("Can't create new access token for user");
+        err.code = EOAUTH2;
+        return done(err);
+      }
+      urlOptions = {
+        client_id: this.options.clientId || "",
+        client_secret: this.options.clientSecret || "",
+        refresh_token: this.options.refreshToken,
+        grant_type: "refresh_token"
+      };
+      loggedUrlOptions = {
+        client_id: this.options.clientId || "",
+        client_secret: (this.options.clientSecret || "").substr(0, 6) + "...",
+        refresh_token: (this.options.refreshToken || "").substr(0, 6) + "...",
+        grant_type: "refresh_token"
+      };
+    }
+    const customParams = this.options.customParams || {};
+    Object.assign(urlOptions, customParams);
+    for (const key of Object.keys(customParams)) {
+      const param = customParams[key];
+      loggedUrlOptions[key] = (param === void 0 || param === null ? "" : String(param)).substr(0, 6) + "...";
+    }
+    this.logger.debug({
+      tnx: "OAUTH2",
+      user: this.options.user,
+      action: "generate"
+    }, "Requesting token using: %s", JSON.stringify(loggedUrlOptions));
+    this.postRequest(this.options.accessUrl, urlOptions, this.options, (error2, body) => {
+      let data;
+      if (error2) {
+        return done(error2);
+      }
+      try {
+        data = JSON.parse(body.toString());
+      } catch (E) {
+        return done(E);
+      }
+      if (!data || typeof data !== "object") {
+        this.logger.debug({
+          tnx: "OAUTH2",
+          user: this.options.user,
+          action: "post"
+        }, "Response: %s", (body || "").toString());
+        const err2 = new Error("Invalid authentication response");
+        err2.code = EOAUTH2;
+        return done(err2);
+      }
+      const logData = Object.assign({}, data);
+      if (logData.access_token) {
+        logData.access_token = (logData.access_token || "").toString().substr(0, 6) + "...";
+      }
+      this.logger.debug({
+        tnx: "OAUTH2",
+        user: this.options.user,
+        action: "post"
+      }, "Response: %s", JSON.stringify(logData));
+      if (data.error) {
+        let errorMessage = data.error;
+        if (data.error_description) {
+          errorMessage += ": " + data.error_description;
+        }
+        if (data.error_uri) {
+          errorMessage += " (" + data.error_uri + ")";
+        }
+        const err2 = new Error(errorMessage);
+        err2.code = EOAUTH2;
+        return done(err2);
+      }
+      if (data.access_token) {
+        this.updateToken(data.access_token, data.expires_in);
+        return callback(null, this.accessToken);
+      }
+      const err = new Error("No access token");
+      err.code = EOAUTH2;
+      return done(err);
+    });
+  }
+  /**
+   * Converts an access_token and user id into a base64 encoded XOAuth2 token
+   *
+   * @param [accessToken] Access token string
+   * @return Base64 encoded token for IMAP or SMTP login
+   */
+  buildXOAuth2Token(accessToken) {
+    const authData = ["user=" + (this.options.user || ""), "auth=Bearer " + (accessToken || this.accessToken), "", ""];
+    return Buffer.from(authData.join(""), "utf-8").toString("base64");
+  }
+  /**
+   * Custom POST request handler.
+   * This is only needed to keep paths short in Windows, usually this module
+   * is a dependency of a dependency and if it tries to require something
+   * like the request module the paths get way too long to handle for Windows.
+   * As we do only a simple POST request we do not actually require complicated
+   * logic support (no redirects, no nothing) anyway.
+   *
+   * @param url Url to POST to
+   * @param payload Payload to POST
+   * @param params Client options, the customHeaders and tls values are used for the request
+   * @param callback Callback function with (err, buff)
+   */
+  postRequest(url, payload, params, callback) {
+    let returned = false;
+    const chunks = [];
+    let chunklen = 0;
+    const fetchOptions = {
+      method: "post",
+      headers: params.customHeaders,
+      body: payload,
+      allowErrorResponse: true,
+      // unset falls back to the fetch default, a stalled token endpoint would otherwise keep
+      // `renewing` set and queue every later request
+      timeout: params.requestTimeout
+    };
+    if (/^https:/i.test(url)) {
+      fetchOptions.tls = Object.assign({ rejectUnauthorized: true }, params.tls || {});
+    }
+    const req = fetch_default(url, fetchOptions);
+    req.on("readable", () => {
+      let chunk;
+      while ((chunk = req.read()) !== null) {
+        chunks.push(chunk);
+        chunklen += chunk.length;
+      }
+    });
+    req.once("error", (err) => {
+      if (returned) {
+        return;
+      }
+      returned = true;
+      return callback(err);
+    });
+    req.once("end", () => {
+      if (returned) {
+        return;
+      }
+      returned = true;
+      return callback(null, Buffer.concat(chunks, chunklen));
+    });
+  }
+  /**
+   * Encodes a buffer or a string into Base64url format
+   *
+   * @param data The data to convert
+   * @return The encoded string
+   */
+  toBase64URL(data) {
+    if (typeof data === "string") {
+      data = Buffer.from(data);
+    }
+    return data.toString("base64").replace(/[=]+/g, "").replace(/\+/g, "-").replace(/\//g, "_");
+  }
+  /**
+   * Creates a JSON Web Token signed with RS256 (SHA256 + RSA)
+   *
+   * @param payload The payload to include in the generated token
+   * @return The generated and signed token
+   */
+  jwtSignRS256(payload) {
+    const signedPayload = ['{"alg":"RS256","typ":"JWT"}', JSON.stringify(payload)].map((val) => this.toBase64URL(val)).join(".");
+    const signature = import_node_crypto7.default.createSign("RSA-SHA256").update(signedPayload).sign(this.options.privateKey);
+    return signedPayload + "." + this.toBase64URL(signature);
+  }
+};
+var xoauth2_default = XOAuth2;
+
+// node_modules/nodemailer/dist/esm/smtp-pool/pool-resource.js
+var import_node_events3 = require("node:events");
+var PoolResource = class extends import_node_events3.EventEmitter {
+  constructor(pool) {
+    super();
+    this.pool = pool;
+    this.options = pool.options;
+    this.logger = this.pool.logger;
+    if (this.options.auth) {
+      switch ((this.options.auth.type || "").toString().toUpperCase()) {
+        case "OAUTH2": {
+          const oauth2 = new xoauth2_default(this.options.auth, this.logger);
+          oauth2.provisionCallback = this.pool.mailer && this.pool.mailer.get("oauth2_provision_cb") || oauth2.provisionCallback;
+          this.auth = {
+            type: "OAUTH2",
+            user: this.options.auth.user,
+            oauth2,
+            method: "XOAUTH2"
+          };
+          oauth2.on("token", (token) => this.pool.mailer.emit("token", token));
+          oauth2.on("error", (err) => this._fail(err));
+          break;
+        }
+        default:
+          if (!this.options.auth.user && !this.options.auth.pass) {
+            break;
+          }
+          this.auth = {
+            type: (this.options.auth.type || "").toString().toUpperCase() || "LOGIN",
+            user: this.options.auth.user,
+            credentials: {
+              user: this.options.auth.user || "",
+              pass: this.options.auth.pass,
+              options: this.options.auth.options
+            },
+            method: (this.options.auth.method || "").trim().toUpperCase() || this.options.authMethod || false
+          };
+      }
+    }
+    this._connection = false;
+    this._connected = false;
+    this._closed = false;
+    this.messages = 0;
+    this.available = true;
+    this._failed = false;
+    this._sending = false;
+    this._idleTimer = false;
+  }
+  /**
+   * Emits 'error' for the first failure only. A dead resource can report the same failure more
+   * than once (the connection error, then the send callback), the pool handles it once
+   * @internal
+   */
+  _fail(err) {
+    if (this._failed) {
+      return;
+    }
+    this._failed = true;
+    this.emit("error", err);
+  }
+  /**
+   * Initiates a connection to the SMTP server
+   *
+   * @param callback Callback function to run once the connection is established or failed
+   */
+  connect(callback) {
+    const connectStartedAt = Date.now();
+    this.pool.getSocket(Object.assign({}, this.options, { connectStartedAt }), (err, socketOptions) => {
+      if (this._closed) {
+        socketOptions && socketOptions.connection?.destroy();
+        return;
+      }
+      if (err) {
+        this._fail(err);
+        return callback(err);
+      }
+      let returned = false;
+      let options = this.options;
+      if (socketOptions && socketOptions.connection) {
+        this.logger.info({
+          tnx: "proxy",
+          remoteAddress: socketOptions.connection.remoteAddress,
+          remotePort: socketOptions.connection.remotePort,
+          destHost: options.host || "",
+          destPort: options.port || "",
+          action: "connected"
+        }, "Using proxied socket from %s:%s to %s:%s", socketOptions.connection.remoteAddress, socketOptions.connection.remotePort, options.host || "", options.port || "");
+        options = Object.assign(assign(false, options), socketOptions);
+      }
+      this.connection = new smtp_connection_default(options);
+      this.connection._connectStartedAt = connectStartedAt;
+      this.connection.on("error", (err2) => {
+        if (this._closed || this._sending) {
+          return;
+        }
+        if (this._connected && isTransientError(err2)) {
+          this.logger.info({
+            tnx: "pool",
+            cid: this.id
+          }, "Connection #%s was closed by the server: %s", this.id, err2.message);
+          return;
+        }
+        this._fail(err2);
+        if (returned || this._closed) {
+          return;
+        }
+        returned = true;
+        return callback(err2);
+      });
+      this.connection.once("end", () => {
+        this.close();
+        returned = true;
+      });
+      this.connection.connect((err2) => {
+        if (returned || this._closed) {
+          return;
+        }
+        if (err2) {
+          returned = true;
+          return;
+        }
+        if (this.auth && (this.connection.allowsAuth || options.forceAuth)) {
+          this.connection.login(this.auth, (err3) => {
+            if (returned || this._closed) {
+              return;
+            }
+            returned = true;
+            if (err3) {
+              this.connection.close();
+              this._fail(err3);
+              return callback(err3);
+            }
+            this._connected = true;
+            callback(null, true);
+          });
+        } else {
+          returned = true;
+          this._connected = true;
+          return callback(null, true);
+        }
+      });
+    });
+  }
+  /**
+   * Sends an e-mail to be sent using the selected settings
+   *
+   * @param mail Mail object
+   * @param callback Callback function
+   */
+  send(mail, callback) {
+    if (this._closed) {
+      return;
+    }
+    if (!this._connected) {
+      return this.connect((err) => {
+        if (err) {
+          return callback(err);
+        }
+        return this.send(mail, callback);
+      });
+    }
+    const envelope = mail.message.getEnvelope();
+    const messageId = mail.message.messageId();
+    const recipients = [].concat(envelope.to || []);
+    if (recipients.length > 3) {
+      recipients.push("...and " + recipients.splice(2).length + " more");
+    }
+    this.logger.info({
+      tnx: "send",
+      messageId,
+      cid: this.id
+    }, "Sending message %s using #%s to <%s>", messageId, this.id, recipients.join(", "));
+    if (mail.data.dsn) {
+      envelope.dsn = mail.data.dsn;
+    }
+    if (mail.data.requireTLSExtensionEnabled) {
+      envelope.requireTLSExtensionEnabled = mail.data.requireTLSExtensionEnabled;
+    }
+    this._sending = true;
+    const reused = this.messages > 0;
+    const messageStream = mail.message.createReadStream();
+    this.connection.send(envelope, messageStream, (err, info) => {
+      if (mail.data.signal?.aborted) {
+        return;
+      }
+      this._sending = false;
+      this.messages++;
+      if (err) {
+        if (reused && messageStream.readableDidRead === false && isTransientError(err)) {
+          this.logger.info({
+            tnx: "pool",
+            cid: this.id,
+            messageId
+          }, "Connection #%s was closed by the server before message %s was sent: %s", this.id, messageId, err.message);
+          this.connection.close();
+          return;
+        }
+        if ((err.code === EENVELOPE || err.code === EMESSAGE) && err.responseCode !== 421 && !this.connection._destroyed) {
+          this.connection.reset((resetErr) => {
+            if (resetErr) {
+              this.connection.close();
+              return;
+            }
+            this._release();
+          });
+          return callback(err);
+        }
+        this.connection.close();
+        this._fail(err);
+        return callback(err);
+      }
+      info.envelope = {
+        from: envelope.from,
+        to: envelope.to
+      };
+      info.messageId = messageId;
+      setImmediate(() => this._release());
+      callback(null, info);
+    });
+  }
+  /**
+   * Makes the connection available for the next message, or closes it once it has sent
+   * maxMessages messages
+   *
+   * @internal
+   */
+  _release() {
+    if (this._closed) {
+      return;
+    }
+    if (this.messages >= this.options.maxMessages) {
+      const err = new Error("Resource exhausted");
+      err.code = EMAXLIMIT;
+      this.connection.close();
+      this._fail(err);
+      return;
+    }
+    this.pool._checkRateLimit(() => {
+      if (this._closed) {
+        return;
+      }
+      this.available = true;
+      this._startIdleTimer();
+      this.emit("available");
+    });
+  }
+  /** @internal */
+  _startIdleTimer() {
+    if (!this.options.idleTimeout || this.options.idleTimeout < 0) {
+      return;
+    }
+    if (this._idleTimer && typeof this._idleTimer.refresh === "function") {
+      this._idleTimer.refresh();
+      return;
+    }
+    clearTimeout(this._idleTimer);
+    this._idleTimer = setTimeout(() => {
+      if (!this.available) {
+        return;
+      }
+      this.logger.debug({
+        tnx: "pool",
+        cid: this.id
+      }, "Closing connection #%s after it was idle for %sms", this.id, this.options.idleTimeout);
+      this.available = false;
+      this.connection.quit();
+    }, this.options.idleTimeout);
+    if (typeof this._idleTimer.unref === "function") {
+      this._idleTimer.unref();
+    }
+  }
+  /** @internal */
+  _stopIdleTimer() {
+    clearTimeout(this._idleTimer);
+    this._idleTimer = false;
+  }
+  /**
+   * Closes the connection
+   */
+  close() {
+    if (this._closed) {
+      return;
+    }
+    this._closed = true;
+    this.available = false;
+    this._connected = false;
+    this._stopIdleTimer();
+    if (this.auth && this.auth.oauth2) {
+      this.auth.oauth2.removeAllListeners();
+    }
+    if (this.connection) {
+      this.connection.close();
+    }
+    this.emit("close");
+  }
+};
+
+// node_modules/nodemailer/dist/esm/well-known/services.js
+var services = {
+  "126": {
+    "description": "126 Mail (NetEase)",
+    "host": "smtp.126.com",
+    "port": 465,
+    "secure": true
+  },
+  "163": {
+    "description": "163 Mail (NetEase)",
+    "host": "smtp.163.com",
+    "port": 465,
+    "secure": true
+  },
+  "1und1": {
+    "description": "1&1 Mail (German hosting provider)",
+    "host": "smtp.1und1.de",
+    "port": 465,
+    "secure": true,
+    "authMethod": "LOGIN"
+  },
+  "Aliyun": {
+    "description": "Alibaba Cloud Mail",
+    "domains": [
+      "aliyun.com"
+    ],
+    "host": "smtp.aliyun.com",
+    "port": 465,
+    "secure": true
+  },
+  "AliyunQiye": {
+    "description": "Alibaba Cloud Enterprise Mail",
+    "host": "smtp.qiye.aliyun.com",
+    "port": 465,
+    "secure": true
+  },
+  "AOL": {
+    "description": "AOL Mail",
+    "domains": [
+      "aol.com"
+    ],
+    "host": "smtp.aol.com",
+    "port": 587
+  },
+  "Aruba": {
+    "description": "Aruba PEC (Italian email provider)",
+    "domains": [
+      "aruba.it",
+      "pec.aruba.it"
+    ],
+    "aliases": [
+      "Aruba PEC"
+    ],
+    "host": "smtps.aruba.it",
+    "port": 465,
+    "secure": true,
+    "authMethod": "LOGIN"
+  },
+  "Bluewin": {
+    "description": "Bluewin (Swiss email provider)",
+    "host": "smtpauths.bluewin.ch",
+    "domains": [
+      "bluewin.ch"
+    ],
+    "port": 465
+  },
+  "BOL": {
+    "description": "BOL Mail (Brazilian provider)",
+    "domains": [
+      "bol.com.br"
+    ],
+    "host": "smtp.bol.com.br",
+    "port": 587,
+    "requireTLS": true
+  },
+  "DebugMail": {
+    "description": "DebugMail (email testing service)",
+    "host": "debugmail.io",
+    "port": 25
+  },
+  "Disroot": {
+    "description": "Disroot (privacy-focused provider)",
+    "domains": [
+      "disroot.org"
+    ],
+    "host": "disroot.org",
+    "port": 587,
+    "secure": false,
+    "authMethod": "LOGIN"
+  },
+  "DynectEmail": {
+    "description": "Dyn Email Delivery",
+    "aliases": [
+      "Dynect"
+    ],
+    "host": "smtp.dynect.net",
+    "port": 25
+  },
+  "ElasticEmail": {
+    "description": "Elastic Email",
+    "aliases": [
+      "Elastic Email"
+    ],
+    "host": "smtp.elasticemail.com",
+    "port": 465,
+    "secure": true
+  },
+  "Ethereal": {
+    "description": "Ethereal Email (email testing service)",
+    "aliases": [
+      "ethereal.email"
+    ],
+    "host": "smtp.ethereal.email",
+    "port": 587
+  },
+  "FastMail": {
+    "description": "FastMail",
+    "domains": [
+      "fastmail.com",
+      "fastmail.fm"
+    ],
+    "host": "smtp.fastmail.com",
+    "port": 465,
+    "secure": true
+  },
+  "Feishu Mail": {
+    "description": "Feishu Mail (Lark)",
+    "aliases": [
+      "Feishu",
+      "FeishuMail"
+    ],
+    "domains": [
+      "www.feishu.cn"
+    ],
+    "host": "smtp.feishu.cn",
+    "port": 465,
+    "secure": true
+  },
+  "Forward Email": {
+    "description": "Forward Email (email forwarding service)",
+    "aliases": [
+      "FE",
+      "ForwardEmail"
+    ],
+    "domains": [
+      "forwardemail.net"
+    ],
+    "host": "smtp.forwardemail.net",
+    "port": 465,
+    "secure": true
+  },
+  "GandiMail": {
+    "description": "Gandi Mail",
+    "aliases": [
+      "Gandi",
+      "Gandi Mail"
+    ],
+    "host": "mail.gandi.net",
+    "port": 587
+  },
+  "Gmail": {
+    "description": "Gmail",
+    "aliases": [
+      "Google Mail"
+    ],
+    "domains": [
+      "gmail.com",
+      "googlemail.com"
+    ],
+    "host": "smtp.gmail.com",
+    "port": 465,
+    "secure": true
+  },
+  "GmailWorkspace": {
+    "description": "Gmail Workspace",
+    "aliases": [
+      "Google Workspace Mail"
+    ],
+    "host": "smtp-relay.gmail.com",
+    "port": 465,
+    "secure": true
+  },
+  "GMX": {
+    "description": "GMX Mail",
+    "domains": [
+      "gmx.com",
+      "gmx.net",
+      "gmx.de"
+    ],
+    "host": "mail.gmx.com",
+    "port": 587
+  },
+  "Godaddy": {
+    "description": "GoDaddy Email (US)",
+    "host": "smtpout.secureserver.net",
+    "port": 25
+  },
+  "GodaddyAsia": {
+    "description": "GoDaddy Email (Asia)",
+    "host": "smtp.asia.secureserver.net",
+    "port": 25
+  },
+  "GodaddyEurope": {
+    "description": "GoDaddy Email (Europe)",
+    "host": "smtp.europe.secureserver.net",
+    "port": 25
+  },
+  "Groundmail": {
+    "description": "Groundmail",
+    "host": "smtp.groundmail.dev",
+    "port": 587,
+    "secure": false,
+    "requireTLS": true
+  },
+  "hot.ee": {
+    "description": "Hot.ee (Estonian email provider)",
+    "host": "mail.hot.ee"
+  },
+  "Hotmail": {
+    "description": "Outlook.com / Hotmail",
+    "aliases": [
+      "Outlook",
+      "Outlook.com",
+      "Hotmail.com"
+    ],
+    "domains": [
+      "hotmail.com",
+      "outlook.com"
+    ],
+    "host": "smtp-mail.outlook.com",
+    "port": 587
+  },
+  "iCloud": {
+    "description": "iCloud Mail",
+    "aliases": [
+      "Me",
+      "Mac"
+    ],
+    "domains": [
+      "icloud.com",
+      "me.com",
+      "mac.com"
+    ],
+    "host": "smtp.mail.me.com",
+    "port": 587
+  },
+  "Infomaniak": {
+    "description": "Infomaniak Mail (Swiss hosting provider)",
+    "host": "mail.infomaniak.com",
+    "domains": [
+      "ik.me",
+      "ikmail.com",
+      "etik.com"
+    ],
+    "port": 587
+  },
+  "KolabNow": {
+    "description": "KolabNow (secure email service)",
+    "domains": [
+      "kolabnow.com"
+    ],
+    "aliases": [
+      "Kolab"
+    ],
+    "host": "smtp.kolabnow.com",
+    "port": 465,
+    "secure": true,
+    "authMethod": "LOGIN"
+  },
+  "Loopia": {
+    "description": "Loopia (Swedish hosting provider)",
+    "host": "mailcluster.loopia.se",
+    "port": 465
+  },
+  "Loops": {
+    "description": "Loops",
+    "host": "smtp.loops.so",
+    "port": 587
+  },
+  "mail.ee": {
+    "description": "Mail.ee (Estonian email provider)",
+    "host": "smtp.mail.ee"
+  },
+  "Mail.ru": {
+    "description": "Mail.ru",
+    "host": "smtp.mail.ru",
+    "port": 465,
+    "secure": true
+  },
+  "Mailcatch.app": {
+    "description": "Mailcatch (email testing service)",
+    "host": "sandbox-smtp.mailcatch.app",
+    "port": 2525
+  },
+  "Maildev": {
+    "description": "MailDev (local email testing)",
+    "port": 1025,
+    "ignoreTLS": true
+  },
+  "MailerSend": {
+    "description": "MailerSend",
+    "host": "smtp.mailersend.net",
+    "port": 587
+  },
+  "Mailgun": {
+    "description": "Mailgun",
+    "host": "smtp.mailgun.org",
+    "port": 465,
+    "secure": true
+  },
+  "Mailjet": {
+    "description": "Mailjet",
+    "host": "in.mailjet.com",
+    "port": 587
+  },
+  "Mailosaur": {
+    "description": "Mailosaur (email testing service)",
+    "host": "mailosaur.io",
+    "port": 25
+  },
+  "MailSenpai": {
+    "description": "MailSenpai (SMTP Senpai, EU)",
+    "host": "relay.mailsenpai.com",
+    "port": 2525,
+    "secure": false
+  },
+  "Mailtrap": {
+    "description": "Mailtrap",
+    "host": "live.smtp.mailtrap.io",
+    "port": 587
+  },
+  "Mandrill": {
+    "description": "Mandrill (by Mailchimp)",
+    "host": "smtp.mandrillapp.com",
+    "port": 587
+  },
+  "Naver": {
+    "description": "Naver Mail (Korean email provider)",
+    "host": "smtp.naver.com",
+    "port": 587
+  },
+  "OhMySMTP": {
+    "description": "OhMySMTP (email delivery service)",
+    "host": "smtp.ohmysmtp.com",
+    "port": 587,
+    "secure": false
+  },
+  "One": {
+    "description": "One.com Email",
+    "host": "send.one.com",
+    "port": 465,
+    "secure": true
+  },
+  "OpenMailBox": {
+    "description": "OpenMailBox",
+    "aliases": [
+      "OMB",
+      "openmailbox.org"
+    ],
+    "host": "smtp.openmailbox.org",
+    "port": 465,
+    "secure": true
+  },
+  "Outlook365": {
+    "description": "Microsoft 365 / Office 365",
+    "host": "smtp.office365.com",
+    "port": 587,
+    "secure": false
+  },
+  "Oveyon": {
+    "description": "Oveyon",
+    "host": "smtp.oveyon.com",
+    "port": 587,
+    "secure": false,
+    "requireTLS": true
+  },
+  "Postmark": {
+    "description": "Postmark",
+    "aliases": [
+      "PostmarkApp"
+    ],
+    "host": "smtp.postmarkapp.com",
+    "port": 2525
+  },
+  "Proton": {
+    "description": "Proton Mail",
+    "aliases": [
+      "ProtonMail",
+      "Proton.me",
+      "Protonmail.com",
+      "Protonmail.ch"
+    ],
+    "domains": [
+      "proton.me",
+      "protonmail.com",
+      "pm.me",
+      "protonmail.ch"
+    ],
+    "host": "smtp.protonmail.ch",
+    "port": 587,
+    "requireTLS": true
+  },
+  "qiye.aliyun": {
+    "description": "Alibaba Mail Enterprise Edition",
+    "host": "smtp.mxhichina.com",
+    "port": "465",
+    "secure": true
+  },
+  "QQ": {
+    "description": "QQ Mail",
+    "domains": [
+      "qq.com"
+    ],
+    "host": "smtp.qq.com",
+    "port": 465,
+    "secure": true
+  },
+  "QQex": {
+    "description": "QQ Enterprise Mail",
+    "aliases": [
+      "QQ Enterprise"
+    ],
+    "domains": [
+      "exmail.qq.com"
+    ],
+    "host": "smtp.exmail.qq.com",
+    "port": 465,
+    "secure": true
+  },
+  "Resend": {
+    "description": "Resend",
+    "host": "smtp.resend.com",
+    "port": 465,
+    "secure": true
+  },
+  "Runbox": {
+    "description": "Runbox (Norwegian email provider)",
+    "domains": [
+      "runbox.com"
+    ],
+    "host": "smtp.runbox.com",
+    "port": 465,
+    "secure": true
+  },
+  "SendCloud": {
+    "description": "SendCloud (Chinese email delivery)",
+    "host": "smtp.sendcloud.net",
+    "port": 2525
+  },
+  "SendGrid": {
+    "description": "SendGrid",
+    "host": "smtp.sendgrid.net",
+    "port": 587
+  },
+  "SendinBlue": {
+    "description": "Brevo (formerly Sendinblue)",
+    "aliases": [
+      "Brevo"
+    ],
+    "host": "smtp-relay.brevo.com",
+    "port": 587
+  },
+  "Sendora": {
+    "description": "Sendora",
+    "host": "smtp.sendora.se",
+    "port": 465,
+    "secure": true
+  },
+  "SendPulse": {
+    "description": "SendPulse",
+    "host": "smtp-pulse.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES": {
+    "description": "AWS SES US East (N. Virginia)",
+    "host": "email-smtp.us-east-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-AP-NORTHEAST-1": {
+    "description": "AWS SES Asia Pacific (Tokyo)",
+    "host": "email-smtp.ap-northeast-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-AP-NORTHEAST-2": {
+    "description": "AWS SES Asia Pacific (Seoul)",
+    "host": "email-smtp.ap-northeast-2.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-AP-NORTHEAST-3": {
+    "description": "AWS SES Asia Pacific (Osaka)",
+    "host": "email-smtp.ap-northeast-3.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-AP-SOUTH-1": {
+    "description": "AWS SES Asia Pacific (Mumbai)",
+    "host": "email-smtp.ap-south-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-AP-SOUTHEAST-1": {
+    "description": "AWS SES Asia Pacific (Singapore)",
+    "host": "email-smtp.ap-southeast-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-AP-SOUTHEAST-2": {
+    "description": "AWS SES Asia Pacific (Sydney)",
+    "host": "email-smtp.ap-southeast-2.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-CA-CENTRAL-1": {
+    "description": "AWS SES Canada (Central)",
+    "host": "email-smtp.ca-central-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-EU-CENTRAL-1": {
+    "description": "AWS SES Europe (Frankfurt)",
+    "host": "email-smtp.eu-central-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-EU-NORTH-1": {
+    "description": "AWS SES Europe (Stockholm)",
+    "host": "email-smtp.eu-north-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-EU-WEST-1": {
+    "description": "AWS SES Europe (Ireland)",
+    "host": "email-smtp.eu-west-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-EU-WEST-2": {
+    "description": "AWS SES Europe (London)",
+    "host": "email-smtp.eu-west-2.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-EU-WEST-3": {
+    "description": "AWS SES Europe (Paris)",
+    "host": "email-smtp.eu-west-3.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-SA-EAST-1": {
+    "description": "AWS SES South America (S\xE3o Paulo)",
+    "host": "email-smtp.sa-east-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-US-EAST-1": {
+    "description": "AWS SES US East (N. Virginia)",
+    "host": "email-smtp.us-east-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-US-EAST-2": {
+    "description": "AWS SES US East (Ohio)",
+    "host": "email-smtp.us-east-2.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-US-GOV-EAST-1": {
+    "description": "AWS SES GovCloud (US-East)",
+    "host": "email-smtp.us-gov-east-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-US-GOV-WEST-1": {
+    "description": "AWS SES GovCloud (US-West)",
+    "host": "email-smtp.us-gov-west-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-US-WEST-1": {
+    "description": "AWS SES US West (N. California)",
+    "host": "email-smtp.us-west-1.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "SES-US-WEST-2": {
+    "description": "AWS SES US West (Oregon)",
+    "host": "email-smtp.us-west-2.amazonaws.com",
+    "port": 465,
+    "secure": true
+  },
+  "Seznam": {
+    "description": "Seznam Email (Czech email provider)",
+    "aliases": [
+      "Seznam Email"
+    ],
+    "domains": [
+      "seznam.cz",
+      "email.cz",
+      "post.cz",
+      "spoluzaci.cz"
+    ],
+    "host": "smtp.seznam.cz",
+    "port": 465,
+    "secure": true
+  },
+  "SMTP2GO": {
+    "description": "SMTP2GO",
+    "host": "mail.smtp2go.com",
+    "port": 2525
+  },
+  "SpacePost": {
+    "description": "SpacePost",
+    "host": "smtp.spacepost.dev",
+    "port": 25976,
+    "secure": false,
+    "requireTLS": true
+  },
+  "Sparkpost": {
+    "description": "SparkPost",
+    "aliases": [
+      "SparkPost",
+      "SparkPost Mail"
+    ],
+    "domains": [
+      "sparkpost.com"
+    ],
+    "host": "smtp.sparkpostmail.com",
+    "port": 587,
+    "secure": false
+  },
+  "Tipimail": {
+    "description": "Tipimail (email delivery service)",
+    "host": "smtp.tipimail.com",
+    "port": 587
+  },
+  "TurboSMTP": {
+    "description": "TurboSMTP",
+    "host": "pro.turbo-smtp.com",
+    "port": 465,
+    "secure": true
+  },
+  "TurboSMTP-EU": {
+    "description": "TurboSMTP (EU region)",
+    "host": "pro.eu.turbo-smtp.com",
+    "port": 465,
+    "secure": true
+  },
+  "Tutanota": {
+    "description": "Tutanota (Tuta Mail)",
+    "domains": [
+      "tutanota.com",
+      "tuta.com",
+      "tutanota.de",
+      "tuta.io"
+    ],
+    "host": "smtp.tutanota.com",
+    "port": 465,
+    "secure": true
+  },
+  "Yahoo": {
+    "description": "Yahoo Mail",
+    "domains": [
+      "yahoo.com"
+    ],
+    "host": "smtp.mail.yahoo.com",
+    "port": 465,
+    "secure": true
+  },
+  "Yandex": {
+    "description": "Yandex Mail",
+    "domains": [
+      "yandex.ru"
+    ],
+    "host": "smtp.yandex.ru",
+    "port": 465,
+    "secure": true
+  },
+  "Zimbra": {
+    "description": "Zimbra Mail Server",
+    "aliases": [
+      "Zimbra Collaboration"
+    ],
+    "host": "smtp.zimbra.com",
+    "port": 587,
+    "requireTLS": true
+  },
+  "Zoho": {
+    "description": "Zoho Mail",
+    "host": "smtp.zoho.com",
+    "port": 465,
+    "secure": true,
+    "authMethod": "LOGIN"
+  }
+};
+
+// node_modules/nodemailer/dist/esm/well-known/index.js
+var normalized = {};
+Object.keys(services).forEach((key) => {
+  const service = services[key];
+  const normalizedService = normalizeService(service);
+  normalized[normalizeKey(key)] = normalizedService;
+  [].concat(service.aliases || []).forEach((alias) => {
+    normalized[normalizeKey(alias)] = normalizedService;
+  });
+  [].concat(service.domains || []).forEach((domain) => {
+    normalized[normalizeKey(domain)] = normalizedService;
+  });
+});
+function normalizeKey(key) {
+  return key.replace(/[^a-zA-Z0-9.-]/g, "").toLowerCase();
+}
+function normalizeService(service) {
+  const response = {};
+  Object.keys(service).forEach((key) => {
+    if (!["domains", "aliases"].includes(key)) {
+      response[key] = service[key];
+    }
+  });
+  return response;
+}
+function wellKnown(key) {
+  key = normalizeKey(key.split("@").pop());
+  return normalized[key] || false;
+}
+
+// node_modules/nodemailer/dist/esm/smtp-pool/index.js
+var REQUEUE_BASE_DELAY = 50;
+var REQUEUE_MAX_DELAY = 2e3;
+var SMTPPool = class extends import_node_events4.EventEmitter {
+  constructor(options) {
+    super();
+    this.supportsAbortSignal = true;
+    options = options || {};
+    if (typeof options === "string") {
+      options = {
+        url: options
+      };
+    }
+    let urlData;
+    let service = options.service;
+    if (typeof options.getSocket === "function") {
+      this.getSocket = options.getSocket;
+    }
+    if (options.url) {
+      urlData = parseConnectionUrl(options.url);
+      service = service || urlData.service;
+    }
+    this.options = assign(
+      false,
+      // create new object
+      options,
+      // regular options
+      urlData,
+      // url options
+      service && wellKnown(service)
+      // wellknown options
+    );
+    this.options.maxConnections = this.options.maxConnections || 5;
+    this.options.maxMessages = this.options.maxMessages || 100;
+    this.options.maxRequeues = typeof this.options.maxRequeues === "number" ? this.options.maxRequeues : 5;
+    this.options.idleTimeout = typeof this.options.idleTimeout === "number" ? this.options.idleTimeout : 4 * 60 * 1e3;
+    this.logger = getLogger(this.options, {
+      component: this.options.component || "smtp-pool"
+    });
+    this.name = "SMTP (pool)";
+    this.version = version + "[client:" + version + "]";
+    this._rateLimit = {
+      counter: 0,
+      timeout: null,
+      waiting: [],
+      checkpoint: false,
+      delta: Number(this.options.rateDelta) || 1e3,
+      limit: Number(this.options.rateLimit) || 0
+    };
+    this._closed = false;
+    this._queue = [];
+    this._connections = [];
+    this._connectionCounter = 0;
+    this._pending = 0;
+    this.idling = true;
+    setImmediate(() => {
+      if (this.idling) {
+        this.emit("idle");
+      }
+    });
+  }
+  /**
+   * Placeholder function for creating proxy sockets. This method immediatelly returns
+   * without a socket
+   *
+   * @param options Connection options
+   * @param callback Callback function to run with the socket keys
+   */
+  getSocket(options, callback) {
+    setImmediate(() => callback(null, false));
+  }
+  /**
+   * Queues an e-mail to be sent using the selected settings
+   *
+   * @param mail Mail object
+   * @param callback Callback function
+   */
+  send(mail, callback) {
+    if (this._closed) {
+      const err = new Error("Connection pool was closed");
+      err.code = ECONNECTION;
+      setImmediate(() => callback(err));
+      return false;
+    }
+    let counted = true;
+    let detachSignal;
+    this._pending++;
+    const entry = {
+      mail,
+      requeueAttempts: 0,
+      callback: (err, info) => {
+        if (!counted) {
+          return;
+        }
+        counted = false;
+        this._pending--;
+        detachSignal?.();
+        entry.resource = void 0;
+        callback(err, info);
+      }
+    };
+    this._queue.push(entry);
+    const signal = mail.data.signal;
+    if (signal) {
+      detachSignal = this._watchAbortSignal(entry, signal, () => counted);
+      if (signal.aborted) {
+        return true;
+      }
+    }
+    if (this.idling && this._queue.length >= this.options.maxConnections) {
+      this.idling = false;
+    }
+    setImmediate(() => this._processMessages());
+    return true;
+  }
+  /**
+   * Fails a queued or assigned entry when its signal aborts: removes it from the queue, or
+   * closes the connection delivering it, so other deliveries in the pool can continue.
+   * Returns a function that removes the listener.
+   * @internal
+   */
+  _watchAbortSignal(entry, signal, isPending) {
+    const onAbort = () => {
+      if (!isPending()) {
+        return;
+      }
+      const index = this._queue.indexOf(entry);
+      if (index !== -1) {
+        this._queue.splice(index, 1);
+      }
+      const resource = entry.resource;
+      if (resource && resource.queueEntry === entry) {
+        resource.queueEntry = false;
+        resource.close();
+      }
+      try {
+        entry.callback(createAbortError(signal));
+      } finally {
+        setImmediate(() => this._processMessages());
+      }
+    };
+    signal.addEventListener("abort", onAbort, { once: true });
+    if (signal.aborted) {
+      setImmediate(onAbort);
+    }
+    return () => signal.removeEventListener("abort", onAbort);
+  }
+  /**
+   * Closes the pool. Idle connections are closed at once and a connection in the middle of a
+   * delivery finishes it first, unless `force` is set: then it is closed too and its message
+   * fails. `force` is for a caller that has given up on a delivery, such as one a server is
+   * stalling by trickling its replies, which no socket timeout notices.
+   *
+   * @param options.force - Also close connections that are delivering a message
+   */
+  close(options) {
+    let connection;
+    const len = this._connections.length;
+    this._closed = true;
+    this._clearRateLimit();
+    if (!len && !this._queue.length) {
+      return;
+    }
+    const force = !!options?.force;
+    for (let i = len - 1; i >= 0; i--) {
+      if (this._connections[i] && (force || this._connections[i].available)) {
+        connection = this._connections[i];
+        connection.close();
+        this.logger.info({
+          tnx: "connection",
+          cid: connection.id,
+          action: "removed"
+        }, "Connection #%s removed", connection.id);
+      }
+    }
+    if (len && !this._connections.length) {
+      this.logger.debug({
+        tnx: "connection"
+      }, "All connections removed");
+    }
+    if (!this._queue.length) {
+      return;
+    }
+    const invokeCallbacks = () => {
+      if (!this._queue.length) {
+        this.logger.debug({
+          tnx: "connection"
+        }, "Pending queue entries cleared");
+        return;
+      }
+      const entry = this._queue.shift();
+      if (entry && typeof entry.callback === "function") {
+        try {
+          entry.callback(new Error("Connection pool was closed"));
+        } catch (E) {
+          this.logger.error({
+            err: E,
+            tnx: "callback"
+          }, "Callback error: %s", E.message);
+        }
+      }
+      setImmediate(invokeCallbacks);
+    };
+    setImmediate(invokeCallbacks);
+  }
+  /**
+   * Check the queue and available connections. If there is a message to be sent and there is
+   * an available connection, then use this connection to send the mail
+   * @internal
+   */
+  _processMessages() {
+    if (this._closed) {
+      return;
+    }
+    if (!this._queue.length) {
+      if (!this.idling) {
+        this.idling = true;
+        this.emit("idle");
+      }
+      return;
+    }
+    let connection = this._connections.find((c) => c.available);
+    if (!connection && this._connections.length < this.options.maxConnections) {
+      connection = this._createConnection();
+    }
+    if (!connection) {
+      this.idling = false;
+      return;
+    }
+    if (!this.idling && this._queue.length < this.options.maxConnections) {
+      this.idling = true;
+      this.emit("idle");
+    }
+    const entry = connection.queueEntry = this._queue.shift();
+    entry.resource = connection;
+    entry.messageId = (connection.queueEntry.mail.message.getHeader("message-id") || "").replace(/[<>\s]/g, "");
+    connection.available = false;
+    this.logger.debug({
+      tnx: "pool",
+      cid: connection.id,
+      messageId: entry.messageId,
+      action: "assign"
+    }, "Assigned message <%s> to #%s (%s)", entry.messageId, connection.id, connection.messages + 1);
+    if (this._rateLimit.limit) {
+      this._rateLimit.counter++;
+      if (!this._rateLimit.checkpoint) {
+        this._rateLimit.checkpoint = Date.now();
+      }
+    }
+    connection.send(entry.mail, (err, info) => {
+      if (entry === connection.queueEntry) {
+        try {
+          entry.callback(err, info);
+        } catch (E) {
+          this.logger.error({
+            err: E,
+            tnx: "callback",
+            cid: connection.id
+          }, "Callback error for #%s: %s", connection.id, E.message);
+        }
+        connection.queueEntry = false;
+      }
+    });
+  }
+  /**
+   * Creates a new pool resource
+   * @internal
+   */
+  _createConnection() {
+    const connection = new PoolResource(this);
+    connection.id = ++this._connectionCounter;
+    this.logger.info({
+      tnx: "pool",
+      cid: connection.id,
+      action: "conection"
+    }, "Created new pool resource #%s", connection.id);
+    connection.on("available", () => {
+      this.logger.debug({
+        tnx: "connection",
+        cid: connection.id,
+        action: "available"
+      }, "Connection #%s became available", connection.id);
+      if (this._closed) {
+        this.close();
+      } else {
+        this._processMessages();
+      }
+    });
+    connection.once("error", (err) => {
+      if (err.code !== EMAXLIMIT) {
+        this.logger.warn({
+          err,
+          tnx: "pool",
+          cid: connection.id
+        }, "Pool Error for #%s: %s", connection.id, err.message);
+      } else {
+        this.logger.debug({
+          tnx: "pool",
+          cid: connection.id,
+          action: "maxlimit"
+        }, "Max messages limit exchausted for #%s", connection.id);
+      }
+      if (connection.queueEntry) {
+        try {
+          connection.queueEntry.callback(err);
+        } catch (E) {
+          this.logger.error({
+            err: E,
+            tnx: "callback",
+            cid: connection.id
+          }, "Callback error for #%s: %s", connection.id, E.message);
+        }
+        connection.queueEntry = false;
+      }
+      this._removeConnection(connection);
+      this._continueProcessing();
+    });
+    connection.once("close", () => {
+      this.logger.info({
+        tnx: "connection",
+        cid: connection.id,
+        action: "closed"
+      }, "Connection #%s was closed", connection.id);
+      this._removeConnection(connection);
+      if (connection.queueEntry) {
+        setTimeout(() => {
+          let delay = 0;
+          if (connection.queueEntry) {
+            if (!this._closed && this._shouldRequeuOnConnectionClose(connection.queueEntry)) {
+              delay = this._requeueEntryOnConnectionClose(connection);
+            } else {
+              this._failDeliveryOnConnectionClose(connection);
+            }
+          }
+          if (delay) {
+            setTimeout(() => this._continueProcessing(), delay);
+          } else {
+            this._continueProcessing();
+          }
+        }, 50);
+      } else {
+        if (!this._closed && this.idling && !this._connections.length) {
+          this.emit("clear");
+        }
+        this._continueProcessing();
+      }
+    });
+    this._connections.push(connection);
+    return connection;
+  }
+  /** @internal */
+  _shouldRequeuOnConnectionClose(queueEntry) {
+    if (this.options.maxRequeues < 0) {
+      return true;
+    }
+    return queueEntry.requeueAttempts < this.options.maxRequeues;
+  }
+  /** @internal */
+  _failDeliveryOnConnectionClose(connection) {
+    if (connection.queueEntry && connection.queueEntry.callback) {
+      try {
+        const err = new Error("Reached maximum number of retries after connection was closed");
+        err.code = ECONNECTION;
+        connection.queueEntry.callback(err);
+      } catch (E) {
+        this.logger.error({
+          err: E,
+          tnx: "callback",
+          messageId: connection.queueEntry.messageId,
+          cid: connection.id
+        }, "Callback error for #%s: %s", connection.id, E.message);
+      }
+      connection.queueEntry = false;
+    }
+  }
+  /** @internal */
+  _requeueEntryOnConnectionClose(connection) {
+    const delay = Math.min(REQUEUE_BASE_DELAY * 2 ** connection.queueEntry.requeueAttempts, REQUEUE_MAX_DELAY);
+    connection.queueEntry.requeueAttempts += 1;
+    this.logger.debug({
+      tnx: "pool",
+      cid: connection.id,
+      messageId: connection.queueEntry.messageId,
+      action: "requeue"
+    }, "Re-queued message <%s> for #%s. Attempt: #%s", connection.queueEntry.messageId, connection.id, connection.queueEntry.requeueAttempts);
+    connection.queueEntry.resource = void 0;
+    this._queue.unshift(connection.queueEntry);
+    connection.queueEntry = false;
+    return delay;
+  }
+  /**
+   * Continue to process message if the pool hasn't closed
+   * @internal
+   */
+  _continueProcessing() {
+    if (this._closed) {
+      this.close();
+    } else {
+      setTimeout(() => this._processMessages(), 100);
+    }
+  }
+  /**
+   * Remove resource from pool
+   *
+   * @param connection The PoolResource to remove
+   * @internal
+   */
+  _removeConnection(connection) {
+    const index = this._connections.indexOf(connection);
+    if (index !== -1) {
+      this._connections.splice(index, 1);
+    }
+  }
+  /**
+   * Checks if connections have hit current rate limit and if so, queues the availability callback
+   *
+   * @param callback Callback function to run once rate limiter has been cleared
+   * @internal
+   */
+  _checkRateLimit(callback) {
+    if (!this._rateLimit.limit) {
+      return callback();
+    }
+    const now = Date.now();
+    if (this._rateLimit.counter < this._rateLimit.limit) {
+      return callback();
+    }
+    this._rateLimit.waiting.push(callback);
+    if (this._rateLimit.checkpoint <= now - this._rateLimit.delta) {
+      return this._clearRateLimit();
+    }
+    if (!this._rateLimit.timeout) {
+      this._rateLimit.timeout = setTimeout(() => this._clearRateLimit(), this._rateLimit.delta - (now - this._rateLimit.checkpoint));
+      this._rateLimit.checkpoint = now;
+    }
+  }
+  /**
+   * Clears current rate limit limitation and runs paused callback
+   * @internal
+   */
+  _clearRateLimit() {
+    clearTimeout(this._rateLimit.timeout);
+    this._rateLimit.timeout = null;
+    this._rateLimit.counter = 0;
+    this._rateLimit.checkpoint = false;
+    while (this._rateLimit.waiting.length) {
+      const cb = this._rateLimit.waiting.shift();
+      setImmediate(cb);
+    }
+  }
+  /**
+   * Returns true if there are free slots in the queue
+   */
+  isIdle() {
+    return this.idling;
+  }
+  /**
+   * Counts the messages the pool has not finished with yet: the ones waiting in the queue
+   * plus the ones a connection is transmitting right now. isIdle() only tells whether the
+   * pool can take another message, it is already true while a message is still being sent,
+   * so use this to check that nothing would be lost by closing the pool. A message that is
+   * re-queued after its connection dropped is counted until its callback runs, also while it waits to be put back on the queue, and
+   * it is no longer counted by the time its callback runs.
+   *
+   * @returns Number of queued and in-flight messages
+   */
+  pendingCount() {
+    return this._pending;
+  }
+  verify(callback) {
+    let promise;
+    if (!callback) {
+      promise = new Promise((resolve3, reject) => {
+        callback = callbackPromise(resolve3, reject);
+      });
+    }
+    const done = callback;
+    const auth = new PoolResource(this).auth;
+    const connectStartedAt = Date.now();
+    this.getSocket(Object.assign({}, this.options, { connectStartedAt }), (err, socketOptions) => {
+      if (err) {
+        return done(err);
+      }
+      let options = this.options;
+      if (socketOptions && socketOptions.connection) {
+        this.logger.info({
+          tnx: "proxy",
+          remoteAddress: socketOptions.connection.remoteAddress,
+          remotePort: socketOptions.connection.remotePort,
+          destHost: options.host || "",
+          destPort: options.port || "",
+          action: "connected"
+        }, "Using proxied socket from %s:%s to %s:%s", socketOptions.connection.remoteAddress, socketOptions.connection.remotePort, options.host || "", options.port || "");
+        options = Object.assign(assign(false, options), socketOptions);
+      }
+      const connection = new smtp_connection_default(options);
+      connection._connectStartedAt = connectStartedAt;
+      let returned = false;
+      connection.once("error", (err2) => {
+        if (returned) {
+          return;
+        }
+        returned = true;
+        connection.close();
+        return done(err2);
+      });
+      connection.once("end", () => {
+        if (returned) {
+          return;
+        }
+        returned = true;
+        return done(new Error("Connection closed"));
+      });
+      const finalize = () => {
+        if (returned) {
+          return;
+        }
+        returned = true;
+        connection.quit();
+        return done(null, true);
+      };
+      connection.connect((err2) => {
+        if (returned) {
+          return;
+        }
+        if (err2) {
+          returned = true;
+          connection.close();
+          return done(err2);
+        }
+        if (auth && (connection.allowsAuth || options.forceAuth)) {
+          connection.login(auth, (err3) => {
+            if (returned) {
+              return;
+            }
+            if (err3) {
+              returned = true;
+              connection.close();
+              return done(err3);
+            }
+            finalize();
+          });
+        } else if (!auth && connection.allowsAuth && options.forceAuth) {
+          const err3 = new Error("Authentication info was not provided");
+          err3.code = ENOAUTH;
+          returned = true;
+          connection.close();
+          return done(err3);
+        } else {
+          finalize();
+        }
+      });
+    });
+    return promise;
+  }
+};
+var smtp_pool_default = SMTPPool;
+
+// node_modules/nodemailer/dist/esm/smtp-transport/index.js
+var import_node_events5 = require("node:events");
+var MESSAGE_AUTH_KEYS = ["type", "user", "pass", "accessToken", "refreshToken", "expires"];
+var SMTPTransport = class extends import_node_events5.EventEmitter {
+  constructor(options) {
+    super();
+    this.supportsAbortSignal = true;
+    options = options || {};
+    if (typeof options === "string") {
+      options = {
+        url: options
+      };
+    }
+    let urlData;
+    let service = options.service;
+    if (typeof options.getSocket === "function") {
+      this.getSocket = options.getSocket;
+    }
+    if (options.url) {
+      urlData = parseConnectionUrl(options.url);
+      service = service || urlData.service;
+    }
+    this.options = assign(
+      false,
+      // create new object
+      options,
+      // regular options
+      urlData,
+      // url options
+      service && wellKnown(service)
+      // wellknown options
+    );
+    this.logger = getLogger(this.options, {
+      component: this.options.component || "smtp-transport"
+    });
+    this.name = "SMTP";
+    this.version = version + "[client:" + version + "]";
+    if (this.options.auth) {
+      this.auth = this.getAuth({});
+    }
+  }
+  /**
+   * Placeholder function for creating proxy sockets. This method immediatelly returns
+   * without a socket
+   *
+   * @param options Connection options
+   * @param callback Callback function to run with the socket keys
+   */
+  getSocket(options, callback) {
+    setImmediate(() => callback(null, false));
+  }
+  getAuth(authOpts) {
+    if (!authOpts) {
+      if (this.auth && this.auth.oauth2 && this.mailer) {
+        this.auth.oauth2.provisionCallback = this.mailer.get("oauth2_provision_cb") || this.auth.oauth2.provisionCallback;
+      }
+      return this.auth;
+    }
+    const authData = Object.assign({}, this.options.auth && typeof this.options.auth === "object" ? this.options.auth : {});
+    if (typeof authOpts === "object") {
+      copyOwnKeys(authData, authOpts, (key) => !MESSAGE_AUTH_KEYS.includes(key));
+    }
+    if (Object.keys(authData).length === 0) {
+      return false;
+    }
+    switch ((authData.type || "").toString().toUpperCase()) {
+      case "OAUTH2": {
+        if (!authData.service && !authData.user) {
+          return false;
+        }
+        const oauth2 = new xoauth2_default(authData, this.logger);
+        oauth2.provisionCallback = this.mailer && this.mailer.get("oauth2_provision_cb") || oauth2.provisionCallback;
+        oauth2.on("token", (token) => this.mailer.emit("token", token));
+        oauth2.on("error", (err) => this.emit("error", err));
+        return {
+          type: "OAUTH2",
+          user: authData.user,
+          oauth2,
+          method: "XOAUTH2"
+        };
+      }
+      default:
+        return {
+          type: (authData.type || "").toString().toUpperCase() || "LOGIN",
+          user: authData.user,
+          credentials: {
+            user: authData.user || "",
+            pass: authData.pass,
+            options: authData.options
+          },
+          method: (authData.method || "").trim().toUpperCase() || this.options.authMethod || false
+        };
+    }
+  }
+  /**
+   * Sends an e-mail using the selected settings
+   *
+   * @param mail Mail object
+   * @param callback Callback function
+   */
+  send(mail, callback) {
+    const signal = mail.data.signal;
+    let returned = false;
+    let connection;
+    let perCallAuth;
+    const cleanupPerCallAuth = () => {
+      if (perCallAuth && perCallAuth !== this.auth && perCallAuth.oauth2) {
+        perCallAuth.oauth2.removeAllListeners();
+      }
+      perCallAuth = null;
+    };
+    const finish = (err, info) => {
+      if (returned) {
+        return;
+      }
+      returned = true;
+      signal?.removeEventListener("abort", onAbort);
+      cleanupPerCallAuth();
+      connection?.close();
+      callback(err, info);
+    };
+    function onAbort() {
+      finish(createAbortError(signal));
+    }
+    if (signal) {
+      signal.addEventListener("abort", onAbort, { once: true });
+      if (signal.aborted) {
+        setImmediate(onAbort);
+        return;
+      }
+    }
+    const connectStartedAt = Date.now();
+    this.getSocket(Object.assign({}, this.options, { connectStartedAt }), (err, socketOptions) => {
+      if (returned) {
+        socketOptions && socketOptions.connection?.destroy();
+        return;
+      }
+      if (err) {
+        return finish(err);
+      }
+      let options = this.options;
+      if (socketOptions && socketOptions.connection) {
+        this.logger.info({
+          tnx: "proxy",
+          remoteAddress: socketOptions.connection.remoteAddress,
+          remotePort: socketOptions.connection.remotePort,
+          destHost: options.host || "",
+          destPort: options.port || "",
+          action: "connected"
+        }, "Using proxied socket from %s:%s to %s:%s", socketOptions.connection.remoteAddress, socketOptions.connection.remotePort, options.host || "", options.port || "");
+        options = Object.assign(assign(false, options), socketOptions);
+      }
+      const smtp = connection = new smtp_connection_default(options);
+      smtp._connectStartedAt = connectStartedAt;
+      smtp.once("error", (err2) => finish(err2));
+      const sendMessage = () => {
+        const envelope = mail.message.getEnvelope();
+        const messageId = mail.message.messageId();
+        const recipients = [].concat(envelope.to || []);
+        if (recipients.length > 3) {
+          recipients.push("...and " + recipients.splice(2).length + " more");
+        }
+        if (mail.data.dsn) {
+          envelope.dsn = mail.data.dsn;
+        }
+        if (mail.data.requireTLSExtensionEnabled) {
+          envelope.requireTLSExtensionEnabled = mail.data.requireTLSExtensionEnabled;
+        }
+        this.logger.info({
+          tnx: "send",
+          messageId
+        }, "Sending message %s to <%s>", messageId, recipients.join(", "));
+        smtp.send(envelope, mail.message.createReadStream(), (err2, info) => {
+          if (returned) {
+            return;
+          }
+          if (err2) {
+            this.logger.error({
+              err: err2,
+              tnx: "send"
+            }, "Send error for %s: %s", messageId, err2.message);
+            return finish(err2);
+          }
+          info.envelope = {
+            from: envelope.from,
+            to: envelope.to
+          };
+          info.messageId = messageId;
+          try {
+            return finish(null, info);
+          } catch (E) {
+            this.logger.error({
+              err: E,
+              tnx: "callback"
+            }, "Callback error for %s: %s", messageId, E.message);
+          }
+        });
+      };
+      smtp.connect((err2) => {
+        if (returned) {
+          return;
+        }
+        if (err2) {
+          return finish(err2);
+        }
+        perCallAuth = this.getAuth(mail.data.auth);
+        if (perCallAuth && (smtp.allowsAuth || options.forceAuth)) {
+          smtp.login(perCallAuth, (err3) => {
+            cleanupPerCallAuth();
+            if (returned) {
+              return;
+            }
+            if (err3) {
+              return finish(err3);
+            }
+            sendMessage();
+          });
+        } else {
+          sendMessage();
+        }
+      });
+    });
+  }
+  verify(callback) {
+    let promise;
+    if (!callback) {
+      promise = new Promise((resolve3, reject) => {
+        callback = callbackPromise(resolve3, reject);
+      });
+    }
+    const done = callback;
+    const connectStartedAt = Date.now();
+    this.getSocket(Object.assign({}, this.options, { connectStartedAt }), (err, socketOptions) => {
+      if (err) {
+        return done(err);
+      }
+      let options = this.options;
+      if (socketOptions && socketOptions.connection) {
+        this.logger.info({
+          tnx: "proxy",
+          remoteAddress: socketOptions.connection.remoteAddress,
+          remotePort: socketOptions.connection.remotePort,
+          destHost: options.host || "",
+          destPort: options.port || "",
+          action: "connected"
+        }, "Using proxied socket from %s:%s to %s:%s", socketOptions.connection.remoteAddress, socketOptions.connection.remotePort, options.host || "", options.port || "");
+        options = Object.assign(assign(false, options), socketOptions);
+      }
+      const connection = new smtp_connection_default(options);
+      connection._connectStartedAt = connectStartedAt;
+      let returned = false;
+      let perCallAuth;
+      const cleanupPerCallAuth = () => {
+        if (perCallAuth && perCallAuth !== this.auth && perCallAuth.oauth2) {
+          perCallAuth.oauth2.removeAllListeners();
+        }
+        perCallAuth = null;
+      };
+      connection.once("error", (err2) => {
+        if (returned) {
+          return;
+        }
+        returned = true;
+        cleanupPerCallAuth();
+        connection.close();
+        return done(err2);
+      });
+      connection.once("end", () => {
+        if (returned) {
+          return;
+        }
+        returned = true;
+        cleanupPerCallAuth();
+        return done(new Error("Connection closed"));
+      });
+      const finalize = () => {
+        if (returned) {
+          return;
+        }
+        returned = true;
+        cleanupPerCallAuth();
+        connection.quit();
+        return done(null, true);
+      };
+      connection.connect((err2) => {
+        if (returned) {
+          return;
+        }
+        if (err2) {
+          returned = true;
+          connection.close();
+          return done(err2);
+        }
+        perCallAuth = this.getAuth({});
+        if (perCallAuth && (connection.allowsAuth || options.forceAuth)) {
+          connection.login(perCallAuth, (err3) => {
+            cleanupPerCallAuth();
+            if (returned) {
+              return;
+            }
+            if (err3) {
+              returned = true;
+              connection.close();
+              return done(err3);
+            }
+            finalize();
+          });
+        } else if (!perCallAuth && connection.allowsAuth && options.forceAuth) {
+          const err3 = new Error("Authentication info was not provided");
+          err3.code = ENOAUTH;
+          returned = true;
+          cleanupPerCallAuth();
+          connection.close();
+          return done(err3);
+        } else {
+          finalize();
+        }
+      });
+    });
+    return promise;
+  }
+  /**
+   * Releases resources
+   */
+  close() {
+    if (this.auth && this.auth.oauth2) {
+      this.auth.oauth2.removeAllListeners();
+    }
+    this.emit("close");
+  }
+};
+var smtp_transport_default = SMTPTransport;
+
+// node_modules/nodemailer/dist/esm/sendmail-transport/index.js
+var import_node_child_process = require("node:child_process");
+var import_node_stream15 = require("node:stream");
+var STDIN_ERROR_EXIT_WAIT = 1e3;
+var SendmailTransport = class {
+  constructor(options) {
+    options = options || {};
+    this._spawn = import_node_child_process.spawn;
+    this.options = options;
+    this.name = "Sendmail";
+    this.version = version;
+    this.path = "sendmail";
+    this.args = false;
+    this.logger = getLogger(this.options, {
+      component: this.options.component || "sendmail"
+    });
+    if (typeof options === "string") {
+      this.path = options;
+    } else if (typeof options === "object") {
+      if (options.path) {
+        this.path = options.path;
+      }
+      if (Array.isArray(options.args)) {
+        this.args = options.args;
+      }
+    }
+    this.winbreak = ["win", "windows", "dos", "\r\n"].includes((options.newline || "").toString().toLowerCase());
+  }
+  /**
+   * <p>Compiles a mailcomposer message and forwards it to handler that sends it.</p>
+   *
+   * @param mail MailComposer object
+   * @param done Callback function to run when the sending is completed
+   */
+  send(mail, done) {
+    mail.message.keepBcc = true;
+    const envelope = mail.message.getEnvelope();
+    const messageId = mail.message.messageId();
+    let returned;
+    const hasInvalidAddresses = [].concat(envelope.from || []).concat(envelope.to || []).some((addr) => /^"?-/.test(addr));
+    if (hasInvalidAddresses) {
+      const err = new Error("Can not send mail. Invalid envelope addresses.");
+      err.code = ESENDMAIL;
+      return done(err);
+    }
+    const args = this.args ? ["-i"].concat(this.args).concat(envelope.to) : ["-i"].concat(envelope.from ? ["-f", envelope.from] : []).concat(envelope.to);
+    const callback = (err) => {
+      if (returned) {
+        return;
+      }
+      returned = true;
+      if (typeof done === "function") {
+        if (err) {
+          return done(err);
+        }
+        return done(null, {
+          envelope,
+          messageId,
+          response: "Messages queued for delivery"
+        });
+      }
+    };
+    let sendmail;
+    try {
+      sendmail = this._spawn(this.path, args);
+    } catch (E) {
+      this.logger.error({
+        err: E,
+        tnx: "spawn",
+        messageId
+      }, "Error occurred while spawning sendmail. %s", E.message);
+      return callback(E);
+    }
+    if (sendmail) {
+      let stream;
+      const messageWritten = () => !!stream && stream.readableEnded;
+      let stdinError = null;
+      const release = () => {
+        if (stream && !messageWritten()) {
+          stream.destroy();
+        }
+      };
+      const fail = (err) => {
+        release();
+        callback(err);
+      };
+      sendmail.on("error", (err) => {
+        this.logger.error({
+          err,
+          tnx: "spawn",
+          messageId
+        }, "Error occurred when sending message %s. %s", messageId, err.message);
+        fail(err);
+      });
+      const onExit = (code, signal) => {
+        let err = null;
+        if (code) {
+          err = new Error(code === 127 ? "Sendmail command not found, process exited with code " + code : "Sendmail exited with code " + code);
+        } else if (signal) {
+          err = new Error("Sendmail was terminated by " + signal);
+        } else if (!messageWritten()) {
+          err = new Error("Sendmail exited before the message was written");
+        } else if (stdinError) {
+          err = stdinError;
+        }
+        if (!err) {
+          return callback();
+        }
+        err.code = err.code || ESENDMAIL;
+        this.logger.error({
+          err,
+          tnx: "stdin",
+          messageId
+        }, "Error sending message %s to sendmail. %s", messageId, err.message);
+        fail(err);
+      };
+      sendmail.once("exit", onExit);
+      sendmail.once("close", onExit);
+      sendmail.stdin.on("error", (err) => {
+        this.logger.error({
+          err,
+          tnx: "stdin",
+          messageId
+        }, "Error occurred when piping message %s to sendmail. %s", messageId, err.message);
+        if (stdinError) {
+          return;
+        }
+        stdinError = err;
+        release();
+        const exitTimer = setTimeout(() => fail(err), STDIN_ERROR_EXIT_WAIT);
+        sendmail.once("exit", () => clearTimeout(exitTimer));
+      });
+      const recipients = [].concat(envelope.to || []);
+      if (recipients.length > 3) {
+        recipients.push("...and " + recipients.splice(2).length + " more");
+      }
+      this.logger.info({
+        tnx: "send",
+        messageId
+      }, "Sending message %s to <%s>", messageId, recipients.join(", "));
+      const sourceStream = mail.message.createReadStream();
+      stream = sourceStream;
+      if (this.options.newline) {
+        stream = (0, import_node_stream15.pipeline)(sourceStream, this.winbreak ? new LeWindows() : new LeUnix(), () => false);
+      }
+      stream.once("error", (err) => {
+        this.logger.error({
+          err,
+          tnx: "stdin",
+          messageId
+        }, "Error occurred when generating message %s. %s", messageId, err.message);
+        sendmail.kill("SIGINT");
+        callback(err);
+      });
+      stream.pipe(sendmail.stdin);
+    } else {
+      const err = new Error("sendmail was not found");
+      err.code = ESENDMAIL;
+      return callback(err);
+    }
+  }
+};
+var sendmail_transport_default = SendmailTransport;
+
+// node_modules/nodemailer/dist/esm/stream-transport/index.js
+var StreamTransport = class {
+  constructor(options) {
+    options = options || {};
+    this.options = options;
+    this.name = "StreamTransport";
+    this.version = version;
+    this.logger = getLogger(this.options, {
+      component: this.options.component || "stream-transport"
+    });
+    this.winbreak = ["win", "windows", "dos", "\r\n"].includes((options.newline || "").toString().toLowerCase());
+  }
+  /**
+   * Compiles a mailcomposer message and forwards it to handler that sends it
+   *
+   * @param mail MailComposer object
+   * @param done Callback function to run when the sending is completed
+   */
+  send(mail, done) {
+    mail.message.keepBcc = true;
+    const envelope = mail.message.getEnvelope();
+    const messageId = mail.message.messageId();
+    const recipients = [].concat(envelope.to || []);
+    if (recipients.length > 3) {
+      recipients.push("...and " + recipients.splice(2).length + " more");
+    }
+    this.logger.info({
+      tnx: "send",
+      messageId
+    }, "Sending message %s to <%s> using %s line breaks", messageId, recipients.join(", "), this.winbreak ? "<CR><LF>" : "<LF>");
+    setImmediate(() => {
+      let stream;
+      try {
+        stream = mail.message.createReadStream();
+        if (this.options.newline) {
+          const sourceStream = stream;
+          stream = sourceStream.pipe(this.winbreak ? new LeWindows() : new LeUnix());
+          sourceStream.once("error", (err) => stream.emit("error", err));
+        }
+      } catch (E) {
+        this.logger.error({
+          err: E,
+          tnx: "send",
+          messageId
+        }, "Creating send stream failed for %s. %s", messageId, E.message);
+        return done(E);
+      }
+      if (!this.options.buffer) {
+        stream.once("error", (err) => {
+          this.logger.error({
+            err,
+            tnx: "send",
+            messageId
+          }, "Failed creating message for %s. %s", messageId, err.message);
+        });
+        return done(null, {
+          envelope,
+          messageId,
+          message: stream
+        });
+      }
+      const chunks = [];
+      let chunklen = 0;
+      stream.on("readable", () => {
+        let chunk;
+        while ((chunk = stream.read()) !== null) {
+          chunks.push(chunk);
+          chunklen += chunk.length;
+        }
+      });
+      stream.once("error", (err) => {
+        this.logger.error({
+          err,
+          tnx: "send",
+          messageId
+        }, "Failed creating message for %s. %s", messageId, err.message);
+        return done(err);
+      });
+      stream.on("end", () => done(null, {
+        envelope,
+        messageId,
+        message: Buffer.concat(chunks, chunklen)
+      }));
+    });
+  }
+};
+var stream_transport_default = StreamTransport;
+
+// node_modules/nodemailer/dist/esm/json-transport/index.js
+var JSONTransport = class {
+  constructor(options) {
+    options = options || {};
+    this.options = options;
+    this.name = "JSONTransport";
+    this.version = version;
+    this.logger = getLogger(this.options, {
+      component: this.options.component || "json-transport"
+    });
+  }
+  /**
+   * <p>Compiles a mailcomposer message and forwards it to handler that sends it.</p>
+   *
+   * @param mail MailComposer object
+   * @param done Callback function to run when the sending is completed
+   */
+  send(mail, done) {
+    mail.message.keepBcc = true;
+    const envelope = mail.message.getEnvelope();
+    const messageId = mail.message.messageId();
+    const recipients = [].concat(envelope.to || []);
+    if (recipients.length > 3) {
+      recipients.push("...and " + recipients.splice(2).length + " more");
+    }
+    this.logger.info({
+      tnx: "send",
+      messageId
+    }, "Composing JSON structure of %s to <%s>", messageId, recipients.join(", "));
+    setImmediate(() => {
+      mail.normalize((err, data) => {
+        if (err) {
+          this.logger.error({
+            err,
+            tnx: "send",
+            messageId
+          }, "Failed building JSON structure for %s. %s", messageId, err.message);
+          return done(err);
+        }
+        delete data.envelope;
+        delete data.normalizedHeaders;
+        delete data.signal;
+        return done(null, {
+          envelope,
+          messageId,
+          message: this.options.skipEncoding ? data : JSON.stringify(data)
+        });
+      });
+    });
+  }
+};
+var json_transport_default = JSONTransport;
+
+// node_modules/nodemailer/dist/esm/ses-transport/index.js
+var import_node_events6 = __toESM(require("node:events"), 1);
+function tagSesError(err) {
+  if (err && typeof err === "object" && !err.code) {
+    err.code = ESES;
+  }
+  return err;
+}
+var SESTransport = class extends import_node_events6.default {
+  constructor(options) {
+    super();
+    if (!options || !options.SES || !options.SES.sesClient) {
+      const error2 = new Error("Missing SES configuration, expecting { sesClient, SendEmailCommand } from @aws-sdk/client-sesv2, see https://nodemailer.com/transports/ses/");
+      error2.code = ECONFIG;
+      throw error2;
+    }
+    this.options = options;
+    this.ses = this.options.SES;
+    this.name = "SESTransport";
+    this.version = version;
+    this.logger = getLogger(this.options, {
+      component: this.options.component || "ses-transport"
+    });
+  }
+  getRegion(cb) {
+    if (this.ses.sesClient.config && typeof this.ses.sesClient.config.region === "function") {
+      this.ses.sesClient.config.region().then((region) => cb(null, region), (err) => cb(err));
+      return;
+    }
+    return cb(null, false);
+  }
+  /**
+   * Compiles a mailcomposer message and forwards it to SES
+   *
+   * @param mail MailComposer object
+   * @param callback Callback function to run when the sending is completed
+   */
+  send(mail, callback) {
+    let fromHeader = mail.message._headers.find((header) => /^from$/i.test(header.key));
+    if (fromHeader) {
+      const mimeNode = new mime_node_default("text/plain");
+      fromHeader = mimeNode._convertAddresses(mimeNode._parseAddresses(fromHeader.value));
+    }
+    const envelope = mail.message.getEnvelope();
+    const messageId = mail.message.messageId();
+    const recipients = [].concat(envelope.to || []);
+    if (recipients.length > 3) {
+      recipients.push("...and " + recipients.splice(2).length + " more");
+    }
+    this.logger.info({
+      tnx: "send",
+      messageId
+    }, "Sending message %s to <%s>", messageId, recipients.join(", "));
+    const getRawMessage = (next) => {
+      if (!mail.data._dkim) {
+        mail.data._dkim = {};
+      }
+      if (mail.data._dkim.skipFields && typeof mail.data._dkim.skipFields === "string") {
+        mail.data._dkim.skipFields += ":date:message-id";
+      } else {
+        mail.data._dkim.skipFields = "date:message-id";
+      }
+      const sourceStream = mail.message.createReadStream();
+      const stream = sourceStream.pipe(new LeWindows());
+      const chunks = [];
+      let chunklen = 0;
+      stream.on("readable", () => {
+        let chunk;
+        while ((chunk = stream.read()) !== null) {
+          chunks.push(chunk);
+          chunklen += chunk.length;
+        }
+      });
+      sourceStream.once("error", (err) => stream.emit("error", err));
+      stream.once("error", (err) => next(err));
+      stream.once("end", () => next(null, Buffer.concat(chunks, chunklen)));
+    };
+    setImmediate(() => getRawMessage((err, raw) => {
+      if (err) {
+        this.logger.error({
+          err,
+          tnx: "send",
+          messageId
+        }, "Failed creating message for %s. %s", messageId, err.message);
+        return callback(err);
+      }
+      const sesMessage = copyOwnKeys({
+        Content: {
+          Raw: {
+            // required
+            Data: raw
+            // required
+          }
+        },
+        FromEmailAddress: fromHeader || envelope.from,
+        Destination: {
+          ToAddresses: envelope.to
+        }
+      }, mail.data.ses);
+      this.getRegion((err2, region) => {
+        if (err2 || !region) {
+          region = "us-east-1";
+        }
+        let sendPromise;
+        try {
+          const command = new this.ses.SendEmailCommand(sesMessage);
+          sendPromise = this.ses.sesClient.send(command);
+        } catch (err3) {
+          tagSesError(err3);
+          this.logger.error({
+            err: err3,
+            tnx: "send"
+          }, "Send error for %s: %s", messageId, err3.message);
+          setImmediate(() => callback(err3));
+          return;
+        }
+        sendPromise.then((data) => {
+          if (region === "us-east-1") {
+            region = "email";
+          }
+          const info = {
+            envelope: {
+              from: envelope.from,
+              to: envelope.to
+            },
+            messageId: "<" + data.MessageId + (!/@/.test(data.MessageId) ? "@" + region + ".amazonses.com" : "") + ">",
+            response: data.MessageId,
+            raw
+          };
+          setImmediate(() => callback(null, info));
+        }).catch((err3) => {
+          tagSesError(err3);
+          this.logger.error({
+            err: err3,
+            tnx: "send"
+          }, "Send error for %s: %s", messageId, err3.message);
+          setImmediate(() => callback(err3));
+        });
+      });
+    }));
+  }
+  verify(callback) {
+    let promise;
+    if (!callback) {
+      promise = new Promise((resolve3, reject) => {
+        callback = callbackPromise(resolve3, reject);
+      });
+    }
+    const done = callback;
+    const cb = (err) => {
+      if (err && !["InvalidParameterValue", "MessageRejected"].includes(err.code || err.Code || err.name)) {
+        return done(tagSesError(err));
+      }
+      return done(null, true);
+    };
+    const sesMessage = {
+      Content: {
+        Raw: {
+          Data: Buffer.from("From: <invalid@invalid>\r\nTo: <invalid@invalid>\r\n Subject: Invalid\r\n\r\nInvalid")
+        }
+      },
+      FromEmailAddress: "invalid@invalid",
+      Destination: {
+        ToAddresses: ["invalid@invalid"]
+      }
+    };
+    this.getRegion(() => {
+      let sendPromise;
+      try {
+        const command = new this.ses.SendEmailCommand(sesMessage);
+        sendPromise = this.ses.sesClient.send(command);
+      } catch (err) {
+        setImmediate(() => cb(err));
+        return;
+      }
+      sendPromise.then(() => setImmediate(() => cb(null))).catch((err) => setImmediate(() => cb(err)));
+    });
+    return promise;
+  }
+};
+var ses_transport_default = SESTransport;
+
+// node_modules/nodemailer/dist/esm/nodemailer.js
+var etherealApi = () => (process.env.ETHEREAL_API || "https://api.nodemailer.com").replace(/\/+$/, "");
+var etherealWeb = () => (process.env.ETHEREAL_WEB || "https://ethereal.email").replace(/\/+$/, "");
+var etherealApiKey = () => (process.env.ETHEREAL_API_KEY || "").replace(/\s*/g, "") || null;
+var etherealCache = () => ["true", "yes", "y", "1"].includes((process.env.ETHEREAL_CACHE || "yes").toString().trim().toLowerCase());
+var testAccount = false;
+function createTransport(transporter, defaults2) {
+  let options;
+  if (
+    // provided transporter is a configuration object, not transporter plugin
+    typeof transporter === "object" && typeof transporter.send !== "function" || // provided transporter looks like a connection url
+    typeof transporter === "string" && /^(smtps?|direct):/i.test(transporter)
+  ) {
+    const urlConfig = typeof transporter === "string" ? transporter : transporter.url;
+    if (urlConfig) {
+      const parsed = parseConnectionUrl(urlConfig);
+      options = typeof transporter === "object" ? assign(false, copyOwnKeys({}, transporter, (key) => key === "url"), parsed) : parsed;
+    } else {
+      options = transporter;
+    }
+    if (options.pool) {
+      transporter = new smtp_pool_default(options);
+    } else if (options.sendmail) {
+      transporter = new sendmail_transport_default(options);
+    } else if (options.streamTransport) {
+      transporter = new stream_transport_default(options);
+    } else if (options.jsonTransport) {
+      transporter = new json_transport_default(options);
+    } else if (options.SES) {
+      const ses = options.SES;
+      if (ses.ses && ses.aws) {
+        const error2 = new Error("Using legacy SES configuration, expecting @aws-sdk/client-sesv2, see https://nodemailer.com/transports/ses/");
+        error2.code = ECONFIG;
+        throw error2;
+      }
+      transporter = new ses_transport_default(options);
+    } else {
+      transporter = new smtp_transport_default(options);
+    }
+  }
+  return new mailer_default(transporter, options, defaults2);
+}
+function createTestAccount(apiUrl, callback) {
+  let promise;
+  if (!callback && typeof apiUrl === "function") {
+    callback = apiUrl;
+    apiUrl = false;
+  }
+  if (!callback) {
+    promise = new Promise((resolve3, reject) => {
+      callback = callbackPromise(resolve3, reject);
+    });
+  }
+  const done = callback;
+  if (etherealCache() && testAccount) {
+    setImmediate(() => done(null, testAccount));
+    return promise;
+  }
+  apiUrl = apiUrl || etherealApi();
+  const chunks = [];
+  let chunklen = 0;
+  const requestHeaders = {};
+  const requestBody = {
+    requestor: name,
+    version
+  };
+  const apiKey = etherealApiKey();
+  if (apiKey) {
+    requestHeaders.Authorization = "Bearer " + apiKey;
+  }
+  const fetchOptions = {
+    contentType: "application/json",
+    method: "POST",
+    headers: requestHeaders,
+    body: Buffer.from(JSON.stringify(requestBody))
+  };
+  if (/^https:/i.test(apiUrl)) {
+    fetchOptions.tls = { rejectUnauthorized: true };
+  }
+  const req = fetch_default(apiUrl + "/user", fetchOptions);
+  req.on("readable", () => {
+    let chunk;
+    while ((chunk = req.read()) !== null) {
+      chunks.push(chunk);
+      chunklen += chunk.length;
+    }
+  });
+  req.once("error", (err) => done(err));
+  req.once("end", () => {
+    const res = Buffer.concat(chunks, chunklen);
+    let data;
+    try {
+      data = JSON.parse(res.toString());
+    } catch (E) {
+      return done(E);
+    }
+    if (data.status !== "success" || data.error) {
+      return done(new Error(data.error || "Request failed"));
+    }
+    delete data.status;
+    testAccount = data;
+    done(null, testAccount);
+  });
+  return promise;
+}
+function getTestMessageUrl(info) {
+  if (!info || !info.response) {
+    return false;
+  }
+  const infoProps = /* @__PURE__ */ new Map();
+  const response = info.response.toString();
+  if (response.length > 2 && response.charAt(response.length - 1) === "]") {
+    const open = response.indexOf("[", response.lastIndexOf("]", response.length - 2) + 1);
+    if (open >= 0 && open < response.length - 2) {
+      const props = response.substring(open + 1, response.length - 1);
+      props.replace(/\b([A-Z0-9]+)=([^\s]+)/g, (m, key, value) => {
+        infoProps.set(key, value);
+        return m;
+      });
+    }
+  }
+  if (infoProps.has("STATUS") && infoProps.has("MSGID")) {
+    return (testAccount && testAccount.web || etherealWeb()) + "/message/" + infoProps.get("MSGID");
+  }
+  return false;
+}
+var nodemailer = {
+  createTransport,
+  createTestAccount,
+  getTestMessageUrl
+};
+var nodemailer_default = nodemailer;
+
+// src/services/emailService.ts
+var EmailService = class _EmailService {
+  static instance;
+  constructor() {
+  }
+  static getInstance() {
+    if (!_EmailService.instance) {
+      _EmailService.instance = new _EmailService();
+    }
+    return _EmailService.instance;
+  }
+  async sendEmail(options) {
+    const { to, subject, html, text } = options;
+    if (config.resendApiKey && config.resendApiKey.startsWith("re_")) {
+      try {
+        const fromAddress = config.resendFromEmail || "NEXUS AI <onboarding@resend.dev>";
+        const resp = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${config.resendApiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            from: fromAddress,
+            to: [to],
+            subject,
+            html,
+            text: text || html.replace(/<[^>]*>?/gm, "")
+          })
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          return {
+            success: true,
+            provider: "RESEND",
+            messageId: data.id
+          };
+        } else {
+          const errData = await resp.text();
+          console.warn("[EMAIL] Resend API error response:", errData);
+        }
+      } catch (err) {
+        console.warn("[EMAIL] Failed sending via Resend API:", err.message);
+      }
+    }
+    if (config.smtpHost && config.smtpUser && config.smtpPass) {
+      try {
+        const transporter = nodemailer_default.createTransport({
+          host: config.smtpHost,
+          port: config.smtpPort || 587,
+          secure: config.smtpSecure || config.smtpPort === 465,
+          auth: {
+            user: config.smtpUser,
+            pass: config.smtpPass
+          }
+        });
+        const info = await transporter.sendMail({
+          from: config.smtpFrom || `"NEXUS AI" <${config.smtpUser}>`,
+          to,
+          subject,
+          text: text || html.replace(/<[^>]*>?/gm, ""),
+          html
+        });
+        return {
+          success: true,
+          provider: "SMTP",
+          messageId: info.messageId
+        };
+      } catch (err) {
+        console.warn("[EMAIL] Failed sending via SMTP:", err.message);
+        return {
+          success: false,
+          error: `SMTP dispatch failed: ${err.message}`
+        };
+      }
+    }
+    return {
+      success: false,
+      error: "No live email provider is configured. Please provide RESEND_API_KEY or SMTP credentials (SMTP_HOST, SMTP_USER, SMTP_PASS) in backend/.env to send emails to users."
+    };
+  }
+};
+var emailService = EmailService.getInstance();
+
 // src/routes/authRoutes.ts
 var authRoutes = (0, import_express.Router)();
 var RegisterSchema = external_exports.object({
@@ -61603,39 +74983,32 @@ authRoutes.post("/forgot-password", async (req, res) => {
     }
     const otp = Math.floor(1e5 + Math.random() * 9e5).toString();
     db.saveOtp(email, otp, 15);
-    let emailDispatched = false;
-    if (config.resendApiKey && config.resendApiKey.startsWith("re_")) {
-      try {
-        const resp = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${config.resendApiKey}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            from: "NEXUS AI <auth@nexus.ai>",
-            to: [email],
-            subject: "Your NEXUS AI Password Reset Code",
-            html: `
-              <div style="font-family: Arial, sans-serif; padding: 24px; background: #0b1120; color: #f8fafc; border-radius: 12px;">
-                <h2 style="color: #38bdf8;">NEXUS AI Password Reset</h2>
-                <p>Hello ${user.full_name},</p>
-                <p>You requested a one-time verification code to reset your account password.</p>
-                <div style="margin: 24px 0; padding: 16px; background: #1e293b; border-radius: 8px; text-align: center;">
-                  <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #38bdf8; font-family: monospace;">${otp}</span>
-                </div>
-                <p style="color: #94a3b8; font-size: 13px;">This code expires in 15 minutes. If you did not request this, you can safely ignore this email.</p>
-              </div>
-            `
-          })
-        });
-        emailDispatched = resp.ok;
-      } catch (err) {
-        console.warn("[AUTH] Live email dispatch failed:", err);
-      }
+    const emailResult = await emailService.sendEmail({
+      to: email,
+      subject: "Your NEXUS AI Password Reset Code",
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 24px; background: #0b1120; color: #f8fafc; border-radius: 12px; max-width: 500px; margin: auto;">
+          <h2 style="color: #38bdf8; margin-top: 0;">NEXUS AI Security</h2>
+          <p>Hello ${user.full_name},</p>
+          <p>You requested a one-time verification code to reset your account password.</p>
+          <div style="margin: 24px 0; padding: 18px; background: #1e293b; border-radius: 8px; text-align: center; border: 1px solid #334155;">
+            <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #38bdf8; font-family: monospace;">${otp}</span>
+          </div>
+          <p style="color: #94a3b8; font-size: 13px;">This code expires in 15 minutes. Enter this code on the password reset screen to set your new password.</p>
+          <hr style="border: none; border-top: 1px solid #334155; margin: 20px 0;" />
+          <p style="color: #64748b; font-size: 11px;">If you did not request this, please ignore this email. Your password remains unchanged.</p>
+        </div>
+      `
+    });
+    if (!emailResult.success) {
+      console.warn("[AUTH] Live email dispatch failed:", emailResult.error);
+      return res.status(503).json({
+        error: "Unable to dispatch email: Email service is not configured. Please add RESEND_API_KEY or SMTP credentials in your server environment to deliver verification codes to user emails.",
+        details: emailResult.error
+      });
     }
     db.createNotification({
-      business_id: db.getDemoBusiness()?.id || "",
+      business_id: user.business_id || db.getDemoBusiness()?.id || "",
       title: "Password Reset OTP Dispatched",
       message: `OTP verification code dispatched to ${email}`,
       type: "SECURITY",
@@ -61643,9 +75016,7 @@ authRoutes.post("/forgot-password", async (req, res) => {
     });
     res.json({
       success: true,
-      message: emailDispatched ? "A 6-digit verification code has been dispatched to your email." : "A 6-digit verification code has been generated.",
-      // In development or when email gateway is pending, provide devOtp for instant testing
-      devOtp: !emailDispatched ? otp : void 0
+      message: "A 6-digit verification code has been dispatched to your email address."
     });
   } catch (err) {
     res.status(400).json({ error: err.message || "Failed to process password reset request." });
@@ -61721,9 +75092,9 @@ businessRoutes.get("/current", authenticateJWT, (req, res) => {
 });
 businessRoutes.put("/current", authenticateJWT, (req, res) => {
   const bizId = req.businessId || req.user?.business_id || db.getDemoBusiness()?.id || "default-biz";
-  const { name, type, currency, address, phone } = req.body;
+  const { name: name2, type, currency, address, phone } = req.body;
   const updates = {};
-  if (name !== void 0) updates.name = String(name).trim();
+  if (name2 !== void 0) updates.name = String(name2).trim();
   if (type !== void 0) updates.type = String(type).trim();
   if (currency !== void 0) updates.currency = String(currency).trim().toUpperCase();
   if (address !== void 0) updates.address = String(address).trim();
@@ -61956,8 +75327,8 @@ dashboardRoutes.get("/charts", authenticateJWT, (req, res) => {
   for (const exp of expenses) {
     categoryTotals[exp.category] = (categoryTotals[exp.category] || 0) + Number(exp.amount);
   }
-  const expenseBreakdown = Object.entries(categoryTotals).map(([name, value]) => ({
-    name,
+  const expenseBreakdown = Object.entries(categoryTotals).map(([name2, value]) => ({
+    name: name2,
     value: Math.round(value * 100) / 100
   }));
   const inventoryCategoryMap = {};
@@ -64859,8 +78230,8 @@ var ToolRegistry = class _ToolRegistry {
   register(tool) {
     this.tools.set(tool.name, tool);
   }
-  getTool(name) {
-    return this.tools.get(name);
+  getTool(name2) {
+    return this.tools.get(name2);
   }
   getAllTools() {
     return Array.from(this.tools.values());
@@ -64868,12 +78239,12 @@ var ToolRegistry = class _ToolRegistry {
   getGeminiFunctionDeclarations() {
     return Array.from(this.tools.values()).map((t) => t.geminiFunctionDeclaration);
   }
-  async executeTool(name, rawInput, context) {
-    const tool = this.tools.get(name);
+  async executeTool(name2, rawInput, context) {
+    const tool = this.tools.get(name2);
     if (!tool) {
       return {
         success: false,
-        error: `Tool "${name}" is not registered in the NEXUS AI tool registry.`,
+        error: `Tool "${name2}" is not registered in the NEXUS AI tool registry.`,
         durationMs: 0
       };
     }
@@ -64881,7 +78252,7 @@ var ToolRegistry = class _ToolRegistry {
     try {
       const validatedInput = tool.inputSchema.parse(rawInput);
       const timeoutPromise = new Promise(
-        (_, reject) => setTimeout(() => reject(new Error(`Tool ${name} timed out after 15,000ms.`)), 15e3)
+        (_, reject) => setTimeout(() => reject(new Error(`Tool ${name2} timed out after 15,000ms.`)), 15e3)
       );
       const outputPromise = tool.execute(validatedInput, context);
       const rawOutput = await Promise.race([outputPromise, timeoutPromise]);
@@ -64891,7 +78262,7 @@ var ToolRegistry = class _ToolRegistry {
         db.recordToolExecution({
           run_id: context.runId,
           step_id: context.stepId,
-          tool_name: name,
+          tool_name: name2,
           input: validatedInput,
           output: validatedOutput,
           status: "SUCCESS",
@@ -64910,14 +78281,14 @@ var ToolRegistry = class _ToolRegistry {
         db.recordToolExecution({
           run_id: context.runId,
           step_id: context.stepId,
-          tool_name: name,
+          tool_name: name2,
           input: rawInput,
           status: "ERROR",
           duration_ms: durationMs,
           error_message: errorMessage
         });
       }
-      console.error(`[TOOL_REGISTRY] Error executing ${name}:`, err);
+      console.error(`[TOOL_REGISTRY] Error executing ${name2}:`, err);
       return {
         success: false,
         error: errorMessage,
@@ -65414,9 +78785,9 @@ toolRoutes.get("/", authenticateJWT, (_req, res) => {
   res.json({ tools, count: tools.length });
 });
 toolRoutes.post("/:name/execute", authenticateJWT, requireRole(["ADMIN", "MANAGER"]), async (req, res) => {
-  const { name } = req.params;
+  const { name: name2 } = req.params;
   const businessId = req.businessId || db.getDemoBusiness()?.id || "";
-  const result = await toolRegistry.executeTool(name, req.body, {
+  const result = await toolRegistry.executeTool(name2, req.body, {
     businessId,
     userId: req.user?.id,
     agentName: "MANUAL_API_TESTER"
@@ -66171,18 +79542,18 @@ function _objectSpread2(e) {
   return e;
 }
 function sleep(ms, signal) {
-  return new Promise((resolve) => {
+  return new Promise((resolve3) => {
     if (signal === null || signal === void 0 ? void 0 : signal.aborted) {
-      resolve();
+      resolve3();
       return;
     }
     const id = setTimeout(() => {
       signal === null || signal === void 0 || signal.removeEventListener("abort", onAbort);
-      resolve();
+      resolve3();
     }, ms);
     function onAbort() {
       clearTimeout(id);
-      resolve();
+      resolve3();
     }
     signal === null || signal === void 0 || signal.addEventListener("abort", onAbort);
   });
@@ -66356,9 +79727,9 @@ var PostgrestBuilder = class {
   * @category Database
   * @subcategory Using modifiers
   */
-  setHeader(name, value) {
+  setHeader(name2, value) {
     this.headers = new Headers(this.headers);
-    this.headers.set(name, value);
+    this.headers.set(name2, value);
     return this;
   }
   /**
@@ -66464,7 +79835,7 @@ ${cause.stack}`;
   */
   async processResponse(res) {
     var _this2 = this;
-    let error = null;
+    let error2 = null;
     let data = null;
     let count = null;
     let status = res.status;
@@ -66480,7 +79851,7 @@ ${cause.stack}`;
         else try {
           data = JSON.parse(body);
         } catch (_unused) {
-          error = { message: body };
+          error2 = { message: body };
           data = null;
           if (_this2.shouldThrowOnError) throw new PostgrestError({
             message: body,
@@ -66494,7 +79865,7 @@ ${cause.stack}`;
       const contentRange = (_res$headers$get = res.headers.get("content-range")) === null || _res$headers$get === void 0 ? void 0 : _res$headers$get.split("/");
       if (countHeader && contentRange && contentRange.length > 1) count = parseInt(contentRange[1]);
       if (_this2.isMaybeSingle && Array.isArray(data)) if (data.length > 1) {
-        error = {
+        error2 = {
           code: "PGRST116",
           details: `Results contain ${data.length} rows, application/vnd.pgrst.object+json requires 1 row`,
           hint: null,
@@ -66506,17 +79877,17 @@ ${cause.stack}`;
         statusText = "Not Acceptable";
         if (_this2.shouldThrowOnError) {
           var _error$hint;
-          throw new PostgrestError(_objectSpread2(_objectSpread2({}, error), {}, { hint: (_error$hint = error.hint) !== null && _error$hint !== void 0 ? _error$hint : "" }));
+          throw new PostgrestError(_objectSpread2(_objectSpread2({}, error2), {}, { hint: (_error$hint = error2.hint) !== null && _error$hint !== void 0 ? _error$hint : "" }));
         }
       } else if (data.length === 1) data = data[0];
       else data = null;
     } else {
       const body = await res.text();
       try {
-        error = JSON.parse(body);
-        if (Array.isArray(error) && res.status === 404) {
+        error2 = JSON.parse(body);
+        if (Array.isArray(error2) && res.status === 404) {
           data = [];
-          error = null;
+          error2 = null;
           status = 200;
           statusText = "OK";
         }
@@ -66524,13 +79895,13 @@ ${cause.stack}`;
         if (res.status === 404 && body === "") {
           status = 204;
           statusText = "No Content";
-        } else error = { message: body };
+        } else error2 = { message: body };
       }
-      if (error && _this2.shouldThrowOnError) throw new PostgrestError(error);
+      if (error2 && _this2.shouldThrowOnError) throw new PostgrestError(error2);
     }
     return {
-      success: error === null,
-      error,
+      success: error2 === null,
+      error: error2,
       data,
       count,
       status,
@@ -69976,8 +83347,8 @@ var PostgrestClient = class PostgrestClient2 {
       body = args;
     } else if (head2 || get2) {
       method = head2 ? "HEAD" : "GET";
-      Object.entries(args).filter(([_, value]) => value !== void 0).map(([name, value]) => [name, Array.isArray(value) ? `{${value.join(",")}}` : `${value}`]).forEach(([name, value]) => {
-        url.searchParams.append(name, value);
+      Object.entries(args).filter(([_, value]) => value !== void 0).map(([name2, value]) => [name2, Array.isArray(value) ? `{${value.join(",")}}` : `${value}`]).forEach(([name2, value]) => {
+        url.searchParams.append(name2, value);
       });
     } else {
       method = "POST";
@@ -70032,8 +83403,8 @@ var IcebergError = class extends Error {
     return this.status === 419;
   }
 };
-function buildUrl(baseUrl, path7, query) {
-  const url = new URL(path7, baseUrl);
+function buildUrl(baseUrl, path9, query) {
+  const url = new URL(path9, baseUrl);
   if (query) {
     for (const [key, value] of Object.entries(query)) {
       if (value !== void 0) {
@@ -70063,12 +83434,12 @@ function createFetchClient(options) {
   return {
     async request({
       method,
-      path: path7,
+      path: path9,
       query,
       body,
       headers
     }) {
-      const url = buildUrl(options.baseUrl, path7, query);
+      const url = buildUrl(options.baseUrl, path9, query);
       const authHeaders = await buildAuthHeaders(options.auth);
       const res = await fetchFn(url, {
         method,
@@ -70150,21 +83521,21 @@ var NamespaceOperations = class {
         path: `${this.prefix}/namespaces/${namespaceToPath(id.namespace)}`
       });
       return true;
-    } catch (error) {
-      if (error instanceof IcebergError && error.status === 404) {
+    } catch (error2) {
+      if (error2 instanceof IcebergError && error2.status === 404) {
         return false;
       }
-      throw error;
+      throw error2;
     }
   }
   async createNamespaceIfNotExists(id, metadata) {
     try {
       return await this.createNamespace(id, metadata);
-    } catch (error) {
-      if (error instanceof IcebergError && error.status === 409) {
+    } catch (error2) {
+      if (error2 instanceof IcebergError && error2.status === 409) {
         return;
       }
-      throw error;
+      throw error2;
     }
   }
 };
@@ -70239,21 +83610,21 @@ var TableOperations = class {
         headers
       });
       return true;
-    } catch (error) {
-      if (error instanceof IcebergError && error.status === 404) {
+    } catch (error2) {
+      if (error2 instanceof IcebergError && error2.status === 404) {
         return false;
       }
-      throw error;
+      throw error2;
     }
   }
   async createTableIfNotExists(namespace, request) {
     try {
       return await this.createTable(namespace, request);
-    } catch (error) {
-      if (error instanceof IcebergError && error.status === 409) {
+    } catch (error2) {
+      if (error2 instanceof IcebergError && error2.status === 409) {
         return await this.loadTable({ namespace: namespace.namespace, name: request.name });
       }
-      throw error;
+      throw error2;
     }
   }
 };
@@ -70605,8 +83976,8 @@ var StorageError = class extends Error {
     };
   }
 };
-function isStorageError(error) {
-  return typeof error === "object" && error !== null && "__isStorageError" in error;
+function isStorageError(error2) {
+  return typeof error2 === "object" && error2 !== null && "__isStorageError" in error2;
 }
 var StorageApiError = class extends StorageError {
   constructor(message, status, statusCode, namespace = "storage", code) {
@@ -70627,9 +83998,9 @@ var StorageUnknownError = class extends StorageError {
     this.originalError = originalError;
   }
 };
-function setHeader(headers, name, value) {
+function setHeader(headers, name2, value) {
   const result = _objectSpread22({}, headers);
-  const nameLower = name.toLowerCase();
+  const nameLower = name2.toLowerCase();
   for (const key of Object.keys(result)) if (key.toLowerCase() === nameLower) delete result[key];
   result[nameLower] = value;
   return result;
@@ -70665,7 +84036,7 @@ var isValidBucketName = (bucketName) => {
   if (bucketName.includes("/") || bucketName.includes("\\")) return false;
   return /^[\w!.\*'() &$@=;:+,?-]+$/.test(bucketName);
 };
-var encodeStoragePath = (path7) => path7.split("/").map(encodeURIComponent).join("/");
+var encodeStoragePath = (path9) => path9.split("/").map(encodeURIComponent).join("/");
 var _getErrorMessage = (err) => {
   if (typeof err === "object" && err !== null) {
     const e = err;
@@ -70680,9 +84051,9 @@ var _getErrorMessage = (err) => {
   }
   return JSON.stringify(err);
 };
-var handleError = async (error, reject, options, namespace) => {
-  if (error !== null && typeof error === "object" && "json" in error && typeof error.json === "function") {
-    const responseError = error;
+var handleError = async (error2, reject, options, namespace) => {
+  if (error2 !== null && typeof error2 === "object" && "json" in error2 && typeof error2.json === "function") {
+    const responseError = error2;
     let status = parseInt(String(responseError.status), 10);
     if (!Number.isFinite(status)) status = 500;
     responseError.json().then((err) => {
@@ -70692,7 +84063,7 @@ var handleError = async (error, reject, options, namespace) => {
       const statusCode = status + "";
       reject(new StorageApiError(responseError.statusText || `HTTP ${status} error`, status, statusCode, namespace));
     });
-  } else reject(new StorageUnknownError(_getErrorMessage(error), error, namespace));
+  } else reject(new StorageUnknownError(_getErrorMessage(error2), error2, namespace));
 };
 var _getRequestParams = (method, options, parameters, body) => {
   const params = {
@@ -70712,7 +84083,7 @@ var _getRequestParams = (method, options, parameters, body) => {
   return _objectSpread22(_objectSpread22({}, params), parameters);
 };
 async function _handleRequest(fetcher, method, url, options, parameters, body, namespace) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve3, reject) => {
     fetcher(url, _getRequestParams(method, options, parameters, body)).then((result) => {
       if (!result.ok) throw result;
       if (options === null || options === void 0 ? void 0 : options.noResolveJson) return result;
@@ -70722,7 +84093,7 @@ async function _handleRequest(fetcher, method, url, options, parameters, body, n
         if (!contentType || !contentType.includes("application/json")) return {};
       }
       return result.json();
-    }).then((data) => resolve(data)).catch((error) => handleError(error, reject, options, namespace));
+    }).then((data) => resolve3(data)).catch((error2) => handleError(error2, reject, options, namespace));
   });
 }
 function createFetchApi(namespace = "storage") {
@@ -70780,8 +84151,8 @@ var BaseApiClient = class {
   * @param value - Header value
   * @returns this - For method chaining
   */
-  setHeader(name, value) {
-    this.headers = setHeader(this.headers, name, value);
+  setHeader(name2, value) {
+    this.headers = setHeader(this.headers, name2, value);
     return this;
   }
   /**
@@ -70816,13 +84187,13 @@ var BaseApiClient = class {
         data: await operation(),
         error: null
       };
-    } catch (error) {
-      if (_this.shouldThrowOnError) throw error;
-      if (isStorageError(error)) return {
+    } catch (error2) {
+      if (_this.shouldThrowOnError) throw error2;
+      if (isStorageError(error2)) return {
         data: null,
-        error
+        error: error2
       };
-      throw error;
+      throw error2;
     }
   }
 };
@@ -70855,13 +84226,13 @@ var StreamDownloadBuilder = class {
         data: (await _this.downloadFn()).body,
         error: null
       };
-    } catch (error) {
-      if (_this.shouldThrowOnError) throw error;
-      if (isStorageError(error)) return {
+    } catch (error2) {
+      if (_this.shouldThrowOnError) throw error2;
+      if (isStorageError(error2)) return {
         data: null,
-        error
+        error: error2
       };
-      throw error;
+      throw error2;
     }
   }
 };
@@ -70897,13 +84268,13 @@ var BlobDownloadBuilder = class {
         data: await (await _this.downloadFn()).blob(),
         error: null
       };
-    } catch (error) {
-      if (_this.shouldThrowOnError) throw error;
-      if (isStorageError(error)) return {
+    } catch (error2) {
+      if (_this.shouldThrowOnError) throw error2;
+      if (isStorageError(error2)) return {
         data: null,
-        error
+        error: error2
       };
-      throw error;
+      throw error2;
     }
   }
 };
@@ -70942,7 +84313,7 @@ var StorageFileApi = class extends BaseApiClient {
   * @param path The relative file path. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to upload.
   * @param fileBody The body of the file to be stored in the bucket.
   */
-  async uploadOrUpdate(method, path7, fileBody, fileOptions) {
+  async uploadOrUpdate(method, path9, fileBody, fileOptions) {
     var _this = this;
     return _this.handleOperation(async () => {
       let body;
@@ -70959,7 +84330,7 @@ var StorageFileApi = class extends BaseApiClient {
         if ((typeof ReadableStream !== "undefined" && body instanceof ReadableStream || body && typeof body === "object" && "pipe" in body && typeof body.pipe === "function") && !options.duplex) options.duplex = "half";
       }
       if (fileOptions === null || fileOptions === void 0 ? void 0 : fileOptions.headers) for (const [key, value] of Object.entries(fileOptions.headers)) headers = setHeader(headers, key, value);
-      const cleanPath = _this._removeEmptyFolders(path7);
+      const cleanPath = _this._removeEmptyFolders(path9);
       const data = await (method == "PUT" ? put : post)(_this.fetch, _this._getRequestUrl("object", cleanPath), body, _objectSpread22({ headers }, (options === null || options === void 0 ? void 0 : options.duplex) ? { duplex: options.duplex } : {}));
       return {
         path: cleanPath,
@@ -71035,8 +84406,8 @@ var StorageFileApi = class extends BaseApiClient {
   * - Refer to the [Storage guide](/docs/guides/storage/security/access-control) on how access control works
   * - For React Native, using either `Blob`, `File` or `FormData` does not work as intended. Upload file using `ArrayBuffer` from base64 file data instead, see example below.
   */
-  async upload(path7, fileBody, fileOptions) {
-    return this.uploadOrUpdate("POST", path7, fileBody, fileOptions);
+  async upload(path9, fileBody, fileOptions) {
+    return this.uploadOrUpdate("POST", path9, fileBody, fileOptions);
   }
   /**
   * Upload a file with a token generated from `createSignedUploadUrl`.
@@ -71076,9 +84447,9 @@ var StorageFileApi = class extends BaseApiClient {
   *   - `objects` table permissions: none
   * - Refer to the [Storage guide](/docs/guides/storage/security/access-control) on how access control works
   */
-  async uploadToSignedUrl(path7, token, fileBody, fileOptions) {
+  async uploadToSignedUrl(path9, token, fileBody, fileOptions) {
     var _this3 = this;
-    const cleanPath = _this3._removeEmptyFolders(path7);
+    const cleanPath = _this3._removeEmptyFolders(path9);
     return _this3.handleOperation(async () => {
       const url = new URL(_this3._getRequestUrl("object/upload/sign", cleanPath));
       url.searchParams.set("token", token);
@@ -71139,18 +84510,18 @@ var StorageFileApi = class extends BaseApiClient {
   *   - `objects` table permissions: `insert`
   * - Refer to the [Storage guide](/docs/guides/storage/security/access-control) on how access control works
   */
-  async createSignedUploadUrl(path7, options) {
+  async createSignedUploadUrl(path9, options) {
     var _this4 = this;
     return _this4.handleOperation(async () => {
       const headers = _objectSpread22({}, _this4.headers);
       if (options === null || options === void 0 ? void 0 : options.upsert) headers["x-upsert"] = "true";
-      const data = await post(_this4.fetch, _this4._getRequestUrl("object/upload/sign", path7), {}, { headers });
+      const data = await post(_this4.fetch, _this4._getRequestUrl("object/upload/sign", path9), {}, { headers });
       const url = new URL(_this4.url + data.url);
       const token = url.searchParams.get("token");
       if (!token) throw new StorageError("No token returned by API");
       return {
         signedUrl: url.toString(),
-        path: path7,
+        path: path9,
         token
       };
     });
@@ -71210,8 +84581,8 @@ var StorageFileApi = class extends BaseApiClient {
   * - Refer to the [Storage guide](/docs/guides/storage/security/access-control) on how access control works
   * - For React Native, using either `Blob`, `File` or `FormData` does not work as intended. Update file using `ArrayBuffer` from base64 file data instead, see example below.
   */
-  async update(path7, fileBody, fileOptions) {
-    return this.uploadOrUpdate("PUT", path7, fileBody, fileOptions);
+  async update(path9, fileBody, fileOptions) {
+    return this.uploadOrUpdate("PUT", path9, fileBody, fileOptions);
   }
   /**
   * Moves an existing file to a new path in the same bucket.
@@ -71384,11 +84755,11 @@ var StorageFileApi = class extends BaseApiClient {
   *   - `objects` table permissions: `select`
   * - Refer to the [Storage guide](/docs/guides/storage/security/access-control) on how access control works
   */
-  async createSignedUrl(path7, expiresIn, options) {
+  async createSignedUrl(path9, expiresIn, options) {
     var _this8 = this;
     return _this8.handleOperation(async () => {
       const hasTransform = typeof (options === null || options === void 0 ? void 0 : options.transform) === "object" && options.transform !== null && Object.keys(options.transform).length > 0;
-      let data = await post(_this8.fetch, _this8._getRequestUrl("object/sign", path7), _objectSpread22(_objectSpread22({ expiresIn }, hasTransform ? { transform: options.transform } : {}), (options === null || options === void 0 ? void 0 : options.versionId) != null ? { versionId: options.versionId } : {}), { headers: _this8.headers });
+      let data = await post(_this8.fetch, _this8._getRequestUrl("object/sign", path9), _objectSpread22(_objectSpread22({ expiresIn }, hasTransform ? { transform: options.transform } : {}), (options === null || options === void 0 ? void 0 : options.versionId) != null ? { versionId: options.versionId } : {}), { headers: _this8.headers });
       const query = new URLSearchParams();
       if (options === null || options === void 0 ? void 0 : options.download) query.set("download", options.download === true ? "" : options.download);
       if ((options === null || options === void 0 ? void 0 : options.cacheNonce) != null) query.set("cacheNonce", String(options.cacheNonce));
@@ -71521,14 +84892,14 @@ var StorageFileApi = class extends BaseApiClient {
   *   - `objects` table permissions: `select`
   * - Refer to the [Storage guide](/docs/guides/storage/security/access-control) on how access control works
   */
-  download(path7, options, parameters) {
+  download(path9, options, parameters) {
     const renderPath = typeof (options === null || options === void 0 ? void 0 : options.transform) === "object" && options.transform !== null && Object.keys(options.transform).length > 0 ? "render/image/authenticated" : "object";
     const query = new URLSearchParams();
     if (options === null || options === void 0 ? void 0 : options.transform) this.applyTransformOptsToQuery(query, options.transform);
     if ((options === null || options === void 0 ? void 0 : options.cacheNonce) != null) query.set("cacheNonce", String(options.cacheNonce));
     if ((options === null || options === void 0 ? void 0 : options.versionId) != null) query.set("versionId", String(options.versionId));
     const queryString = query.toString();
-    const downloadFn = () => get(this.fetch, this._getRequestUrl(renderPath, path7, { queryString }), {
+    const downloadFn = () => get(this.fetch, this._getRequestUrl(renderPath, path9, { queryString }), {
       headers: this.headers,
       noResolveJson: true
     }, parameters);
@@ -71559,13 +84930,13 @@ var StorageFileApi = class extends BaseApiClient {
   * }
   * ```
   */
-  async info(path7, options) {
+  async info(path9, options) {
     var _this10 = this;
     const query = new URLSearchParams();
     if ((options === null || options === void 0 ? void 0 : options.versionId) != null) query.set("versionId", String(options.versionId));
     const queryString = query.toString();
     return _this10.handleOperation(async () => {
-      return recursiveToCamel(await get(_this10.fetch, _this10._getRequestUrl("object/info", path7, { queryString }), { headers: _this10.headers }));
+      return recursiveToCamel(await get(_this10.fetch, _this10._getRequestUrl("object/info", path9, { queryString }), { headers: _this10.headers }));
     });
   }
   /**
@@ -71592,17 +84963,17 @@ var StorageFileApi = class extends BaseApiClient {
   *   .exists('folder/avatar1.png')
   * ```
   */
-  async exists(path7) {
-    const { error } = await this.info(path7);
-    if (!error) return {
+  async exists(path9) {
+    const { error: error2 } = await this.info(path9);
+    if (!error2) return {
       data: true,
       error: null
     };
-    if (error instanceof StorageApiError && (error.code === "NoSuchKey" || error.status === 404 && error.code === void 0)) return {
+    if (error2 instanceof StorageApiError && (error2.code === "NoSuchKey" || error2.status === 404 && error2.code === void 0)) return {
       data: false,
-      error
+      error: error2
     };
-    throw error;
+    throw error2;
   }
   /**
   * A simple convenience function to get the URL for an asset in a public bucket. If you do not want to use this function, you can construct the public URL by concatenating the bucket URL with the path to the asset.
@@ -71664,8 +85035,8 @@ var StorageFileApi = class extends BaseApiClient {
   *   - `objects` table permissions: none
   * - Refer to the [Storage guide](/docs/guides/storage/security/access-control) on how access control works
   */
-  getPublicUrl(path7, options) {
-    const _path = this._getFinalPath(path7);
+  getPublicUrl(path9, options) {
+    const _path = this._getFinalPath(path9);
     const query = new URLSearchParams();
     if (options === null || options === void 0 ? void 0 : options.download) query.set("download", options.download === true ? "" : options.download);
     if (options === null || options === void 0 ? void 0 : options.transform) this.applyTransformOptsToQuery(query, options.transform);
@@ -71765,13 +85136,13 @@ var StorageFileApi = class extends BaseApiClient {
   *   .purgeCache('folder/avatar1.png', { transformations: true })
   * ```
   */
-  async purgeCache(path7, options, parameters) {
+  async purgeCache(path9, options, parameters) {
     var _this13 = this;
     return _this13.handleOperation(async () => {
       const query = new URLSearchParams();
       if (options === null || options === void 0 ? void 0 : options.transformations) query.set("transformations", "true");
       const queryString = query.toString();
-      return await remove(_this13.fetch, _this13._getRequestUrl("cdn", path7, {
+      return await remove(_this13.fetch, _this13._getRequestUrl("cdn", path9, {
         encodePath: true,
         queryString
       }), {}, { headers: _this13.headers }, parameters);
@@ -71868,13 +85239,13 @@ var StorageFileApi = class extends BaseApiClient {
   *   - `objects` table permissions: `select`
   * - Refer to the [Storage guide](/docs/guides/storage/security/access-control) on how access control works
   */
-  async list(path7, options, parameters) {
+  async list(path9, options, parameters) {
     var _this14 = this;
     return _this14.handleOperation(async () => {
       const sortBy = (options === null || options === void 0 ? void 0 : options.sortBy) ? _objectSpread22(_objectSpread22({}, DEFAULT_SEARCH_OPTIONS.sortBy), options.sortBy) : DEFAULT_SEARCH_OPTIONS.sortBy;
       const body = _objectSpread22(_objectSpread22(_objectSpread22({}, DEFAULT_SEARCH_OPTIONS), options), {}, {
         sortBy,
-        prefix: path7 || ""
+        prefix: path9 || ""
       });
       return await post(_this14.fetch, `${_this14.url}/object/list/${_this14.bucketId}`, body, { headers: _this14.headers }, parameters);
     });
@@ -71936,15 +85307,15 @@ var StorageFileApi = class extends BaseApiClient {
   prepareUploadFormData(fileBody, options) {
     const body = new FormData();
     const files = [];
-    if (fileBody instanceof FormData) fileBody.forEach((value, name) => {
-      if (typeof value === "string") body.append(name, value);
-      else files.push([name, value]);
+    if (fileBody instanceof FormData) fileBody.forEach((value, name2) => {
+      if (typeof value === "string") body.append(name2, value);
+      else files.push([name2, value]);
     });
     else files.push(["", fileBody]);
     if (!body.has("cacheControl")) body.append("cacheControl", options.cacheControl);
     if (options.metadata && !body.has("metadata")) body.append("metadata", this.encodeMetadata(options.metadata));
     if (options.contentEncoding && !body.has("contentEncoding")) body.append("contentEncoding", options.contentEncoding);
-    for (const [name, file] of files) body.append(name, file);
+    for (const [name2, file] of files) body.append(name2, file);
     return body;
   }
   encodeMetadata(metadata) {
@@ -71955,8 +85326,8 @@ var StorageFileApi = class extends BaseApiClient {
     return btoa(data);
   }
   /** Builds a request URL and checks that it stays within the intended Storage route and bucket. */
-  _getRequestUrl(route, path7, { encodePath = false, queryString = "" } = {}) {
-    const finalPath = this._getFinalPath(path7);
+  _getRequestUrl(route, path9, { encodePath = false, queryString = "" } = {}) {
+    const finalPath = this._getFinalPath(path9);
     const bucket = encodePath ? encodeStoragePath(String(this.bucketId)) : this.bucketId;
     const url = `${this.url}/${route}/${encodePath ? encodeStoragePath(finalPath) : finalPath}${queryString ? `?${queryString}` : ""}`;
     const routeUrl = new URL(`${this.url}/${route}/`);
@@ -71968,11 +85339,11 @@ var StorageFileApi = class extends BaseApiClient {
     }
     return validateStorageUrl(requestUrl, bucketUrl);
   }
-  _getFinalPath(path7) {
-    return `${this.bucketId}/${path7.replace(/^\/+/, "")}`;
+  _getFinalPath(path9) {
+    return `${this.bucketId}/${path9.replace(/^\/+/, "")}`;
   }
-  _removeEmptyFolders(path7) {
-    return path7.replace(/^\/|\/$/g, "").replace(/\/+/g, "/");
+  _removeEmptyFolders(path9) {
+    return path9.replace(/^\/|\/$/g, "").replace(/\/+/g, "/");
   }
   /** Modifies the `query`, appending values the from `transform` */
   applyTransformOptsToQuery(query, transform) {
@@ -71984,8 +85355,8 @@ var StorageFileApi = class extends BaseApiClient {
     return query;
   }
 };
-var version = "2.119.2";
-var DEFAULT_HEADERS = { "X-Client-Info": `storage-js/${version}` };
+var version2 = "2.119.2";
+var DEFAULT_HEADERS = { "X-Client-Info": `storage-js/${version2}` };
 var StorageBucketApi = class extends BaseApiClient {
   constructor(url, headers = {}, fetch$1, opts) {
     const baseUrl = new URL(url);
@@ -72560,10 +85931,10 @@ var StorageAnalyticsClient = class extends BaseApiClient {
   * - Creates a new analytics bucket using Iceberg tables
   * - Analytics buckets are optimized for analytical queries and data processing
   */
-  async createBucket(name) {
+  async createBucket(name2) {
     var _this = this;
     return _this.handleOperation(async () => {
-      return await post(_this.fetch, `${_this.url}/bucket`, { name }, { headers: _this.headers });
+      return await post(_this.fetch, `${_this.url}/bucket`, { name: name2 }, { headers: _this.headers });
     });
   }
   /**
@@ -72818,11 +86189,11 @@ var StorageAnalyticsClient = class extends BaseApiClient {
             data: await value.apply(target, args),
             error: null
           };
-        } catch (error) {
-          if (shouldThrowOnError) throw error;
+        } catch (error2) {
+          if (shouldThrowOnError) throw error2;
           return {
             data: null,
-            error
+            error: error2
           };
         }
       };
@@ -73545,7 +86916,7 @@ var StorageClient = class extends StorageBucketApi {
 var import_auth_js = __toESM(require_main4(), 1);
 __reExport(dist_exports, __toESM(require_main3(), 1));
 __reExport(dist_exports, __toESM(require_main4(), 1));
-var version2 = "2.119.2";
+var version3 = "2.119.2";
 function _typeof3(o) {
   "@babel/helpers - typeof";
   return _typeof3 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
@@ -73654,7 +87025,7 @@ function formatClientEnvironment(environment) {
     ["framework-version", environment.frameworkVersion]
   ].filter(([, value]) => value).map(([key, value]) => `${key}=${value}`);
 }
-var DEFAULT_HEADERS2 = { "X-Client-Info": [`supabase-js/${version2}`, ...formatClientEnvironment(detectClientEnvironment())].join("; ") };
+var DEFAULT_HEADERS2 = { "X-Client-Info": [`supabase-js/${version3}`, ...formatClientEnvironment(detectClientEnvironment())].join("; ") };
 var DEFAULT_GLOBAL_OPTIONS = { headers: DEFAULT_HEADERS2 };
 var DEFAULT_DB_OPTIONS = { schema: "public" };
 var DEFAULT_AUTH_OPTIONS = {
@@ -73691,7 +87062,7 @@ function shouldPropagateToTarget(targetUrl, targets) {
   if (targetUrl instanceof URL) url = targetUrl;
   else try {
     url = new URL(targetUrl);
-  } catch (error) {
+  } catch (error2) {
     return false;
   }
   for (const target of targets) try {
@@ -73702,7 +87073,7 @@ function shouldPropagateToTarget(targetUrl, targets) {
     } else if (typeof target === "function") {
       if (target(url)) return true;
     }
-  } catch (error) {
+  } catch (error2) {
     continue;
   }
   return false;
@@ -73722,7 +87093,7 @@ function getDefaultPropagationTargets(supabaseUrl) {
   try {
     const url = new URL(supabaseUrl);
     targets.push(url.hostname);
-  } catch (error) {
+  } catch (error2) {
   }
   targets.push("*.supabase.co", "*.supabase.in");
   targets.push("localhost", "127.0.0.1", "[::1]");
@@ -74215,8 +87586,8 @@ var SupabaseClient = class {
   *
   * @category Realtime
   */
-  channel(name, opts = { config: {} }) {
-    return this.realtime.channel(name, opts);
+  channel(name2, opts = { config: {} }) {
+    return this.realtime.channel(name2, opts);
   }
   /**
   * Returns all Realtime channels.
@@ -74419,19 +87790,19 @@ var SupabaseService = class _SupabaseService {
       const testClient = createClient(testUrl, testKey, {
         auth: { persistSession: false }
       });
-      const { data, error } = await testClient.from("businesses").select("id, name").limit(1);
-      if (error) {
-        if (error.code === "42P01" || error.message.includes('relation "businesses" does not exist') || error.code === "PGRST204") {
+      const { data, error: error2 } = await testClient.from("businesses").select("id, name").limit(1);
+      if (error2) {
+        if (error2.code === "42P01" || error2.message.includes('relation "businesses" does not exist') || error2.code === "PGRST204") {
           return {
             success: true,
             message: "Connected to Supabase project successfully! Note: Tables are not yet created. Run the SQL Migration to initialize schema.",
-            details: { schemaNeeded: true, code: error.code }
+            details: { schemaNeeded: true, code: error2.code }
           };
         }
         return {
           success: false,
-          message: `Supabase returned error: ${error.message} (${error.code || "UNKNOWN"})`,
-          details: error
+          message: `Supabase returned error: ${error2.message} (${error2.code || "UNKNOWN"})`,
+          details: error2
         };
       }
       return {

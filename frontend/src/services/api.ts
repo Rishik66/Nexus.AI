@@ -98,89 +98,20 @@ export interface Approval {
 export const ApiService = {
   // Auth
   login: async (email: string, password: string) => {
-    try {
-      const res = await api.post('/auth/login', { email, password });
-      return res.data;
-    } catch (err: any) {
-      // If network is offline or server 5xx error, provide resilient session
-      if (!err.response || err.response.status >= 500) {
-        console.warn('Backend unavailable/cold start, creating resilient session:', err);
-        const namePart = (email || 'user').split('@')[0];
-        const formatted = namePart.charAt(0).toUpperCase() + namePart.slice(1);
-        return {
-          token: 'nexus_session_' + Date.now(),
-          user: {
-            id: 'usr_' + Date.now(),
-            email,
-            full_name: formatted,
-            role: 'ADMIN' as const,
-          },
-          business: {
-            id: 'biz_' + Date.now(),
-            name: `${formatted}'s Enterprise`,
-            type: 'TECHNOLOGY',
-            currency: 'USD',
-            is_demo: false,
-          },
-        };
-      }
-      throw err;
-    }
+    const res = await api.post('/auth/login', { email, password });
+    return res.data;
   },
   register: async (payload: { email: string; password: string; full_name: string; company_name?: string; role?: string }) => {
-    try {
-      const res = await api.post('/auth/register', payload);
-      return res.data;
-    } catch (err: any) {
-      if (!err.response || err.response.status >= 500) {
-        console.warn('Backend unavailable/cold start, creating resilient session:', err);
-        const orgName = payload.company_name?.trim() || `${payload.full_name}'s Enterprise`;
-        return {
-          token: 'nexus_session_' + Date.now(),
-          user: {
-            id: 'usr_' + Date.now(),
-            email: payload.email,
-            full_name: payload.full_name,
-            role: (payload.role as any) || 'ADMIN',
-          },
-          business: {
-            id: 'biz_' + Date.now(),
-            name: orgName,
-            type: 'TECHNOLOGY',
-            currency: 'USD',
-            is_demo: false,
-          },
-        };
-      }
-      throw err;
-    }
+    const res = await api.post('/auth/register', payload);
+    return res.data;
   },
-  forgotPassword: async (email: string): Promise<{ success: boolean; message: string; devOtp?: string }> => {
-    try {
-      const res = await api.post('/auth/forgot-password', { email });
-      return res.data;
-    } catch (err: any) {
-      if (!err.response || err.response.status >= 500) {
-        const devOtp = Math.floor(100000 + Math.random() * 900000).toString();
-        return {
-          success: true,
-          message: 'Verification code generated.',
-          devOtp,
-        };
-      }
-      throw err;
-    }
+  forgotPassword: async (email: string): Promise<{ success: boolean; message: string }> => {
+    const res = await api.post('/auth/forgot-password', { email });
+    return res.data;
   },
   resetPassword: async (payload: { email: string; otp: string; new_password: string }) => {
-    try {
-      const res = await api.post('/auth/reset-password', payload);
-      return res.data;
-    } catch (err: any) {
-      if (!err.response || err.response.status >= 500) {
-        return { success: true, message: 'Password reset successfully!' };
-      }
-      throw err;
-    }
+    const res = await api.post('/auth/reset-password', payload);
+    return res.data;
   },
   getMe: async () => {
     try {

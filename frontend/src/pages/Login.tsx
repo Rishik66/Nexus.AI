@@ -43,7 +43,6 @@ export const Login: React.FC = () => {
   const [otpCode, setOtpCode] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [devOtpCode, setDevOtpCode] = useState<string | null>(null);
 
   // Feedback states
   const [loading, setLoading] = useState(false);
@@ -86,7 +85,13 @@ export const Login: React.FC = () => {
       const target = from && from !== '/login' && from !== '/' ? from : '/command-center';
       navigate(target, { replace: true });
     } catch (err: any) {
-      const msg = err.response?.data?.error || err.response?.data?.message || err.message || 'Invalid email or password.';
+      const msg =
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        (err.message === 'Network Error'
+          ? 'Unable to reach backend server. Please verify your connection or ensure backend is running.'
+          : err.message) ||
+        'Invalid email or password.';
       setError(msg);
       setLoading(false);
     }
@@ -132,14 +137,11 @@ export const Login: React.FC = () => {
       setError(null);
       setSuccessMessage(null);
       const res = await ApiService.forgotPassword(email.trim());
-      setSuccessMessage(res.message || 'Verification code sent.');
-      if (res.devOtp) {
-        setDevOtpCode(res.devOtp);
-        setOtpCode(res.devOtp); // auto-fill for convenience
-      }
+      setSuccessMessage(res.message || 'A 6-digit verification code has been dispatched to your email.');
+      setOtpCode(''); // user must input the code received in email
       setOtpStep('VERIFY');
     } catch (err: any) {
-      const msg = err.response?.data?.error || err.message || 'Failed to dispatch verification code.';
+      const msg = err.response?.data?.error || err.response?.data?.message || err.message || 'Failed to dispatch verification code.';
       setError(msg);
     } finally {
       setLoading(false);
@@ -177,7 +179,6 @@ export const Login: React.FC = () => {
       setMode('LOGIN');
       setOtpStep('REQUEST');
       setPassword('');
-      setDevOtpCode(null);
     } catch (err: any) {
       const msg = err.response?.data?.error || err.message || 'Failed to reset password. Please check your verification code.';
       setError(msg);
@@ -562,14 +563,10 @@ export const Login: React.FC = () => {
                 </form>
               ) : (
                 <form onSubmit={handleResetPassword} className="space-y-4">
-                  {devOtpCode && (
-                    <div className="p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/40 text-cyan-300 text-xs flex items-center justify-between">
-                      <span>Verification Code Generated:</span>
-                      <span className="font-mono font-black text-sm tracking-widest text-cyan-400 bg-[#090f1d] px-2 py-0.5 rounded border border-cyan-500/30">
-                        {devOtpCode}
-                      </span>
-                    </div>
-                  )}
+                  <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-cyan-300 text-xs flex items-center gap-2.5">
+                    <Mail className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                    <span>Please enter the 6-digit verification code sent to your email inbox.</span>
+                  </div>
 
                   <div className="space-y-1.5">
                     <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">

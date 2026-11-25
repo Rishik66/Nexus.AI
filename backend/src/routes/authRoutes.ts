@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { db } from '../database/db.js';
 import { config } from '../config/env.js';
 import { generateToken, authenticateJWT, AuthRequest } from '../middleware/auth.js';
+import { emailService } from '../services/emailService.js';
 
 export const authRoutes = Router();
 
@@ -168,41 +169,36 @@ authRoutes.post('/forgot-password', async (req: Request, res: Response) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     db.saveOtp(email, otp, 15);
 
-    // Dispatch live email via Resend if API key is configured
-    let emailDispatched = false;
-    if (config.resendApiKey && config.resendApiKey.startsWith('re_')) {
-      try {
-        const resp = await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${config.resendApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            from: 'NEXUS AI <auth@nexus.ai>',
-            to: [email],
-            subject: 'Your NEXUS AI Password Reset Code',
-            html: `
-              <div style="font-family: Arial, sans-serif; padding: 24px; background: #0b1120; color: #f8fafc; border-radius: 12px;">
-                <h2 style="color: #38bdf8;">NEXUS AI Password Reset</h2>
-                <p>Hello ${user.full_name},</p>
-                <p>You requested a one-time verification code to reset your account password.</p>
-                <div style="margin: 24px 0; padding: 16px; background: #1e293b; border-radius: 8px; text-align: center;">
-                  <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #38bdf8; font-family: monospace;">${otp}</span>
-                </div>
-                <p style="color: #94a3b8; font-size: 13px;">This code expires in 15 minutes. If you did not request this, you can safely ignore this email.</p>
-              </div>
-            `,
-          }),
-        });
-        emailDispatched = resp.ok;
-      } catch (err) {
-        console.warn('[AUTH] Live email dispatch failed:', err);
-      }
+    // Dispatch live email to the user
+    const emailResult = await emailService.sendEmail({
+      to: email,
+      subject: 'Your NEXUS AI Password Reset Code',
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 24px; background: #0b1120; color: #f8fafc; border-radius: 12px; max-width: 500px; margin: auto;">
+          <h2 style="color: #38bdf8; margin-top: 0;">NEXUS AI Security</h2>
+          <p>Hello ${user.full_name},</p>
+          <p>You requested a one-time verification code to reset your account password.</p>
+          <div style="margin: 24px 0; padding: 18px; background: #1e293b; border-radius: 8px; text-align: center; border: 1px solid #334155;">
+            <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #38bdf8; font-family: monospace;">${otp}</span>
+          </div>
+          <p style="color: #94a3b8; font-size: 13px;">This code expires in 15 minutes. Enter this code on the password reset screen to set your new password.</p>
+          <hr style="border: none; border-top: 1px solid #334155; margin: 20px 0;" />
+          <p style="color: #64748b; font-size: 11px;">If you did not request this, please ignore this email. Your password remains unchanged.</p>
+        </div>
+      `,
+    });
+
+    if (!emailResult.success) {
+      console.warn('[AUTH] Live email dispatch failed:', emailResult.error);
+      return res.status(503).json({
+        error:
+          'Unable to dispatch email: Email service is not configured. Please add RESEND_API_KEY or SMTP credentials in your server environment to deliver verification codes to user emails.',
+        details: emailResult.error,
+      });
     }
 
     db.createNotification({
-      business_id: db.getDemoBusiness()?.id || '',
+      business_id: user.business_id || db.getDemoBusiness()?.id || '',
       title: 'Password Reset OTP Dispatched',
       message: `OTP verification code dispatched to ${email}`,
       type: 'SECURITY',
@@ -211,11 +207,7 @@ authRoutes.post('/forgot-password', async (req: Request, res: Response) => {
 
     res.json({
       success: true,
-      message: emailDispatched
-        ? 'A 6-digit verification code has been dispatched to your email.'
-        : 'A 6-digit verification code has been generated.',
-      // In development or when email gateway is pending, provide devOtp for instant testing
-      devOtp: !emailDispatched ? otp : undefined,
+      message: 'A 6-digit verification code has been dispatched to your email address.',
     });
   } catch (err: any) {
     res.status(400).json({ error: err.message || 'Failed to process password reset request.' });
