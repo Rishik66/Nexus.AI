@@ -19,16 +19,58 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [business, setBusiness] = useState<Business | null>(null);
-  const [role, setRole] = useState<'ADMIN' | 'MANAGER' | 'EMPLOYEE'>('ADMIN');
-  const [pendingApprovalsCount, setPendingApprovalsCount] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [token, setToken] = useState<string | null>(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
       return window.localStorage.getItem('nexus_token');
     }
     return null;
+  });
+
+  const [user, setUser] = useState<User | null>(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const raw = window.localStorage.getItem('nexus_user');
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  });
+
+  const [business, setBusiness] = useState<Business | null>(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const raw = window.localStorage.getItem('nexus_business');
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  });
+
+  const [role, setRole] = useState<'ADMIN' | 'MANAGER' | 'EMPLOYEE'>(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const raw = window.localStorage.getItem('nexus_user');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed?.role) return parsed.role;
+        }
+      } catch {}
+    }
+    return 'ADMIN';
+  });
+
+  const [pendingApprovalsCount, setPendingApprovalsCount] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const t = window.localStorage.getItem('nexus_token');
+      const u = window.localStorage.getItem('nexus_user');
+      if (t && u) return false;
+    }
+    return true;
   });
 
   // Check and restore session on mount if token exists
@@ -40,6 +82,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (!storedToken) {
         setUser(null);
+        setBusiness(null);
         setToken(null);
         setIsLoading(false);
         return;
@@ -51,24 +94,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setUser(meRes.user);
           setRole(meRes.user.role);
           setToken(storedToken);
+          if (typeof window !== 'undefined' && window.localStorage) {
+            window.localStorage.setItem('nexus_user', JSON.stringify(meRes.user));
+          }
 
           const biz = await ApiService.getCurrentBusiness();
-          if (biz) setBusiness(biz);
+          if (biz) {
+            setBusiness(biz);
+            if (typeof window !== 'undefined' && window.localStorage) {
+              window.localStorage.setItem('nexus_business', JSON.stringify(biz));
+            }
+          }
 
           await refreshApprovals();
-        } else {
-          // Token invalid
-          localStorage.removeItem('nexus_token');
+        } else if (meRes === null) {
+          if (typeof window !== 'undefined' && window.localStorage) {
+            window.localStorage.removeItem('nexus_token');
+            window.localStorage.removeItem('nexus_user');
+            window.localStorage.removeItem('nexus_business');
+          }
           setUser(null);
+          setBusiness(null);
           setToken(null);
         }
-      } catch (err) {
-        console.warn('Session verification failed, logging out:', err);
-        if (typeof window !== 'undefined' && window.localStorage) {
-          window.localStorage.removeItem('nexus_token');
+      } catch (err: any) {
+        // ONLY if the server explicitly rejects authentication with 401 do we logout
+        if (err.response?.status === 401) {
+          console.warn('Session expired (401), logging out:', err);
+          if (typeof window !== 'undefined' && window.localStorage) {
+            window.localStorage.removeItem('nexus_token');
+            window.localStorage.removeItem('nexus_user');
+            window.localStorage.removeItem('nexus_business');
+          }
+          setUser(null);
+          setBusiness(null);
+          setToken(null);
+        } else {
+          // If server is cold-starting or temporarily offline, preserve local session
+          console.warn('Backend server cold-starting/offline, preserving session:', err?.message || err);
         }
-        setUser(null);
-        setToken(null);
       } finally {
         setIsLoading(false);
       }
@@ -90,6 +154,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const res = await ApiService.login(email, pass);
     if (typeof window !== 'undefined' && window.localStorage) {
       window.localStorage.setItem('nexus_token', res.token);
+      window.localStorage.setItem('nexus_user', JSON.stringify(res.user));
     }
     setToken(res.token);
     setUser(res.user);
@@ -97,7 +162,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     try {
       const biz = await ApiService.getCurrentBusiness();
-      if (biz) setBusiness(biz);
+      if (biz) {
+        setBusiness(biz);
+        if (typeof window !== 'undefined' && window.localStorage) {
+          window.localStorage.setItem('nexus_business', JSON.stringify(biz));
+        }
+      }
     } catch {
       // ignore
     }
@@ -121,6 +191,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
     if (typeof window !== 'undefined' && window.localStorage) {
       window.localStorage.setItem('nexus_token', res.token);
+      window.localStorage.setItem('nexus_user', JSON.stringify(res.user));
     }
     setToken(res.token);
     setUser(res.user);
@@ -128,10 +199,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     if (res.business) {
       setBusiness(res.business);
+      if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('nexus_business', JSON.stringify(res.business));
+      }
     } else {
       try {
         const biz = await ApiService.getCurrentBusiness();
-        if (biz) setBusiness(biz);
+        if (biz) {
+          setBusiness(biz);
+          if (typeof window !== 'undefined' && window.localStorage) {
+            window.localStorage.setItem('nexus_business', JSON.stringify(biz));
+          }
+        }
       } catch {
         // ignore
       }
@@ -147,6 +226,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       window.localStorage.removeItem('nexus_token');
+      window.localStorage.removeItem('nexus_user');
+      window.localStorage.removeItem('nexus_business');
     }
     setToken(null);
     setUser(null);

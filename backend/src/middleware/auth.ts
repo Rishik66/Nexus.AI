@@ -31,9 +31,36 @@ export function authenticateJWT(req: AuthRequest, res: Response, next: NextFunct
       role: UserRole;
       business_id?: string;
     };
-    const user = db.getUserById(payload.id);
+    let user = db.getUserById(payload.id);
     if (!user) {
-      return res.status(401).json({ error: 'User not found or session expired.' });
+      // Reconstruct user from cryptographically verified JWT payload (crucial for serverless containers)
+      const namePart = (payload.email || 'User').split('@')[0];
+      const displayName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+      const bizId = payload.business_id || db.getDemoBusiness()?.id || 'default-biz';
+
+      user = {
+        id: payload.id,
+        business_id: bizId,
+        email: payload.email,
+        full_name: displayName,
+        role: payload.role || 'ADMIN',
+        password_hash: '',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      db.getStore().users.push(user);
+
+      if (!db.getBusinessById(bizId)) {
+        db.getStore().businesses.push({
+          id: bizId,
+          name: `${displayName}'s Enterprise`,
+          type: 'TECHNOLOGY',
+          currency: 'USD',
+          is_demo: false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        });
+      }
     }
     req.user = user;
     // Strictly isolate by user's assigned company tenant

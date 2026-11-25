@@ -23624,7 +23624,7 @@ var require_main = __commonJS({
   "node_modules/dotenv/lib/main.js"(exports2, module2) {
     var fs6 = require("fs");
     var path7 = require("path");
-    var os = require("os");
+    var os2 = require("os");
     var crypto2 = require("crypto");
     var packageJson = require_package();
     var version3 = packageJson.version;
@@ -23747,7 +23747,7 @@ var require_main = __commonJS({
       return null;
     }
     function _resolveHome(envPath) {
-      return envPath[0] === "~" ? path7.join(os.homedir(), envPath.slice(1)) : envPath;
+      return envPath[0] === "~" ? path7.join(os2.homedir(), envPath.slice(1)) : envPath;
     }
     function _configVault(options) {
       const debug = Boolean(options && options.debug);
@@ -37586,7 +37586,7 @@ var require_mkdirp = __commonJS({
 var require_disk = __commonJS({
   "node_modules/multer/storage/disk.js"(exports2, module2) {
     var fs6 = require("fs");
-    var os = require("os");
+    var os2 = require("os");
     var path7 = require("path");
     var crypto2 = require("crypto");
     var mkdirp = require_mkdirp();
@@ -37596,7 +37596,7 @@ var require_disk = __commonJS({
       });
     }
     function getDestination(req, file, cb) {
-      cb(null, os.tmpdir());
+      cb(null, os2.tmpdir());
     }
     function DiskStorage(opts) {
       this.getFilename = opts.filename || getFilename;
@@ -54434,6 +54434,7 @@ var config = {
 // src/database/db.ts
 var import_fs = __toESM(require("fs"));
 var import_path2 = __toESM(require("path"));
+var import_os = __toESM(require("os"));
 
 // node_modules/uuid/dist/esm/stringify.js
 var byteToHex = [];
@@ -54533,7 +54534,12 @@ var DatabaseService = class _DatabaseService {
   storeFilePath;
   isPostgres = false;
   constructor() {
-    this.dataDir = import_path2.default.resolve(process.cwd(), "data");
+    const isServerless2 = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
+    if (isServerless2) {
+      this.dataDir = import_path2.default.join(import_os.default.tmpdir(), "nexus_data");
+    } else {
+      this.dataDir = import_path2.default.resolve(process.cwd(), "data");
+    }
     this.storeFilePath = import_path2.default.join(this.dataDir, "nexus_store.json");
     this.init();
   }
@@ -54562,36 +54568,51 @@ var DatabaseService = class _DatabaseService {
     }
   }
   initLocalStore() {
-    if (!import_fs.default.existsSync(this.dataDir)) {
-      import_fs.default.mkdirSync(this.dataDir, { recursive: true });
+    try {
+      if (!import_fs.default.existsSync(this.dataDir)) {
+        import_fs.default.mkdirSync(this.dataDir, { recursive: true });
+      }
+    } catch (e) {
+      console.warn("[DATABASE] Could not create dataDir:", this.dataDir, e);
     }
-    if (import_fs.default.existsSync(this.storeFilePath)) {
+    const candidatePaths = [
+      this.storeFilePath,
+      import_path2.default.resolve(process.cwd(), "data", "nexus_store.json"),
+      import_path2.default.resolve(process.cwd(), "backend", "data", "nexus_store.json"),
+      import_path2.default.resolve(process.cwd(), "..", "backend", "data", "nexus_store.json")
+    ];
+    let loaded = false;
+    for (const p of candidatePaths) {
       try {
-        const raw = import_fs.default.readFileSync(this.storeFilePath, "utf-8");
-        this.store = { ...initialStore, ...JSON.parse(raw) };
-        console.log("[DATABASE] Loaded local persistent store from", this.storeFilePath);
-        const defaultBiz = this.store.businesses.find((b) => b.is_demo) || this.store.businesses[0];
-        if (defaultBiz) {
-          let usersMigrated = false;
-          this.store.users.forEach((u) => {
-            if (!u.business_id) {
-              u.business_id = defaultBiz.id;
-              usersMigrated = true;
-            }
-          });
-          if (usersMigrated) {
-            this.persist();
+        if (import_fs.default.existsSync(p)) {
+          const raw = import_fs.default.readFileSync(p, "utf-8");
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object") {
+            this.store = { ...initialStore, ...parsed };
+            console.log("[DATABASE] Loaded persistent store from", p);
+            loaded = true;
+            break;
           }
         }
       } catch (err) {
-        console.error("[DATABASE] Failed to parse local store, initializing empty store", err);
-        this.store = { ...initialStore };
+      }
+    }
+    if (!loaded) {
+      this.store = { ...initialStore };
+      console.log("[DATABASE] Initialized in-memory store");
+    }
+    const defaultBiz = this.store.businesses.find((b) => b.is_demo) || this.store.businesses[0];
+    if (defaultBiz) {
+      let usersMigrated = false;
+      this.store.users.forEach((u) => {
+        if (!u.business_id) {
+          u.business_id = defaultBiz.id;
+          usersMigrated = true;
+        }
+      });
+      if (usersMigrated) {
         this.persist();
       }
-    } else {
-      this.store = { ...initialStore };
-      this.persist();
-      console.log("[DATABASE] Initialized new local persistent store at", this.storeFilePath);
     }
   }
   persist() {
@@ -54601,7 +54622,7 @@ var DatabaseService = class _DatabaseService {
       }
       import_fs.default.writeFileSync(this.storeFilePath, JSON.stringify(this.store, null, 2), "utf-8");
     } catch (err) {
-      console.error("[DATABASE] Error persisting store to disk:", err);
+      console.warn("[DATABASE] Persistent write to disk skipped/failed:", err);
     }
   }
   isUsingPostgres() {
@@ -61351,9 +61372,33 @@ function authenticateJWT(req, res, next) {
   const token = authHeader.split(" ")[1];
   try {
     const payload = import_jsonwebtoken.default.verify(token, config.jwtSecret);
-    const user = db.getUserById(payload.id);
+    let user = db.getUserById(payload.id);
     if (!user) {
-      return res.status(401).json({ error: "User not found or session expired." });
+      const namePart = (payload.email || "User").split("@")[0];
+      const displayName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+      const bizId = payload.business_id || db.getDemoBusiness()?.id || "default-biz";
+      user = {
+        id: payload.id,
+        business_id: bizId,
+        email: payload.email,
+        full_name: displayName,
+        role: payload.role || "ADMIN",
+        password_hash: "",
+        created_at: (/* @__PURE__ */ new Date()).toISOString(),
+        updated_at: (/* @__PURE__ */ new Date()).toISOString()
+      };
+      db.getStore().users.push(user);
+      if (!db.getBusinessById(bizId)) {
+        db.getStore().businesses.push({
+          id: bizId,
+          name: `${displayName}'s Enterprise`,
+          type: "TECHNOLOGY",
+          currency: "USD",
+          is_demo: false,
+          created_at: (/* @__PURE__ */ new Date()).toISOString(),
+          updated_at: (/* @__PURE__ */ new Date()).toISOString()
+        });
+      }
     }
     req.user = user;
     req.businessId = user.business_id || payload.business_id || db.getDemoBusiness()?.id;
@@ -74380,7 +74425,7 @@ async function startServer() {
   });
   return server;
 }
-var isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || true);
+var isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
 if (process.env.NODE_ENV !== "test" && !isServerless && require.main === module) {
   startServer().catch((err) => {
     console.error("[FATAL] Failed to start NEXUS AI server:", err);
@@ -74739,4 +74784,4 @@ object-assign/index.js:
    * limitations under the License.
    *)
 */
-if (module.exports && module.exports.default) { const _h = module.exports.default; module.exports = _h; module.exports.default = _h; }
+if(module.exports&&module.exports.default){const _h=module.exports.default;module.exports=_h;module.exports.default=_h;}

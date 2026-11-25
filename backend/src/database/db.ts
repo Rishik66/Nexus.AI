@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import { v4 as uuidv4 } from 'uuid';
 import { Pool } from 'pg';
 import {
@@ -68,7 +69,12 @@ export class DatabaseService {
   private isPostgres: boolean = false;
 
   private constructor() {
-    this.dataDir = path.resolve(process.cwd(), 'data');
+    const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.SERVERLESS_BUNDLE);
+    if (isServerless) {
+      this.dataDir = path.join(os.tmpdir(), 'nexus_data');
+    } else {
+      this.dataDir = path.resolve(process.cwd(), 'data');
+    }
     this.storeFilePath = path.join(this.dataDir, 'nexus_store.json');
     this.init();
   }
@@ -101,38 +107,58 @@ export class DatabaseService {
   }
 
   private initLocalStore() {
-    if (!fs.existsSync(this.dataDir)) {
-      fs.mkdirSync(this.dataDir, { recursive: true });
+    try {
+      if (!fs.existsSync(this.dataDir)) {
+        fs.mkdirSync(this.dataDir, { recursive: true });
+      }
+    } catch (e) {
+      console.warn('[DATABASE] Could not create dataDir:', this.dataDir, e);
     }
-    if (fs.existsSync(this.storeFilePath)) {
-      try {
-        const raw = fs.readFileSync(this.storeFilePath, 'utf-8');
-        this.store = { ...initialStore, ...JSON.parse(raw) };
-        console.log('[DATABASE] Loaded local persistent store from', this.storeFilePath);
 
-        // Ensure all legacy users have a valid business_id assigned
-        const defaultBiz = this.store.businesses.find(b => b.is_demo) || this.store.businesses[0];
-        if (defaultBiz) {
-          let usersMigrated = false;
-          this.store.users.forEach(u => {
-            if (!u.business_id) {
-              u.business_id = defaultBiz.id;
-              usersMigrated = true;
-            }
-          });
-          if (usersMigrated) {
-            this.persist();
+    // Try finding existing seed data from candidate locations
+    const candidatePaths = [
+      this.storeFilePath,
+      path.resolve(process.cwd(), 'data', 'nexus_store.json'),
+      path.resolve(process.cwd(), 'backend', 'data', 'nexus_store.json'),
+      path.resolve(process.cwd(), '..', 'backend', 'data', 'nexus_store.json'),
+    ];
+
+    let loaded = false;
+    for (const p of candidatePaths) {
+      try {
+        if (fs.existsSync(p)) {
+          const raw = fs.readFileSync(p, 'utf-8');
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            this.store = { ...initialStore, ...parsed };
+            console.log('[DATABASE] Loaded persistent store from', p);
+            loaded = true;
+            break;
           }
         }
       } catch (err) {
-        console.error('[DATABASE] Failed to parse local store, initializing empty store', err);
-        this.store = { ...initialStore };
+        // continue to next candidate
+      }
+    }
+
+    if (!loaded) {
+      this.store = { ...initialStore };
+      console.log('[DATABASE] Initialized in-memory store');
+    }
+
+    // Ensure all legacy users have a valid business_id assigned
+    const defaultBiz = this.store.businesses.find(b => b.is_demo) || this.store.businesses[0];
+    if (defaultBiz) {
+      let usersMigrated = false;
+      this.store.users.forEach(u => {
+        if (!u.business_id) {
+          u.business_id = defaultBiz.id;
+          usersMigrated = true;
+        }
+      });
+      if (usersMigrated) {
         this.persist();
       }
-    } else {
-      this.store = { ...initialStore };
-      this.persist();
-      console.log('[DATABASE] Initialized new local persistent store at', this.storeFilePath);
     }
   }
 
@@ -143,7 +169,8 @@ export class DatabaseService {
       }
       fs.writeFileSync(this.storeFilePath, JSON.stringify(this.store, null, 2), 'utf-8');
     } catch (err) {
-      console.error('[DATABASE] Error persisting store to disk:', err);
+      // In-memory store continues functioning even if disk writes fail in constrained environments
+      console.warn('[DATABASE] Persistent write to disk skipped/failed:', err);
     }
   }
 

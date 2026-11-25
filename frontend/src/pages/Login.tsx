@@ -84,7 +84,7 @@ export const Login: React.FC = () => {
       setSuccessMessage(null);
       await login(email.trim(), password);
       const target = from && from !== '/login' && from !== '/' ? from : '/command-center';
-      window.location.href = target;
+      navigate(target, { replace: true });
     } catch (err: any) {
       const msg = err.response?.data?.error || err.response?.data?.message || err.message || 'Invalid email or password.';
       setError(msg);
@@ -111,7 +111,7 @@ export const Login: React.FC = () => {
       setSuccessMessage(null);
       await register(email.trim(), password, fullName.trim(), role, companyName.trim());
       const target = from && from !== '/login' && from !== '/' ? from : '/command-center';
-      window.location.href = target;
+      navigate(target, { replace: true });
     } catch (err: any) {
       const msg = err.response?.data?.error || err.response?.data?.message || err.message || 'Registration failed. Please try again.';
       setError(msg);
